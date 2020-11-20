@@ -98,8 +98,8 @@
 			header('location:../../media.php?module=data_karyawan');
 		
 	}
-	//Update Data Karyawan yang Ada
 	elseif ($module == 'data_karyawan' AND $act == 'update') {
+	//Update Data Karyawan yang Ada
 		$id_karyawan		= $_POST['id_karyawan'];
 		$klinik				= $_POST['klinik'];
 		$nama_karyawan		= $_POST['nama_karyawan'];
@@ -107,18 +107,18 @@
 		$tgl_lahir			= $_POST['tgl_lahir'];
 		$no_telp			= $_POST['no_telp'];
 		$bagian				= $_POST['bagian'];
-		$tgl_masuk				= $_POST['tgl_masuk'];
+		$tgl_masuk			= $_POST['tgl_masuk'];
 		$awal = date_create($tgl_masuk);
 		$akhir= date_create();
 		$diff = date_diff($awal,$akhir);
 		$lama = $diff->y.'tahun,'.$diff->m.'bulan,'.$diff->d.'hari';
 		$alamat				= $_POST['alamat'];
-		$lulusan				= $_POST['lulusan'];
+		$lulusan			= $_POST['lulusan'];
 		$status				= $_POST['status'];
 		$username			= $_POST['username'];
 		$password			= MD5($_POST['password']);
-		$blokir			= $_POST['blokir'];
-		
+		$blokir			    = $_POST['blokir'];
+
 		//upload
 		$nama_file = $_FILES['file']['name'];
 		$ukuran_file = $_FILES['file']['size'];

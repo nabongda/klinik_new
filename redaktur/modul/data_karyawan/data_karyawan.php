@@ -159,6 +159,7 @@
           <div class="card-header">
             <h3 class="card-title">Tambah Data Karyawan</h3>
           </div>
+          <!-- Kurang menambahkan attribut action, entype dan post -->
           <form role="form" method="post" enctype="multipart/form-data" action="modul/data_karyawan/aksi_data_karyawan.php?module=data_karyawan&act=input">
             <div class="card-body">
               <div class="form-row">
@@ -301,7 +302,7 @@ $edit   =  mysqli_fetch_array(mysqli_query($con, "Select * From karyawan Where i
           <div class="card-header">
             <h3 class="card-title">Edit Data Karyawan</h3>
           </div>
-          <form role="form">
+          <form role="form" action="modul/data_karyawan/aksi_data_karyawan.php?module=data_karyawan&act=update" enctype="multipart/form-data" method="post">
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-6">
