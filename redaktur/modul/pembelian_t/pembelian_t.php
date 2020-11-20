@@ -2,6 +2,8 @@
   switch($_GET['act']){
   default:
 ?>
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -140,8 +142,7 @@
 
             <!-- SweetAlert Hapus -->
             <script>
-              document.querySelector(".hapus").addEventListener("click",
-                function () {
+              $('.hapus').click(function () {
                   var no_fak = $(this).attr('no-fak');
                   Swal.fire({
                     title: 'Yakin Ingin Menghapus Data?',
