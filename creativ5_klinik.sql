@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-<<<<<<< HEAD
--- Generation Time: Nov 20, 2020 at 08:37 AM
-=======
--- Generation Time: Nov 17, 2020 at 04:22 AM
->>>>>>> 058fb029f0091712b415edde0a79a6b86c347e09
+-- Generation Time: Nov 20, 2020 at 08:43 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -753,11 +749,7 @@ CREATE TABLE `identitas` (
 --
 
 INSERT INTO `identitas` (`id`, `nama_organisasi`, `nama_web`, `alamat`, `informasi`, `logo`) VALUES
-<<<<<<< HEAD
 (1, 'Klinik CGS', '-', 'Jl. Tatabumi Selatan No.109 Kel. Banyuraden, Kec. Gamping, Sleman - Yogyakarta', '-', 'logo.ico');
-=======
-(1, 'Klinik CGS', '-', 'Jl. Tatabumi Selatan No.109 Kel. Banyuraden, Kec. Gamping, Sleman - Yogyakarta', '-', '109559692300_logocgs.jpg');
->>>>>>> 058fb029f0091712b415edde0a79a6b86c347e09
 
 -- --------------------------------------------------------
 
@@ -818,12 +810,8 @@ INSERT INTO `karyawan` (`id_karyawan`, `id_kk`, `nama_karyawan`, `jk`, `tgl_lahi
 (35, 0, 'Marshmallow', 'P', '1996-04-02', '089765432567', 'JU-08', 'Nonaktif', 'product_main_233122605_66320.jpg', '2000-01-01', '-', '-', 'marsh', 'd3ee527baae384aad8ef4ba0e308da7c', 'N'),
 (36, 1, 'Lorem Ipsum', 'P', '2000-01-01', '12345', 'JU-10', 'Aktif', '-', '2020-01-01', '-', '-', 'lorem', 'd2e16e6ef52a45b7468f1da56bba1953', 'N'),
 (37, 1, 'Dolors Sit Amet', 'P', '1990-01-01', '', 'JU-10', 'Aktif', 'Desert.jpg', '2020-02-05', '-', '-', 'dolors', '82e2e29d72b4a557c7516beabf088886', 'N'),
-<<<<<<< HEAD
 (38, 1, 'kiki', 'L', '1995-03-01', '089123432234', 'JU-09', 'Aktif', 'icon orang.png', '2020-03-09', 'Bantul', 'UGM', 'apt', 'd41d8cd98f00b204e9800998ecf8427e', 'N'),
 (39, 1, 'Laboratorium', 'P', '2000-11-02', '000', 'JU-08', 'Aktif', '2.png', '2020-11-20', 'Lab', 'S4', 'lab', 'f9664ea1803311b35f81d07d8c9e072d', 'N');
-=======
-(38, 1, 'kiki', 'L', '1995-03-01', '089123432234', 'JU-09', 'Aktif', 'icon orang.png', '2020-03-09', 'Bantul', 'UGM', 'apt', 'd41d8cd98f00b204e9800998ecf8427e', 'N');
->>>>>>> 058fb029f0091712b415edde0a79a6b86c347e09
 
 -- --------------------------------------------------------
 
@@ -2186,13 +2174,9 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1077, 'ginger', 'Gagal Login', '2020-11-16 16:52:06'),
 (1078, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-16 16:52:12'),
 (1079, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-16 16:57:12'),
-<<<<<<< HEAD
 (1080, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-17 02:18:10'),
 (1081, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 07:32:13'),
 (1082, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 07:32:23');
-=======
-(1080, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-17 02:18:10');
->>>>>>> 058fb029f0091712b415edde0a79a6b86c347e09
 
 -- --------------------------------------------------------
 
@@ -3987,11 +3971,7 @@ CREATE TABLE `sub_menu` (
 INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_fa`, `urutan`) VALUES
 ('JU-01', 'SM-001', 'Keuangan', 'keuangan', 'Tidak Aktif', 'dollar', 121),
 ('JU-06', 'SM-004', 'History Antrian', 'antrian', 'Aktif', 'history', 12),
-<<<<<<< HEAD
 ('JU-01', 'SM-01010101', 'Biaya Administrasi RS', 'admin_rs', 'Aktif', 'money-check', 4),
-=======
-('JU-01', 'SM-01010101', 'Biaya Administrasi RS', 'admin_rs', 'Aktif', 'gear', 4),
->>>>>>> 058fb029f0091712b415edde0a79a6b86c347e09
 ('JU-02', 'SM-02', 'History', '#', 'Tidak Aktif', 'history', 2),
 ('JU-01', 'SM-04', 'Setting Bisnis', '#', 'Tidak Aktif', 'handshake-o', 14),
 ('JU-01', 'SM-05', 'Setting User', '#', 'Tidak Aktif', 'users', 13),
@@ -4659,11 +4639,7 @@ ALTER TABLE `history_kasir`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-<<<<<<< HEAD
   MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-=======
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
->>>>>>> 058fb029f0091712b415edde0a79a6b86c347e09
 
 --
 -- AUTO_INCREMENT for table `kasir_sementara`
@@ -4705,11 +4681,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1083;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1081;
->>>>>>> 058fb029f0091712b415edde0a79a6b86c347e09
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -4793,11 +4765,7 @@ ALTER TABLE `perawatan_pasien`
 -- AUTO_INCREMENT for table `poliklinik`
 --
 ALTER TABLE `poliklinik`
-<<<<<<< HEAD
   MODIFY `id_poli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-=======
-  MODIFY `id_poli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
->>>>>>> 058fb029f0091712b415edde0a79a6b86c347e09
 
 --
 -- AUTO_INCREMENT for table `produk`
