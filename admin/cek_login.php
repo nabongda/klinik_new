@@ -35,7 +35,7 @@
 	} else {
 		catat($con, $username, "Gagal Login");
 		echo "<script>
-alert('Username atau Password Salah!!'); location.href = '../admin/index.php';
+alert('Username atau Password Salah!!'); location.href = '".$url."admin/index.php';
 </script>";		
 		}
 	}

@@ -52,7 +52,7 @@
                 <?php if ($_SESSION['jenis_u']=="JU-01") { ?>
                 <td>
                   <a href="media.php?module=poliklinik&id=<?php echo $li['id_poli']; ?>&act=edit" class="btn-sm btn-warning"> Edit</a>
-                  <a href="modul/poliklinik/aksi.php?act=del&id=<?php echo $li['id_poli']; ?>" class="hapus btn-sm btn-danger"> Hapus</a>
+                  <a href="#" class="hapus btn-sm btn-danger" id-poli="<?php echo $li['id_poli']; ?>"> Hapus</a>
                 </td>
                 <?php } ?>
               </tr>
@@ -60,19 +60,32 @@
             </tbody>
 
             <!-- SweetAlert Hapus -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
             <script>
-              document.querySelector(".hapus").addEventListener("click",
-                function () {
-                  Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Delete !'
-                  });
+              $(document).ready(function() {
+                $(document).on('click', '.hapus', function(e) {
+                  var id_poli = $(this).attr('id-poli');
+                  SwalDelete(id_poli);
+                  e.preventDefault();
                 });
+              });
+
+              function SwalDelete(id_poli) {
+                Swal.fire({
+                  title: 'Yakin Ingin Menghapus Data?',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Delete!'
+                })
+                .then((result) => {
+                    console.log(result);
+                    if (result.value) {
+                      window.location = "modul/poliklinik/aksi.php?act=del&id="+id_poli;
+                    }
+                  });
+              }
             </script>
           </table>
         </div>

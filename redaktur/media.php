@@ -60,9 +60,11 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Klinik CGS | Beranda</title>
+  <title><?php echo $iden['nama_organisasi']; ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon -->
+  <link rel="icon" href="../file_user/foto_identitas/<?php echo $iden['logo']; ?>">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo $url2; ?>plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
