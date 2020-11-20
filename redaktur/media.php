@@ -191,10 +191,7 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
                       $visit = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(a.id_pasien) AS b FROM dr_visit a JOIN perawatan_pasien b ON a.no_faktur = b.no_faktur WHERE a.id_dr = '$_SESSION[id_user]' AND b.status IS NULL"));
                       $jmlpas = (int) $utama['b'] + (int) $visit['b'];    
                 ?>
-                <p title="<?php echo $jmlpas; ?> pasien masih dirawat">
-                  <?php echo $jmlpas; ?>
-                </p>
-
+                <span class="badge badge-warning navbar-badge" title="<?php echo $jmlpas; ?> Pasien Masih Dirawat"><?php echo $jmlpas; ?></span>
                 <?php } 
                 else if($id_sb == "SM-669969"){
                   $rujuk = mysqli_num_rows(mysqli_query($con, "SELECT * FROM rujuk_inap"));

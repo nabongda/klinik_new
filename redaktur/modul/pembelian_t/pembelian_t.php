@@ -77,18 +77,14 @@
             <div class="modal fade" id="detail" role="dialog">
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title"> Detail Barang</h5>
-                  </div>
-                  <div class="modal-body">
-                    <div class="fetched-data"></div>
-                  </div>
+                  <div class="fetched-data"></div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
                   </div>
                 </div>
               </div>
             </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
             <script type="text/javascript">
               $(document).ready(function () {
                 $('#detail').on('show.bs.modal', function (e) {
@@ -112,12 +108,7 @@
                   <div class="modal-header">
                     <h5 class="modal-title"> Edit Transaksi</h5>
                   </div>
-                  <div class="modal-body">
-                    <div class="fetched-data"></div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
-                  </div>
+                  <div class="fetched-data"></div>
                 </div>
               </div>
             </div>
