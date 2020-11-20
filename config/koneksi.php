@@ -5,12 +5,9 @@
 	$username = "root";
 	$password = "";
 	$database="creativ5_klinik";
-	
-	// $database = "suryame2_testing";
 
 	// $database="creativ5_klinik";
-	// $username="root";
-	// $password="";
+	// $server = "localhost";
 	// $username = "creativ5_klincgs";
 	// $password = "cYA;QxYd_eC~";
 	

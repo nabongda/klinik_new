@@ -77,106 +77,106 @@
       </div>
     </div>
   </div>
-  
+
   <?php include "modul/mod_home/add_noticelab.php"; ?>
 
-<div class="modal fade" role="dialog" id="modal-default3">
+  <div class="modal fade" role="dialog" id="modal-default3">
     <div class="modal-dialog modal-xs" role="document">
-    <div class="modal-content">
+      <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title">Pasien Rawat Inap Pulang</h5>
+          <h5 class="modal-title">Pasien Rawat Inap Pulang</h5>
         </div>
         <form class="form-horizontal" role="form">
-        <div class="modal-body">        
+          <div class="modal-body">        
             <input type="hidden" id="pasien">
             <input type="hidden" id="faktur">
             <div class="form-group row">
-            <div class="col-sm-4">
+              <div class="col-sm-4">
                 <label>Alasan Boleh Pulang</label>
-            </div>
-            <div class="col-sm-8">
+              </div>
+              <div class="col-sm-8">
                 <textarea class="form-control" id="status"></textarea>
-            </div>
+              </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="pulangkan" onclick="pulangkan()">OK</button>
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="pulangkan" onclick="pulangkan()">OK</button>
             </div>
-        </div>
+          </div>
         </form>
+      </div>
     </div>
-    </div>
-</div>
+  </div>
 
-<div class="modal fade" role="dialog" id="modal-default2">
+  <div class="modal fade" role="dialog" id="modal-default2">
     <div class="modal-dialog modal-xs" role="document">
-    <div class="modal-content">
+      <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title">Detail Kondisi Pasien Rawat Inap</h5>
+          <h5 class="modal-title">Detail Kondisi Pasien Rawat Inap</h5>
         </div>
         <div class="modal-body">
-        <table id="detailpas" class="table table-bordered table-striped">
+          <table id="detailpas" class="table table-bordered table-striped">
             <thead>
-            <tr>
+              <tr>
                 <th>Tanggal</th>
                 <th>Keterangan</th>
                 <th>Nama Dokter</th>
-            </tr>
+              </tr>
             </thead> 
-        </table>
+          </table>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         </div>
+      </div>
     </div>
-    </div>
-</div>
+  </div>
 
-<div class="modal fade" role="dialog" id="modal-default">
+  <div class="modal fade" role="dialog" id="modal-default">
     <div class="modal-dialog modal-xs" role="document">
-    <div class="modal-content">
+      <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Atur Dokter Visit</h5>
+          <h5 class="modal-title">Atur Dokter Visit</h5>
         </div>
         <form class="form-horizontal" role="form">
-        <div class="modal-body">
+          <div class="modal-body">
             <span><strong>Dokter yang diizinkan visit akan melihat data pasien ini pada saat login</strong></span>
             <div class="row">
-            <div class="col-md-12">
+              <div class="col-md-12">
                 <label>Pilih Dokter</label>
                 <select class="form-control" id="dr1">
-                <option value="">--Pilih Dokter--</option>
-                <?php 
-                $u = mysqli_query($con,"SELECT * FROM user WHERE id_ju = 'JU-02' AND id_user != '$_SESSION[id_dr]'");
-                while($ux = mysqli_fetch_assoc($u)){
-                echo "<option value='$ux[id_user]'>$ux[nama_lengkap] </option>";
-                }
-                ?>
+                  <option value="">--Pilih Dokter--</option>
+                  <?php 
+                  $u = mysqli_query($con,"SELECT * FROM user WHERE id_ju = 'JU-02' AND id_user != '$_SESSION[id_dr]'");
+                  while($ux = mysqli_fetch_assoc($u)){
+                  echo "<option value='$ux[id_user]'>$ux[nama_lengkap] </option>";
+                  }
+                  ?>
                 </select>
-            </div>
+              </div>
             </div>
             <input type="hidden" id="pasien">
             <input type="hidden" id="faktur">
             <div class="row">
-            <div class="col-md-12">
+              <div class="col-md-12">
                 <table class="table" id="drvisit" style="width: 100%">
-                <thead>
+                  <thead>
                     <tr>
-                    <th>Nama Dokter</th><th>Aksi</th>
+                      <th>Nama Dokter</th><th>Aksi</th>
                     </tr>
-                </thead>
+                  </thead>
                 </table>
+              </div>
             </div>
-            </div>
-        </div>
-        <div class="modal-footer">
+          </div>
+          <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" id="tukarin" onclick="switched()">Tambahkan</button>
-        </div>
+          </div>
         </form>
+      </div>
     </div>
-    </div>
-</div>
+  </div>
 </section>
 
 <script>
@@ -262,7 +262,6 @@
       "sAjaxSource": "modul/rawat_inap/drvisit.php?faktur=" + faktur + "&pasien=" + pasien
     });
   }
-
 
   $(document).ready(function(){
     $("#example1").DataTable();

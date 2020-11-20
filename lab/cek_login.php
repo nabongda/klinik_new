@@ -48,11 +48,12 @@
 
 
 		catat($con, $_SESSION['namauser'], "Berhasil Login dengan IP $ip");
+		// header('location:'.$url2.'media.php?module=home');
 		header('location:../redaktur/media.php?module=home');
 	} else {
 		catat($con, $username, "Gagal Login");
 		echo "<script>
-alert('Username atau Password !!'); location.href = 'index.php';
+alert('Username atau Password !!'); location.href = '".$url."lab/index.php';
 </script>";		
 		}
 	}
