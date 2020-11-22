@@ -23,10 +23,10 @@ function setkodehari($ymd){
 }
 
 $filter = setkodehari($tujuh_hari);
-$cekantri = mysql_num_rows(mysql_query("SELECT * FROM antrian_pasien WHERE 
+$cekantri = mysqli_num_rows(mysqli_query($con,"SELECT * FROM antrian_pasien WHERE 
     tanggal_pendaftaran='$kembali2' AND id_pasien='$_SESSION[namauser]'"));
 	
-switch($_GET[act]){
+switch($_GET['act']){
   // Tampil Kategori
   default:
     echo "<div class='row'>
@@ -76,7 +76,7 @@ switch($_GET[act]){
 <form method=POST role='form' enctype='multipart/form-data' action='$aksi?module=antrian&act=input' class='validate'>						
 							 
 			NO FAKTUR : <input type='text' name='nofaktur' class='form-control' value='$nofak' readonly/>
-			NO PASIEN : <input type=text name='nopasien' class='form-control' data-validate='required'  value='".$_SESSION[namauser]."' readonly><p></p>
+			NO PASIEN : <input type=text name='nopasien' class='form-control' data-validate='required'  value='".$_SESSION['namauser']."' readonly><p></p>
 			TANGGAL ANTRIAN : <input type=text name='tglantri' class='form-control' data-validate='required'  value='".$kembali."' readonly><p></p>
 			
 		
@@ -95,8 +95,8 @@ switch($_GET[act]){
 			echo"</select>	<br>
 			POLIKLINIK : <select name='poli' id='poli' class='form-control' onchange='pilihdr()'>
 			<option value=''>--Pilih Poliklinik--</option>";
-			$bagian = mysql_query("SELECT * FROM poliklinik");
-			while($b=mysql_fetch_array($bagian)){
+			$bagian = mysqli_query($con,"SELECT * FROM poliklinik");
+			while($b=mysqli_fetch_array($bagian)){
 			echo"
 			<option value='$b[id_poli]'>$b[poli]</option>
 			";
@@ -137,21 +137,21 @@ switch($_GET[act]){
 		 <th>Nama Dokter</th><th>Tgl. Antrian</th>
 		 <th>Waktu</th><th>Aksi</th></tr></thead><tbody>"; 
 
-    $tampil=mysql_query("SELECT * FROM antrian_pasien WHERE id_pasien='$_SESSION[namauser]' AND tanggal_pendaftaran = '$kembali2'");
+    $tampil=mysqli_query($con,"SELECT * FROM antrian_pasien WHERE id_pasien='$_SESSION[namauser]' AND tanggal_pendaftaran = '$kembali2'");
     $no=1;
-    while ($r=mysql_fetch_array($tampil)){
-		$pol = mysql_fetch_array(mysql_query("SELECT * FROM poliklinik WHERE id_poli='$r[poliklinik]'"));
-		$dok = mysql_fetch_array(mysql_query("SELECT * FROM user WHERE id_user='$r[id_dr]'"));
+    while ($r=mysqli_fetch_array($tampil)){
+		$pol = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM poliklinik WHERE id_poli='$r[poliklinik]'"));
+		$dok = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM user WHERE id_user='$r[id_dr]'"));
 		
-		$hari = date("w",strtotime($r[tanggal_pendaftaran]));
-		$wkt = mysql_fetch_assoc(mysql_query("SELECT jam FROM dr_praktek WHERE id_poli='$r[poliklinik]' AND id_dr='$r[id_dr]' AND hari='$hari'"));
-		$wktu = $wkt[jam];
+		$hari = date("w",strtotime($r['tanggal_pendaftaran']));
+		$wkt = mysqli_fetch_assoc(mysqli_query($con,"SELECT jam FROM dr_praktek WHERE id_poli='$r[poliklinik]' AND id_dr='$r[id_dr]' AND hari='$hari'"));
+		$wktu = $wkt['jam'];
 		 echo "<tr>
 		 
 		<td>$r[no_urut]</td>
-			   <td >".$pol[poli]."</td>
+			   <td >".$pol['poli']."</td>
 			   <td>$dok[nama_lengkap]</td>
-			   <td>".tgl_indo($r[tanggal_pendaftaran])."</td>
+			   <td>".tgl_indo($r['tanggal_pendaftaran'])."</td>
 			   <td>$wktu</td>
 			   <td><a href=modul/mod_antrian/cetak.php?&nobooking=$r[no_faktur]  data-toggle='tooltip' data-placement='top' data-original-title='Cetak Antrian' target='_blank'><i class='entypo-print'></i></a>
 			   </td></tr>";

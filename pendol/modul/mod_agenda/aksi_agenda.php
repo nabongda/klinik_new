@@ -11,12 +11,12 @@ include "../../../config/koneksi.php";
 include "../../../config/fungsi_seo.php";
 include "../../../config/library.php";
 
-$module=$_GET[module];
-$act=$_GET[act];
+$module=$_GET['module'];
+$act=$_GET['act'];
 
 // Hapus agenda
 if ($module=='agenda' AND $act=='hapus'){
-  mssql_query("DELETE FROM agenda WHERE id_agenda='$_GET[id]'");
+  mysqli_query($con,"DELETE FROM agenda WHERE id_agenda='$_GET[id]'");
   header('location:../../media.php?module='.$module);
 }
 
@@ -24,7 +24,7 @@ if ($module=='agenda' AND $act=='hapus'){
 elseif ($module=='agenda' AND $act=='input'){
   $mulai=$_POST['waktu'];
 
-  mssql_query("INSERT INTO agenda(tema,
+  mysqli_query($con,"INSERT INTO agenda(tema,
                                   tema_seo, 
                                   isi_agenda,
                                   tempat,
@@ -47,7 +47,7 @@ elseif ($module=='agenda' AND $act=='input'){
 elseif ($module=='agenda' AND $act=='update'){
   $waktu=$_POST['waktu'];
   $tema_seo = seo_title($_POST['tema']);
-  mssql_query("UPDATE agenda SET tema        = '$_POST[tema]',
+  mysqli_query($con,"UPDATE agenda SET tema        = '$_POST[tema]',
                                  tema_seo    = '$tema_seo',
                                  isi_agenda  = '$_POST[isi_agenda]',
                                  tempat      = '$_POST[tempat]',  

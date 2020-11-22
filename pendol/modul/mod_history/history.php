@@ -11,7 +11,7 @@ $pinjam            = date("d-m-Y");
 $tujuh_hari        = mktime(0,0,0,date("n"),date("j")+1,date("Y"));
 $kembali        = date("Y-m-d", $tujuh_hari);
 $filter = date("N",$tujuh_hari);
-switch($_GET[act]){
+switch($_GET['act']){
   // Tampil Kategori
   default:
     echo "<div class='row'>
@@ -41,21 +41,21 @@ switch($_GET[act]){
 		 <th>Kode Booking</th><th>No URUT</th><th>POLI</th>
 		 <th>Nama Dokter</th><th>Tgl. Antrian</th>
 		 <th>Waktu</th><th>Aksi</th></tr></thead><tbody>"; 
-		 $tampil=mysql_query("SELECT * FROM antrian_pasien WHERE id_pasien='$_SESSION[namauser]' ");
+		 $tampil=mysqli_query($con,"SELECT * FROM antrian_pasien WHERE id_pasien='$_SESSION[namauser]' ");
 		 $no=1;
-		 while ($r=mysql_fetch_array($tampil)){
-			 $pol = mysql_fetch_array(mysql_query("SELECT * FROM poliklinik WHERE id_poli='$r[poliklinik]'"));
-			 $dok = mysql_fetch_array(mysql_query("SELECT * FROM user WHERE id_user='$r[id_dr]'"));
-		 $hari = date("w",strtotime($r[tanggal_pendaftaran]));
+		 while ($r=mysqli_fetch_array($tampil)){
+			 $pol = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM poliklinik WHERE id_poli='$r[poliklinik]'"));
+			 $dok = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM user WHERE id_user='$r[id_dr]'"));
+		 $hari = date("w",strtotime($r['tanggal_pendaftaran']));
 	 
-		 $wkt = mysql_fetch_assoc(mysql_query("SELECT jam FROM dr_praktek WHERE id_poli='$r[poliklinik]' AND id_dr='$r[id_dr]' AND hari='$hari'"));
-		   $wktu = $wkt[jam];
+		 $wkt = mysqli_fetch_assoc(mysqli_query($con,"SELECT jam FROM dr_praktek WHERE id_poli='$r[poliklinik]' AND id_dr='$r[id_dr]' AND hari='$hari'"));
+		   $wktu = $wkt['jam'];
 			echo "<tr>
-			 <td>".$r[no_faktur]."</td>
+			 <td>".$r['no_faktur']."</td>
 		   <td>$r[no_urut]</td>
-				  <td >".$pol[poli]."</td>
+				  <td >".$pol['poli']."</td>
 				  <td>$dok[nama_lengkap]</td>
-				  <td>".tgl_indo($r[tanggal_pendaftaran])."</td>
+				  <td>".tgl_indo($r['tanggal_pendaftaran'])."</td>
 				  <td>$wktu</td>
 				  <td><a href=modul/mod_antrian/cetak.php?&nobooking=$r[no_faktur]  data-toggle='tooltip' data-placement='top' data-original-title='Cetak Antrian' target='_blank'><i class='entypo-print'></i></a>
 				  </td></tr>";
@@ -80,8 +80,8 @@ switch($_GET[act]){
   
   // Form Edit Kategori  
   case "editantrian":
-    $edit=mysql_query("SELECT * FROM antrian WHERE id_antrian='$_GET[id]'");
-    $r=mysql_fetch_array($edit);
+    $edit=mysqli_query($con,"SELECT * FROM antrian WHERE id_antrian='$_GET[id]'");
+    $r=mysqli_fetch_array($edit);
 
 	 echo "<div class='row'>
 			<div class='col-sm-12'>
@@ -116,7 +116,7 @@ switch($_GET[act]){
 			</div>
 		  </div>
 		  ";
-			if ($r[aktif]=='Y'){
+			if ($r['aktif']=='Y'){
       echo "<div class='form-group'>
 	  <label class='control-label'>Aktif</label>
 			<div class='col-sm-12'> <input type=radio name='aktif' value='Y' checked> Y  
@@ -149,10 +149,10 @@ switch($_GET[act]){
 					</div>
           <table class='table table-bordered table-responsive' id='mytable'>
          <thead> <tr><th>No</th><th>Nama antrian</th><th>Status</th><th>Aksi</th></tr></thead><tbody>"; 
-    $tampil=mysql_query("SELECT * FROM antrian ORDER BY id_antrian DESC");
+    $tampil=mysqli_query($con,"SELECT * FROM antrian ORDER BY id_antrian DESC");
     $no=1;
-    while ($r=mysql_fetch_array($tampil)){
-		 if ($r[WAKTUDR]=='P'){
+    while ($r=mysqli_fetch_array($tampil)){
+		 if ($r['WAKTUDR']=='P'){
 		  $wktu = "PAGI";
 	  }else{
 		  $wktu = "SORE";

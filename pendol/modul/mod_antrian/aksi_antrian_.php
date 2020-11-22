@@ -9,22 +9,22 @@ else{
 include "../../../config/koneksi.php";
 //include "../../../config/fungsi_seo.php";
 date_default_timezone_set('Asia/Jakarta');
-$module=$_GET[module];
-$act=$_GET[act];
+$module=$_GET['module'];
+$act=$_GET['act'];
 
 // Input antrian
 if ($module=='antrian' AND $act=='input'){
-  $ambil = mysql_fetch_array(mysql_query("SELECT max(nourutdr) as noantrian FROM regbooking WHERE 
+  $ambil = mysqli_fetch_array(mysqli_query($con,"SELECT max(nourutdr) as noantrian FROM regbooking WHERE 
   waktudr='$_POST[kunjungan]' AND kodebagian='$_POST[poliklinik]' AND kodedokter='$_POST[dokter]'  
   AND utktglreg='$_POST[tglantri]'"));
     
-  if($ambil[noantrian] < 6 ){
+  if($ambil['noantrian'] < 6 ){
 	  $nourut = 6;
   }else{
-	  $nourut = $ambil[noantrian] + 1;
+	  $nourut = $ambil['noantrian'] + 1;
   }
   
-  $urutbooking=mysql_num_rows(mysql_query("SELECT * FROM regbooking WHERE utktglreg='$_POST[tglantri]'"));
+  $urutbooking=mysqli_num_rows(mysqli_query($con,"SELECT * FROM regbooking WHERE utktglreg='$_POST[tglantri]'"));
   if (!empty($urutbooking)){
 	  $urut = $urutbooking + 1;
   }else{
@@ -32,19 +32,19 @@ if ($module=='antrian' AND $act=='input'){
   }
   $urut1= sprintf("%04d", $urut);
   
-  $thn=substr($_POST[tglantri],2,2);
-  $thn2=substr($_POST[tglantri],0,4);
-  $bln = substr($_POST[tglantri],5,2);
-  $tgl = substr($_POST[tglantri],8,2);
+  $thn=substr($_POST['tglantri'],2,2);
+  $thn2=substr($_POST['tglantri'],0,4);
+  $bln = substr($_POST['tglantri'],5,2);
+  $tgl = substr($_POST['tglantri'],8,2);
   $nobooking = $thn."".$bln."".$tgl."".$urut1; 
    $sekarang = date('Y-m-d');
-   $tanggal = $_POST[tglantri];
-$jam = $_POST[jam_mulai];
+   $tanggal = $_POST['tglantri'];
+$jam = $_POST['jam_mulai'];
 $jammulai = $thn2."-".$bln."-".$tgl." ".$jam;
 
   
   
-$cekantri = mysql_num_rows(mysql_query("SELECT * FROM regbooking WHERE 
+$cekantri = mysqli_num_rows(mysqli_query($con,"SELECT * FROM regbooking WHERE 
     utktglreg='$_POST[tglantri]' AND nopasien='$_POST[nopasien]'"));
 	
   if(!empty($cekantri)){
@@ -53,21 +53,21 @@ $cekantri = mysql_num_rows(mysql_query("SELECT * FROM regbooking WHERE
         window.location=('../../media.php?module=download')</script>";
 			
 		  }else{			
-   mysql_query("INSERT INTO REGPAS (NOREG, NOPASIEN, KODEPT, TGLREG, JAMREG, ASALREG,
+   mysqli_query($con,"INSERT INTO REGPAS (NOREG, NOPASIEN, KODEPT, TGLREG, JAMREG, ASALREG,
 BARULAMA, REGTELP, CRKUNJUNG, VALIDRI, USLOGNM, CLIENT, KONDISIPAS)
 values ('$nobooking', '$_POST[nopasien]', '$_POST[penjamin]','$_POST[tglantri]',
  '$jammulai', 'J', 'L', 'Y', 'A', 'O', 'PENDOL', 'WEBSITE','N')");
 
 
 
-mysql_query("INSERT INTO REGDR (KODEDOKTER, DOKTERPGNT, NOREG, WAKTUREG, NOURUTDR,
+mysqli_query($con,"INSERT INTO REGDR (KODEDOKTER, DOKTERPGNT, NOREG, WAKTUREG, NOURUTDR,
 BAGREGDR, FLAGICD, TGLINPUT, FLAGRESUME) values ( '$_POST[dokter]', '$_POST[dokter]',
  '$nobooking','$_POST[kunjungan]', '$nourut', '$_POST[poliklinik]', 'N', GETDATE(), 'T')");
 
 
-if($_POST[penjamin]!='UMUM'){
+if($_POST['penjamin']!='UMUM'){
 
- mysql_query("INSERT INTO TRXPMR (NOREG, KODEBAGIAN, KODEPMR, KODEDOKTER, TGLPMR,
+ mysqli_query($con,"INSERT INTO TRXPMR (NOREG, KODEBAGIAN, KODEPMR, KODEDOKTER, TGLPMR,
 TGLINPUT, DRKIRIM, DRPERIKSA, TIPEPMR, PAJAKPMR, PROSENPMR, BIAYAPMR, BIAYAPMRIIL, SUBSIDIRS,
 TARIFASKES, SUBSIDIASKES, STDBIAYA, SELISIH, BIAYARS, BIAYARSRIIL, BIAYADR, BIAYADRRIIL, BIAYASU,
 BIAYASURIIL, BIAYAST, BIAYASTRIIL, BIAYANM, BIAYANMRIIL, BIAYAIUR, BYIURRS, BYIURDR, BYIURSU,
@@ -81,7 +81,7 @@ NILAIDISC, FLAGDISC, PAKET, PERSEN, NOKWT, STPIUTANG, STTUNAI, STIPELT, STIPELP)
 
 }else {
 
-mysql_query("INSERT INTO TRXPMR (NOREG, KODEBAGIAN, KODEPMR, KODEDOKTER, TGLPMR,
+mysqli_query($con,"INSERT INTO TRXPMR (NOREG, KODEBAGIAN, KODEPMR, KODEDOKTER, TGLPMR,
 TGLINPUT, DRKIRIM, DRPERIKSA, TIPEPMR, PAJAKPMR, PROSENPMR, BIAYAPMR, BIAYAPMRIIL, SUBSIDIRS,
 TARIFASKES, SUBSIDIASKES, STDBIAYA, SELISIH, BIAYARS, BIAYARSRIIL, BIAYADR, BIAYADRRIIL, BIAYASU,
 BIAYASURIIL, BIAYAST, BIAYASTRIIL, BIAYANM, BIAYANMRIIL, BIAYAIUR, BYIURRS, BYIURDR, BYIURSU,
@@ -96,7 +96,7 @@ NILAIDISC, FLAGDISC, PAKET, PERSEN, NOKWT, STPIUTANG, STTUNAI, STIPELT, STIPELP)
 }
 
 
- mysql_query("INSERT INTO REGBOOKING (NOBOOKING, KODEBAGIAN, KODEDOKTER, WAKTUDR,
+ mysqli_query($con,"INSERT INTO REGBOOKING (NOBOOKING, KODEBAGIAN, KODEDOKTER, WAKTUDR,
 TYPEPASIEN, NOPASIEN, NAMAPASIEN, UTKTGLREG, JAMDTG, TGLPESAN, JAMPESAN, VALID, TIPEBOOKING,
 NOURUTDR)values ('$nobooking', '$_POST[poliklinik]', '$_POST[dokter]', 
 '$_POST[kunjungan]', 'L', '$_POST[nopasien]', '$_SESSION[namalengkap]', 
@@ -128,7 +128,7 @@ NOURUTDR)values ('$nobooking', '$_POST[poliklinik]', '$_POST[dokter]',
 // Update antrian
 elseif ($module=='antrian' AND $act=='update'){
   $antrian_seo = seo_title($_POST['nama_antrian']);
-  mysql_query("UPDATE antrian SET nama_antrian='$_POST[nama_antrian]', menu='$_POST[menu]', antrian_seo='$antrian_seo', aktif='$_POST[aktif]' 
+  mysqli_query($con,"UPDATE antrian SET nama_antrian='$_POST[nama_antrian]', menu='$_POST[menu]', antrian_seo='$antrian_seo', aktif='$_POST[aktif]' 
                WHERE id_antrian = '$_POST[id]'");
  // header('location:../../media.php?module='.$module);
 }

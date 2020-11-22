@@ -3,12 +3,12 @@ session_start();
 error_reporting(0);
 include "timeout.php";
 
-if($_SESSION[login]==1){
+if($_SESSION['login']==1){
 	if(!cek_login()){
-		$_SESSION[login] = 0;
+		$_SESSION['login'] = 0;
 	}
 }
-if($_SESSION[login]==0){
+if($_SESSION['login']==0){
   header('location:logout.php');
 }
 else{
@@ -50,7 +50,7 @@ else{
 
   <?php include "../config/koneksi.php";
 
-$mysql = mysql_fetch_array(mysql_query("select alamat_web from identitas"));?>
+$mysql = mysqli_fetch_array(mysqli_query($con, "select alamat_web from identitas"));?>
   
  
   <script type="text/javascript" src="../bootstrap/js/jquery.js" ></script>
@@ -179,7 +179,7 @@ window.prettyPrint && prettyPrint();
 				<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->			
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<?php
-						$count = mysql_fetch_array(mysql_query("select img from users where username='$_SESSION[namauser]'")); 
+						$count = mysqli_fetch_array(mysqli_query($con, "select img from users where username='$_SESSION[namauser]'")); 
 						if($count['img']!=''){
 								echo "<img src='../img_foto/small_$count[img]' width='42px' height='42px' alt='' style='background:#ebebeb;border:2px solid #303641;' class='img-circle'> <strong>$_SESSION[namalengkap]</strong>";
 						}else{
@@ -193,7 +193,7 @@ window.prettyPrint && prettyPrint();
 					<li class="caret"></li>
 					<!-- Profile sub-links -->
 					<li>
-							<a href="media.php?module=user&act=edituser&id=<?php $q_session = mysql_fetch_array(mysql_query("SELECT * FROM users WHERE username='$_SESSION[namauser]'")); echo $q_session[id_session];?>">Edit profile</a>
+							<a href="media.php?module=user&act=edituser&id=<?php $q_session = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM users WHERE username='$_SESSION[namauser]'")); echo $q_session['id_session'];?>">Edit profile</a>
 						
 					</li>
 					

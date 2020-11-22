@@ -27,6 +27,7 @@
 		$ketemu	= mysqli_num_rows($login);
 		$r		= mysqli_fetch_array($login);
 		$ip 	= $_SERVER['REMOTE_ADDR'];
+		
 	// Apabila username dan password ditemukan
 	if ($ketemu > 0){
 		session_start();

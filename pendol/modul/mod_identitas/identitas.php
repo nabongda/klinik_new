@@ -1,10 +1,10 @@
 <?php
 $aksi="modul/mod_identitas/aksi_identitas.php";
-switch($_GET[act]){
+switch($_GET['act']){
   // Tampil identitas
   default:
-    $sql  = mysql_query("SELECT * FROM identitas LIMIT 1");
-    $r    = mysql_fetch_array($sql);
+    $sql  = mysqli_query($con,"SELECT * FROM identitas LIMIT 1");
+    $r    = mysqli_fetch_array($sql);
 
     echo "<div class='row'>
 			<div class='col-sm-12'>

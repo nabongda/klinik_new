@@ -27,7 +27,7 @@ $filter = ($_POST["status"] == "day")? "AND JWDOKTER.KODEHARI = ".$_POST["opsi"]
 $filter2 = ($_POST["status"] == "poli")? "AND JWDOKTER.KODEBAGIAN = ".$_POST["opsi"] : "" ;
 
 $filter3 = ($_POST["status"] == "dokter")? "AND JWDOKTER.KODEDOKTER = '".$_POST["opsi"]."'" : "" ;
-switch($_GET[act]){
+switch($_GET['act']){
   // Tampil Agenda
   default:
 
@@ -79,7 +79,7 @@ echo '<div class="well"><form action="" method="post">
 
 
 
-    if ($_SESSION[leveluser]=='admin'){
+    if ($_SESSION['leveluser']=='admin'){
       //$tampil=mysql_query("SELECT * FROM agenda ORDER BY id_agenda DESC");
     }
     else{
@@ -92,11 +92,11 @@ echo '<div class="well"><form action="" method="post">
 	}
 	
 
-    $tampil=mysql_query($sql);
+    $tampil=mysqli_query($con,$sql);
 
     $no = 1;
-    while ($r=mysql_fetch_array($tampil)){ 
-		switch($r[hari]){
+    while ($r=mysqli_fetch_array($tampil)){ 
+		switch($r['hari']){
 			case "0": $hari = "Minggu"; break;
 			case  "1": $hari = "Senin"; break;
 			case  "2": $hari = "Selasa"; break;
@@ -143,10 +143,10 @@ echo '<div class="well"><form action="" method="post">
                          html = "<select class='form-control' onchange='submit()' name='opsi'><option value=''>--pilih--</option>";
                         <?php 
                         
-                        $po = mysql_query("SELECT * FROM user WHERE id_ju = 'JU-02'");
-                        while($li = mysql_fetch_assoc($po)){
+                        $po = mysqli_query($con,"SELECT * FROM user WHERE id_ju = 'JU-02'");
+                        while($li = mysqli_fetch_assoc($po)){
                             ?> 
-                            html += "<option value='<?php echo $li[id_user]; ?>'><?php echo $li[nama_lengkap]; ?></option>";
+                            html += "<option value='<?php echo $li['id_user']; ?>'><?php echo $li['nama_lengkap']; ?></option>";
                             <?php
                         }
                         
@@ -158,10 +158,10 @@ echo '<div class="well"><form action="" method="post">
                         html = "<select class='form-control' onchange='submit()' name='opsi'><option value=''>--pilih--</option>";
                         <?php 
                         
-                        $po = mysql_query("SELECT * FROM poliklinik ");
-                        while($li = mysql_fetch_assoc($po)){
+                        $po = mysqli_query($con,"SELECT * FROM poliklinik ");
+                        while($li = mysqli_fetch_assoc($po)){
                             ?> 
-                            html += "<option value='<?php echo $li[id_poli]; ?>'><?php echo $li[poli]; ?></option>";
+                            html += "<option value='<?php echo $li['id_poli']; ?>'><?php echo $li['poli']; ?></option>";
                             <?php
                         }
                         

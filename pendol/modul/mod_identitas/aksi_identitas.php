@@ -9,8 +9,8 @@ else{
 include "../../../config/koneksi.php";
 include "../../../config/fungsi_thumb.php";
 
-$module=$_GET[module];
-$act=$_GET[act];
+$module=$_GET['module'];
+$act=$_GET['act'];
 
 // Update identitas
 if ($module=='identitas' AND $act=='update'){
@@ -20,7 +20,7 @@ if ($module=='identitas' AND $act=='update'){
   // Apabila ada gambar yang diupload
   if (!empty($lokasi_file)){
     UploadFavicon($nama_file);
-    mysql_query("UPDATE identitas SET nama_website   = '$_POST[nama_website]',
+    mysqli_query($con,"UPDATE identitas SET nama_website   = '$_POST[nama_website]',
 									  alamat_web     = '$_POST[alamat_web]',
 									  email          = '$_POST[email]',
 									  telp			 ='$_POST[telp]',
@@ -33,7 +33,7 @@ if ($module=='identitas' AND $act=='update'){
                                 WHERE id_identitas   = '$_POST[id]'");
   }
   else{
-    mysql_query("UPDATE identitas SET nama_website   = '$_POST[nama_website]',
+    mysqli_query($con,"UPDATE identitas SET nama_website   = '$_POST[nama_website]',
 									  alamat_web     = '$_POST[alamat_web]',
 									   email          = '$_POST[email]',
 									  telp			 ='$_POST[telp]',

@@ -8,11 +8,11 @@ session_start();
 else{
 
 $aksi="modul/mod_users/aksi_users.php";
-switch($_GET[act]){
+switch($_GET['act']){
   // Tampil User
   default:
     
-      $tampil = mysql_query("SELECT * FROM pasien WHERE id_pasien='$_SESSION[namauser]'");
+      $tampil = mysqli_query($con,"SELECT * FROM pasien WHERE id_pasien='$_SESSION[namauser]'");
       echo "<div class='row'>
 			<div class='col-sm-12'>
 			<ol class='breadcrumb bc-3'>
@@ -43,7 +43,7 @@ switch($_GET[act]){
 		  <th>Tanggal Lahir</th>
 		  </tr></thead><tbody>"; 
     $no=1;
-    while ($r=mysql_fetch_array($tampil)){
+    while ($r=mysqli_fetch_array($tampil)){
 		$tanggal_lahir = strftime("%d %B %Y",strtotime($r['tgl_lahir']));
 		
        echo "<tr><td>$no</td>
@@ -67,7 +67,7 @@ switch($_GET[act]){
    break;
   
   case "tambahuser":
-    if ($_SESSION[leveluser]=='admin'){
+    if ($_SESSION['leveluser']=='admin'){
     echo "<div class='row'>
 			<div class='col-sm-12'>
 			<ol class='breadcrumb bc-3'>
@@ -187,10 +187,10 @@ switch($_GET[act]){
      break;
     
   case "edituser":
-    $edit=mysql_query("SELECT * FROM users WHERE id_session='$_GET[id]'");
-    $r=mysql_fetch_array($edit);
+    $edit=mysqli_query($con,"SELECT * FROM users WHERE id_session='$_GET[id]'");
+    $r=mysqli_fetch_array($edit);
 
-    if ($_SESSION[leveluser]=='admin'){
+    if ($_SESSION['leveluser']=='admin'){
 	echo "<div class='row'>
 			<div class='col-sm-12'>
 			<ol class='breadcrumb bc-3'>

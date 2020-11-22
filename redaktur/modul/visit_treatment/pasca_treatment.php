@@ -267,7 +267,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Tanggal</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="tanggal" value="<?php echo $date_now; ?>">
+							<input type="date" class="form-control" name="tanggal" value="<?php echo $date_now; ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -297,7 +297,9 @@
 					<div class="form-group row">
 						<div class="col-sm-3">
 							<div class="card" style="width: 18rem;">
-								<img class="foto" id="img-fototes1">
+								<div class="card-header">
+									<img class="foto" id="img-fototes1" style="width: 100%">
+								</div>
 								<div class="card-body">
 									<center><label for="fototes1" class="btn btn-info">Tambah Foto</label></center>
 								</div>
@@ -305,7 +307,9 @@
 						</div>
 						<div class="col-sm-3">
 							<div class="card" style="width: 18rem;">
-								<img class="foto" id="img-fototes2">
+								<div class="card-header">
+									<img class="foto" id="img-fototes2" style="width: 100%">
+								</div>
 								<div class="card-body">
 									<center><label for="fototes2" class="btn btn-info">Tambah Foto</label></center>
 								</div>
@@ -313,7 +317,9 @@
 						</div>
 						<div class="col-sm-3">
 							<div class="card" style="width: 18rem;">
-								<img class="foto" id="img-fototes3">
+								<div class="card-header">	
+									<img class="foto" id="img-fototes3" style="width: 100%">
+								</div>
 								<div class="card-body">
 									<center><label for="fototes3" class="btn btn-info">Tambah Foto</label></center>
 								</div>
@@ -321,7 +327,9 @@
 						</div>
 						<div class="col-sm-3">
 							<div class="card" style="width: 18rem;">
-								<img class="foto" id="img-fototes4">
+								<div class="card-header">	
+									<img class="foto" id="img-fototes4" style="width: 100%">
+								</div>
 								<div class="card-body">
 									<center><label for="fototes4" class="btn btn-info">Tambah Foto</label></center>
 								</div>
@@ -412,7 +420,7 @@
     </div>
 </section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function zoom(id){
 		var url = $("#" + id).data("uri");

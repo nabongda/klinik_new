@@ -283,6 +283,10 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
         "autoWidth": false,
         "responsive": true,
       });
+      $("#example3").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+      });
     });
   </script>
   <script>

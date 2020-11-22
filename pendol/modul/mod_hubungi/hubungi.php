@@ -7,7 +7,7 @@ session_start();
 }
 else{
 $aksi="modul/mod_hubungi/aksi_hubungi.php";
-switch($_GET[act]){
+switch($_GET['act']){
   // Tampil Hubungi Kami
   default:
     echo "<div class='row'>
@@ -28,11 +28,11 @@ switch($_GET[act]){
           <table class='table table-bordered table-responsive' id='mytable'>
           <thead><tr><th>No</th><th>Nama</th><th>Email</th><th>Subjek</th><th>Tanggal</th><th>Aksi</th></tr></thead><tbody>";
 
-    $tampil=mysql_query("SELECT * FROM hubungi ORDER BY id_hubungi DESC");
+    $tampil=mysqli_query($con,"SELECT * FROM hubungi ORDER BY id_hubungi DESC");
 
     $no = 1;
-    while ($r=mysql_fetch_array($tampil)){
-      $tgl=tgl_indo($r[tanggal]);
+    while ($r=mysqli_fetch_array($tampil)){
+      $tgl=tgl_indo($r['tanggal']);
       echo "<tr><td>$no</td>
                 <td width=40%>$r[nama]</td>
                 <td><a href=?module=hubungi&act=balasemail&id=$r[id_hubungi]>$r[email]</a></td>
@@ -46,8 +46,8 @@ switch($_GET[act]){
     break;
 
   case "balasemail":
-    $tampil = mysql_query("SELECT * FROM hubungi WHERE id_hubungi='$_GET[id]'");
-    $r      = mysql_fetch_array($tampil);
+    $tampil = mysqli_query($con,"SELECT * FROM hubungi WHERE id_hubungi='$_GET[id]'");
+    $r      = mysqli_fetch_array($tampil);
 
     echo "<div class='row'>
 			<div class='col-sm-12'>
@@ -94,7 +94,7 @@ switch($_GET[act]){
      break;
     
   case "kirimemail":
-    mail($_POST[email],$_POST[subjek],$_POST[pesan],"From: info@creativegamastudio.com");
+    mail($_POST['email'],$_POST['subjek'],$_POST['pesan'],"From: info@creativegamastudio.com");
     echo "<h2>Status Email</h2>
           <p>Email telah sukses terkirim ke tujuan</p>
           <p>[ <a href=javascript:history.go(-2)>Kembali</a> ]</p>";	 		  

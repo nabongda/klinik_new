@@ -7,7 +7,7 @@ session_start();
 }
 else{
 $aksi="modul/mod_komentar/aksi_komentar.php";
-switch($_GET[act]){
+switch($_GET['act']){
   // Tampil Komentar
   default:
     echo "<div class='row'>
@@ -27,10 +27,10 @@ switch($_GET[act]){
 					</div>
           <table class='table table-bordered table-responsive' id='mytable'>
           <thead><tr><th>Nama</th><th>Komentar</th><th>Tanggal</th><th>Aktif</th><th>Aksi</th></tr></thead><tbody>";
-    $tampil=mysql_query("SELECT * FROM komentar ORDER BY id_komentar DESC");
+    $tampil=mysqli_query($con,"SELECT * FROM komentar ORDER BY id_komentar DESC");
 
     $no = $posisi+1;
-    while ($r=mysql_fetch_array($tampil)){
+    while ($r=mysqli_fetch_array($tampil)){
 	$isi_kom = htmlentities(strip_tags($r['isi_komentar']));
 	$isi = substr($isi_kom,0,100);
 	$isi = substr($isi_kom,0,strrpos($isi," "));
@@ -58,8 +58,8 @@ switch($_GET[act]){
     break;
   
   case "editkomentar":
-    $edit = mysql_query("SELECT * FROM komentar WHERE id_komentar='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($con,"SELECT * FROM komentar WHERE id_komentar='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 
     echo "<div class='col-sm-12'>
 			<ol class='breadcrumb bc-3'>
@@ -100,7 +100,7 @@ switch($_GET[act]){
 			 <textarea class='form-control' style='resize: none; width:100%; height: 350px;' name='isi_komentar' id='loko' >$r[isi_komentar]</textarea><p></p>
 		  </div>
 		 ";
-if ($r[aktif]=='Y'){
+if ($r['aktif']=='Y'){
       echo "<div class='form-group'>
 	  <label class='control-label'>Aktif</label>
 			<div class='col-sm-12'> <input type=radio name='aktif' value='Y' checked> Y  

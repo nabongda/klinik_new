@@ -1,8 +1,8 @@
 <?php
 include "../config/koneksi.php";
 if ($_SESSION['leveluser']=='admin'){
-  $sql=mysql_query("select * from modul m, icon i where aktif='Y' and m.id_icon = i.id_icon order by id_modul");
-  while ($m=mysql_fetch_array($sql)){
+  $sql=mysqli_query($con,"select * from modul m, icon i where aktif='Y' and m.id_icon = i.id_icon order by id_modul");
+  while ($m=mysqli_fetch_array($sql)){
     echo "<li><a href='$m[link]'><i class='$m[icon]'></i><span>$m[nama_modul]</span></a></li>";
   }
   //echo "tess";

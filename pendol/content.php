@@ -18,7 +18,7 @@ if ($_GET['module']=='home'){
 		<a href=?module=antrian>
 		<div class="tile-stats tile-red">
 			<div class="icon"><i class="entypo-pencil"></i></div>';
-			$mysql=mysql_fetch_array(mysql_query("select count(berita.id_berita) as jumlah from berita"));
+			$mysql=mysqli_fetch_array(mysqli_query($con,"select count(berita.id_berita) as jumlah from berita"));
 		
 	/*		<div class="num" data-start="0" data-end="0" data-postfix="" data-duration="2000" data-delay="0"></div> */
 			echo'
@@ -33,7 +33,7 @@ if ($_GET['module']=='home'){
 	<a href=?module=jadwal>
 		<div class="tile-stats tile-green">
 			<div class="icon"><i class="entypo-calendar"></i></div>';
-			$mysql=mysql_fetch_array(mysql_query("select count(agenda.id_agenda) as jumlah from agenda"));
+			$mysql=mysqli_fetch_array(mysqli_query($con, "select count(agenda.id_agenda) as jumlah from agenda"));
 		
 	/*		<div class="num" data-start="0" data-end="0" data-postfix="" data-duration="2000" data-delay="0"></div> */
 			echo'
@@ -48,7 +48,7 @@ if ($_GET['module']=='home'){
 	<a href=?module=user>
 		<div class="tile-stats tile-aqua">
 			<div class="icon"><i class="entypo-mail"></i></div>';
-			$count = mysql_fetch_array(mysql_query("select count(hubungi.id_hubungi) as jumlah from hubungi"));
+			$count = mysqli_fetch_array(mysqli_query($con,"select count(hubungi.id_hubungi) as jumlah from hubungi"));
 			
 	/*		<div class="num" data-start="0" data-end="0" data-postfix="" data-duration="2000" data-delay="0"></div> */
 			echo'
@@ -94,21 +94,21 @@ if ($_GET['module']=='home'){
          <thead> <tr><th>Kode Booking</th><th>No URUT</th><th>POLI</th>
 		 <th>Nama Dokter</th><th>Tgl. Antrian</th>
 		 <th>Waktu</th><th>Aksi</th></tr></thead><tbody>"; 
-    $tampil=mysql_query("SELECT * FROM antrian_pasien WHERE id_pasien='$_SESSION[namauser]' ");
+    $tampil=mysqli_query($con, "SELECT * FROM antrian_pasien WHERE id_pasien='$_SESSION[namauser]' ");
     $no=1;
-    while ($r=mysql_fetch_array($tampil)){
-		$pol = mysql_fetch_array(mysql_query("SELECT * FROM poliklinik WHERE id_poli='$r[poliklinik]'"));
-		$dok = mysql_fetch_array(mysql_query("SELECT * FROM user WHERE id_user='$r[id_dr]'"));
-    $hari = date("w",strtotime($r[tanggal_pendaftaran]));
+    while ($r=mysqli_fetch_array($tampil)){
+		$pol = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM poliklinik WHERE id_poli='$r[poliklinik]'"));
+		$dok = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM user WHERE id_user='$r[id_dr]'"));
+    $hari = date("w",strtotime($r['tanggal_pendaftaran']));
 
-    $wkt = mysql_fetch_assoc(mysql_query("SELECT jam FROM dr_praktek WHERE id_poli='$r[poliklinik]' AND id_dr='$r[id_dr]' AND hari='$hari'"));
-      $wktu = $wkt[jam];
+    $wkt = mysqli_fetch_assoc(mysqli_query($con,"SELECT jam FROM dr_praktek WHERE id_poli='$r[poliklinik]' AND id_dr='$r[id_dr]' AND hari='$hari'"));
+      $wktu = $wkt['jam'];
        echo "<tr>
-	    <td>".$r[no_faktur]."</td>
+	    <td>".$r['no_faktur']."</td>
 	  <td>$r[no_urut]</td>
-             <td >".$pol[poli]."</td>
+             <td >".$pol['poli']."</td>
              <td>$dok[nama_lengkap]</td>
-			 <td>".tgl_indo($r[tanggal_pendaftaran])."</td>
+			 <td>".tgl_indo($r['tanggal_pendaftaran'])."</td>
 			 <td>$wktu</td>
              <td><a href=modul/mod_antrian/cetak.php?&nobooking=$r[no_faktur]  data-toggle='tooltip' data-placement='top' data-original-title='Cetak Antrian' target='_blank'><i class='entypo-print'></i></a>
              </td></tr>";
@@ -127,7 +127,7 @@ if ($_GET['module']=='home'){
   &copy; '.date('Y').' Neon Admin Theme by Laborator
   </footer>';
   }
-  elseif (!empty($_SESSION[namauser])){
+  elseif (!empty($_SESSION['namauser'])){
   echo "<div class='well'><h3>Selamat Datang</h3>
           <p>Hai <b>$_SESSION[namalengkap]</b>, selamat datang di halaman Pendaftaran Pasien Secara Online.<br> 
           Silahkan klik menu pilihan yang berada di sebelah kiri atau icon dibawah. </p>
@@ -154,19 +154,19 @@ elseif ($_GET['module']=='profil'){
 
 // Bagian User
 elseif ($_GET['module']=='user'){
-  if ($_SESSION['leveluser']=='admin' OR $_SESSION[leveluser]=='user'){
+  if ($_SESSION['leveluser']=='admin' OR $_SESSION['leveluser']=='user'){
     include "modul/mod_users/users.php";
   }
 }
 // Bagian History Antrian
 elseif ($_GET['module']=='history'){
-  if ($_SESSION['leveluser']=='admin' OR $_SESSION[leveluser]=='user'){
+  if ($_SESSION['leveluser']=='admin' OR $_SESSION['leveluser']=='user'){
     include "modul/mod_history/history.php";
   }
 }
 // Bagian User
 elseif ($_GET['module']=='antrian'){
-  if ($_SESSION['leveluser']=='admin' OR $_SESSION[leveluser]=='user'){
+  if ($_SESSION['leveluser']=='admin' OR $_SESSION['leveluser']=='user'){
     include "modul/mod_antrian/antrian.php";
   }
 }
