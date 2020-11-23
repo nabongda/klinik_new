@@ -84,12 +84,12 @@
                 <td><?php echo $data['alamat']; ?></td>
                 <td><?php echo $data['email']; ?></td>
                 <td align="center"><center><?php echo $data['blokir']; ?></center></td> 
+                <?php
+                  if ($_SESSION['jenis_u'] =="JU-01") { ?>
                 <td>
-                    <?php
-                    if ($_SESSION['jenis_u'] =="JU-01") { ?>
-                    <a href="?module=data_dokter&act=edit_dokter&id=<?php echo $data['id_user']; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>&nbsp;<a onclick="return confirm('Yakin Ingin Menghapus Data?')" href="modul/data_dokter/aksi_data_dokter.php?module=user&act=hapus&id=<?php echo $data['id_user']; ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Hapus</a>
-                    <?php } ?>                  
+                  <a href="?module=data_dokter&act=edit_dokter&id=<?php echo $data['id_user']; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>&nbsp;<a onclick="return confirm('Yakin Ingin Menghapus Data?')" href="modul/data_dokter/aksi_data_dokter.php?module=user&act=hapus&id=<?php echo $data['id_user']; ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Hapus</a>                 
                 </td>
+                <?php } ?> 
               </tr>
               <?php } ?>
             </tbody>
