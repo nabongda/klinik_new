@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2020 at 08:43 AM
+-- Generation Time: Nov 23, 2020 at 10:55 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -727,7 +727,9 @@ INSERT INTO `history_kasir` (`id`, `no_faktur`, `id_pasien`, `id_dr`, `id_kasir`
 (165, '202006251055049', 'S.M.S.5', 0, NULL, '2020-06-25', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
 (166, '202006251055049', 'S.M.S.5', 9, NULL, '2020-06-25', 0, 'VIT C ( KALENG )', '766785', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
 (172, '202006251302069', 'S.M.S.5', 0, 33, '2020-06-25', 0, 'Perawatan Luka kena Benda Tajam', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
-(173, '202006251302069', 'S.M.S.5', 9, 33, '2020-06-25', 0, 'VIT C ( KALENG )', '766785', '', '577', 1, 0, '577', 0, 'Produk', 'Lunas', '-', 'Dokter', 0, NULL, NULL);
+(173, '202006251302069', 'S.M.S.5', 9, 33, '2020-06-25', 0, 'VIT C ( KALENG )', '766785', '', '577', 1, 0, '577', 0, 'Produk', 'Lunas', '-', 'Dokter', 0, NULL, NULL),
+(174, '202006250928465', 'S.M.S.5', 9, NULL, '2020-06-25', 0, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '8085', 1, 0, '8085', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
+(175, '202006250928465', 'S.M.S.5', 9, NULL, '2020-06-25', 0, 'VIT C ( KALENG )', '766785', '', '577', 1, 0, '577', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -806,11 +808,11 @@ CREATE TABLE `karyawan` (
 INSERT INTO `karyawan` (`id_karyawan`, `id_kk`, `nama_karyawan`, `jk`, `tgl_lahir`, `no_telp`, `id_ju`, `status`, `foto`, `tgl_masuk`, `alamat`, `lulusan`, `username`, `password`, `blokir`) VALUES
 (18, 1, 'Syahli', 'L', '2019-05-01', '081931745058', 'JU-06', 'Aktif', 'kambing-hitam-romansa.jpg', '2019-10-31', 'Pontianak', 'sma', 'syahli', 'f573ddf42d2b45645b608c863aff257c', 'N'),
 (33, 1, 'Hibiscus rosa-sinensis', 'L', '2000-01-01', '', 'JU-06', 'Aktif', 'hibiscus.jpg', '2019-12-09', 'Indonesia', 'SD', 'hibiscus', 'ec07d733adeecee47a5573f257db6005', 'N'),
-(34, 0, 'Gingerbread', 'P', '0', '0', 'JU-07', 'Aktif', '-', '2000-01-01', '-', '-', 'ginger', '6f4ec514eee84cc58c8e610a0c87d7a2', 'N'),
+(34, 0, 'Gingerbread', 'P', '0', '0', 'JU-07', 'Aktif', '', '2000-01-01', '-', '-', 'ginger', '6f4ec514eee84cc58c8e610a0c87d7a2', 'N'),
 (35, 0, 'Marshmallow', 'P', '1996-04-02', '089765432567', 'JU-08', 'Nonaktif', 'product_main_233122605_66320.jpg', '2000-01-01', '-', '-', 'marsh', 'd3ee527baae384aad8ef4ba0e308da7c', 'N'),
-(36, 1, 'Lorem Ipsum', 'P', '2000-01-01', '12345', 'JU-10', 'Aktif', '-', '2020-01-01', '-', '-', 'lorem', 'd2e16e6ef52a45b7468f1da56bba1953', 'N'),
+(36, 1, 'Lorem Ipsum', 'P', '2000-01-01', '12345', 'JU-10', 'Aktif', '', '2020-01-01', '-', '-', 'lorem', 'd2e16e6ef52a45b7468f1da56bba1953', 'N'),
 (37, 1, 'Dolors Sit Amet', 'P', '1990-01-01', '', 'JU-10', 'Aktif', 'Desert.jpg', '2020-02-05', '-', '-', 'dolors', '82e2e29d72b4a557c7516beabf088886', 'N'),
-(38, 1, 'kiki', 'L', '1995-03-01', '089123432234', 'JU-09', 'Aktif', 'icon orang.png', '2020-03-09', 'Bantul', 'UGM', 'apt', 'd41d8cd98f00b204e9800998ecf8427e', 'N'),
+(38, 1, 'kiki', 'L', '1995-03-01', '089123432234', 'JU-09', 'Aktif', 'icon_orang.png', '2020-03-09', 'Bantul', 'UGM', 'apt', 'd41d8cd98f00b204e9800998ecf8427e', 'N'),
 (39, 1, 'Laboratorium', 'P', '2000-11-02', '000', 'JU-08', 'Aktif', '2.png', '2020-11-20', 'Lab', 'S4', 'lab', 'f9664ea1803311b35f81d07d8c9e072d', 'N');
 
 -- --------------------------------------------------------
@@ -880,7 +882,6 @@ INSERT INTO `kasir_sementara` (`id`, `no_faktur`, `id_pasien`, `id_dr`, `id_kasi
 (59, '', '', 0, NULL, '2020-05-07', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
 (165, '202006251055049', 'S.M.S.5', 0, NULL, '2020-06-25', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
 (77, '202005051206323', 'S.M.S.6', 9, NULL, '2020-05-15', 0, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '8085', 1, 0, '8085', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(167, '202006250928465', 'S.M.S.5', 9, NULL, '2020-06-25', 0, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '8085', 1, 0, '8085', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
 (129, '202005051205062', 'S.M.S.2', 0, NULL, '2020-06-05', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
 (130, '202005051205062', 'S.M.S.2', 0, NULL, '2020-06-05', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
 (131, '202006051556273', '', 0, NULL, '2020-06-06', 1, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
@@ -904,7 +905,6 @@ INSERT INTO `kasir_sementara` (`id`, `no_faktur`, `id_pasien`, `id_dr`, `id_kasi
 (155, '202006241028013', '', 0, NULL, '2020-06-24', 1, 'Perawatan Luka kena Benda Tajam', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
 (156, '202006241127291', '', 0, NULL, '2020-06-24', 2, 'Perawatan Luka kena Benda Tajam', NULL, '', '15000', 1, 0, '15000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
 (153, '202006241028013', 'S.M.S.3', 0, NULL, '2020-06-24', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
-(168, '202006250928465', 'S.M.S.5', 9, NULL, '2020-06-25', 0, 'VIT C ( KALENG )', '766785', '', '577', 1, 0, '577', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
 (159, '202006241127291', 'S.M.S.3', 0, NULL, '2020-06-24', 0, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '0000-00-00', NULL);
 
 -- --------------------------------------------------------
@@ -1056,7 +1056,10 @@ INSERT INTO `kehadiran_dr` (`id_keh`, `id_dr`, `id_kk`, `tanggal`, `jam`) VALUES
 (48, 11, 0, '2020-06-24', '10:36:32'),
 (49, 9, 0, '2020-06-25', '09:29:25'),
 (50, 9, 0, '2020-08-01', '14:24:54'),
-(51, 9, 0, '2020-08-18', '14:33:36');
+(51, 9, 0, '2020-08-18', '14:33:36'),
+(52, 11, 0, '2020-11-20', '14:54:50'),
+(53, 11, 0, '2020-11-21', '15:03:24'),
+(54, 11, 0, '2020-11-23', '14:32:14');
 
 -- --------------------------------------------------------
 
@@ -2176,7 +2179,67 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1079, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-16 16:57:12'),
 (1080, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-17 02:18:10'),
 (1081, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 07:32:13'),
-(1082, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 07:32:23');
+(1082, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 07:32:23'),
+(1083, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-20 07:54:50'),
+(1084, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-20 07:55:26'),
+(1085, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-20 07:57:06'),
+(1086, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-20 07:57:41'),
+(1087, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-20 07:59:57'),
+(1088, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 08:03:31'),
+(1089, 'lab', 'Berhasil Login dengan IP ::1', '2020-11-20 08:07:24'),
+(1090, 'lab', 'Berhasil Login dengan IP ::1', '2020-11-20 08:18:49'),
+(1091, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 08:34:31'),
+(1092, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-20 08:34:48'),
+(1093, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 08:39:18'),
+(1094, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-20 08:44:47'),
+(1095, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-20 10:32:32'),
+(1096, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 10:41:54'),
+(1097, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-20 10:42:11'),
+(1098, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-20 10:47:50'),
+(1099, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-20 10:49:17'),
+(1100, 'lab', 'Berhasil Login dengan IP ::1', '2020-11-20 10:51:41'),
+(1101, 'drsam', 'Gagal Login', '2020-11-20 10:53:14'),
+(1102, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-20 10:54:47'),
+(1103, 'admin', 'Gagal Login', '2020-11-20 13:49:52'),
+(1104, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-20 13:50:02'),
+(1105, 'admin', 'Gagal Login', '2020-11-20 14:41:01'),
+(1106, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-20 14:45:03'),
+(1107, 'lab', 'Gagal Login', '2020-11-20 15:04:18'),
+(1108, 'lab', 'Berhasil Login dengan IP ::1', '2020-11-20 15:04:27'),
+(1109, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-20 15:19:12'),
+(1110, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-21 07:58:50'),
+(1111, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-21 07:59:22'),
+(1112, 'lab', 'Berhasil Login dengan IP ::1', '2020-11-21 08:03:04'),
+(1113, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-21 08:03:24'),
+(1114, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-21 09:11:25'),
+(1115, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-21 09:12:27'),
+(1116, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-21 09:55:45'),
+(1117, 'lorem', 'Berhasil Login dengan IP ::1', '2020-11-21 11:05:24'),
+(1118, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-21 11:06:13'),
+(1119, 'lorem', 'Berhasil Login dengan IP ::1', '2020-11-21 11:09:22'),
+(1120, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-21 11:25:01'),
+(1121, 'hibiscus', 'Gagal Login', '2020-11-21 11:26:46'),
+(1122, 'syahli', 'Gagal Login', '2020-11-21 11:27:08'),
+(1123, 'hibiscus', 'Berhasil Login dengan IP ::1', '2020-11-21 11:28:34'),
+(1124, 'hibiscus', 'Berhasil Login dengan IP ::1', '2020-11-21 11:40:58'),
+(1125, 'apt', 'Gagal Login', '2020-11-21 11:53:01'),
+(1126, 'apt', 'Berhasil Login dengan IP ::1', '2020-11-21 11:54:03'),
+(1127, 'hibiscus', 'Berhasil Login dengan IP ::1', '2020-11-21 12:23:05'),
+(1128, 'hibiscus', 'Berhasil Login dengan IP ::1', '2020-11-22 05:35:20'),
+(1129, 'lab', 'Berhasil Login dengan IP ::1', '2020-11-22 08:12:07'),
+(1130, 'hibiscus', 'Berhasil Login dengan IP ::1', '2020-11-22 08:13:28'),
+(1131, 'hibiscus', 'Edit KategoriKa Produk (4)', '2020-11-22 16:25:38'),
+(1132, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-23 04:21:52'),
+(1133, 'hibiscus', 'Berhasil Login dengan IP ::1', '2020-11-23 04:30:48'),
+(1134, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-23 04:38:36'),
+(1135, 'hibiscus', 'Berhasil Login dengan IP ::1', '2020-11-23 04:54:57'),
+(1136, 'lab', 'Berhasil Login dengan IP ::1', '2020-11-23 07:31:48'),
+(1137, 'drsam', 'Gagal Login', '2020-11-23 07:32:05'),
+(1138, 'drsam', 'Berhasil Login dengan IP ::1', '2020-11-23 07:32:14'),
+(1139, 'hibiscus', 'Berhasil Login dengan IP ::1', '2020-11-23 07:39:50'),
+(1140, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-23 09:21:47'),
+(1141, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-23 09:49:06'),
+(1142, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-23 09:52:21');
 
 -- --------------------------------------------------------
 
@@ -2264,6 +2327,8 @@ INSERT INTO `menu` (`id_sm`, `id_menu`, `nama_menu`, `page_menu`, `sts_menu`) VA
 ('SM-13', 'MN-23', 'Data Pemasukan', 'pemasukan', 'Tidak Aktif'),
 ('SM-13', 'MN-24', 'Data KAS', 'kas', 'Tidak Aktif'),
 ('SM-13', 'MN-25', 'Laba Rugi', 'keuangan', 'Tidak Aktif'),
+('SM-103', 'MN-301', 'Gudang Pusat', 'gudang', 'Aktif'),
+('SM-103', 'MN-302', 'Gudang Penjualan', 'gudang_cabang', 'Aktif'),
 ('SM-15', 'MN-32', 'Pasien Baru', 'pendaftarbaru', 'Tidak Aktif'),
 ('SM-15', 'MN-33', 'Antrian Baru', 'data_antrian', 'Tidak Aktif'),
 ('SM-15', 'MN-34', 'Checkout', 'checkout', 'Tidak Aktif'),
@@ -2524,7 +2589,7 @@ CREATE TABLE `pasien` (
 INSERT INTO `pasien` (`id`, `id_pasien`, `id_kk`, `nama_pasien`, `alamat`, `jk`, `tgl_lahir`, `umur`, `no_telp`, `tgl_pendaftaran`, `total_kunjungan`, `klaster`, `pekerjaan`, `km_exp`) VALUES
 (2, 'S.M.S.2', 1, 'Anisa', 'Bantul', 'P', '2001-12-04', '18', '+628', '2019-12-11', 0, 'D', '-', '0000-00-00'),
 (3, 'S.M.S.3', 1, 'Charlie', 'Kasihan, Bantul', 'Laki-', '1999-04-04', '20', '0879897834', '2020-03-09', 0, 'M', 'Wiraswasta', '0000-00-00'),
-(4, 'S.M.S', 1, 'Agus', 'Yogyakarta', 'Perem', '1996-03-02', '23', 'jsak', '2020-03-09', 0, 'M', 'Swasta', '0000-00-00'),
+(4, 'S.M.S', 1, 'Agus', 'Yogyakarta', 'Perem', '0000-00-00', '0', '', '0000-00-00', 0, 'M', '', '0000-00-00'),
 (7, 'S.M.S.1', 1, 'asep', 'Kasihan, Bantul', 'Laki-', '1990-03-01', '30', '0879897834', '2020-03-09', 0, 'D', 'Wiraswasta', '0000-00-00'),
 (5, 'S.M.S 4', 1, 'Elvi', 'Jl.Cnta', 'P', '1990-03-22', '29', '081237878900', '2020-03-09', 0, 'D', 'Makelar Hp', '0000-00-00'),
 (6, 'S.M.S.5', 1, 'Ade', 'Gejayan', 'Laki-', '1990-04-04', '29', '089765432123', '2020-03-09', 0, 'M', 'Orang Sibuk', '0000-00-00'),
@@ -2900,9 +2965,9 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`) VALUES
-(1, '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', 53),
+(1, '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', 52),
 (2, '661713', 'ALKOHOL 70 %', 7),
-(3, '766785', 'VIT C ( KALENG )', 49),
+(3, '766785', 'VIT C ( KALENG )', 48),
 (4, '581543', 'ALKOHOL KECIL', 4),
 (5, '186097', 'ANTIMO DEWASA', 45),
 (6, '643464', 'ANTANGIN JRG', 29),
@@ -3976,32 +4041,33 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-01', 'SM-04', 'Setting Bisnis', '#', 'Tidak Aktif', 'handshake-o', 14),
 ('JU-01', 'SM-05', 'Setting User', '#', 'Tidak Aktif', 'users', 13),
 ('JU-01', 'SM-06', 'Setting Menu', '#', 'Tidak Aktif', 'list', 15),
-('JU-06', 'SM-07', 'Pembayaran', 'pembayaran_ks', 'Aktif', 'dollar', 2),
+('JU-06', 'SM-07', 'Pembayaran', 'pembayaran_ks', 'Aktif', 'dollar-sign', 2),
 ('JU-01', 'SM-100', 'Pelayanan', 'kasir', 'Tidak Aktif', 'laptop', 2),
 ('JU-10', 'SM-101010', 'Pasien Rawat Inap', 'nurse_inap', 'Tidak Aktif', 'bed', 1),
+('JU-07', 'SM-103', 'Gudang', '#', 'Aktif', 'building', 7),
 ('JU-07', 'SM-107', 'Pembelian Produk', '#', 'Aktif', 'shopping-cart', 6),
 ('JU-07', 'SM-121212', 'Data Pendaftaran Apotek', 'apotek_antrian', 'Aktif', 'search', 4),
 ('JU-01', 'SM-124345', 'Jadwal Dokter', 'jadwal_dokter', 'Aktif', 'stethoscope', 4),
 ('JU-06', 'SM-124399', 'Jadwal Dokter Ganti', 'dr_ganti', 'Aktif', 'stethoscope', 4),
-('JU-09', 'SM-200', 'Setting User', '#', 'Tidak Aktif', 'gear', 3),
-('JU-07', 'SM-201', 'Retur Penjualan', 'retur', 'Aktif', 'exchange', 10),
+('JU-09', 'SM-200', 'Setting User', '#', 'Tidak Aktif', 'cog', 3),
+('JU-07', 'SM-201', 'Retur Penjualan', 'retur', 'Aktif', 'exchange-alt', 10),
 ('JU-06', 'SM-202', 'Data Dokter', 'dokter', 'Aktif', 'user-md', 9),
 ('JU-06', 'SM-28', 'Pasien', '#', 'Aktif', 'user', 8),
-('JU-09', 'SM-299', 'Bonus', 'bonus', 'Non Aktif', 'gear', 4),
+('JU-09', 'SM-299', 'Bonus', 'bonus', 'Non Aktif', 'cog', 4),
 ('JU-06', 'SM-300', 'Bonus', 'bonus', 'Tidak Aktif', 'gift', 4),
 ('JU-06', 'SM-3000', 'Produk Pra Rilis', 'prerelease', 'Tidak Aktif', 'heartbeat', 5),
 ('JU-06', 'SM-302', 'Data Poliklinik', 'poliklinik', 'Aktif', 'tags', 10),
-('JU-06', 'SM-303', 'Biaya Administrasi RS', 'admin_rs', 'Aktif', 'gear', 11),
+('JU-06', 'SM-303', 'Biaya Administrasi RS', 'admin_rs', 'Aktif', 'cog', 11),
 ('JU-06', 'SM-304', 'Pasien dan Asuransi', 'asuransi', 'Aktif', 'list-alt', 12),
 ('JU-06', 'SM-31', 'History Transaksi', 'history_transaksi', 'Aktif', 'history', 11),
-('JU-06', 'SM-335399', 'Data Kasir Lama', 'kasir_lama', 'Tidak Aktif', 'gear', 4),
+('JU-06', 'SM-335399', 'Data Kasir Lama', 'kasir_lama', 'Tidak Aktif', 'cog', 4),
 ('JU-01', 'SM-33978', 'Data Kategori Biaya', 'kategori_biaya', 'Aktif', 'fire', 4),
-('JU-06', 'SM-3434343', 'History Kasir Lama', 'history_kasir_lama', 'Non Aktif', 'gear', 4),
+('JU-06', 'SM-3434343', 'History Kasir Lama', 'history_kasir_lama', 'Non Aktif', 'cog', 4),
 ('JU-01', 'SM-36', 'Data Master', '#', 'Aktif', 'th-list', 7),
 ('JU-01', 'SM-37', 'Pembelian Produk', '#', 'Aktif', 'shopping-cart', 1),
 ('JU-01', 'SM-38', 'Reture Produk', 'reture', 'Non Aktif', 'sign-in', 3),
 ('JU-01', 'SM-39', 'Pengeluaran', 'pengeluaran', 'Tidak Aktif', 'sign-out', 4),
-('JU-01', 'SM-398', 'Data Bonus', 'data_bonus', 'Non Aktif', 'gear', 2),
+('JU-01', 'SM-398', 'Data Bonus', 'data_bonus', 'Non Aktif', 'cog', 2),
 ('JU-01', 'SM-40', 'Data Karyawan', 'karyawan', 'Aktif', 'users', 8),
 ('JU-01', 'SM-41', 'Data Dokter', 'dokter', 'Aktif', 'user-md', 9),
 ('JU-01', 'SM-42', 'Laporan', '#', 'Tidak Aktif', 'book', 12),
@@ -4011,7 +4077,7 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-06', 'SM-48', 'Data Dokter', 'dokter_cabang', 'Tidak Aktif', 'user-md', 10),
 ('JU-06', 'SM-49', 'Setting User', '#', 'Tidak Aktif', 'users', 14),
 ('JU-06', 'SM-50', 'Stok Produk', 'stok_cabang', 'Tidak Aktif', 'building', 5),
-('JU-06', 'SM-5000', 'Kirim Produk Antar Klinik', '#', 'Non Aktif', 'gear', 3),
+('JU-06', 'SM-5000', 'Kirim Produk Antar Klinik', '#', 'Non Aktif', 'cog', 3),
 ('JU-06', 'SM-55', 'Jenis Pelayanan', 'pelayanan_cabang', 'Tidak Aktif', 'list', 6),
 ('JU-02', 'SM-57', 'Daftar Produk', 'dokter_dafpro', 'Tidak Aktif', 'list', 3),
 ('JU-02', 'SM-58', 'Daftar Treatment', 'dokter_treatment', 'Tidak Aktif', 'user-md', 4),
@@ -4026,7 +4092,7 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-06', 'SM-68', 'Pengeluaran', 'pengeluaran_cabang', 'Tidak Aktif', 'sign-out', 4),
 ('JU-01', 'SM-69', 'Grafik', '#', 'Tidak Aktif', 'bar-chart', 5),
 ('JU-06', 'SM-70', 'Setting Printer', 'set_print', 'Tidak Aktif', 'print', 14),
-('JU-07', 'SM-7778', 'Pelayanan Apotek', 'kasir_apotek', 'Aktif', 'files-o', 1),
+('JU-07', 'SM-7778', 'Pelayanan Apotek', 'kasir_apotek', 'Aktif', 'copy', 1),
 ('JU-06', 'SM-9889', 'Retur Penjualan', 'retur', 'Tidak Aktif', 'chain-broken', 4),
 ('JU-09', 'SM-99', 'Kritik & Saran', 'kritik_saran', 'Tidak Aktif', 'thumbs-up', 3),
 ('JU-01', 'SM-99000999', 'Data Poliklinik', 'poliklinik', 'Aktif', 'tags', 6),
@@ -4034,9 +4100,9 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-07', 'SM-990990', 'Data Obat Rawat Inap', 'apotek_inap', 'Aktif', 'bed', 4),
 ('JU-08', 'SM-998767', 'Pelayanan Lab', 'kasir_lab', 'Aktif', 'table', 1),
 ('JU-08', 'SM-998789', 'Data Antrian Lab', 'data_lab', 'Tidak Aktif', 'files-o', 2),
-('JU-02', 'SM-998990', 'Data Rawat Inap', 'rawat_inap', 'Aktif', 'gear', 3),
+('JU-02', 'SM-998990', 'Data Rawat Inap', 'rawat_inap', 'Aktif', 'cog', 3),
 ('JU-01', 'SM-9989976', 'Jadwal Perawat', 'jadwal_perawat', 'Aktif', 'wheelchair', 6),
-('JU-10', 'SM-99998', 'Data Lab Rawat Inap', 'lab_inap', 'Aktif', 'gear', 4);
+('JU-10', 'SM-99998', 'Data Lab Rawat Inap', 'lab_inap', 'Aktif', 'cog', 4);
 
 -- --------------------------------------------------------
 
@@ -4118,11 +4184,11 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_ju`, `id_kk`, `id_user`, `username`, `password`, `nama_lengkap`, `email`, `no_telp`, `foto`, `blokir`, `tgl_masuk`, `lulusan`, `alamat`) VALUES
 ('JU-01', 1, 2, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'paid@gmail.com', '085294976830', '171625.png', 'N', '0000-00-00', '', ''),
-('JU-06', 1, 8, 'resepsionis', '13016b898b3877960653191b72b2f03c', 'Resepsionis', 'ropiatunanisa@gmail.com', '08975755472311', '19cat_face_glasses_thick_65455_1366x768.jpg', 'N', '0000-00-00', '', ''),
-('JU-02', 0, 9, 'drwatson', '0bdd56e52b9f2ba1568f732087ddcad9', 'Watson', '-', '-', '-', 'N', '2000-01-01', '-', '-'),
-('JU-02', 0, 10, 'drstrange', '8b6e10530f75d23c0a0eca4d5671db7d', 'Stephen', '-', '-', '-', 'N', '2000-01-01', '-', '-'),
-('JU-02', 1, 11, 'drsam', 'c4584667951e1479b8dedb9d8105f19b', 'drsam', 'drsam@gmail.com', '088212671299', '63default-profile-pic.png', 'N', '2020-04-15', 's3 UGM', 'Jl. jalan'),
-('JU-02', 1, 12, 'drdaniel', '364393b7ac43318a848e94ee90b75835', 'drdaniel', 'daniel@gmail.com', '109923764789', '53default.jpg', 'N', '2020-04-15', 's3 UGM', 'Jl. Sudirman');
+('JU-06', 1, 8, 'resepsionis', '13016b898b3877960653191b72b2f03c', 'Resepsionis', 'ropiatunanisa@gmail.com', '08975755472311', '', 'N', '0000-00-00', '', ''),
+('JU-02', 0, 9, 'drwatson', '0bdd56e52b9f2ba1568f732087ddcad9', 'Watson', '-', '-', '', 'N', '2000-01-01', '-', '-'),
+('JU-02', 0, 10, 'drstrange', '8b6e10530f75d23c0a0eca4d5671db7d', 'Stephen', '-', '-', '', 'N', '2000-01-01', '-', '-'),
+('JU-02', 1, 11, 'drsam', 'c4584667951e1479b8dedb9d8105f19b', 'drsam', 'drsam@gmail.com', '088212671299', '', 'N', '2020-04-15', 's3 UGM', 'Jl. jalan'),
+('JU-02', 1, 12, 'drdaniel', '364393b7ac43318a848e94ee90b75835', 'drdaniel', 'daniel@gmail.com', '109923764789', '', 'N', '2020-04-15', 's3 UGM', 'Jl. Sudirman');
 
 --
 -- Indexes for dumped tables
@@ -4597,7 +4663,7 @@ ALTER TABLE `data_satuan`
 -- AUTO_INCREMENT for table `dr_pengganti`
 --
 ALTER TABLE `dr_pengganti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `dr_praktek`
@@ -4633,7 +4699,7 @@ ALTER TABLE `history_beli_t`
 -- AUTO_INCREMENT for table `history_kasir`
 --
 ALTER TABLE `history_kasir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -4669,7 +4735,7 @@ ALTER TABLE `kategori_pelanggan`
 -- AUTO_INCREMENT for table `kehadiran_dr`
 --
 ALTER TABLE `kehadiran_dr`
-  MODIFY `id_keh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_keh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `krisar`
@@ -4681,7 +4747,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1083;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1143;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
