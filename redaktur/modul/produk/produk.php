@@ -2,7 +2,8 @@
   switch($_GET['act']){
   default:
 ?>
-
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -75,28 +76,28 @@
                 <td><?php echo $j['satuan']; ?></td>
                 <td>
                   <a href="?module=produk&act=edit_produk&id_produk=<?php echo $r["kd_produk"]; ?>" class="btn-xs btn-warning"><i class="fa fa-edit"> Edit</i></a>
-                  <a href="modul/produk/aksi_produk.php?module=produk&act=hapus&kd_produk=<?php echo $r['kd_produk']; ?>" class="hapus btn-xs btn-danger" id-obat="<?php echo $r['kd_produk']; ?>"><i class="fa fa-trash"> Hapus</i></a>
+                  <a href="#" class="hapus btn-xs btn-danger" id-obat="<?php echo $r['kd_produk']; ?>"><i class="fa fa-trash"> Hapus</i></a>
                 </td>
               </tr>
               <?php } ?>
             </tbody>
             <script>
-              document.querySelector(".hapus").addEventListener("click",
-                function () {
-                  var id_obat = $(this).attr('id-obat');
+              $('.hapus').click(function () {
+                var id_obat = $(this).attr('id-obat');
                   Swal.fire({
-                    title: 'Yakin Ingin Menghapus Data?',
+                    title: 'Kamu Yakin?',
+                    text: "Kamu akan hapus data selamanya!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Delete !'
                   })
-                  .then((result) => {
+                  .then((result)=>{
                     console.log(result);
-                  if (result.value) {
-                    window.location = "modul/produk/aksi_produk.php?module=produk&act=hapus&kd_produk="+id_obat+"";
-                  }
+                    if (result.value){
+                      window.location = "modul/produk/aksi_produk.php?module=produk&act=hapus&kd_produk="+id_obat+"";
+                    }
                   })
                 });
             </script>

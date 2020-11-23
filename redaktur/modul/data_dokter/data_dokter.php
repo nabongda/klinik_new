@@ -2,7 +2,8 @@
   switch($_GET['act']){
   default:
 ?>
-
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -87,7 +88,8 @@
                 <?php
                   if ($_SESSION['jenis_u'] =="JU-01") { ?>
                 <td>
-                  <a href="?module=data_dokter&act=edit_dokter&id=<?php echo $data['id_user']; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>&nbsp;<a onclick="return confirm('Yakin Ingin Menghapus Data?')" href="modul/data_dokter/aksi_data_dokter.php?module=user&act=hapus&id=<?php echo $data['id_user']; ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Hapus</a>                 
+                    <a href="?module=data_dokter&act=edit_dokter&id=<?php echo $data['id_user']; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="#" id-user="<?php echo $data['id_user'];?>" class="btn btn-xs btn-danger hapus"><i class="fa fa-trash-o"></i> Hapus</a>
                 </td>
                 <?php } ?> 
               </tr>
@@ -96,17 +98,23 @@
 
             <!-- SweetAlert Hapus -->
             <script>
-              document.querySelector(".hapus").addEventListener("click",
-                function () {
+              $('.hapus').click(function () {
+                var id_use = $(this).attr('id-user');
                   Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Kamu Yakin?',
+                    text: "Kamu akan hapus data selamanya!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Delete !'
-                  });
+                  })
+                  .then((result)=>{
+                    console.log(result);
+                    if (result.value){
+                      window.location = "modul/data_dokter/aksi_data_dokter.php?module=user&act=hapus&id="+id_use+"";
+                    }
+                  })
                 });
             </script>
           </table>

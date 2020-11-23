@@ -2,7 +2,8 @@
 	switch($_GET['act']){
 	default:
 ?>
-
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -64,23 +65,29 @@
                 <td><?php echo rupiah($r["jasa_dokter"]); ?></td>
                 <td>
                   <a href="?module=treatment&act=edit_dt&id=<?php echo $r["id"]; ?>" class="btn-xs btn-warning"><i class="fa fa-edit"> Edit</i></a>
-                  <a href="modul/treatment/aksi_treatment.php?module=dt&act=hapus&id=<?php echo $r['id']; ?>" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
+                  <a href="#" id-treat="<?php echo $r['id'];?>" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
                 </td>
               </tr>
               <?php } ?>
             </tbody>
             <script>
-              document.querySelector(".hapus").addEventListener("click",
-                function () {
+              $('.hapus').click(function () {
+                var id_t = $(this).attr('id-treat');
                   Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Kamu Yakin?',
+                    text: "Kamu akan hapus data selamanya!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Delete !'
-                  });
+                  })
+                  .then((result)=>{
+                    console.log(result);
+                    if (result.value){
+                      window.location = "modul/treatment/aksi_treatment.php?module=dt&act=hapus&id="+id_t+"";
+                    }
+                  })
                 });
             </script>
           </table>

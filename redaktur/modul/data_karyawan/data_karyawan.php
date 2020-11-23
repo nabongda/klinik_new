@@ -2,7 +2,8 @@
   switch($_GET['act']){
   default:
 ?>
-
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -100,7 +101,7 @@
                     <?php } ?>
                     <?php if($_SESSION['jenis_u']=='JU-01'){ ?>
                     <a href="?module=data_karyawan&act=edit_karyawan&id_karyawan=<?php echo $data["id_karyawan"]; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>&nbsp;
-                    <a onclick="return confirm('Yakin Ingin Menghapus Data?')" href="modul/data_karyawan/aksi_data_karyawan.php?module=data_karyawan&act=hapus&id_karyawan=<?php echo $data['id_karyawan']; ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Hapus</a>
+                    <a href="#" id-karyawan="<?php echo $data['id_karyawan']?>" class="btn btn-xs btn-danger hapus"><i class="fa fa-trash-o"></i> Hapus</a>
                     <?php } ?>      
                 </td>
               </tr>
@@ -110,17 +111,23 @@
             </tbody>
             <!-- SweetAlert Hapus -->
             <script>
-              document.querySelector(".hapus").addEventListener("click",
-                function () {
+              $('.hapus').click(function () {
+                var id_kar = $(this).attr('id-karyawan');
                   Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Kamu Yakin?',
+                    text: "Kamu akan hapus data selamanya!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Delete !'
-                  });
+                  })
+                  .then((result)=>{
+                    console.log(result);
+                    if (result.value){
+                      window.location = "modul/data_karyawan/aksi_data_karyawan.php?module=data_karyawan&act=hapus&id_karyawan="+id_kar+"";
+                    }
+                  })
                 });
             </script>
           </table>
