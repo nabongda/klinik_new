@@ -1,4 +1,5 @@
-
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -44,24 +45,30 @@
                 <td><?php echo $jo['kategori']; ?></td>
                 <td>
                   <a href="?module=kategori_biaya_edit&id=<?php echo $jo['id']; ?>" class="btn-sm btn-warning"> Edit</a>
-                  <a href="#" class="hapus btn-sm btn-danger"> Hapus</a>
+                  <a href="#" id="<?php echo $jo['id'];?>" class="hapus btn-sm btn-danger"> Hapus</a>
                 </td>
               </tr>
               <?php } ?>
             </tbody>
             
             <script>
-              document.querySelector(".hapus").addEventListener("click",
-                function () {
+              $('.hapus').click(function () {
+                var id_bi = $(this).attr('id');
                   Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Kamu Yakin?',
+                    text: "Kamu akan hapus data selamanya!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Delete !'
-                  });
+                  })
+                  .then((result)=>{
+                    console.log(result);
+                    if (result.value){
+                      window.location = "modul/kategori_biaya/aksi.php?module=kategori_biaya&act=del&id="+id_bi+"";
+                    }
+                  })
                 });
             </script>
           </table>

@@ -1,3 +1,5 @@
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -156,22 +158,22 @@
             </div>
             <!-- SweetAlert Hapus -->
             <script>
-              document.querySelector(".hapus").addEventListener("click",
-                function () {
-                  var id = $(this).attr('id');
+            $('.hapus').click(function () {
+                var id_b = $(this).attr('id');
                   Swal.fire({
-                    title: 'Yakin Ingin Menghapus Data?',
+                    title: 'Kamu Yakin?',
+                    text: "Kamu akan hapus data selamanya!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Hapus !'
+                    confirmButtonText: 'Delete !'
                   })
-                  .then((result) => {
+                  .then((result)=>{
                     console.log(result);
-                  if (result.value) {
-                    window.location = "modul/mod_adminrs/aksi.php?act=del&id="+id+"";
-                  }
+                    if (result.value){
+                      window.location = "modul/mod_adminrs/aksi.php?act=del&id="+id_b+"";
+                    }
                   })
                 });
             </script>

@@ -2,52 +2,79 @@
 $act = $_GET['act']; 
 $id_kk = $_SESSION['klinik'];
 ?>
-<section class="content">
-	<div class="box box-success">
-		<div class="box-header">
-			<h4 class="box-title">History Transaksi</h4>
-		</div>
-		<div class="box-body">
-			<div class="row" style="margin-bottom: 5px;">
-				<div class="col-md-12">
-					<form method="POST" action="?module=antrian&act=cari">
-					<table class="table">
-						<tbody>
-							<tr>
-								<td><label>Tanggal</label></td>
-								<td><input id="tanggal_h" class="form-control datepicker" name="date" value="<?php echo $date; ?>" style="float: left;text-align: center;"></td>
-								<td><label>Poliklinik</label></td>
-								<td>
-									<select class="form-control" name="klinik">
-										<option value="All">All</option>
-										<?php
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Histori Transaksi</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                    <li class="breadcrumb-item active">Histori Transaksi</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <form class="form-horizontal" method="POST" action="?module=antrian&act=cari">
+                                    <!-- /.card-body -->
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group row col-md-6">
+                                                <div class="col-md-2">
+                                                    <label for="inputTglBeli">Tanggal </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" id="tanggal_h" class="form-control datepicker" name="date" value="<?php echo $date; ?>" data-mask>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row col-md-6">
+                                                <div class="col-md-2">
+                                                    <label for="inputSuplier">Poliklinik </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-control select2" style="width: 100%;" name="klinik">
+                                                        <option>All</option>
+                                                        <?php
 											$query1 = mysqli_query($con, "SELECT * FROM poliklinik");
 											while($result = mysqli_fetch_assoc($query1)){
 										?>
 										<option value="<?php echo $result['id_poli']; ?>"><?php echo $result['poli']; ?></option>
 									<?php } ?>
-									</select>
-								</td>
-								<td><button class="btn btn-info">Cari</button></td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
-				</div>
-			</div>
-			<div class="table-responsive">
-			<table class="datatable table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th>No Faktur</th>
-						<th>No Antrian</th>
-						<th>Nama Pasien</th>
-						<th>Poliklinik</th>
-						<th>Online</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
+                                                    </select>
+                                                </div>
+                                                <button class="btn btn-info">Cari</button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card-header -->
+
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Nomor Faktur</th>
+                                            <th>Nomor Antrian</th>
+                                            <th>Nama Pasien</th>
+                                            <th>Poliklinik</th>
+                                            <th>Online</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
 					switch ($_GET['act']) {
 						case 'cari':
 							$date = $_POST['date'];
@@ -77,15 +104,34 @@ $id_kk = $_SESSION['klinik'];
 						<td><?php if($data['online']==NULL){ echo "Tidak"; } else{ echo "Ya"; } ?></td>
 					<?php	}
 					 ?>
-				</tbody>
-			</table>
-			</div>
-		</div>
-	</div>
-</section>
-
-
-<script>
+                                    </tbody>
+                                    <!-- SweetAlert Hapus -->
+                                    <script>
+                                        document.querySelector(".hapus").addEventListener("click",
+                                            function () {
+                                                Swal.fire({
+                                                    title: 'Are you sure?',
+                                                    text: "You won't be able to revert this!",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: 'Delete !'
+                                                });
+                                            });
+                                    </script>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+            <script>
 $(document).ready(function(){
   $.ajaxSetup({
         headers: {
