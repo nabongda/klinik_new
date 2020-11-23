@@ -54,7 +54,7 @@
                   </select>
                 </div>
                 <div class="col-auto col-4 text-right">
-                  <button class="btn btn-success btn-sm">Tampilkan</button>
+                  <button class="btn btn-success btn-sm tampil">Tampilkan</button>
                 </div>
               </div>
             </form>
@@ -163,9 +163,9 @@
 
 <script>
   $(document).ready(function(){
-    $(".xbtn").click(function(){
+    $(".tampil").click(function(){
       var act = ($("#abjad").val() == "all")? "&act=all" : "&act=" + $("#abjad").val();
-      location.href="media.php?module=data_pasien" + act;
+      location.href="media.php?module=data_pasien"+act;
     });
   });
 </script>

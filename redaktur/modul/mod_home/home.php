@@ -87,7 +87,7 @@ if($_SESSION['jenis_u']!="JU-01"){ ?>
         <div class="small-box bg-info">
           <div class="inner">
             <h3>+</h3>
-            <p>Pendaftaran Antrian</p>
+            <p>Pendaftaran<br>Antrian</p>
           </div>
           <div class="icon">
             <i class="ion ion-ios-cart"></i>
