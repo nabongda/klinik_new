@@ -85,13 +85,13 @@
                 <td><?php echo $data['alamat']; ?></td>
                 <td><?php echo $data['email']; ?></td>
                 <td align="center"><center><?php echo $data['blokir']; ?></center></td> 
+                <?php
+                  if ($_SESSION['jenis_u'] =="JU-01") { ?>
                 <td>
-                    <?php
-                    if ($_SESSION['jenis_u'] =="JU-01") { ?>
                     <a href="?module=data_dokter&act=edit_dokter&id=<?php echo $data['id_user']; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>
                     <a href="#" id-user="<?php echo $data['id_user'];?>" class="btn btn-xs btn-danger hapus"><i class="fa fa-trash-o"></i> Hapus</a>
-                    <?php } ?>                  
                 </td>
+                <?php } ?> 
               </tr>
               <?php } ?>
             </tbody>

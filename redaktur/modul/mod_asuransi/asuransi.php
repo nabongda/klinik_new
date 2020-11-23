@@ -1,83 +1,70 @@
-
 <section class="content-header">
-    
- 
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Pasien dan Asuransi</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                <li class="breadcrumb-item active">Pasien dan Asuransi</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
 
-    <h1>
-        Pasien dan Asuransi     </h1>
-    </section>
-
-
-
-    <section class="content">
-      <?php
-              if ($_SESSION['jenis_u']=="JU-01") {
-            ?>
-      <div class="row">
-    <div class="col-md-12">
-         <div class="callout callout-success">
-         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" onclick="setdata(0)">
-                Tambah Data
-              </button>
-
-    </div>
-        </div>
-    </div>
-  <?php } ?>
-
-   
+      <!-- Main content -->
+      <section class="content">
+        <?php
+            if ($_SESSION['jenis_u']=="JU-01") {
+        ?>
         <div class="row">
-          <div class="col-md-12">
-            <div class="box">
-              <div class="box-header">
-                <h3 class="box-title">Data Jenis Pasien</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="table-responsive">
-              <table class="table table-bordered table-stripped datatable">
-                  <thead>
-            <tr>
-               
-                 <th>Nama</th>
-            </tr>
-        </thead>
-      <tbody>
-        <tr>
-          <td>Umum</td>
-        </tr>
-        <tr>
-          <td>BPJS</td>
-        </tr>
-        <tr>
-          <td>Asuransi Lain</td>
-        </tr>
-        </tbody>
-  </table>
-</div>
-</div>
-</div>
-</div>
-</div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="col-md-12"><a href="#" class="btn btn-primary">Tambah Data Asuransi</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <?php } ?>
 
-<div class="row">
-          <div class="col-md-12">
-            <div class="box">
-              <div class="box-header">
-                <h3 class="box-title">Data Asuransi</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="table-responsive">
-              <table class="table table-bordered table-stripped datatable">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped ">
+                    <h4>Data Jenis Pasien</h4>
                   <thead>
-            <tr>
-               
-                 <th>Nama</th>
-            </tr>
-        </thead>
-      <tbody>
-         <?php 
+                    <tr>
+                        <th>Nama</th>
+                    </tr>
+                    <tr>
+                        <th>Umum</th>
+                    </tr>
+                    <tr>
+                        <th>BPJS</th>
+                    </tr>
+                    <tr>
+                        <th>Asuransi Lian</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-striped ">
+                    <h4>Data Asuransi</h4>
+                  <thead>
+                    <tr>
+                        <th>Nama</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php 
       
       $j = mysqli_query($con, "SELECT * FROM asuransi");
       while($jo = mysqli_fetch_assoc($j)){
@@ -86,12 +73,11 @@
           <td><?php echo $jo['nama'];?></td>
         </tr>
       <?php } ?>
-        </tbody>
-  </table>
-</div>
-</div>
-</div>
-</div>
-</div>
+                  </tbody>
+                </table>
+              </div>
 
-</section>
+            </div>
+          </div>]
+        </div>
+      </section>
