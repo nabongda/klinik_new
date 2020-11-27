@@ -73,6 +73,8 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
   <link rel="stylesheet" href="<?php echo $url2; ?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo $url2; ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- jQuery UI 1.11.4 -->
+  <link rel="stylesheet" href="<?php echo $url2; ?>plugins/jquery-ui/jquery-ui.min.css">
   <!-- JQVMap -->
   <link rel="stylesheet" href="<?php echo $url2; ?>plugins/jqvmap/jqvmap.min.css">
   <!-- fullCalendar -->
@@ -276,6 +278,23 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
   <script src="<?php echo $url2; ?>plugins/sweetalert2/sweetalert2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script>
+    $(document).ready(function(){
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      <?php include 'fungsi.js'; ?>
+    });
+
+    var top = -1;
+    var self = false;
+    function netbro_cache_analytics(fn,callback){
+      return false;
+    }
+
+  </script>
+  <script>
     $.widget.bridge('uibutton', $.ui.button)
     $(function () {
       $("#example1").DataTable({
@@ -291,7 +310,7 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
         "autoWidth": false,
         "responsive": true,
       });
-      $("#example3").DataTable({
+      $("#example3").dataTable({
         "responsive": true,
         "autoWidth": false,
       });

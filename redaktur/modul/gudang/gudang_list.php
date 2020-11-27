@@ -72,11 +72,11 @@
                     //cari data di produk, kalau jumlahnya mendekati 0 maka warning
                     $j = mysqli_fetch_assoc(mysqli_query($con, "SELECT jumlah FROM produk WHERE kode_barang = '$r[kode_barang]'"));
                     if(is_null($j['jumlah'])){
-                      echo "<span class='badge bg-yellow'>Belum ada data</span>";
+                      echo "<span class='badge bg-warning'>Belum ada data</span>";
                     } else  if($j['jumlah'] < 2){
-                      echo "<span class='badge bg-red'>Stok tidak mencukupi</span>";
+                      echo "<span class='badge bg-danger'>Stok tidak mencukupi</span>";
                     }  else {
-                      echo "<span class='badge bg-green'>Stok mencukupi</span>";
+                      echo "<span class='badge bg-success'>Stok mencukupi</span>";
                     }
                   ?>
                 </td>

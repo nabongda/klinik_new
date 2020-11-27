@@ -3,92 +3,110 @@
 include "../../../config/koneksi.php";
 
 if($_POST['id']) {
-        $id = $_POST['id'];
-        // mengambil data berdasarkan id
-        $tampil     = mysqli_query($con,"SELECT * FROM beli_k WHERE id = $id");
-        while($data = mysqli_fetch_array($tampil)){
-         ?>
-            <table class="table">
+    $id = $_POST['id'];
+    // mengambil data berdasarkan id
+    $tampil     = mysqli_query($con,"SELECT * FROM beli_k WHERE id = $id");
+    while($data = mysqli_fetch_array($tampil)){ ?>
+        <div class="modal-header">
+            <h5 class="modal-title"> Detail Barang</h5>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" role="form">
+            <div class="form-group row">
+                <div class="col-sm-4">
+                <label>Nomor Faktur</label>
+                </div>
+                <div class="col-sm-8">
+                <input class="form-control" value="<?php echo $data['no_fak']; ?>" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                <label>Tanggal Beli</label>
+                </div>
+                <div class="col-sm-8">
+                <input class="form-control" value="<?php echo $data['tgl_beli']; ?>" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                <label>Suplier</label>
+                </div>
+                <?php $q1 = mysqli_query($con,"SELECT *FROM suplier WHERE id_sup='$data[id_sup]'"); 
+                $k = mysqli_fetch_array($q1); ?>
+                <div class="col-sm-8">
+                <input class="form-control" value="<?php echo $k['nama_sup']; ?>" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                <label>Total</label>
+                </div>
+                <div class="col-sm-8">
+                <input class="form-control" value="<?php echo $data['total']; ?>" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                <label>Tanggal Tempo</label>
+                </div>
+                <div class="col-sm-8">
+                <input class="form-control" value="<?php echo $data['tgl_tempo']; ?>" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                <label>Bukti Bayar</label>
+                </div>
+                <div class="col-sm-8">
+                <?php if ( $data['bukti_bayar'] == '') { ?>
+                <input class="form-control" value="<?php echo "Belum Dibayar"; ?>" readonly>
+                <?php } else { 
+                    echo '<a href="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'"><img src="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'" width="100px" height="100px"></a>';
+                } ?>
+                </div>
+            </div>
+            </form>
+        </div>
+    
+        <div class="modal-header">
+            <h5 class="modal-title"> Item :</h5>
+        </div>
+        <div class="modal-body">
+            <table id="example1" class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td>Nomor Faktur</td>
-                    <td>:</td>
-                    <td><?php echo $data['no_fak']; ?></td>
+                <th>Gambar Produk</th>
+                <th>Nama Barang</th>
+                <th>Kode Barang</th>
+                <th>Jumlah</th>
+                <th>Harga</th>
+                <th>Tanggal Beli</th>
                 </tr>
-                <tr>
-                    <td>Tanggal beli</td>
-                    <td>:</td>
-                    <td><?php echo $data['tgl_beli']; ?></td>
-                </tr>
-                <tr>
-                    <td>Suplier</td>
-                    <td>:</td>
-                    <td><?php $q1 = mysqli_query($con,"SELECT *FROM suplier WHERE id_sup='$data[id_sup]'"); 
-                    $k = mysqli_fetch_array($q1); ?>
-                    <?php echo $k['nama_sup']; ?></td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td>:</td>
-                    <td><?php echo $data['total']; ?></td>
-                </tr>
-                <tr>
-                    <td>Tanggal Tempo</td>
-                    <td>:</td>
-                    <td style="color: #ff0000;"><?php echo $data['tgl_tempo']; ?></td>
-                </tr>
-                <tr>
-                    <td>Bukti Bayar</td>
-                    <td>:</td>
-                    <td><?php
-                        if ( $data['bukti_bayar'] == '') {
-                            echo "Belum Dibayar";
-                        }else{
-                            echo '<a href="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'"><img src="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'" width="100px" height="100px"></a>';
-                        }?>
-                        </td>
-                </tr>
-            </table>
-            <h5><b>Item : </b></h5>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Gambar</th>
-                        <th>Nama Barang</th>
-                        <th>Kode Barang</th>
-                        <th>Jumlah</th>
-                        <th>Harga</th>
-                        <th>Tanggal Beli</th>
-                    </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 <?php
-                    $tampil     = mysqli_query($con,"Select * From history_beli_k where no_fak='$data[no_fak]'");
-                    $no = 1;
-                    while($data = mysqli_fetch_array($tampil)){
+                $tampil     = mysqli_query($con,"Select * From history_beli_k where no_fak='$data[no_fak]'");
+                $no = 1;
+                while($data = mysqli_fetch_array($tampil)){
                 ?>
-                <tr class="gradeX">
-                    <?php $q1 = mysqli_query($con,"SELECT *FROM produk_master WHERE nama_produk='$data[nama_brg]'"); 
-                 $k = mysqli_fetch_array($q1); ?>
-                 <td><?php
-                        if ( $k['gambar'] == '') {
-                            echo "Belum Ada Gambar";
-                        }else{
-                            echo '<center><a href="'.$url.'/gambar_produk/'.$k['gambar'].'"><img src="'.$url.'/gambar_produk/'.$k['gambar'].'" width="40px" height="40px"></a></center>';
-                        }?></td>
-                 <td><?php echo $data['nama_brg']; ?></td>
-                 <td><?php echo $data['kd_brg']; ?></td>
-                 <td><?php echo $data['jumlah']?></td>
-                 <td><?php echo $data['hrg']?></td>
-                 <td><?php echo $data['tgl_beli']?></td>
+                <tr>
+                <?php $q1 = mysqli_query($con,"SELECT * FROM produk_master WHERE nama_produk='$data[nama_brg]'"); 
+                $k = mysqli_fetch_array($q1); ?>
+                <td><?php
+                    if ( $k['gambar'] == '') {
+                    echo "Belum Ada Gambar";
+                    }else{
+                    echo '<center><a href="'.$url.'/gambar_produk/'.$k['gambar'].'"><img src="'.$url.'/gambar_produk/'.$k['gambar'].'" width="40px" height="40px"></a></center>';
+                    }?></td>
+                <td><?php echo $data['nama_brg']; ?></td>
+                <td><?php echo $data['kd_brg']; ?></td>
+                <td><?php echo $data['jumlah']; ?></td>
+                <td><?php echo $data['hrg']; ?></td>
+                <td><?php echo $data['tgl_beli']; ?></td>
                 </tr>
-        <?php
-            }
-        ?>
-                  </tbody> 
+                <?php } ?>
+            </tbody> 
             </table>
-        <?php 
- 
-        }
-    }
-
-?>
+        </div>
+        <?php } } ?>

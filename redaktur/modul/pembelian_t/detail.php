@@ -67,9 +67,11 @@ if($_POST['id']) {
               <label>Bukti Bayar</label>
             </div>
             <div class="col-sm-8">
-              <input class="form-control" value="<?php if ( $data['bukti_bayar'] == '') {
-                echo "Belum Dibayar"; } else{ echo '<a href="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'">
-                <img src="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'" width="100px" height="100px"></a>'; } ?>" readonly>
+              <?php if ( $data['bukti_bayar'] == '') { ?>
+              <input class="form-control" value="<?php echo "Belum Dibayar"; ?>" readonly>
+              <?php } else { 
+                echo '<a href="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'"><img src="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'" width="100px" height="100px"></a>';
+              } ?>
             </div>
           </div>
         </form>

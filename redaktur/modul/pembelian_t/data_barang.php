@@ -23,18 +23,18 @@
 	$gaSql['server']     = $server;
 	
 
-	$gaSql['link'] =  mysqli_connect( $gaSql['server'], $gaSql['user'], $gaSql['password']  ) or
+	$gaSql['link'] =  mysqli_connect( $gaSql['server'], $gaSql['user'], $gaSql['password'] ) or
 		die( 'Could not open connection to server' );
 	
-	mysqli_select_db( $gaSql['db'], $gaSql['link'] ) or 
+	mysqli_select_db( $gaSql['link'], $gaSql['db'] ) or 
 		die( 'Could not select database '. $gaSql['db'] );
 	
 
 	$sLimit = "";
 	if ( isset( $_GET['iDisplayStart'] ) && $_GET['iDisplayLength'] != '-1' )
 	{
-		$sLimit = "LIMIT ".mysqli_real_escape_string($con, $_GET['iDisplayStart'] ).", ".
-			mysqli_real_escape_string($con, $_GET['iDisplayLength'] );
+		$sLimit = "LIMIT ".mysqli_real_escape_string($gaSql['link'], $_GET['iDisplayStart'] ).", ".
+			mysqli_real_escape_string($gaSql['link'], $_GET['iDisplayLength'] );
 	}
 	
 	if ( isset( $_GET['iSortCol_0'] ) )
@@ -45,7 +45,7 @@
 			if ( $_GET[ 'bSortable_'.intval($_GET['iSortCol_'.$i]) ] == "true" )
 			{
 				$sOrder .= $aColumns[ intval( $_GET['iSortCol_'.$i] ) ]."
-				 	".mysqli_real_escape_string($con, $_GET['sSortDir_'.$i] ) .", ";
+				 	".mysqli_real_escape_string($gaSql['link'], $_GET['sSortDir_'.$i] ) .", ";
 			}
 		}
 		
@@ -69,7 +69,7 @@
 			{
 				$sWhere .= " AND ";
 			}
-			$sWhere .= $aColumns[$i]." LIKE '%".mysqli_real_escape_string($con, $_GET['sSearch_'.$i])."%' ";
+			$sWhere .= $aColumns[$i]." LIKE '%".mysqli_real_escape_string($gaSql['link'], $_GET['sSearch_'.$i])."%' ";
 		}
 	}
 	
@@ -84,12 +84,12 @@
 
 	//echo $sQuery;
 
-	$rResult = mysqli_query($con, $sQuery, $gaSql['link'] ) or die(mysqli_error($con));
+	$rResult = mysqli_query($gaSql['link'], $sQuery ) or die(mysqli_error($gaSql['link']));
 	
 	$sQuery = "
 		SELECT FOUND_ROWS()
 	";
-	$rResultFilterTotal = mysqli_query($con, $sQuery, $gaSql['link'] ) or die(mysqli_error($con));
+	$rResultFilterTotal = mysqli_query($gaSql['link'], $sQuery ) or die(mysqli_error($gaSql['link']));
 	$aResultFilterTotal = mysqli_fetch_array($rResultFilterTotal);
 	$iFilteredTotal = $aResultFilterTotal[0];
 	
@@ -97,7 +97,7 @@
 		SELECT COUNT(".$sIndexColumn.")
 		FROM   $sTable
 	";
-	$rResultTotal = mysqli_query($con, $sQuery, $gaSql['link'] ) or die(mysqli_error($con));
+	$rResultTotal = mysqli_query($gaSql['link'], $sQuery ) or die(mysqli_error($gaSql['link']));
 	$aResultTotal = mysqli_fetch_array($rResultTotal);
 	$iTotal = $aResultTotal[0];
 	

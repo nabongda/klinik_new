@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2020 at 10:55 AM
+-- Generation Time: Nov 27, 2020 at 04:58 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -158,7 +158,8 @@ INSERT INTO `beli` (`no_fak`, `tgl_beli`, `total`, `id`, `id_sup`, `pembayaran`,
 ('20200415', '2020-04-15', 2100000, 10, '1', 'tunai', 'adad', ''),
 ('2020-17-04', '2020-04-17', 1050000, 11, '1', 'tunai', 'Beli', ''),
 ('202004171', '2020-04-17', 2100000, 12, '', '--Pilih Salah S', '131', ''),
-('123311', '2020-06-24', 2100000, 13, '1', 'tunai', 'ssa', '');
+('123311', '2020-06-24', 2100000, 13, '1', 'tunai', 'ssa', ''),
+('27112020', '2020-11-27', 2500000, 17, '1', 'tunai', 'Selesai...', 'IMG-20191209-WA0014.jpg');
 
 -- --------------------------------------------------------
 
@@ -175,6 +176,13 @@ CREATE TABLE `beli_k` (
   `tgl_tempo` date NOT NULL,
   `bukti_bayar` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `beli_k`
+--
+
+INSERT INTO `beli_k` (`no_fak`, `tgl_beli`, `total`, `id`, `id_sup`, `tgl_tempo`, `bukti_bayar`) VALUES
+('28052014', '2020-11-27', 2000000, 2, '1', '2021-01-27', 'Tulips.jpg');
 
 -- --------------------------------------------------------
 
@@ -532,6 +540,13 @@ CREATE TABLE `history_beli_k` (
   `sub_tot` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `history_beli_k`
+--
+
+INSERT INTO `history_beli_k` (`id`, `no_fak`, `tgl_beli`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`) VALUES
+(2, '28052014', '2020-11-27', '150194', 'Hawedion', '7', '6', '40000', 0, 100, 10, '50', '0', '2000000');
+
 -- --------------------------------------------------------
 
 --
@@ -575,7 +590,8 @@ INSERT INTO `history_beli_t` (`id`, `no_fak`, `tgl_beli`, `kd_brg`, `nama_brg`, 
 (18, '20200415', '2020-04-15', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', '', '', '21000', 0, 100, 10, '100', '0', '2100000'),
 (19, '2020-17-04', '2020-04-17', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', '', '', '21000', 0, 100, 10, '50', '0', '1050000'),
 (20, '202004171', '2020-04-17', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', '', '', '21000', 0, 100, 10, '100', '0', '2100000'),
-(21, '123311', '2020-06-24', '766785', 'VIT C ( KALENG )', '', '9', '21000', 0, 100, 10, '100', '0', '2100000');
+(21, '123311', '2020-06-24', '766785', 'VIT C ( KALENG )', '', '9', '21000', 0, 100, 10, '100', '0', '2100000'),
+(25, '27112020', '2020-11-27', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, '100', '0', '2500000');
 
 -- --------------------------------------------------------
 
@@ -2239,7 +2255,19 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1139, 'hibiscus', 'Berhasil Login dengan IP ::1', '2020-11-23 07:39:50'),
 (1140, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-23 09:21:47'),
 (1141, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-23 09:49:06'),
-(1142, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-23 09:52:21');
+(1142, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-23 09:52:21'),
+(1143, 'ginger', 'Berhasil Login dengan IP ::1', '2020-11-23 10:46:08'),
+(1144, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-26 07:32:26'),
+(1145, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-26 13:41:02'),
+(1146, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-26 17:45:49'),
+(1147, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-27 04:19:51'),
+(1148, 'admin', 'Hapus Data Produk (27112020)', '2020-11-27 04:39:22'),
+(1149, 'admin', 'Hapus Data Produk (28112020)', '2020-11-27 07:43:51'),
+(1150, 'admin', 'Hapus Data Produk (30122020)', '2020-11-27 08:03:00'),
+(1151, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-27 14:15:19'),
+(1152, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-27 14:36:39'),
+(1153, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-27 15:00:19'),
+(1154, 'admin', 'Berhasil Login dengan IP ::1', '2020-11-27 15:25:43');
 
 -- --------------------------------------------------------
 
@@ -2833,10 +2861,10 @@ CREATE TABLE `pembelian_k` (
 
 CREATE TABLE `pembelian_t` (
   `id_t` int(11) NOT NULL,
-  `kd_brg` varchar(110) NOT NULL,
+  `kd_brg` varchar(25) NOT NULL,
   `nama_brg` varchar(50) NOT NULL,
-  `satuan_t` varchar(50) NOT NULL,
-  `kategori_t` varchar(50) NOT NULL,
+  `satuan_t` int(11) NOT NULL,
+  `kategori_t` int(11) NOT NULL,
   `hrg` varchar(50) NOT NULL,
   `hrg_jual` int(11) NOT NULL,
   `batas_cabang` int(11) NOT NULL,
@@ -2972,7 +3000,8 @@ INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`) VALUES
 (5, '186097', 'ANTIMO DEWASA', 45),
 (6, '643464', 'ANTANGIN JRG', 29),
 (7, '180024', 'BETADINE 5 LITER', 2),
-(13, '504761', 'HICO - HEPARIN SODIUM', 0);
+(13, '504761', 'HICO - HEPARIN SODIUM', 0),
+(15, '010494', 'GEQUIN', 50);
 
 -- --------------------------------------------------------
 
@@ -3724,7 +3753,8 @@ INSERT INTO `produk_master` (`kd_produk`, `nama_produk`, `harga_beli`, `jual_umu
 ('821564', 'ZINE 10 MG (SPESIALIS)', '', '6006', NULL, NULL, NULL, NULL, NULL),
 ('911561', 'ZORALIN ( KETOCONAZOLE  ) ZALF', '', '28875', NULL, NULL, NULL, NULL, NULL),
 ('768036', 'ZORALIN TABLET ( KETOCONAZOLE )', '', '3150', NULL, NULL, NULL, NULL, NULL),
-('010494', 'GEQUIN', '25000', '30000', '1.png', 9, 3, 27000, 27000);
+('010494', 'GEQUIN', '25000', '30000', '1.png', 9, 3, 27000, 27000),
+('150194', 'Hawedion', '40000', '45000', 'betyouwanna.jpg', 6, 7, 37000, 46000);
 
 -- --------------------------------------------------------
 
@@ -3786,7 +3816,9 @@ INSERT INTO `produk_pengiriman` (`id`, `tgl_kirim`, `kode_barang`, `nama_p`, `ju
 (26, '2020-06-24', '766785', 'VIT C ( KALENG )', 50, 0),
 (25, '2020-05-16', '504761', 'HICO - HEPARIN SODIUM', 1, 0),
 (24, '2020-04-18', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', 80, 10),
-(23, '2020-04-17', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', 10, 0);
+(23, '2020-04-17', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', 10, 0),
+(27, '2020-11-27', '010494', 'GEQUIN', 100, 0),
+(28, '2020-11-27', '010494', 'GEQUIN', 50, 0);
 
 -- --------------------------------------------------------
 
@@ -3817,28 +3849,33 @@ CREATE TABLE `produk_pusat` (
   `id_p` int(11) NOT NULL,
   `nama_p` varchar(50) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `kode_barang` varchar(50) NOT NULL
+  `kode_barang` varchar(50) NOT NULL,
+  `hrg` varchar(50) NOT NULL,
+  `hrg_jual` int(11) NOT NULL,
+  `kategori` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `produk_pusat`
 --
 
-INSERT INTO `produk_pusat` (`id_p`, `nama_p`, `jumlah`, `kode_barang`) VALUES
-(1, 'DOTRAMOL-PARACETAMOL-TRAMADOL', 20, '251069'),
-(2, 'PROFEN - IBUPROFEN SYRUP', 1, '368012'),
-(3, 'VIT C ( KALENG )', 50, '766785'),
-(4, 'PANADOL BIRU', 2, '009430'),
-(5, 'PARAMEX', 1, '594452'),
-(6, 'antibotik', 3, '661713'),
-(7, 'HICO - HEPARIN SODIUM', 2, '504761'),
-(8, 'IMBOOST F COUGH SPESIALIS', 2, '056275'),
-(9, 'NEUROBAT FORTE INJ 3 ML/20', 1, '682038'),
-(10, 'CASETAMOL SYR (PARASETAMOL)', 1, '497345'),
-(11, 'ALKOHOL KECIL', 5, '581543'),
-(12, 'ANTIMO DEWASA', 50, '186097'),
-(13, 'ANTANGIN JRG', 20, '643464'),
-(14, 'BETADINE 5 LITER', 3, '180024');
+INSERT INTO `produk_pusat` (`id_p`, `nama_p`, `jumlah`, `kode_barang`, `hrg`, `hrg_jual`, `kategori`) VALUES
+(1, 'DOTRAMOL-PARACETAMOL-TRAMADOL', 20, '251069', '', 0, '0'),
+(2, 'PROFEN - IBUPROFEN SYRUP', 1, '368012', '', 0, '0'),
+(3, 'VIT C ( KALENG )', 50, '766785', '', 0, '0'),
+(4, 'PANADOL BIRU', 2, '009430', '', 0, '0'),
+(5, 'PARAMEX', 1, '594452', '', 0, '0'),
+(6, 'antibotik', 3, '661713', '', 0, '0'),
+(7, 'HICO - HEPARIN SODIUM', 2, '504761', '', 0, '0'),
+(8, 'IMBOOST F COUGH SPESIALIS', 2, '056275', '', 0, '0'),
+(9, 'NEUROBAT FORTE INJ 3 ML/20', 1, '682038', '', 0, '0'),
+(10, 'CASETAMOL SYR (PARASETAMOL)', 1, '497345', '', 0, '0'),
+(11, 'ALKOHOL KECIL', 5, '581543', '', 0, '0'),
+(12, 'ANTIMO DEWASA', 50, '186097', '', 0, '0'),
+(13, 'ANTANGIN JRG', 20, '643464', '', 0, '0'),
+(14, 'BETADINE 5 LITER', 3, '180024', '', 0, '0'),
+(17, 'GEQUIN', 50, '010494', '25000', 30000, '9'),
+(18, 'Hawedion', 100, '150194', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -4603,13 +4640,13 @@ ALTER TABLE `asuransi`
 -- AUTO_INCREMENT for table `beli`
 --
 ALTER TABLE `beli`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `beli_k`
 --
 ALTER TABLE `beli_k`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `biaya_administrasi`
@@ -4687,13 +4724,13 @@ ALTER TABLE `history_ap`
 -- AUTO_INCREMENT for table `history_beli_k`
 --
 ALTER TABLE `history_beli_k`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `history_beli_t`
 --
 ALTER TABLE `history_beli_t`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `history_kasir`
@@ -4747,7 +4784,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1143;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1155;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -4807,13 +4844,13 @@ ALTER TABLE `pembayaran_lab`
 -- AUTO_INCREMENT for table `pembelian_k`
 --
 ALTER TABLE `pembelian_k`
-  MODIFY `id_k` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pembelian_t`
 --
 ALTER TABLE `pembelian_t`
-  MODIFY `id_t` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_t` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
@@ -4837,7 +4874,7 @@ ALTER TABLE `poliklinik`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `produk_pasien`
@@ -4849,7 +4886,7 @@ ALTER TABLE `produk_pasien`
 -- AUTO_INCREMENT for table `produk_pengiriman`
 --
 ALTER TABLE `produk_pengiriman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `produk_ps`
@@ -4861,7 +4898,7 @@ ALTER TABLE `produk_ps`
 -- AUTO_INCREMENT for table `produk_pusat`
 --
 ALTER TABLE `produk_pusat`
-  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `produk_reture`
