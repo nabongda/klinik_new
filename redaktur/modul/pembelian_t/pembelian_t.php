@@ -4,6 +4,8 @@
 ?>
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -62,8 +64,8 @@
                 <?php $q1 = mysqli_query($con, "SELECT *FROM suplier WHERE id_sup='$data[id_sup]'"); 
                     $k = mysqli_fetch_array($q1); ?>
                 <td><?php echo $k['nama_sup']; ?></td>
-                <td><?php echo $data['total']?></td>
-                <td><?php echo $data['pembayaran']?></td>
+                <td><?php echo rupiah($data['total']); ?></td>
+                <td><?php echo $data['pembayaran']; ?></td>
                 <td><?php echo $data['ket']?></td>
                 <td>
                   <a href="#detail" id="custId" data-toggle="modal" data-id="<?php echo $data['id']?>" class="btn-xs btn-success"><i
@@ -86,7 +88,6 @@
                 </div>
               </div>
             </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
             <script type="text/javascript">
               $(document).ready(function () {
                 $('#detail').on('show.bs.modal', function (e) {
@@ -254,7 +255,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
           <div class="card-header">
-              <h3 class="card-title">Silahkan Pilih Produk yg akan dibeli</h3>
+              <h3 class="card-title">Silahkan pilih produk yang akan dibeli</h3>
           </div>
           <!-- /.card-header -->
           <!-- form start -->
@@ -266,16 +267,16 @@
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Nama Barang </label>
+                  <label>Nama Barang </label>
                   <input type="text" class="form-control" name="nama_brg" id="nama_barang" placeholder="Nama Barang" required>
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Kode Barang </label>
+                  <label>Kode Barang </label>
                   <input type="text" class="form-control" name="kd_brg" id="kd_brg" placeholder="Kode Barang" required>
                 </div>
                 <div class="col-md-2">
-                  <label for="exampleInputKode1">Satuan</label>
-                  <select class="form-control select2" name="id_satuan" id="id_satuan" style="width: 100%;">
+                  <label>Satuan</label>
+                  <select class="form-control select2" name="id_satuan" id="id_satuan" style="width: 100%;" readonly>
                     <option value="">Satuan</option>
                     <?php $query = mysqli_query($con, "SELECT *FROM data_satuan");
                       while ($cb = mysqli_fetch_array($query)) { ?>
@@ -284,8 +285,8 @@
                   </select>
                 </div>
                 <div class="col-md-2">
-                  <label for="exampleInputKode1">Kategori</label>
-                  <select class="form-control select2" name="id_kategori" id="id_kategori" style="width: 100%;" placeholder="Nama Produk">
+                  <label>Kategori</label>
+                  <select class="form-control select2" name="id_kategori" id="id_kategori" style="width: 100%;" readonly>
                     <option value="">Kategori</option>
                       <?php $query = mysqli_query($con, "SELECT *FROM kategori");
                         while ($cb = mysqli_fetch_array($query)) { ?>
@@ -294,17 +295,17 @@
                   </select>
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Jumlah </label>
+                  <label>Jumlah </label>
                   <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Harga </label>
+                  <label>Harga </label>
                   <input type="text" class="form-control" name="hrg" id="hrg" placeholder="Harga" required>
                   <input class="form-control" type="hidden" name="harga_jual" id="harga_jual" required>
                   <input class="form-control" type="hidden" name="tgl_beli" value="<?php echo $tgl_beli?>">
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Diskon </label>
+                  <label>Diskon </label>
                   <input type="number" class="form-control" name="diskon" id="diskon" placeholder="Diskon" value="0">
                   <input class="form-control" type="hidden" name="batas_cabang" id="batas_cabang" value="100" required>
                   <input class="form-control" type="hidden" name="batas_minim" id="batas_minim" value="10" required>
@@ -320,9 +321,10 @@
           </form>
 
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="barang11" class="table table-bordered table-striped">
               <thead>
                 <tr>
+                  <th>No</th>
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
                   <th>Jumlah</th>
@@ -342,35 +344,13 @@
                   <td><?php echo $no++?></td>
                   <td><?php echo $data['kd_brg']; ?></td>
                   <td><?php echo $data['nama_brg']; ?></td>
-                  <td><?php echo $data['harga']; ?></td>
                   <td><?php echo $data['jumlah']; ?></td>
+                  <td><?php echo $data['hrg']; ?></td>
                   <td><?php echo $data['diskon']; ?></td>
                   <td><?php echo $data['sub_tot']; ?></td>
-                  <td>
-                    <a href="#" class="btn-xs btn-warning" data-toggle="modal"
-                        data-target=".modalEditBarangKer"><i class="fa fa-edit">
-                            Edit</i></a>
-                    <a href="#" class="hapus btn-xs btn-danger"><i class="fa fa-trash">
-                            Hapus</i></a>
-                  </td>
                 </tr>
                 <?php } ?>
               </tbody>
-              <!-- SweetAlert Hapus -->
-              <script>
-                  document.querySelector(".hapus").addEventListener("click",
-                      function () {
-                          Swal.fire({
-                              title: 'Are you sure?',
-                              text: "You won't be able to revert this!",
-                              icon: 'warning',
-                              showCancelButton: true,
-                              confirmButtonColor: '#3085d6',
-                              cancelButtonColor: '#d33',
-                              confirmButtonText: 'Delete !'
-                          });
-                      });
-              </script>
               <tr>
                 <th colspan="6" style="text-align: right;">Total</th>
                 <td id="total">
@@ -519,6 +499,7 @@
   }
 ?>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
   $.ajaxSetup({
@@ -527,28 +508,20 @@ $(document).ready(function(){
     }
   });
 
-  // $("#example1").DataTable();
-  // Datatable
-  $('#barang11').dataTable( {
-    "bProcessing": true,
-    "bServerSide": true,
-    "sAjaxSource": "modul/pembelian_t/data_barang.php",
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
-    "aoColumns": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      {
-      "mData": "0",
-      "mRender": function ( data, type, full ) {
-        return '<button id="hapus_brg" data-id="'+data+'" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Remove</button>';
-        }
+  // Tambah Input Barang Tunai
+  $('#form_t').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'post',
+      url: 'modul/pembelian_t/input_data.php',
+      data: $('#form_t').serialize(),
+      success: function (data) {
+        var oTable = $('#barang11').dataTable();
+        oTable.fnDraw(false);
+        $('#form_t').trigger("reset");
+        total();
       }
-    ]
+    });
   });
 
   // auto complete
@@ -579,20 +552,27 @@ $(document).ready(function(){
     }
   });
 
-  // Tambah Input Barang Tunai
-  $('#form_t').on('submit', function (e) {
-    e.preventDefault();
-    $.ajax({
-      type: 'post',
-      url: 'modul/pembelian_t/input_data.php',
-      data: $('#form_t').serialize(),
-      success: function (data) {
-        var oTable = $('#barang11').dataTable(); 
-        oTable.fnDraw(false);
-        total();
-          $('#form_t').trigger("reset");
+  // Datatable
+  $('#barang11').dataTable( {
+    "bProcessing": true,
+    "bServerSide": true,
+    "sAjaxSource": "modul/pembelian_t/data_barang.php",
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
+    "aoColumns": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      {
+      "mData": "0",
+      "mRender": function ( data, type, full ) {
+        return '<button id="hapus_brg" data-id="'+data+'" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Remove</button>';
+        }
       }
-    });
+    ]
   });
 
   // Edit Barang Tunai
@@ -615,25 +595,49 @@ $(document).ready(function(){
   });
 
   // Hapus Barang
-  $('body').on("click","#hapus_brg",function(){
+  $('body').on('click', '#hapus_brg', function (event) {
+    event.preventDefault();
     var id_t = $(this).data("id");
-    $.ajax({
-      type:'POST',
-      url: 'modul/pembelian_t/hapus_brg.php',
-      data:{
-        id_t:id_t
-      },
-      success:function(data){
-        if(data=="YES"){
-          alert("Berhasil dihapus");
-          var oTable = $('#barang11').dataTable(); 
-          oTable.fnDraw(false);
-          total();
-        }else{
-          alert("Data gagal terhapus");
+    var token = $("meta[name='csrf-token']").attr("content");
+    Swal.fire({
+      title: 'Delete',
+      text: "Yakin ingin menghapus data?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Hapus'
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.value) {
+          $.ajax({
+            url: "modul/pembelian_t/hapus_brg.php",
+            type: "POST",
+            data: {
+              "id_t": id_t,
+              "_token": token,
+            },
+            success: function (response) {
+              var oTable = $('#barang11').dataTable(); 
+              oTable.fnDraw(false);
+              total();
+              Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Data berhasil dihapus!'
+              });
+            },
+            error: function (xhr) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Terjadi kesalahan!'
+              });
+            }
+          });
         }
-      }
-    });
+      })
   });
 
   // function total

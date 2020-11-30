@@ -73,7 +73,7 @@
                 while($r  = mysqli_fetch_array($tampil)){
               ?>
               <tr>
-                <?php $q1 = mysqli_query($con, "SELECT *FROM produk_master WHERE kd_produk='$r[kode_barang]'"); 
+                <?php $q1 = mysqli_query($con, "SELECT * FROM produk_master WHERE kd_produk='$r[kode_barang]'"); 
                 $k = mysqli_fetch_array($q1); ?>
                 <td>
                   <?php
@@ -86,12 +86,15 @@
                 </td>
                 <td><?php echo $r["kode_barang"]; ?></td>
                 <td><?php echo $r["nama_p"]; ?></td>
-                <?php $q1 = mysqli_query($con, "SELECT *FROM kategori WHERE id_kategori='$r[id_kategori]'"); 
-                $k = mysqli_fetch_array($q1); ?>
-                <td><?php echo $k['kategori']; ?></td>
+                <?php 
+                $ps = mysqli_query($con, "SELECT * FROM produk_pusat WHERE kode_barang='$r[kode_barang]'");
+                $p = mysqli_fetch_array($ps);
+                $qk = mysqli_query($con, "SELECT * FROM kategori WHERE id_kategori='$p[kategori]'"); 
+                $kt = mysqli_fetch_array($qk); ?>
+                <td><?php echo $kt['kategori']; ?></td>
                 <td><?php echo $r["jumlah"]; ?></td>
-                <td><?php echo rupiah($r["harga_beli"]); ?></td>
-                <td><?php echo rupiah($r["harga_jual"]); ?></td>
+                <td><?php echo rupiah($p["hrg"]); ?></td>
+                <td><?php echo rupiah($p["hrg_jual"]); ?></td>
                 <td>
                   <?php
                     if ($r["jumlah"] <= 3) {

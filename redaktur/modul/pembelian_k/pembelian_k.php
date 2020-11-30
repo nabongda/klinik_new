@@ -2,6 +2,8 @@
   switch($_GET['act']){
   default:
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -40,7 +42,7 @@
                 <th>No</th>
                 <th>No Faktur</th>
                 <th>Tanggal Pembelian</th>
-                <th>Id Suplier</th>
+                <th>Supplier</th>
                 <th>Total</th>
                 <th>Tanggal Tempo</th>
                 <th class="nosort">Aksi</th>
@@ -59,8 +61,8 @@
                 <?php $q1 = mysqli_query($con, "SELECT *FROM suplier WHERE id_sup='$data[id_sup]'"); 
                     $k = mysqli_fetch_array($q1); ?>
                 <td><?php echo $k['nama_sup']; ?></td>
-                <td><?php echo $data['total']?></td>
-                <td><?php echo $data['tgl_tempo']?></td>
+                <td><?php echo rupiah($data['total']); ?></td>
+                <td><?php echo $data['tgl_tempo']; ?></td>
                 <td>
                   <a href="#detail" id="custId" class="btn-xs btn-success" data-toggle="modal" data-id="<?php echo $data['id']?>"><i class="fa fa-eye"> Detail</i></a>
                   <a href="#editmodal" id="custId" class="btn-xs btn-warning" data-toggle="modal" data-id="<?php echo $data['id']?>"><i class="fa fa-edit"> Edit</i></a>
@@ -70,15 +72,10 @@
               <?php } ?>
             </tbody>
             <!-- Modals Detail -->
-            <div class="modal fade modalDetailKredit" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal fade" id="detail" role="dialog">
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title"> Detail Barang</h5>
-                  </div>
-                  <div class="modal-body">
-                    <div class="fetched-data"></div>
-                  </div>
+                  <div class="fetched-data"></div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
                   </div>
@@ -103,18 +100,13 @@
             </script>
 
             <!-- Modals Edit Transaksi -->
-            <div class="modal fade modalEditKredit" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal fade" id="editmodal" role="dialog">
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title"> Edit Transaksi</h5>
                   </div>
-                  <div class="modal-body">
-                    <div class="fetched-data"></div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
-                  </div>
+                  <div class="fetched-data"></div>
                 </div>
               </div>
             </div>
@@ -257,7 +249,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
           <div class="card-header">
-              <h3 class="card-title">Silahkan Pilih Produk yg akan dibeli</h3>
+              <h3 class="card-title">Silahkan pilih produk yang akan dibeli</h3>
           </div>
           <!-- form start -->
           <form role="form" id="form_kk">
@@ -268,15 +260,15 @@
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Nama Barang </label>
+                  <label>Nama Barang </label>
                   <input type="text" class="form-control" name="nama_brg" id="nama_barang" placeholder="Nama Barang" required>
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Kode Barang </label>
+                  <label>Kode Barang </label>
                   <input type="text" class="form-control" name="kd_brg" id="kd_brg" placeholder="Kode Barang" required>
                 </div>
                 <div class="col-md-2">
-                  <label for="exampleInputKode1">Satuan</label>
+                  <label>Satuan</label>
                   <select class="form-control select2" name="id_satuan" id="id_satuan" style="width: 100%;">
                     <option value="">Satuan</option>
                     <?php $query = mysqli_query($con, "SELECT *FROM data_satuan");
@@ -286,7 +278,7 @@
                   </select>
                 </div>
                 <div class="col-md-2">
-                  <label for="exampleInputKode1">Kategori</label>
+                  <label>Kategori</label>
                   <select class="form-control select2" name="id_kategori" id="id_kategori" style="width: 100%;" placeholder="Nama Produk">
                     <option value="">Kategori</option>
                       <?php $query = mysqli_query($con, "SELECT *FROM kategori");
@@ -296,17 +288,17 @@
                   </select>
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Jumlah </label>
+                  <label>Jumlah </label>
                   <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Harga </label>
+                  <label>Harga </label>
                   <input type="text" class="form-control" name="hrg" id="hrg" placeholder="Harga" required>
                   <input class="form-control" type="hidden" name="harga_jual" id="harga_jual" required>
                   <input class="form-control" type="hidden" name="tgl_beli" value="<?php echo $tgl_beli?>">
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="exampleInputKode1">Diskon </label>
+                  <label>Diskon </label>
                   <input type="number" class="form-control" name="diskon" id="diskon" placeholder="Diskon" value="0">
                   <input class="form-control" type="hidden" name="batas_cabang" id="batas_cabang" value="100" required>
                   <input class="form-control" type="hidden" name="batas_minim" id="batas_minim" value="10" required>
@@ -322,9 +314,10 @@
           </form>
 
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="barang12" class="table table-bordered table-striped">
               <thead>
                 <tr>
+                  <th>No</th>
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
                   <th>Jumlah</th>
@@ -337,40 +330,20 @@
               <tbody>
                 <?php
                   $tampil     = mysqli_query($con, "Select * From pembelian_k");
+                  $no = 1;
                   while($data = mysqli_fetch_array($tampil)){
                 ?>
                 <tr>
+                  <td><?php echo $no++?></td>
                   <td><?php echo $data['kd_brg']; ?></td>
                   <td><?php echo $data['nama_brg']; ?></td>
                   <td><?php echo $data['harga']; ?></td>
                   <td><?php echo $data['jumlah']; ?></td>
                   <td><?php echo $data['diskon']; ?></td>
                   <td><?php echo $data['sub_tot']; ?></td>
-                  <td>
-                    <a href="#" class="btn-xs btn-warning" data-toggle="modal"
-                        data-target=".modalEditBarangKer"><i class="fa fa-edit">
-                            Edit</i></a>
-                    <a href="#" class="hapus btn-xs btn-danger"><i class="fa fa-trash">
-                            Hapus</i></a>
-                  </td>
                 </tr>
                 <?php } ?>
               </tbody>
-              <!-- SweetAlert Hapus -->
-              <script>
-                document.querySelector(".hapus").addEventListener("click",
-                  function () {
-                    Swal.fire({
-                      title: 'Are you sure?',
-                      text: "You won't be able to revert this!",
-                      icon: 'warning',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: 'Delete !'
-                    });
-                  });
-              </script>
               <tr>
                 <th colspan="6" style="text-align: right;">Total</th>
                 <td id="total"></td>
@@ -495,14 +468,14 @@
   }
 ?>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
   $.ajaxSetup({
     headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-  $("#example1").DataTable();
 
   // Tambah Input Barang Kredit
   $('#form_kk').on('submit', function (e) {
@@ -590,25 +563,49 @@ $(document).ready(function(){
   });
 
   // Hapus Barang
-  $('body').on("click","#hapus_brgk",function(){
+  $('body').on('click', '#hapus_brgk', function (event) {
+    event.preventDefault();
     var id_k = $(this).data("id");
-    $.ajax({
-      type:'POST',
-      url: 'modul/pembelian_k/hapus_k.php',
-      data:{
-        id_k:id_k
-      },
-      success:function(data){
-        if(data=="YES"){
-          alert("Berhasil dihapus");
-          var oTable = $('#barang12').dataTable(); 
-          oTable.fnDraw(false);
-          total();
-        }else{
-          alert("Data gagal terhapus");
+    var token = $("meta[name='csrf-token']").attr("content");
+    Swal.fire({
+      title: 'Delete',
+      text: "Yakin ingin menghapus data?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Hapus'
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.value) {
+          $.ajax({
+            url: "modul/pembelian_k/hapus_k.php",
+            type: "POST",
+            data: {
+              "id_k": id_k,
+              "_token": token,
+            },
+            success: function (response) {
+              var oTable = $('#barang12').dataTable(); 
+              oTable.fnDraw(false);
+              total();
+              Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Data berhasil dihapus!'
+              });
+            },
+            error: function (xhr) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Terjadi kesalahan!'
+              });
+            }
+          });
         }
-      }
-    });
+      })
   });
   
   // function total

@@ -33,7 +33,7 @@ $no_fak = $_POST['no_fak'];
 				$batas_cabang = 100;
 				$batas_minim = 10;
 				mysqli_query($con, "INSERT INTO produk_pusat (
-					kode_barang,nama_p,jumlah) VALUES('$kd_brg','$nama_brg','$jumlah')
+					kode_barang,nama_p,jumlah,hrg,hrg_jual,kategori) VALUES('$kd_brg','$nama_brg','$jumlah','$hrg_beli','$hrg_jual','$kategori')
 					");
 			}
 		}
