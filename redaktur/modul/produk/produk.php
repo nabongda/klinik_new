@@ -4,6 +4,8 @@
 ?>
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">

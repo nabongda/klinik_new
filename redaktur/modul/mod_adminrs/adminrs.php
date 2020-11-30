@@ -57,7 +57,7 @@
                 <td>
                   <a href="#" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default" onclick="setdata(this.id)" id="<?php echo $jo['id']; ?>">
                     Edit
-                  </a>&nbsp; 
+                  </a>&nbsp;
                   <a href="#" class="hapus btn-sm btn-danger" id="<?php echo $jo['id']; ?>">
                     Hapus
                   </a>
@@ -71,13 +71,14 @@
               <div class="modal-dialog modal-xs" role="document">
                 <div class="modal-content">
                   <form class="form-horizontal" role="form" method="POST" id="frm">
+                    <input type="hidden" name="id" id="dataid">  
                     <div class="modal-header">
                       <h5 class="modal-title">Data Biaya Administrasi RS</h5>
                     </div>
                     <div class="modal-body">
                       <div class="form-group row">
                         <div class="col-sm-4">
-                          <label for="inputNoFaktur">Nama</label>
+                          <label>Nama</label>
                         </div>
                         <div class="col-sm-8">
                           <input type="text" class="form-control" name="nama" id="nama">
@@ -85,7 +86,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-4">
-                          <label for="inputNoFaktur">Tarif</label>
+                          <label>Tarif</label>
                         </div>
                         <div class="col-sm-8">
                           <input type="text" class="form-control" name="biaya" id="biaya">
@@ -120,42 +121,7 @@
                 }
               }
             </script>
-        
-            <!-- Modals Edit -->
-            <div class="modal fade modalEditBiaya tabindex=" -1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-xs" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Data Biaya Administrasi RS</h5>
-                  </div>
-                  <div class="modal-body">
-                    <form class="form-horizontal" role="form">
-                      <div class="form-group row">
-                        <div class="col-sm-4">
-                          <label for="inputNoFaktur">Nama</label>
-                        </div>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" id="">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="col-sm-4">
-                          <label for="inputNoFaktur">Tarif</label>
-                        </div>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" id="">
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" type="submit" class="btn btn-primary pull-left">Simpan</button>
-                      </div>
-                  </div>
-                  </form>
-                </div>
 
-              </div>
-            </div>
             <!-- SweetAlert Hapus -->
             <script>
             $('.hapus').click(function () {
