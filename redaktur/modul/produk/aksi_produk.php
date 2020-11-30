@@ -29,6 +29,8 @@
 		$satuan		= $_POST['satuan'];
 		// $id_sup 		= $_POST['id_sup'];
 		// $id_kk			= $_POST['id_kk'];
+		$tgl_produk	= $_POST['tgl_produksi'];
+		$tgl_exp	= $_POST['tgl_expired'];
 
 		$nama_file = $_FILES['file']['name'];
 		$ukuran_file = $_FILES['file']['size'];
@@ -45,8 +47,8 @@
 		      // Jika gambar berhasil diupload, Lakukan :  
 		      // Proses simpan ke Database
 		      $query = "INSERT Into produk_master(kd_produk,nama_produk,harga_beli,jual_umum,gambar,id_kategori,id_satuan,jual_bpjs,
-			   jual_lain)VALUES('$kode_barang','$nama_p','$harga_beli','$harga_jual','$nama_file',
-			   '$kategori','$satuan','$harga_bpjs','$harga_asuransilainnya')";
+			   jual_lain,tgl_produksi,tgl_expired)VALUES('$kode_barang','$nama_p','$harga_beli','$harga_jual','$nama_file',
+			   '$kategori','$satuan','$harga_bpjs','$harga_asuransilainnya','$tgl_produk','$tgl_exp')";
 			  $sql = mysqli_query($con, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
 		      if($sql){ // Cek jika proses simpan ke database sukses atau tidak
@@ -60,8 +62,8 @@
 		    }else{
 		       // Proses simpan ke Database
 			 $query = "INSERT Into produk_master(kd_produk,nama_produk,harga_beli,jual_umum,gambar,id_kategori,id_satuan,jual_bpjs,
-			   jual_lain)VALUES('$kode_barang','$nama_p','$harga_beli','$harga_jual','$nama_file',
-			   '$kategori','$satuan','$harga_bpjs','$harga_asuransilainnya')";
+			   jual_lain,tgl_produksi,tgl_expired)VALUES('$kode_barang','$nama_p','$harga_beli','$harga_jual','$nama_file',
+			   '$kategori','$satuan','$harga_bpjs','$harga_asuransilainnya','$tgl_produk','$tgl_exp',)";
 			   $sql = mysqli_query($con, $query); // Eksekusi/ Jalankan query dari variabel $query
 			   
 			   if($sql){ // Cek jika proses simpan ke database sukses atau tidak
