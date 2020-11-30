@@ -2,6 +2,8 @@
   switch($_GET['act']){
   default:
 ?>
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <section class="content-header">
@@ -66,7 +68,7 @@
                 <td>
                   <a href="#detail" id="custId" class="btn-xs btn-success" data-toggle="modal" data-id="<?php echo $data['id']?>"><i class="fa fa-eye"> Detail</i></a>
                   <a href="#editmodal" id="custId" class="btn-xs btn-warning" data-toggle="modal" data-id="<?php echo $data['id']?>"><i class="fa fa-edit"> Edit</i></a>
-                  <a href="#delete" no-fak="<?php echo $data['no_fak']?>" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
+                  <a href="#delete" no-fak="<?php echo $data['no_fak']; ?>" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
                 </td>
               </tr>
               <?php } ?>
@@ -188,8 +190,7 @@
 
             <!-- SweetAlert Hapus -->
             <script>
-              document.querySelector(".hapus").addEventListener("click",
-                function () {
+                $('.hapus').click(function () {
                   var no_fak = $(this).attr('no-fak');
                   Swal.fire({
                     title: 'Yakin Ingin Menghapus Data?',
@@ -202,7 +203,7 @@
                   .then((result) => {
                     console.log(result);
                   if (result.value) {
-                    window.location = "modul/pembelian_t/aksi_pembelian_k.php?module=pembelian_k&act=hapus&no_fak="+no_fak+"";
+                    window.location = "modul/pembelian_k/aksi_pembelian_k.php?module=pembelian_k&act=hapus&no_fak="+no_fak+"";
                   }
                   })
                 });
@@ -290,6 +291,8 @@
                 <div class="form-group col-md-2">
                   <label>Jumlah </label>
                   <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
+                  <input type="hidden" class="form-control" name="tgl_produksi" id="tgl_produksi" required>
+                  <input type="hidden" class="form-control" name="tgl_expired" id="tgl_expired" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Harga </label>
@@ -323,6 +326,8 @@
                   <th>Jumlah</th>
                   <th>Harga</th>
                   <th>Diskon</th>
+                  <th>Tanggal Produksi</th>
+                  <th>Tanggal Expired</th>
                   <th>Sub Total</th>
                   <th class="nosort">Aksi</th>
                 </tr>
@@ -340,12 +345,14 @@
                   <td><?php echo $data['harga']; ?></td>
                   <td><?php echo $data['jumlah']; ?></td>
                   <td><?php echo $data['diskon']; ?></td>
+                  <td><?php echo $data['tgl_produksi']; ?></td>
+                  <td><?php echo $data['tgl_expired']; ?></td>
                   <td><?php echo $data['sub_tot']; ?></td>
                 </tr>
                 <?php } ?>
               </tbody>
               <tr>
-                <th colspan="6" style="text-align: right;">Total</th>
+                <th colspan="8" style="text-align: right;">Total</th>
                 <td id="total"></td>
               </tr>
             </table>
@@ -516,6 +523,8 @@ $(document).ready(function(){
       $('#id_kategori').val(ui.item.id_kategori);
       $('#hrg').val(ui.item.harga_beli);
       $('#harga_jual').val(ui.item.harga_jual);
+      $('#tgl_produksi').val(ui.item.tgl_produksi);
+      $('#tgl_expired').val(ui.item.tgl_expired);
       return false;
     }
   });
@@ -527,6 +536,8 @@ $(document).ready(function(){
     "sAjaxSource": "modul/pembelian_k/data_barangk.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
+      null,
+      null,
       null,
       null,
       null,

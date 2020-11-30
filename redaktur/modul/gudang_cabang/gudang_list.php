@@ -64,6 +64,8 @@
                 <th>Stok Produk</th>
                 <th>Harga Beli</th>
                 <th>Harga Jual</th>
+                <th>Tanggal Produksi</th>
+                <th>Tanggal Expired</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -95,6 +97,8 @@
                 <td><?php echo $r["jumlah"]; ?></td>
                 <td><?php echo rupiah($p["hrg"]); ?></td>
                 <td><?php echo rupiah($p["hrg_jual"]); ?></td>
+                <td><?php echo $p['tgl_produksi']?></td>
+                <td><?php echo $p['tgl_expired']?></td>
                 <td>
                   <?php
                     if ($r["jumlah"] <= 3) {

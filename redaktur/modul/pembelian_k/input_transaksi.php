@@ -10,7 +10,7 @@ include "../../../config/koneksi.php";
 
 		mysqli_query($con,"INSERT INTO beli_k (no_fak, tgl_beli,total, id_sup, tgl_tempo) VALUES('$no_fak', '$tgl','$total', '$supp', '$tempo')");
 		
-		mysqli_query($con,"INSERT INTO history_beli_k (no_fak, tgl_beli, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot) SELECT '$no_fak','$tgl',kd_brg,nama_brg,satuan_k,kategori_k,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot FROM pembelian_k ");
+		mysqli_query($con,"INSERT INTO history_beli_k (no_fak, tgl_beli, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot, tgl_produksi, tgl_expired) SELECT '$no_fak','$tgl',kd_brg,nama_brg,satuan_k,kategori_k,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_produksi,tgl_expired FROM pembelian_k ");
 
 		$q = mysqli_query($con,"SELECT * FROM history_beli_k Where no_fak='$no_fak'");
 
@@ -23,17 +23,19 @@ include "../../../config/koneksi.php";
 				$jumlah = $p['jumlah']+$cek['jumlah'];
 				mysqli_query($con,"UPDATE produk_pusat SET jumlah='$jumlah' where kode_barang='$cek[kd_brg]'");
 			}else{
-				$nama_brg = $cek['nama_brg'];
-				$hrg_beli = $cek['hrg'];
-				$hrg_jual = $cek['hrg_jual'];
-				$jumlah = $cek['jumlah'];
-				$id_sat = $cek['satuan'];
-				$kd_brg = $cek['kd_brg'];
-				$kategori = $cek['kategori'];
-				$batas_cabang = $cek['batas_cabang'];
-				$batas_minim = $cek['batas_minim'];
+				$nama_brg		= $cek['nama_brg'];
+				$hrg_beli		= $cek['hrg'];
+				$hrg_jual		= $cek['hrg_jual'];
+				$jumlah			= $cek['jumlah'];
+				$id_sat			= $cek['satuan'];
+				$kd_brg			= $cek['kd_brg'];
+				$kategori		= $cek['kategori'];
+				$tgl_produksi	= $cek['tgl_produksi'];
+				$tgl_expired	= $cek['tgl_expired'];
+				$batas_cabang	= $cek['batas_cabang'];
+				$batas_minim	= $cek['batas_minim'];
 				mysqli_query($con,"INSERT INTO produk_pusat (
-					kode_barang,nama_p,jumlah) VALUES('$kd_brg','$nama_brg','$jumlah')
+					kode_barang,nama_p,jumlah,hrg,hrg_jual,kategori,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$jumlah','$hrg_beli','$hrg_jual','$kategori','$tgl_produksi','$tgl_expired')
 					");
 			}
 		}

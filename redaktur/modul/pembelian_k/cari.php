@@ -18,6 +18,8 @@ if(isset($_POST['search'])){
       "harga_jual"=>$row['harga_jual'],
       "id_satuan"=>$row['id_satuan'],
       "id_kategori"=>$row['id_kategori'],
+      "tgl_produksi"=>$row['tgl_produksi'],
+      "tgl_expired"=>$row['tgl_expired'],
    );
  }
 }

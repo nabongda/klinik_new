@@ -90,6 +90,8 @@ if($_POST['id']) {
               <th>Jumlah</th>
               <th>Harga</th>
               <th>Tanggal Beli</th>
+              <th>Tanggal Produksi</th>
+              <th>Tanggal Expired</th>
             </tr>
           </thead>
           <tbody>
@@ -112,6 +114,8 @@ if($_POST['id']) {
               <td><?php echo $data['jumlah']?></td>
               <td><?php echo $data['hrg']?></td>
               <td><?php echo $data['tgl_beli']?></td>
+              <td><?php echo $data['tgl_produksi']?></td>
+              <td><?php echo $data['tgl_expired']?></td>
             </tr>
             <?php } ?>
           </tbody> 

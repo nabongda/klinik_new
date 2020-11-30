@@ -297,6 +297,8 @@
                 <div class="form-group col-md-2">
                   <label>Jumlah </label>
                   <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
+                  <input type="hidden" class="form-control" name="tgl_produksi" id="tgl_produksi" required>
+                  <input type="hidden" class="form-control" name="tgl_expired" id="tgl_expired" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Harga </label>
@@ -330,6 +332,8 @@
                   <th>Jumlah</th>
                   <th>Harga</th>
                   <th>Diskon</th>
+                  <th>Tanggal Produksi</th>
+                  <th>Tanggal Expired</th>
                   <th>Sub Total</th>
                   <th class="nosort">Aksi</th>
                 </tr>
@@ -347,12 +351,14 @@
                   <td><?php echo $data['jumlah']; ?></td>
                   <td><?php echo $data['hrg']; ?></td>
                   <td><?php echo $data['diskon']; ?></td>
+                  <td><?php echo $data['tgl_produksi']; ?></td>
+                  <td><?php echo $data['tgl_expired']; ?></td>
                   <td><?php echo $data['sub_tot']; ?></td>
                 </tr>
                 <?php } ?>
               </tbody>
               <tr>
-                <th colspan="6" style="text-align: right;">Total</th>
+                <th colspan="8" style="text-align: right;">Total</th>
                 <td id="total">
                   <?php
                     $jumlahkan = "SELECT SUM(sub_tot) AS total FROM pembelian_t"; //perintah untuk menjumlahkan
@@ -548,6 +554,8 @@ $(document).ready(function(){
       $('#id_kategori').val(ui.item.id_kategori);
       $('#hrg').val(ui.item.harga_beli);
       $('#harga_jual').val(ui.item.harga_jual);
+      $('#tgl_produksi').val(ui.item.tgl_produksi);
+      $('#tgl_expired').val(ui.item.tgl_expired);
       return false;
     }
   });
@@ -559,6 +567,8 @@ $(document).ready(function(){
     "sAjaxSource": "modul/pembelian_t/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
+      null,
+      null,
       null,
       null,
       null,

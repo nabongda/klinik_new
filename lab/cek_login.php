@@ -48,8 +48,8 @@
 
 
 		catat($con, $_SESSION['namauser'], "Berhasil Login dengan IP $ip");
-		// header('location:'.$url2.'media.php?module=home');
-		header('location:../redaktur/media.php?module=home');
+		header('location:'.$url2.'media.php?module=home');
+		// header('location:../redaktur/media.php?module=home');
 	} else {
 		catat($con, $username, "Gagal Login");
 		echo "<script>

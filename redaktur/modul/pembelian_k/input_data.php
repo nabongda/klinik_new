@@ -23,6 +23,8 @@ $kd_brg 		= $_POST['kd_brg'];
 		//$total			= $_POST['total'];
 		$pembayaran		= $_POST['pembayaran'];
 		$ket			= $_POST['ket'];
+		$tgl_produksi	= $_POST['tgl_produksi'];
+		$tgl_expired	= $_POST['tgl_expired'];
 
 /*		if ($kategori=="") {
 			echo "kategori";
@@ -52,11 +54,11 @@ $kd_brg 		= $_POST['kd_brg'];
 				$jumlah = $cek['jumlah']+$jumlah;
 				mysqli_query($con,"UPDATE pembelian_k SET jumlah='$jumlah' where nama_brg='$nama_brg'");
 			}else{
-				mysqli_query($con,"INSERT INTO pembelian_k(kd_brg,nama_brg,satuan_k,kategori_k,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli')");
+				mysqli_query($con,"INSERT INTO pembelian_k(kd_brg,nama_brg,satuan_k,kategori_k,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
 			}
 			
 		}else{
-			mysqli_query($con,"INSERT INTO pembelian_k(kd_brg,nama_brg,satuan_k,kategori_K,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli')");
+			mysqli_query($con,"INSERT INTO pembelian_k(kd_brg,nama_brg,satuan_k,kategori_K,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
 			}
 		
 exit();
