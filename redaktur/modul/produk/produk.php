@@ -39,6 +39,8 @@
                 <th>Gambar Produk</th>
                 <th>Kode Produk</th>
                 <th>Nama Produk</th>
+                <th>Tgl Produksi</th>
+                <th>Tgl Expired</th>
                 <th>Harga Beli</th>
                 <th>Harga Umum</th>
                 <th>Harga BPJS</th>
@@ -64,6 +66,8 @@
                 </td>
                 <td><?php echo $r["kd_produk"]; ?></td>
                 <td><?php echo $r["nama_produk"]; ?></td>
+                <td><?php echo $r["tgl_produksi"]; ?></td>
+                <td><?php echo $r["tgl_expired"]; ?></td>
                 <td><?php echo rupiah ($r['harga_beli']);?></td>
                 <td><?php echo rupiah ($r['jual_umum']);?></td>  
                 <td><?php echo rupiah ($r['jual_bpjs']);?></td> 
@@ -182,6 +186,14 @@
               <div class="form-group">
                 <label>Harga Jual Asuransi Lainnya</label>
                 <input type="number" class="form-control" name="harga_asuransilainnya" placeholder="Harga Jual Asuransi Lainnya" required>
+              </div>
+              <div class="form-group">
+                <label>Tanggal Produksi</label>
+                <input type="date" class="form-control" name="tgl_produksi" required>
+              </div>
+              <div class="form-group">
+                <label>Tanggal Expired</label>
+                <input type="date" class="form-control" name="tgl_expired" required>
               </div>
               <div class="input-group">
                 <label>Upload Gambar</label>
