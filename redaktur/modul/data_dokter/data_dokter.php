@@ -241,7 +241,7 @@
                 </div>
               </div>
               <div class="form-group col-md-12">
-              <a href="?module=user"><button type="button" class="btn btn-danger">Batal</button></a>
+              <a href="?module=data_dokter"><button type="button" class="btn btn-danger">Batal</button></a>
                 <button type="submit" class="btn btn-success">Tambah</button>
               </div>
             </div>
