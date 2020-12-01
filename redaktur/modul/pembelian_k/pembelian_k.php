@@ -291,8 +291,6 @@
                 <div class="form-group col-md-2">
                   <label>Jumlah </label>
                   <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
-                  <input type="hidden" class="form-control" name="tgl_produksi" id="tgl_produksi" required>
-                  <input type="hidden" class="form-control" name="tgl_expired" id="tgl_expired" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Harga </label>
@@ -305,6 +303,14 @@
                   <input type="number" class="form-control" name="diskon" id="diskon" placeholder="Diskon" value="0">
                   <input class="form-control" type="hidden" name="batas_cabang" id="batas_cabang" value="100" required>
                   <input class="form-control" type="hidden" name="batas_minim" id="batas_minim" value="10" required>
+                </div>
+                <div class="form-group col-md-2">
+                  <label>Tanggal Produksi </label>
+                  <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_produksi" id="tgl_produksi" required>
+                </div>
+                <div class="form-group col-md-2">
+                  <label>Tanggal Expired </label>
+                  <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_expired" id="tgl_expired" required>
                 </div>
               </div>
               <div class="form-row">

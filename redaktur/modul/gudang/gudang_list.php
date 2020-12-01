@@ -66,11 +66,16 @@
               <tr>
                 <td><?php echo $r["kode_barang"]; ?></td>
                 <td><?php echo $r["nama_p"]; ?></td>
-                <td><?php echo $r["jumlah"]; ?></td>
+                <td><?php if ($r["jumlah"]<=0) {
+                  echo "0";
+                } else {
+                  echo $r["jumlah"];
+                }
+                ?></td>
                 <td>
                   <?php
                     //cari data di produk, kalau jumlahnya mendekati 0 maka warning
-                    $j = mysqli_fetch_assoc(mysqli_query($con, "SELECT jumlah FROM produk WHERE kode_barang = '$r[kode_barang]'"));
+                    $j = mysqli_fetch_assoc(mysqli_query($con, "SELECT jumlah FROM produk_pusat WHERE kode_barang = '$r[kode_barang]'"));
                     if(is_null($j['jumlah'])){
                       echo "<span class='badge bg-warning'>Belum ada data</span>";
                     } else  if($j['jumlah'] < 2){

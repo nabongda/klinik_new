@@ -10,9 +10,24 @@
 	// Hapus Produk pusat
 	if ($act == 'hapus'){
 		$id		= $_GET['no_fak'];
-		mysqli_query($con, "Delete From beli Where no_fak='$id'");
-		mysqli_query($con, "Delete From history_beli_t Where no_fak='$id'");
-		catat($con, $_SESSION['namauser'], 'Hapus Data Produk'.' ('.$id.')');
+		
+		$sql = mysqli_query($con, "SELECT * FROM history_beli_t Where no_fak='$id'");
+		while ($result = mysqli_fetch_array($sql)) {
+			$sql2 = mysqli_query($con, "SELECT * FROM produk_pusat where kode_barang='$result[kd_brg]'");
+			$ambil = mysqli_fetch_array($sql2);
+			$jumlahsql = $ambil['jumlah']-$result['jumlah'];
+
+			if ($jumlahsql<=0) {
+				mysqli_query($con, "UPDATE produk_pusat SET jumlah='0' where kode_barang='$result[kd_brg]'");
+			}
+			else {
+				mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlahsql' where kode_barang='$result[kd_brg]'");
+			}
+
+			mysqli_query($con, "Delete From beli Where no_fak='$id'");
+			mysqli_query($con, "Delete From history_beli_t Where no_fak='$id'");
+			catat($con, $_SESSION['namauser'], 'Hapus Data Produk'.' ('.$id.')');
+		}
 		
 	}
 	// Input Produk pusat Baru
@@ -84,16 +99,16 @@
 		$q = mysqli_query($con, "SELECT * FROM history_beli_t Where no_fak='$no_fak'");
 
 		while ($cek = mysqli_fetch_array($q)) {
-			$q2 = mysqli_query($con, "SELECT * FROM produk_pusat where nama_produk='$cek[nama_brg]'");
+			$q2 = mysqli_query($con, "SELECT * FROM produk_pusat where nama_p='$cek[nama_brg]'");
 			$jum = mysqli_num_rows($q2);
 
 			if ($jum >0) {
 				$p = mysqli_fetch_array($q2);
 				$jumlah = $p['jumlah']+$cek['jumlah'];
-				mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlah' where nama_produk='$cek[nama_brg]'");
+				mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlah' where nama_p='$cek[nama_brg]'");
 			}else{
 				mysqli_query($con, "INSERT INTO produk_pusat(
-					nama_produk,harga_beli,harga_jual,jumlah,id_sat,id_supp,kode_produk,id_kategori,batas_cabang,batas_minim
+					nama_p,harga_beli,harga_jual,jumlah,id_sat,id_supp,kode_produk,id_kategori,batas_cabang,batas_minim
 					");
 			}
 			

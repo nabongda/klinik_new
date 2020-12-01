@@ -9,10 +9,18 @@
 	// Hapus Produk pusat
 	if ($act == 'hapus'){
 		$id		= $_GET['no_fak'];
-		mysqli_query($con,"Delete From beli_k Where no_fak='$id'");
-		mysqli_query($con,"Delete From history_beli_k Where no_fak='$id'");
-		catat($con, $_SESSION['namauser'], 'Hapus Data Produk'.' ('.$id.')');
-		
+
+		$sql = mysqli_query($con, "SELECT * FROM history_beli_k Where no_fak='$id'");
+		while ($result = mysqli_fetch_array($sql)) {
+			$sql2 = mysqli_query($con, "SELECT * FROM produk_pusat where kode_barang='$result[kd_brg]'");
+			$ambil = mysqli_fetch_array($sql2);
+			$jumlahsql = $ambil['jumlah']-$result['jumlah'];
+			mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlahsql' where kode_barang='$result[kd_brg]'");
+
+			mysqli_query($con,"Delete From beli_k Where no_fak='$id'");
+			mysqli_query($con,"Delete From history_beli_k Where no_fak='$id'");
+			catat($con, $_SESSION['namauser'], 'Hapus Data Produk'.' ('.$id.')');
+		}
 	}
 	// Input Produk pusat Baru
 	elseif ($act == 'input') {

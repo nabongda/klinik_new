@@ -297,8 +297,6 @@
                 <div class="form-group col-md-2">
                   <label>Jumlah </label>
                   <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
-                  <input type="hidden" class="form-control" name="tgl_produksi" id="tgl_produksi" required>
-                  <input type="hidden" class="form-control" name="tgl_expired" id="tgl_expired" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Harga </label>
@@ -311,6 +309,14 @@
                   <input type="number" class="form-control" name="diskon" id="diskon" placeholder="Diskon" value="0">
                   <input class="form-control" type="hidden" name="batas_cabang" id="batas_cabang" value="100" required>
                   <input class="form-control" type="hidden" name="batas_minim" id="batas_minim" value="10" required>
+                </div>
+                <div class="form-group col-md-2">
+                  <label>Tanggal Produksi </label>
+                  <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_produksi" id="tgl_produksi" required>
+                </div>
+                <div class="form-group col-md-2">
+                  <label>Tanggal Expired </label>
+                  <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_expired" id="tgl_expired" required>
                 </div>
               </div>
               <div class="form-row">
@@ -358,14 +364,13 @@
                 <?php } ?>
               </tbody>
               <tr>
-                <th colspan="8" style="text-align: right;">Total</th>
-                <td id="total">
+                <th colspan="9" style="text-align: right;" id="total">Total: 
                   <?php
                     $jumlahkan = "SELECT SUM(sub_tot) AS total FROM pembelian_t"; //perintah untuk menjumlahkan
                     $total =@mysqli_query($con, $jumlahkan) or die (mysqli_error($con));//melakukan query dengan varibel $jumlahkan
                     $t = mysqli_fetch_array($total); //menyimpan hasil query ke variabel $t
                     ?><b><?php echo rupiah($t["total"]); ?></b>
-                </td>
+                </th>
               </tr>
               <div class="modal fade modalEditBarang" tabindex="-1" role="dialog"
                   aria-hidden="true">
@@ -564,6 +569,8 @@ $(document).ready(function(){
   $('#barang11').dataTable( {
     "bProcessing": true,
     "bServerSide": true,
+    "responsive": true,
+    "autoWidth": false,
     "sAjaxSource": "modul/pembelian_t/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
@@ -656,7 +663,7 @@ $(document).ready(function(){
       url : "modul/pembelian_t/total.php",
       success: function(data){
         var obj = JSON.parse(data);
-        var t = "<b>"+obj.rupiah+"</b>";
+        var t = "Total: "+obj.rupiah;
         $("#total").html(t);
         $("#tot").val(obj.total);
       }
