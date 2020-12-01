@@ -30,7 +30,11 @@
 			$_SESSION['id_dr']		= $r['id_user'];
 		}
 		catat($con, $_SESSION['namauser'], "Berhasil Login dengan IP $ip");
+<<<<<<< HEAD
 		// header('location:'.$url2.'media.php?module=home');
+=======
+		//header('location:'.$url2.'media.php?module=home');
+>>>>>>> a0e27eb574af9515f1f27df8541aae0c4bfba044
 		header('location:../redaktur/media.php?module=home');
 	} else {
 		catat($con, $username, "Gagal Login");
