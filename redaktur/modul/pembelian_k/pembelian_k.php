@@ -352,8 +352,7 @@
                 <?php } ?>
               </tbody>
               <tr>
-                <th colspan="8" style="text-align: right;">Total</th>
-                <td id="total"></td>
+                <th colspan="9" style="text-align: right;" id="total">Total</th>
               </tr>
             </table>
           </div>
@@ -533,6 +532,8 @@ $(document).ready(function(){
   $('#barang12').dataTable( {
     "bProcessing": true,
     "bServerSide": true,
+    "responsive": true,
+    "autoWidth": false,
     "sAjaxSource": "modul/pembelian_k/data_barangk.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
@@ -625,7 +626,7 @@ $(document).ready(function(){
       url : "modul/pembelian_k/total.php",
       success: function(data){
         var obj = JSON.parse(data);
-        var k = "<b>"+obj.rupiah+"</b>";
+        var k = "Total: "+obj.rupiah;
         $("#total").html(k);
         $("#tot").val(obj.total);
       }
