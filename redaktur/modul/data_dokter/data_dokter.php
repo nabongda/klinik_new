@@ -96,10 +96,8 @@
               </tr>
               <?php } ?>
             </tbody>
-
             <!-- SweetAlert Hapus -->
             <script>
-              // Hapus Barang
               $('body').on('click', '.hapus', function (event) {
                 event.preventDefault();
                 var id_use = $(this).attr("id-user");

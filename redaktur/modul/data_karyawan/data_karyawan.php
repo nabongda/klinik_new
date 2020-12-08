@@ -111,24 +111,26 @@
             </tbody>
             <!-- SweetAlert Hapus -->
             <script>
-              $('.hapus').click(function () {
+              $('body').on('click', '.hapus', function (event) {
+                event.preventDefault();
                 var id_kar = $(this).attr('id-karyawan');
-                  Swal.fire({
-                    title: 'Kamu Yakin?',
-                    text: "Kamu akan hapus data selamanya!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Delete !'
-                  })
-                  .then((result)=>{
-                    console.log(result);
-                    if (result.value){
-                      window.location = "modul/data_karyawan/aksi_data_karyawan.php?module=data_karyawan&act=hapus&id_karyawan="+id_kar+"";
-                    }
-                  })
-                });
+                var token = $("meta[name='csrf-token']").attr("content");
+                Swal.fire({
+                  title: 'Delete',
+                  text: "Yakin ingin menghapus data?",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Hapus'
+                })
+                .then((result) => {
+                  console.log(result);
+                  if (result.value) {
+                    window.location = "modul/data_karyawan/aksi_data_karyawan.php?module=data_karyawan&act=hapus&id_karyawan="+id_kar;
+                  }
+                })
+              });
             </script>
           </table>
         </div>
