@@ -315,32 +315,30 @@ $edit   =  mysqli_fetch_array(mysqli_query($con, "Select * From karyawan Where i
                 <div class="form-group col-md-6">
                   <label>Klinik</label>
                   <select class="form-control select2" style="width: 100%;" name="klinik" required>
-                    <option value="<?php echo $edit['id_kk']?>">
-                      <?php $q1 = mysqli_query($con, "SELECT *FROM daftar_klinik"); 
-                            while($k = mysqli_fetch_array($q1)){ ?>
-                              <?php echo $k['nama_klinik']?></option>
-                            <option value="<?php echo $k['id_kk']; ?>"><?php echo $k["nama_klinik"]; ?></option>
-                            <?php 
-                          }
-                      ?>
+                    <option value="" disabled>Pilih Klinik</option>
+                      <?php $q1 = mysqli_query($con, "SELECT * FROM daftar_klinik"); 
+                      while($k = mysqli_fetch_array($q1)){ ?>
+                      <?php $sel = $edit['id_kk'] == $k['id_kk']? "selected" : ""; ?>
+                        <option value="<?php echo $k['id_kk']; ?>" <?php echo $sel; ?>><?php echo $k['nama_klinik']; ?></option>
+                      <?php } ?>
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputKode1">Nama Karyawan </label>
+                  <label>Nama Karyawan </label>
                   <input type="hidden" class="form-control" name="id_karyawan" value="<?php echo $edit['id_karyawan']?>" required/>
                   <input type="text" class="form-control" name="nama_karyawan" value="<?php echo $edit['nama_karyawan']?>" required/>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputKode1">Jenis Kelamin </label>
+                  <label>Jenis Kelamin </label>
                   <select class="form-control select2" style="width: 100%;" name="jk" required="">   
                     <?php 
                     if ($edit['jk'] == "L") {
-                      echo '<option value="L">Laki Laki</option>';
+                      echo '<option value="L" selected>Laki Laki</option>
+                            <option value="P">Perempuan</option>';
                     }else{
-                      echo '<option value="P">Perempuan</option>';
+                      echo '<option value="L">Laki Laki</option>
+                            <option value="P" selected>Perempuan</option>';
                     }?>
-                    <option value="L">Laki Laki</option>
-                    <option value="P">Perempuan</option>
                   </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -350,53 +348,47 @@ $edit   =  mysqli_fetch_array(mysqli_query($con, "Select * From karyawan Where i
                 </div>
                 <div class="col-md-6">
                   <label>Jenis User </label>
-                  <select name="bagian"class="form-control select2" style="width: 100%;" required>
-                  <?php
-                    $data = mysqli_query($con, "Select * From jenis_user WHERE (id_ju!='JU-01') AND (id_ju!='JU-02')");            
-                          while($hasil  = mysqli_fetch_array($data)){
-                      if($hasil['id_ju']==$edit['id_ju']){
-                  ?>
-                    <option value="<?php echo $hasil['id_ju']; ?>" checked><?php echo $hasil['nama_ju']; ?></option>            
-                      <?php }else { ?>
-                    <option value="">-- Pilih Jenis --</option>
-                    <option value="<?php echo $hasil['id_ju']; ?>" ><?php echo $hasil['nama_ju']; ?></option>  
-                      <?php }
-                        }
-                      ?>
+                  <select name="bagian" class="form-control select2" style="width: 100%;" required>
+                    <option value="" disabled>Pilih Jenis User</option>
+                    <?php $data = mysqli_query($con, "SELECT * FROM jenis_user"); 
+                    while($hasil = mysqli_fetch_array($data)){ ?>
+                    <?php $sel = $edit['id_ju'] == $hasil['id_ju']? "selected" : ""; ?>
+                      <option value="<?php echo $hasil['id_ju']; ?>" <?php echo $sel; ?>><?php echo $hasil['nama_ju']; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputKode1">Tanggal Masuk </label>
+                  <label>Tanggal Masuk </label>
                   <input type="date" class="form-control" data-inputmask-alias="datetime"
                     data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_masuk" value="<?php echo $edit['tgl_masuk']?>" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputKode1">Alamat </label>
+                  <label>Alamat </label>
                   <input type="text" class="form-control" name="alamat" value="<?php echo $edit['alamat']?>" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputKode1">Lulusan </label>
+                  <label>Lulusan </label>
                   <input type="text" class="form-control" name="lulusan" value="<?php echo $edit['lulusan']?>" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputKode1">Status</label>
-                  <select class="form-control select2" style="width: 100%;" name="status" value="<?php echo $edit['status']?>" required="">
+                  <label>Status</label>
+                  <select class="form-control select2" style="width: 100%;" name="status" value="<?php echo $edit['status']?>" required>
                   <?php 
-                    if ($edit['jk'] == "L") {
-                      echo '<option value="Aktif">Aktif</option>';
+                    if ($edit['status'] == "Aktif") {
+                      echo '<option value="Aktif" selected>Aktif</option>
+                            <option value="Nonaktif">Nonaktif</option>';
                     }else{
-                      echo '<option value="Nonaktif">Nonaktif</option>';
+                      echo '<option value="Aktif">Aktif</option>
+                            <option value="Nonaktif" selected>Nonaktif</option>';
                     }?>
-                    <option value="Aktif">Aktif</option>
-                    <option value="Nonaktif">Nonaktif</option>
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputKode1">Username </label>
-                  <input type="text" class="form-control"name="username" value="<?php echo $edit['username']?>">
+                  <label>Username </label>
+                  <input type="text" class="form-control" name="username" value="<?php echo $edit['username']?>" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputKode1">Password </label>
+                  <label>Password </label>
                   <input type="password" class="form-control" name="password">
                 </div>
                 <div class="form-group col-md-6">
@@ -415,7 +407,7 @@ $edit   =  mysqli_fetch_array(mysqli_query($con, "Select * From karyawan Where i
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputKode1">No Telepon </label>
+                  <label>No Telepon </label>
                   <input type="text" class="form-control" name="no_telp" value="<?php echo $edit['no_telp']?>" required>
                 </div>
                 <div class="form-group col-md-6">
@@ -425,7 +417,7 @@ $edit   =  mysqli_fetch_array(mysqli_query($con, "Select * From karyawan Where i
                   <div class="form-group">
                     <div class="custom-file">
                       <div class="col-sm-12">
-                        <input type="file" name="file"  value="<?php echo $edit['foto']?>" class="custom-file-input">
+                        <input type="file" name="file" value="<?php echo $edit['foto']?>" class="custom-file-input">
                         <label class="custom-file-label" >Pilih
                           File</label>
                       </div>

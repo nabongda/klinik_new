@@ -11,10 +11,9 @@
         </ol>
       </div>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
 </section>
 
-<!-- Main content -->
 <section class="content">
   <div class="row">
     <div class="col-12">
@@ -64,7 +63,8 @@
                   case 7: $day = "Minggu"; break;
                 }
                 echo "<tr>";
-                echo "<td><a href='modul/dr_praktek/aksi.php?act=del&id=$dr[id_drpraktek]' onclick='return confirm(\"Menghapus jadwal dokter praktek akan menyebabkan jadwal perawat yang terkait ikut terhapus. Apakah yakin akan menghapus? \")'><button class='btn btn-xs btn-danger'>Hapus</button></a></td>";
+                // echo "<td><a href='modul/dr_praktek/aksi.php?act=del&id=$dr[id_drpraktek]' onclick='return confirm(\"Menghapus jadwal dokter praktek akan menyebabkan jadwal perawat yang terkait ikut terhapus. Apakah yakin akan menghapus? \")'><button class='hapus btn btn-xs btn-danger'>Hapus</button></a></td>";
+                echo "<td><a href='#' class='hapus btn-sm btn-danger' id-dr='$dr[id_drpraktek]'> Hapus</a></td>";
                 echo "<td>$dr[nama_lengkap]</td>";
                 echo "<td>$dr[poli]</td>";
                 echo "<td>$day</td>";
@@ -74,6 +74,36 @@
               }
               ?>
             </tbody>
+
+            <!-- SweetAlert Hapus -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+              $(document).ready(function() {
+                $(document).on('click', '.hapus', function(e) {
+                  var id_dr = $(this).attr('id-dr');
+                  SwalDelete(id_dr);
+                  e.preventDefault();
+                });
+              });
+
+              function SwalDelete(id_dr) {
+                Swal.fire({
+                  title: 'Yakin Ingin Menghapus Data?',
+                  text: 'Menghapus jadwal dokter praktek akan menyebabkan jadwal perawat yang terkait ikut terhapus.',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Delete!'
+                })
+                .then((result) => {
+                    console.log(result);
+                    if (result.value) {
+                      window.location = "modul/dr_praktek/aksi.php?act=del&id="+id_dr;
+                    }
+                  });
+              }
+            </script>
 
             <div class="modal fade" role="dialog" id="modal-default">
               <div class="modal-dialog modal-xs" role="document">

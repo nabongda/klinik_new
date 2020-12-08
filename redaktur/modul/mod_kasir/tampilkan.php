@@ -27,13 +27,13 @@ if($nama!=""){
    $diskon_pr = $kl['diskon_p']; 
    $diskon_tr = $kl['diskon_t'];
 
-   $np = ": ".$row['nama_pasien'];
-   $nt = ": ".$row['no_telp'];
-   $jk = ": ".$row['jk'];
-   $a  = ": ".$row['alamat'];
-   $tk = ": ".$row['total_kunjungan'];
-   $tl = ": ".$row['tgl_lahir'];
-   $nid= ": ".$row['id_pasien'];
+   $np = $row['nama_pasien'];
+   $nt = $row['no_telp'];
+   $jk = $row['jk'];
+   $a  = $row['alamat'];
+   $tk = $row['total_kunjungan'];
+   $tl = $row['tgl_lahir'];
+   $nid= $row['id_pasien'];
 
       $response = array(
       "dpr"=>$diskon_pr,
@@ -80,13 +80,13 @@ if($nama!=""){
 
       $response = array();
 
-      $np = ": ".$row['nama_pasien'];
-      $nt = ": ".$row['no_telp'];
-      $jk = ": ".$row['jk'];
-      $a  = ": ".$row['alamat'];
-      $tk = ": ".$row['total_kunjungan'];
-      $tl = ": ".$row['tgl_lahir'];
-      $nid= ": ".$row['id_pasien'];
+      $np = $row['nama_pasien'];
+      $nt = $row['no_telp'];
+      $jk = $row['jk'];
+      $a  = $row['alamat'];
+      $tk = $row['total_kunjungan'];
+      $tl = $row['tgl_lahir'];
+      $nid= $row['id_pasien'];
 
       $response = array(
       "dpr"=>$diskon_pr,

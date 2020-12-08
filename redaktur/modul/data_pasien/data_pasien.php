@@ -29,35 +29,33 @@
       <div class="card">
         <div class="card-header">
           <div class="callout callout-success">
-            <form>
-              <div class="form-row align-items-center">
-                <div class="col-auto col-4">
-                  <a target="_blank" href="report/rpt_lap_pasien.php"><button type="button" class="btn btn-warning btn-sm">Laporan Data Pasien</button></a>
-                </div>
-                <div class="col-auto col-4 text-center">
-                  <label>Tampilkan data sampai:</label>
-                  <select class="form-control" id="abjad">
-                    <option value="1">abjad A - B</option>
-                    <option value="2">abjad C - D</option>
-                    <option value="3">abjad E - F</option>
-                    <option value="4">abjad G - H</option>
-                    <option value="5">abjad I - J</option>
-                    <option value="6">abjad K - L</option>
-                    <option value="7">abjad M - N</option>
-                    <option value="8">abjad O - P</option>
-                    <option value="9">abjad Q - R</option>
-                    <option value="10">abjad S - T</option>
-                    <option value="11">abjad U - V</option>
-                    <option value="12">abjad W - X</option>
-                    <option value="13">abjad Y - Z</option>
-                    <option value="all">semua abjad</option>
-                  </select>
-                </div>
-                <div class="col-auto col-4 text-right">
-                  <button class="btn btn-success btn-sm tampil">Tampilkan</button>
-                </div>
+            <div class="form-row align-items-center">
+              <div class="col-auto col-4">
+                <a target="_blank" href="report/rpt_lap_pasien.php"><button type="button" class="btn btn-warning btn-sm">Laporan Data Pasien</button></a>
               </div>
-            </form>
+              <div class="col-auto col-4 text-center">
+                <label>Tampilkan data sampai:</label>
+                <select class="form-control" id="abjad">
+                  <option value="1">abjad A - B</option>
+                  <option value="2">abjad C - D</option>
+                  <option value="3">abjad E - F</option>
+                  <option value="4">abjad G - H</option>
+                  <option value="5">abjad I - J</option>
+                  <option value="6">abjad K - L</option>
+                  <option value="7">abjad M - N</option>
+                  <option value="8">abjad O - P</option>
+                  <option value="9">abjad Q - R</option>
+                  <option value="10">abjad S - T</option>
+                  <option value="11">abjad U - V</option>
+                  <option value="12">abjad W - X</option>
+                  <option value="13">abjad Y - Z</option>
+                  <option value="all">semua abjad</option>
+                </select>
+              </div>
+              <div class="col-auto col-4 text-right">
+                <button class="btn btn-success btn-sm tampil">Tampilkan</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="card-body">
@@ -161,6 +159,7 @@
   </div>
 </section>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   $(document).ready(function(){
     $(".tampil").click(function(){

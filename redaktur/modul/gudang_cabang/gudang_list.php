@@ -25,96 +25,98 @@
 <section class="content">
   <div class="row">
     <div class="col-12">
-      <div class="card">
-        <div class="card-header">
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>Data Stok Barang Tiap Cabang </label>
+      <form action="" method="post">
+        <div class="card">
+          <div class="card-header">
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label>Data Stok Barang Tiap Cabang </label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label for="inputSuplier">Pilih Klinik </label>
+                <select class="form-control select2" id="jenis_klinik" name="jenis_klinik" style="width: 100%;" required>
+                  <option value="">Pilih Klinik</option>
+                  <?php
+                    $sql = 'SELECT * from daftar_klinik';
+                    $query  = mysqli_query($con, $sql);
+                    while ($row = mysqli_fetch_array($query)) {
+                    ?>
+                    <option value="<?php echo $row['id_kk']; ?>"><?php echo $row['nama_klinik']; ?></option>
+                  <?php }?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary" name="submit"><i class="fa fa-search"></i> Tampilkan</button>
+              </div>
             </div>
           </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="inputSuplier">Pilih Klinik </label>
-              <select class="form-control select2" id="jenis_klinik" name="jenis_klinik" style="width: 100%;" required>
-                <option value="">Klinik CGS</option>
+          <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Gambar</th>
+                  <th>Kode Produk</th>
+                  <th>Nama Produk</th>
+                  <th>Kategori Produk</th>
+                  <th>Stok Produk</th>
+                  <th>Harga Beli</th>
+                  <th>Harga Jual</th>
+                  <th>Tanggal Produksi</th>
+                  <th>Tanggal Expired</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
                 <?php
-                  $sql = 'SELECT * from daftar_klinik';
-                  $query  = mysqli_query($con, $sql);
-                  while ($row = mysqli_fetch_array($query)) {
-                  ?>
-                  <option value="<?php echo $row['id_kk']; ?>"><?php echo $row['nama_klinik']; ?></option>
-                <?php }?>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <button type="submit" class="btn btn-primary" name="submit"><i class="fa fa-search"></i> Tampilkan</button>
-            </div>
+                  $tampil   = mysqli_query($con, "Select * From produk");
+                  while($r  = mysqli_fetch_array($tampil)){
+                ?>
+                <tr>
+                  <?php $q1 = mysqli_query($con, "SELECT * FROM produk_master WHERE kd_produk='$r[kode_barang]'"); 
+                  $k = mysqli_fetch_array($q1); ?>
+                  <td>
+                    <?php
+                      if ($k['gambar'] == '') {
+                        echo "Belum Ada Gambar";
+                      }else{
+                        echo '<center><a href="'.$url.'/gambar_produk/'.$k['gambar'].'"><img src="'.$url.'/gambar_produk/'.$k['gambar'].'" width="40px" height="40px"></a></center>';
+                      }
+                    ?>
+                  </td>
+                  <td><?php echo $r["kode_barang"]; ?></td>
+                  <td><?php echo $r["nama_p"]; ?></td>
+                  <?php 
+                  $ps = mysqli_query($con, "SELECT * FROM produk_pusat WHERE kode_barang='$r[kode_barang]'");
+                  $p = mysqli_fetch_array($ps);
+                  $qk = mysqli_query($con, "SELECT * FROM kategori WHERE id_kategori='$p[kategori]'"); 
+                  $kt = mysqli_fetch_array($qk); ?>
+                  <td><?php echo $kt['kategori']; ?></td>
+                  <td><?php echo $r["jumlah"]; ?></td>
+                  <td><?php echo rupiah($p["hrg"]); ?></td>
+                  <td><?php echo rupiah($p["hrg_jual"]); ?></td>
+                  <td><?php echo $p['tgl_produksi']?></td>
+                  <td><?php echo $p['tgl_expired']?></td>
+                  <td>
+                    <?php
+                      if ($r["jumlah"] <= 3) {
+                      echo '
+                      <a href="media.php?module=gudang" class="btn-sm btn-danger">Tambah Stok</a>&nbsp;';
+                      }else{
+                      echo '<a href="#" class="btn-sm btn-success"> Stok Tersedia</a>';
+                      }
+                    ?>
+                  </td>
+                </tr>
+                <?php } ?>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Gambar</th>
-                <th>Kode Produk</th>
-                <th>Nama Produk</th>
-                <th>Kategori Produk</th>
-                <th>Stok Produk</th>
-                <th>Harga Beli</th>
-                <th>Harga Jual</th>
-                <th>Tanggal Produksi</th>
-                <th>Tanggal Expired</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-                $tampil   = mysqli_query($con, "Select * From produk");
-                while($r  = mysqli_fetch_array($tampil)){
-              ?>
-              <tr>
-                <?php $q1 = mysqli_query($con, "SELECT * FROM produk_master WHERE kd_produk='$r[kode_barang]'"); 
-                $k = mysqli_fetch_array($q1); ?>
-                <td>
-                  <?php
-                    if ($k['gambar'] == '') {
-                      echo "Belum Ada Gambar";
-                    }else{
-                      echo '<center><a href="'.$url.'/gambar_produk/'.$k['gambar'].'"><img src="'.$url.'/gambar_produk/'.$k['gambar'].'" width="40px" height="40px"></a></center>';
-                    }
-                  ?>
-                </td>
-                <td><?php echo $r["kode_barang"]; ?></td>
-                <td><?php echo $r["nama_p"]; ?></td>
-                <?php 
-                $ps = mysqli_query($con, "SELECT * FROM produk_pusat WHERE kode_barang='$r[kode_barang]'");
-                $p = mysqli_fetch_array($ps);
-                $qk = mysqli_query($con, "SELECT * FROM kategori WHERE id_kategori='$p[kategori]'"); 
-                $kt = mysqli_fetch_array($qk); ?>
-                <td><?php echo $kt['kategori']; ?></td>
-                <td><?php echo $r["jumlah"]; ?></td>
-                <td><?php echo rupiah($p["hrg"]); ?></td>
-                <td><?php echo rupiah($p["hrg_jual"]); ?></td>
-                <td><?php echo $p['tgl_produksi']?></td>
-                <td><?php echo $p['tgl_expired']?></td>
-                <td>
-                  <?php
-                    if ($r["jumlah"] <= 3) {
-                    echo '
-                    <a href="media.php?module=gudang" class="btn-sm btn-danger">Tambah Stok</a>&nbsp;';
-                    }else{
-                    echo '<a href="#" class="btn-sm btn-success"> Stok Tersedia</a>';
-                    }
-                  ?>
-                </td>
-              </tr>
-              <?php } ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </section>

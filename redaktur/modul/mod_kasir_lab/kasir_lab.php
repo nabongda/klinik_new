@@ -18,248 +18,250 @@
 	</div>
 </section>
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <ul class="nav nav-tabs">
-                                            <li class="nav-item" id="pb">
-                                                <a class="nav-link active" href="#" id="konsultasi">Laboratorium</a>
-                                            </li>
-                                        </ul>
-                                        <input type="hidden" id="awal">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="col-md-12">
-                                    <!-- Panggil Data Pasien -->
-                                    <form id="form_tam" class="collapse">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Cari Pelanggan</label>
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" name="cara_cari" id="radio1"
-                                                                    value="nama" checked>
-                                                                Nama
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" name="cara_cari" id="radio2"
-                                                                    value="kode">
-                                                                No.RM
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" name="cara_cari" id="radio3"
-                                                                    value="tgl">
-                                                                Tanggal Lahir (yyyy-mm-dd)
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <input class="form-control" type="text" id="nama_k" name="nama_kode"
-                                                    style="width:93%;" required>
-                                                <input class="form-control" type="hidden" name="nama" id="nama_hidden">
-                                                <input type="hidden" id="cara2">
-                                                <input type="hidden" id="cek_tampil">
-                                                <button style="margin-top: 10px;margin-bottom: 10px;"
-                                                    class="btn btn-sm btn-info">Tampilkan</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <!-- Ambil data pasien -->
-                                    <form id="form_k" class="collapse">
-                                        <?php $nofak = date("YmdHis"); 
-                                            $ran = rand(1,9);
-                                            $nofak .= $ran;
-                                        ?>
-                                        <input class="form-control" type="hidden" id="nama_kon" name="nama" style="width:93%;" required>
-                                        <div
-                                            style="border: 2px solid blue;padding: 0px 0px 10px 10px;box-sizing: border-box;margin-bottom: 15px;">
-                                            <h4>Data Pasien</h4>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="row" style="margin-bottom: 10px;">
-                                                        <div class="col-md-3">
-                                                            <label>Rekam Medis</label>
-                                                        </div>
-                                                        <div class="col-md-6" id="data_id">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="row" style="margin-bottom: 10px;">
-                                                        <div class="col-md-3">
-                                                            <label>Nama</label>
-                                                        </div>
-                                                        <div class="col-md-6" id="data_n">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="row" style="margin-bottom: 10px;">
-                                                        <div class="col-md-3">
-                                                            <label> No Telp</label>
-                                                        </div>
-                                                        <div class="col-md-6" id="data_nt">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="row" style="margin-bottom: 10px;">
-                                                        <div class="col-md-3">
-                                                            <label>Alamat</label>
-                                                        </div>
-                                                        <div class="col-md-6" id="data_a">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="row" style="margin-bottom: 10px;">
-                                                        <div class="col-md-3">
-                                                            <label>Tanggal Lahir</label>
-                                                        </div>
-                                                        <div class="col-md-6" id="data_tl">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="row" style="margin-bottom: 10px;">
-                                                        <div class="col-md-3">
-                                                            <label>Jenis Kelamin</label>
-                                                        </div>
-                                                        <div class="col-md-6" id="data_jk">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="row" style="margin-bottom: 10px;">
-                                                        <div class="col-md-3">
-                                                            <label>Total Kunjungan</label>
-                                                        </div>
-                                                        <div class="col-md-6" id="data_tk">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="row" style="margin-bottom: 10px;">
-                                                        <div class="col-md-3">
-                                                            <label>Jenis Member</label>
-                                                        </div>
-                                                        <div class="col-md-6" id="data_katmem">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <!-- Form Poliklinik -->
-                                    <div class="collaps">
-                                        <form style="margin-bottom: 20px;" id="form_z">
-                                            <input class="form-control" type="hidden" name="id_kasir" value="<?php echo $_SESSION['id_user']; ?>">
-                                                     <input class="form-control id_pasien" type="hidden" name="id_pasien" id="id_pasien">
-                                                 
-                                                     <input type="hidden" name="nofak" value="<?php echo $nofak; ?>">
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Jenis Pasien</label>
-                                                    <select class="form-control" style="width: 93%;" name="pas">
-                                                        <option value="">--silakan pilih--</option>
-                                                        <option value="umum">Umum</option>
-                                                        <option value="bpjs">BPJS</option>
-                                                        <option value="lain">Asuransi Lain</option>
-                                                    </select>
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>Asuransi</label>
-                                                    <select class="form-control" style="width: 93%;" name="ass">
-                                                        <option value="">--abaikan--</option>
-                                                        <?php 
-											
-											$asur = mysqli_query($con,"SELECT * FROM asuransi");
-											while($asuri = mysqli_fetch_assoc($asur)){
-												echo "<option value='$asuri[id]'>$asuri[nama]</option>";
-											}
-											
-											?>
-                                                    </select>
-                                                    (abaikan jika tidak ada)
-                                                </div>
-
-                                                <div class="col-md-3">
-                                                    <label>Berat Badan</label>
-                                                    <input type="text" name="bb" class="form-control" />
-
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label>Tinggi Badan</label>
-                                                    <input type="text" name="tb" class="form-control" />
-
-                                                </div>
-
-                                                <div class="col-md-3">
-                                                    <label>Suhu Badan</label>
-                                                    <input type="text" name="suhu" class="form-control" />
-
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label>Tekanan Darah</label>
-                                                    <input type="text" name="tensi" class="form-control" />
-
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label>Keluhan</label>
-                                                    <textarea class="form-control" style="height: 150px"
-                                                        name="sakit"></textarea>
-
-                                                </div>
-
-                                                <div class="col-md-6"><br>
-                                                    <button style="margin-top: 5px;" type="submit"
-                                                        class="btn btn-sm btn-success">Simpan</button>
-                                                    <button style="margin-top: 5px;" type="button"
-                                                        class="btn btn-sm btn-danger data_batal">Batal</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <script>
-                                        function changedoc(){
-                                            var poli = $("#poli").val();
-                                            var hari = <?php echo date("N"); ?>;
-                                            var x = $.ajax({
-                                                url: "modul/mod_kasir/doct.php?poli=" + poli + "&hari=" + hari,
-                                                success: function(data){
-                                                    $("#doct").html(data);
-                                                }
-                                            });
-                                            if(x.readyState == "1"){
-                                                $("#doct").html("mencari dokter");
-                                            }
-                                        }
-                                        </script>
-                                    </div>
-
-                                </div>
-                            </div>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item" id="pb">
+                                    <a class="nav-link active" href="#" id="konsultasi">Laboratorium</a>
+                                </li>
+                            </ul>
+                            <input type="hidden" id="awal">
                         </div>
                     </div>
                 </div>
-            </section>
-            <script>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <!-- Panggil Data Pasien -->
+                        <form id="form_tam" class="collapse">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Cari Pelanggan</label>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="cara_cari" id="radio1"
+                                                        value="nama" checked>
+                                                    Nama
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="cara_cari" id="radio2"
+                                                        value="kode">
+                                                    No.RM
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="cara_cari" id="radio3"
+                                                        value="tgl">
+                                                    Tanggal Lahir (yyyy-mm-dd)
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input class="form-control" type="text" id="nama_k" name="nama_kode"
+                                        style="width:93%;" required>
+                                    <input class="form-control" type="hidden" name="nama" id="nama_hidden">
+                                    <input type="hidden" id="cara2">
+                                    <input type="hidden" id="cek_tampil">
+                                    <button style="margin-top: 10px;margin-bottom: 10px;"
+                                        class="btn btn-sm btn-info">Tampilkan</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Ambil data pasien -->
+                        <form id="form_k" class="collapse">
+                            <?php $nofak = date("YmdHis"); 
+                                $ran = rand(1,9);
+                                $nofak .= $ran;
+                            ?>
+                            <input class="form-control" type="hidden" id="nama_kon" name="nama" style="width:93%;" required>
+                            <div
+                                style="border: 2px solid blue;padding: 0px 0px 10px 10px;box-sizing: border-box;margin-bottom: 15px;">
+                                <h4>Data Pasien</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-md-3">
+                                                <label>Rekam Medis</label>
+                                            </div>
+                                            <div class="col-md-6" id="data_id">
+
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-md-3">
+                                                <label>Nama</label>
+                                            </div>
+                                            <div class="col-md-6" id="data_n">
+
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-md-3">
+                                                <label> No Telp</label>
+                                            </div>
+                                            <div class="col-md-6" id="data_nt">
+
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-md-3">
+                                                <label>Alamat</label>
+                                            </div>
+                                            <div class="col-md-6" id="data_a">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-md-3">
+                                                <label>Tanggal Lahir</label>
+                                            </div>
+                                            <div class="col-md-6" id="data_tl">
+
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-md-3">
+                                                <label>Jenis Kelamin</label>
+                                            </div>
+                                            <div class="col-md-6" id="data_jk">
+
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-md-3">
+                                                <label>Total Kunjungan</label>
+                                            </div>
+                                            <div class="col-md-6" id="data_tk">
+
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-md-3">
+                                                <label>Jenis Member</label>
+                                            </div>
+                                            <div class="col-md-6" id="data_katmem">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Form Poliklinik -->
+                        <div class="collapse" id="pilih_dok">
+                            <form style="margin-bottom: 20px;" id="form_z">
+                                <input class="form-control" type="hidden" name="id_kasir" value="<?php echo $_SESSION['id_user']; ?>">
+                                            <input class="form-control id_pasien" type="hidden" name="id_pasien" id="id_pasien">
+                                        
+                                            <input type="hidden" name="nofak" value="<?php echo $nofak; ?>">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Jenis Pasien</label>
+                                        <select class="form-control" style="width: 93%;" name="pas">
+                                            <option value="">--silakan pilih--</option>
+                                            <option value="umum">Umum</option>
+                                            <option value="bpjs">BPJS</option>
+                                            <option value="lain">Asuransi Lain</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Asuransi</label>
+                                        <select class="form-control" style="width: 93%;" name="ass">
+                                            <option value="">--abaikan--</option>
+                                            <?php 
+                                
+                                $asur = mysqli_query($con,"SELECT * FROM asuransi");
+                                while($asuri = mysqli_fetch_assoc($asur)){
+                                    echo "<option value='$asuri[id]'>$asuri[nama]</option>";
+                                }
+                                
+                                ?>
+                                        </select>
+                                        (abaikan jika tidak ada)
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label>Berat Badan</label>
+                                        <input type="text" name="bb" class="form-control" />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Tinggi Badan</label>
+                                        <input type="text" name="tb" class="form-control" />
+
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label>Suhu Badan</label>
+                                        <input type="text" name="suhu" class="form-control" />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Tekanan Darah</label>
+                                        <input type="text" name="tensi" class="form-control" />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Keluhan</label>
+                                        <textarea class="form-control" style="height: 150px"
+                                            name="sakit"></textarea>
+
+                                    </div>
+
+                                    <div class="col-md-6"><br>
+                                        <button style="margin-top: 5px;" type="submit"
+                                            class="btn btn-sm btn-success">Simpan</button>
+                                        <button style="margin-top: 5px;" type="button"
+                                            class="btn btn-sm btn-danger data_batal">Batal</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <script>
+                            function changedoc(){
+                                var poli = $("#poli").val();
+                                var hari = <?php echo date("N"); ?>;
+                                var x = $.ajax({
+                                    url: "modul/mod_kasir/doct.php?poli=" + poli + "&hari=" + hari,
+                                    success: function(data){
+                                        $("#doct").html(data);
+                                    }
+                                });
+                                if(x.readyState == "1"){
+                                    $("#doct").html("mencari dokter");
+                                }
+                            }
+                            </script>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
 $(document).ready(function(){
   $.ajaxSetup({
         headers: {

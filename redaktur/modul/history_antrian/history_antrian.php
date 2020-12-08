@@ -49,7 +49,7 @@ $id_kk = $_SESSION['klinik'];
                       <?php } ?>
                     </select>
                   </div>
-                  <button class="btn btn-info">Cari</button>
+                  <button type="submit" class="btn btn-info">Cari</button>
                 </div>
               </div>
             </div>

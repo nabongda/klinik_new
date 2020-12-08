@@ -404,6 +404,7 @@ $id_kk = $_SESSION['klinik']; ?>
   </div>
 </section>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   $(document).ready(function(){
     $.ajaxSetup({
@@ -472,19 +473,19 @@ $id_kk = $_SESSION['klinik']; ?>
             var obj = JSON.parse(data);
             $('#form_tam').trigger("reset");
             $('#form_p').collapse('hide');
-            $("#data_id").html(obj.nid);
-            $("#data_n").html(obj.np);
+            $("#data_id").val(obj.nid);
+            $("#data_n").val(obj.np);
             $("#nama_kk").val(obj.id);
             $("#nama_kon").val(obj.id);
-            $("#data_tk").html(obj.tk);
-            $("#data_jk").html(obj.jk);
-            $("#data_tl").html(obj.tl);
-            $("#data_a").html(obj.a);
-            $("#data_nt").html(obj.nt);
+            $("#data_tk").val(obj.tk);
+            $("#data_jk").val(obj.jk);
+            $("#data_tl").val(obj.tl);
+            $("#data_a").val(obj.a);
+            $("#data_nt").val(obj.nt);
             $("#diskon_t").val(obj.dtr);
             $("#diskon_p").val(obj.dpr);
             $(".id_pasien").val(obj.id);
-            $("#data_katmem").html(obj.klas);
+            $("#data_katmem").val(obj.klas);
             $("#cek_tampil").val("Sudah");
             if (awal=="lab") {
               $('#pilih_dok').collapse('hide');
