@@ -60,7 +60,7 @@
             </tbody>
 
             <!-- SweetAlert Hapus -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
               $(document).ready(function() {
                 $(document).on('click', '.hapus', function(e) {
@@ -114,7 +114,7 @@
                 <input type="text" class="form-control" name="poli" placeholder="Nama Poliklinik" required>
               </div>
               <div class="form-group">
-                <a href="media.php?module=poliklinik"><button type="submit" class="btn btn-danger">Batal</button></a>
+                <a href="media.php?module=poliklinik"><button type="button" class="btn btn-danger">Batal</button></a>
                 <button type="submit" class="btn btn-success">Tambah</button>
               </div>
             </div>

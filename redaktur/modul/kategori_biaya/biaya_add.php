@@ -26,10 +26,10 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="exampleInputNamTin">Kategori</label>
-                <input type="text" class="form-control" id="" placeholder="Kategorin">
+                <input type="text" class="form-control" id="" placeholder="Kategori">
               </div>
               <div class="form-group">
-                <a href="?module=cabang"><button type="button" class="btn btn-danger">Batal</button></a>
+                <a href="?module=kategori_biaya"><button type="button" class="btn btn-danger">Batal</button></a>
                 <button type="submit" class="btn btn-success">Tambah</button>
               </div>
             </div>

@@ -3,6 +3,8 @@
 unlink("modul/mod_kasir/error_log");
 $id_kk = $_SESSION['klinik']; ?>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <section class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
@@ -170,7 +172,7 @@ $id_kk = $_SESSION['klinik']; ?>
 						</form>
 
 						<!-- Form Poliklinik -->
-						<div class="collaps" id="pilih_dok">
+						<div class="collapse" id="pilih_dok">
 							<form style="margin-bottom: 20px;" id="form_z">
 								<input class="form-control" type="hidden" name="id_kasir" value="<?php echo $_SESSION['id_user']; ?>">
 											<input class="form-control id_pasien" type="hidden" name="id_pasien" id="id_pasien">

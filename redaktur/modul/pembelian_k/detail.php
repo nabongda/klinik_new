@@ -51,7 +51,7 @@ if($_POST['id']) {
                 <label>Tanggal Tempo</label>
                 </div>
                 <div class="col-sm-8">
-                <input class="form-control" value="<?php echo $data['tgl_tempo']; ?>" readonly>
+                <input class="form-control" style="color: #ff0000;" value="<?php echo $data['tgl_tempo']; ?>" readonly>
                 </div>
             </div>
             <div class="form-group row">

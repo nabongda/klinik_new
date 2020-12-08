@@ -37,11 +37,11 @@
               <h3 class="card-title">Tambah Dokter Pengganti</h3>
             </div>
             <div class="card-body">
-              <form>
+              <form action="modul/dr_praktek/aksi_ganti.php?act=input" method="POST">
                 <div class="form-group">
                   <label>Nama Dokter</label>
                   <select class="form-control" name="dr">
-                    <option value="">--Silakan Pilih--</option>
+                    <option value="">Pilih Dokter</option>
                     <?php
                     $dr = mysqli_query($con, "SELECT * FROM user WHERE id_ju = 'JU-02'");
                     while($dri = mysqli_fetch_assoc($dr)){
@@ -61,7 +61,7 @@
                 <div class="form-group">
                   <label>Poliklinik</label>
                   <select class="form-control" name="klinik">
-                    <option value="">--Silakan Pilih--</option>
+                    <option value="">Pilih Poliklinik</option>
                     <?php
                     $dr = mysqli_query($con, "SELECT * FROM poliklinik");
                     while($dri = mysqli_fetch_assoc($dr)){
@@ -81,7 +81,7 @@
       <div class="col-md-9">
         <div class="card card-primary">
           <div class="card-body p-0">
-            <div id="calendars"></div>
+            <div id="calendar"></div>
           </div>
         </div>
       </div>
@@ -89,33 +89,62 @@
   </div>
 </section>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-  $(document).ready(function(){
-    function init_events(ele) {
+  $(document).ready(function() {
+    function ini_events(ele) {
       ele.each(function () {
         var eventObject = {
-          title: $(this).text() // use the element's text as the event title
+          title: $.trim($(this).text())
         }
         
-        $(this).data('event', eventObject)
+        $(this).data('eventObject', eventObject)
 
-        // make the event draggable using jQuery UI
         $(this).draggable({
           zIndex        : 1070,
-          revert        : true, // will cause the event to go back to its
-          revertDuration: 0  //  original position after the drag
+          revert        : true,
+          revertDuration: 0
         })
 
       })
     }
 
-    init_events($('#external-events div.external-event'));
+    ini_events($('#external-events div.external-event'))
+    
     var date = new Date()
     var d    = date.getDate(),
         m    = date.getMonth(),
         y    = date.getFullYear()
-        
-    $("#calendars").fullCalendar({
+
+    var Calendar = FullCalendar.Calendar;
+    var Draggable = FullCalendarInteraction.Draggable;
+
+    var containerEl = document.getElementById('external-events');
+    var checkbox = document.getElementById('drop-remove');
+    var calendarEl = document.getElementById('calendar');
+
+    new Draggable(containerEl, {
+      itemSelector: '.external-event',
+      eventData: function(eventEl) {
+        console.log(eventEl);
+        return {
+          title: eventEl.innerText,
+          backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
+          borderColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
+          textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),
+        };
+      }
+    });
+
+    var calendar = new Calendar(calendarEl, {
+      plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
+      header    : {
+        left  : 'prev,next today',
+        center: 'title',
+        right : 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      'themeSystem': 'bootstrap',
+      
       eventClick: function(a,b,c){
         var u = confirm("apakah yakin akan menghapus?");
         if(u){
@@ -123,34 +152,33 @@
             url: "modul/dr_praktek/aksi_ganti.php?act=del",
             data: {"id" : a.id},
             success: function(data){
-              $("#calendars").fullCalendar("removeEvents",a.id);
+              $("#calendar").fullCalendar("removeEvents",a.id);
             }
           });
-          
+
           if(xhr.readyState == "1"){
             a.title = "menghapus...";
-            $("#calendars").fullCalendar("updateEvent",a);
+            $("#calendar").fullCalendar("updateEvent",a);
           }
-             
         } else {}
-            
       },
-      
-      events: [
+
+      events    : [
         <?php
         $ev = mysqli_query($con, "SELECT * FROM dr_pengganti");
         while($eve = mysqli_fetch_assoc($ev)){
           $dr = mysqli_fetch_assoc(mysqli_query($con, "SELECT nama_lengkap FROM user WHERE id_user = $eve[id_dr]"));
-          $k .= "{id: $eve[id], title: '$dr[nama_lengkap]', start: '$eve[tgl] $eve[jam]', allDay: false},";
+          $k .= "{id: $eve[id], title: '$dr[nama_lengkap]', start: '$eve[tgl] $eve[jam]', allDay: false, backgroundColor: '#00a65a', borderColor: '#00a65a'},";
         }
         echo substr($k,0,strlen($k) - 1);
         ?>
       ],
       editable  : true,
-      droppable : true, // this allows things to be dropped onto the calendar !!!
-      drop      : function (date, allDay) {
+      droppable : true,
+      drop      : function(date, allDay) {
         // retrieve the dropped element's stored Event Object
         var originalEventObject = $(this).data('eventObject')
+
         // we need to copy it, so that multiple events don't have a reference to the same object
         var copiedEventObject = $.extend({}, originalEventObject)
 
@@ -169,29 +197,31 @@
           // if so, remove the element from the "Draggable Events" list
           $(this).remove()
         }
-      }
+      }    
     });
 
-    /* ADDING EVENTS */
+    calendar.render();
+    
     var currColor = '#3c8dbc' //Red by default
-    //Color chooser button
+    
     var colorChooser = $('#color-chooser-btn')
     $('#color-chooser > li > a').click(function (e) {
       e.preventDefault()
-      //Save color
+      
       currColor = $(this).css('color')
-      //Add color effect to button
-      $('#add-new-event').css({ 'background-color': currColor, 'border-color': currColor })
+      
+      $('#add-new-event').css({
+        'background-color': currColor,
+        'border-color'    : currColor
+      })
     })
     $('#add-new-event').click(function (e) {
       e.preventDefault()
-      //Get value and make sure it is not null
       var val = $('#new-event').val()
       if (val.length == 0) {
         return
       }
 
-      //Create events
       var event = $('<div />')
       event.css({
         'background-color': currColor,
@@ -201,11 +231,9 @@
       event.html(val)
       $('#external-events').prepend(event)
 
-      //Add draggable funtionality
-      init_events(event)
+      ini_events(event)
 
-      //Remove event from text input
       $('#new-event').val('')
     })
-  });
+  })
 </script>
