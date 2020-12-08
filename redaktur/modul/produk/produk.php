@@ -87,8 +87,10 @@
               </tr>
               <?php } ?>
             </tbody>
+            
             <script>
-              $('.hapus').click(function () {
+              $('body').on('click','.hapus', function (event) {
+                event.preventDefault();
                 var id_obat = $(this).attr('id-obat');
                   Swal.fire({
                     title: 'Kamu Yakin?',
