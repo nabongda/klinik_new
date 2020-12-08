@@ -34,7 +34,7 @@
                 <input type="text" class="form-control" name="nama" value='<?php echo $edit['kategori']; ?>' required>
               </div>
               <div class="form-group">
-                <a href="?module=cabang"><button type="button" class="btn btn-danger">Batal</button></a>
+                <a href="?module=kategori_biaya"><button type="button" class="btn btn-danger">Batal</button></a>
                 <button type="submit" class="btn btn-success">Simpan</button>
               </div>
             </div>

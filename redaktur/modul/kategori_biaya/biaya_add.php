@@ -26,11 +26,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="exampleInputNamTin">Kategori</label>
-<<<<<<< HEAD
-                <input type="text" class="form-control" name="nama" placeholder="Kategori">
-=======
                 <input type="text" class="form-control" id="" placeholder="Kategori">
->>>>>>> 9c78cb977ebfbecdf2c5f3bfa5869a3aedce96e7
               </div>
               <div class="form-group">
                 <a href="?module=kategori_biaya"><button type="button" class="btn btn-danger">Batal</button></a>
