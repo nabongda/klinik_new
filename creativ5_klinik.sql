@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2020 at 03:18 PM
+-- Generation Time: Dec 08, 2020 at 05:13 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -2329,7 +2329,8 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1201, 'lab', 'Berhasil Login dengan IP ::1', '2020-12-07 14:06:54'),
 (1202, 'drsam', 'Berhasil Login dengan IP ::1', '2020-12-07 14:08:00'),
 (1203, 'lorem', 'Berhasil Login dengan IP ::1', '2020-12-07 14:09:35'),
-(1204, 'ginger', 'Berhasil Login dengan IP ::1', '2020-12-07 14:10:10');
+(1204, 'ginger', 'Berhasil Login dengan IP ::1', '2020-12-07 14:10:10'),
+(1205, 'admin', 'Berhasil Login dengan IP ::1', '2020-12-08 04:03:52');
 
 -- --------------------------------------------------------
 
@@ -4849,7 +4850,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `kategori_biaya`
 --
 ALTER TABLE `kategori_biaya`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `kategori_pelanggan`
@@ -4873,7 +4874,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1205;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1206;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -4939,7 +4940,7 @@ ALTER TABLE `pembelian_k`
 -- AUTO_INCREMENT for table `pembelian_t`
 --
 ALTER TABLE `pembelian_t`
-  MODIFY `id_t` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_t` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
