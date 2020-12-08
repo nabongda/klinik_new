@@ -18,15 +18,14 @@
       <section class="content">
         <div class="container-fluid">
           <div class="row">
-            <!-- left column -->
+          
             <div class="col-md-12">
-              <!-- general form elements -->
+
               <div class="card card-primary">
                 <div class="card-header">
                   <h3 class="card-title">Tambah Jadwal</h3>
                 </div>
-                <!-- /.card-header -->
-                <!-- form start -->
+                
                 <form role="form">
                   <div class="card-body">
                     <div class="form-group">
@@ -78,36 +77,36 @@
                       <label for="exampleInputBeli">Jam Piket</label>
                       <input type="text" class="form-control" iname="jam" placeholder="Contoh 22:30">
                     </div>
-                    <a href="?module=jadwal_dokter"></a><button type="submit" class="btn btn-danger">Batal</button></a>
+                    <a href="?module=jadwal_dokter"></a><button type="button" class="btn btn-danger">Batal</button></a>
                     <button type="submit" class="btn btn-success">Tambah</button>
                   </div>
               </div>
-              <!-- /.card-body -->
 
               </form>
             </div>
           </div>
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
     </section>
-<script>
-$(document).ready(function(){
-  var date = new Date();
-  var bln = (date.getMonth() + 1);
-  var bln2 = (bln < 10)? "0" + bln : bln;
-  var bln3 = ((bln + 1) < 10)? "0" + (bln + 1) : (bln + 1);
-  var tgl = date.getDate();
-  var now = "";
-  
-  if(tgl <= 24){
-    now = date.getFullYear() + "-" + bln2 + "-24";
-  } else {
-    now = date.getFullYear() + "-" + bln3 + "-24";
-  }
-  
-  $("#expired").val(now);
-  var dt = new Date(now);
-  var k = new Intl.DateTimeFormat("id-ID",{year: 'numeric', day: '2-digit', month: 'long'}).format(dt);
-  $("#lblexpired").html("<label>Berlaku s/d </label><br/>" + k);
-});
-</script>
+    
+    <script>
+    $(document).ready(function(){
+      var date = new Date();
+      var bln = (date.getMonth() + 1);
+      var bln2 = (bln < 10)? "0" + bln : bln;
+      var bln3 = ((bln + 1) < 10)? "0" + (bln + 1) : (bln + 1);
+      var tgl = date.getDate();
+      var now = "";
+      
+      if(tgl <= 24){
+        now = date.getFullYear() + "-" + bln2 + "-24";
+      } else {
+        now = date.getFullYear() + "-" + bln3 + "-24";
+      }
+      
+      $("#expired").val(now);
+      var dt = new Date(now);
+      var k = new Intl.DateTimeFormat("id-ID",{year: 'numeric', day: '2-digit', month: 'long'}).format(dt);
+      $("#lblexpired").html("<label>Berlaku s/d </label><br/>" + k);
+    });
+    </script>

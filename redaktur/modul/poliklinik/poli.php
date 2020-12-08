@@ -114,7 +114,7 @@
                 <input type="text" class="form-control" name="poli" placeholder="Nama Poliklinik" required>
               </div>
               <div class="form-group">
-                <a href="media.php?module=poliklinik"><button type="submit" class="btn btn-danger">Batal</button></a>
+                <a href="media.php?module=poliklinik"><button type="button" class="btn btn-danger">Batal</button></a>
                 <button type="submit" class="btn btn-success">Tambah</button>
               </div>
             </div>

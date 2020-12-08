@@ -300,6 +300,14 @@
                 <label>Harga Jual Asuransi Lainnya</label>
                 <input type="number" class="form-control" name="harga_asuransilainnya" value="<?php echo $edit['jual_lain']; ?>" required>
               </div>
+              <div class="form-group">
+                <label>Tanggal Produksi</label>
+                <input type="date" class="form-control" name="tgl_produksi" value="<?php echo $edit['tgl_produksi']; ?>" required>
+              </div>
+              <div class="form-group">
+                <label>Tanggal Expired</label>
+                <input type="date" class="form-control" name="tgl_expired" value="<?php echo $edit['tgl_expired']; ?>" required>
+              </div>
               <div class="input-group">
                 <label>Upload Gambar</label>
               </div>

@@ -30,10 +30,10 @@
           <ul class="fa-ul">
             <li>
               <i class="fa fa-li fa-arrow-right"></i>
-              &nbsp;&nbsp;Halaman ini menampilkan Data Produk Obat yang berasal dari menu Pembelian Tunai dan Pembelian Kredit
+              &nbsp;Halaman ini menampilkan Data Produk Obat yang berasal dari menu Pembelian Tunai dan Pembelian Kredit
             </li>
             <li>
-              <i class="fa fa-li fa-arrow-right"></i>&nbsp;&nbsp;Halaman ini juga menampilkan status jumlah item Produk Obat yang ada pada menu Gudang Penjualan yang terdiri atas
+              <i class="fa fa-li fa-arrow-right"></i>&nbsp;Halaman ini juga menampilkan status jumlah item Produk Obat yang ada pada menu Gudang Penjualan yang terdiri atas
               <ul>
                 <li><span class='bagde bg-yellow'>Belum ada data</span> Jika item belum ada</li>
                 <li><span class='bagde bg-red'>Stok tidak mencukupi</span> Jika item hampir atau sudah habis</li>
@@ -42,7 +42,7 @@
             </li>
             <li>
               <i class="fa fa-li fa-arrow-right"></i>
-              &nbsp;&nbsp;Anda bisa menambahkan item berdasarkan status di atas dengan mengklik tombol Tambahkan dan mengisi jumlah yang akan ditambahkan
+              &nbsp;Anda bisa menambahkan item berdasarkan status di atas dengan mengklik tombol Tambahkan dan mengisi jumlah yang akan ditambahkan
             </li>
           </ul>
         </div>
