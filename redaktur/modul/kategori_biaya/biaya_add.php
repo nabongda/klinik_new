@@ -25,8 +25,8 @@
           <form role="form" method="post" enctype="multipart/form-data" action="modul/kategori_biaya/aksi.php?act=add">
             <div class="card-body">
               <div class="form-group">
-                <label for="exampleInputNamTin">Kategori</label>
-                <input type="text" class="form-control" id="" placeholder="Kategori">
+                <label for="kategori">Kategori</label>
+                <input type="text" class="form-control" id="kategori" name="nama" placeholder="Kategori" required>
               </div>
               <div class="form-group">
                 <a href="?module=kategori_biaya"><button type="button" class="btn btn-danger">Batal</button></a>
