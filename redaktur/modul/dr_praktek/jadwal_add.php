@@ -1,4 +1,3 @@
-<!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -105,4 +104,3 @@ $(document).ready(function(){
   $("#lblexpired").html("<label>Berlaku s/d " + k + "</label>");
 });
 </script>
->>>>>>> 9c78cb977ebfbecdf2c5f3bfa5869a3aedce96e7
