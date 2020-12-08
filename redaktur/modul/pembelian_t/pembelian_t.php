@@ -134,7 +134,8 @@
 
             <!-- SweetAlert Hapus -->
             <script>
-              $('.hapus').click(function () {
+              $('body').on('click','.hapus',function (event) {
+                event.preventDefault();
                   var no_fak = $(this).attr('no-fak');
                   Swal.fire({
                     title: 'Yakin Ingin Menghapus Data?',
@@ -306,7 +307,7 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label>Diskon </label>
-                  <input type="number" class="form-control" name="diskon" id="diskon" placeholder="Diskon" value="0">
+                  <input type="number" class="form-control" name="diskon" id="diskon" placeholder="misal: 1-100">
                   <input class="form-control" type="hidden" name="batas_cabang" id="batas_cabang" value="100" required>
                   <input class="form-control" type="hidden" name="batas_minim" id="batas_minim" value="10" required>
                 </div>
@@ -355,11 +356,11 @@
                   <td><?php echo $data['kd_brg']; ?></td>
                   <td><?php echo $data['nama_brg']; ?></td>
                   <td><?php echo $data['jumlah']; ?></td>
-                  <td><?php echo $data['hrg']; ?></td>
+                  <td><?php echo rupiah($data['hrg']); ?></td>
                   <td><?php echo $data['diskon']; ?></td>
                   <td><?php echo $data['tgl_produksi']; ?></td>
                   <td><?php echo $data['tgl_expired']; ?></td>
-                  <td><?php echo $data['sub_tot']; ?></td>
+                  <td><?php echo rupiah($data['sub_tot']); ?></td>
                 </tr>
                 <?php } ?>
               </tbody>
