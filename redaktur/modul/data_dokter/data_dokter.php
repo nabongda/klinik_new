@@ -4,6 +4,7 @@
 ?>
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -98,24 +99,27 @@
 
             <!-- SweetAlert Hapus -->
             <script>
-              $('.hapus').click(function () {
-                var id_use = $(this).attr('id-user');
-                  Swal.fire({
-                    title: 'Kamu Yakin?',
-                    text: "Kamu akan hapus data selamanya!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Delete !'
-                  })
-                  .then((result)=>{
-                    console.log(result);
-                    if (result.value){
-                      window.location = "modul/data_dokter/aksi_data_dokter.php?module=user&act=hapus&id="+id_use+"";
-                    }
-                  })
-                });
+              // Hapus Barang
+              $('body').on('click', '.hapus', function (event) {
+                event.preventDefault();
+                var id_use = $(this).attr("id-user");
+                var token = $("meta[name='csrf-token']").attr("content");
+                Swal.fire({
+                  title: 'Delete',
+                  text: "Yakin ingin menghapus data?",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Hapus'
+                })
+                .then((result) => {
+                  console.log(result);
+                  if (result.value) {
+                    window.location = "modul/data_dokter/aksi_data_dokter.php?module=user&act=hapus&id="+id_use;
+                  }
+                })
+              });
             </script>
           </table>
         </div>
