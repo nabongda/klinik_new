@@ -5,6 +5,7 @@
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -169,7 +170,7 @@
                   <select name="cabang" class="form-control select2" style="width: 100%;" required>
                   <option value="">-- Pilih Cabang --</option>
                     <?php
-                      $data     = mysqli_query($con, "Select * From daftar_klinik");            
+                      $data = mysqli_query($con, "Select * From daftar_klinik");            
                       while($hasil  = mysqli_fetch_array($data)){
                     ?>
                   <option value="<?php echo $hasil['id_kk']; ?>"><?php echo $hasil['nama_klinik']; ?></option>            
@@ -183,7 +184,7 @@
                 <select name="jenis_user" class="form-control" required>
                   <option value="JU-02"> Dokter</option>
                     <?php
-                      $data     = mysqli_query($con, "Select * From jenis_user Where id_ju='JU-02'");            
+                      $data = mysqli_query($con, "Select * From jenis_user Where id_ju='JU-02'");            
                             while($hasil  = mysqli_fetch_array($data)){
                     ?>
                   <option value="<?php echo $hasil['id_ju']; ?>"><?php echo $hasil['nama_ju']; ?></option>            
