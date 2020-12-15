@@ -32,7 +32,7 @@ $id_kk = $_SESSION['klinik'];
                     <label for="inputTglBeli">Tanggal </label>
                   </div>
                   <div class="col-md-8">
-                    <input type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" id="tanggal_h" class="form-control datepicker" name="date" value="<?php echo $date; ?>" data-mask>
+                    <input type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" id="tanggal_h" class="form-control" name="date" value="<?php echo $date; ?>" data-mask>
                   </div>
                 </div>
                 <div class="form-group row col-md-6">
