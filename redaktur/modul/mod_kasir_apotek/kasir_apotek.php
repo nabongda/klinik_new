@@ -11,14 +11,14 @@ $id_kk = $_SESSION['klinik']; ?>
 			<div class="col-sm-6">
 				<div class="box box-success" id="boxbos">
 					<div class="box-header" id="tabone">
-						<h1>Pelayanan Apotek</h1>
+						<h1>Pelayanan Pasien</h1>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a href="?module=home">Beranda</a></li>
-					<li class="breadcrumb-item active">Pelayanan Apotek</li>
+					<li class="breadcrumb-item active">Pelayanan Pasien</li>
 				</ol>
 			</div>
 		</div>
@@ -47,7 +47,7 @@ $id_kk = $_SESSION['klinik']; ?>
 						<form id="form_tam" class="collapse">
 							<div class="row">
 								<div class="col-md-6">
-									<label>Cari Pelanggan</label>
+									<label>Cari Apotek</label>
 									<div class="row">
 										<div class="col-md-2">
 											<div class="radio">
