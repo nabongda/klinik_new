@@ -30,7 +30,7 @@
           <div class="card-header">
             <div class="form-group row">
               <div class="col-sm-6">
-                <label>Data Stok Barang Tiap Cabang </label>
+                <label><b>Data Stok Barang Tiap Cabang</b></label>
               </div>
             </div>
             <div class="form-group row">
@@ -53,6 +53,9 @@
                 <button type="submit" class="btn btn-primary" name="submit"><i class="fa fa-search"></i> Tampilkan</button>
               </div>
             </div>
+          </div>
+          <div class="card-header">
+            <a href="?module=gudang_cabang&act=tambah_stok" class="btn btn-primary">Tambah Stok</a>
           </div>
           <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">

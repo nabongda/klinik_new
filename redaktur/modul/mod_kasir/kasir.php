@@ -2,6 +2,7 @@
 
 unlink("modul/mod_kasir/error_log");
 $id_kk = $_SESSION['klinik']; ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <section class="content-header">
   <div class="container-fluid">
@@ -165,9 +166,9 @@ $id_kk = $_SESSION['klinik']; ?>
                   <?php } ?>
                 </select>
               </div>
-              <div class="col">
+              <div class="col" id="doct">
                 <label>Dokter</label>
-                <select id="doct" class="form-control" disabled>
+                <select class="form-control" disabled>
                   <option value="belum">--Silahkan Pilih--</option>
                 </select>
               </div>
@@ -404,7 +405,6 @@ $id_kk = $_SESSION['klinik']; ?>
   </div>
 </section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   $(document).ready(function(){
     $.ajaxSetup({
