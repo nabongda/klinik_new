@@ -139,6 +139,81 @@
           <div class="card-header">
             <h3 class="card-title">Tambah Data Stok Barang</h3>
           </div>
+          <div class="card-body">
+            <form role="form" method="POST" enctype="multipart/form-data" action="modul/gudang/aksi_stok.php?act=input">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Gambar</th>
+                    <th>Kode Produk</th>
+                    <th>Nama Produk</th>
+                    <th>Kategori Produk</th>
+                    <th>Stok Produk</th>
+                    <th>Harga Beli</th>
+                    <th>Harga Jual</th>
+                    <th>Tanggal Produksi</th>
+                    <th>Tanggal Expired</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    $tampil   = mysqli_query($con, "SELECT * FROM history_kirim_stok");
+                    while($r  = mysqli_fetch_array($tampil)){
+                  ?>
+                  <tr>
+                    <?php $q1 = mysqli_query($con, "SELECT * FROM produk_master WHERE kd_produk='$r[kode_barang]'"); 
+                    $k = mysqli_fetch_array($q1); ?>
+                    <td>
+                      <?php
+                        if ($k['gambar'] == '') {
+                          echo "Belum Ada Gambar";
+                        }else{
+                          echo '<center><a href="'.$url.'/gambar_produk/'.$k['gambar'].'"><img src="'.$url.'/gambar_produk/'.$k['gambar'].'" width="40px" height="40px"></a></center>';
+                        }
+                      ?>
+                    </td>
+                    <td><?php echo $r["kd_brg"]; ?></td>
+                    <td><?php echo $r["nama_brg"]; ?></td>
+                    <?php
+                    $qk = mysqli_query($con, "SELECT * FROM kategori WHERE id_kategori='$r[kategori]'"); 
+                    $kt = mysqli_fetch_array($qk); ?>
+                    <td><?php echo $kt['kategori']; ?></td>
+                    <td><?php echo $r["jumlah"]; ?></td>
+                    <td><?php echo rupiah($r["hrg"]); ?></td>
+                    <td><?php echo rupiah($r["hrg_jual"]); ?></td>
+                    <td><?php echo $r['tgl_produksi']?></td>
+                    <td><?php echo $r['tgl_expired']?></td>
+                    <td>
+                      <a href="#editmodal" id="custId" data-toggle="modal" data-id="<?php echo $data['id']?>" class="btn-xs btn-warning"><i
+                      class="fa fa-edit"> Edit</i></a>
+                      <a href="#" no-fak="<?php echo $data['no_fak']?>" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
+                    </td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="10" class="text-right"><button type="submit" class="btn btn-primary">Simpan</button></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Tambah Data Stok Barang</h3>
+          </div>
           <form role="form" method="POST" enctype="multipart/form-data" action="modul/gudang/aksi_stok.php?act=input">
             <div class="card-body">
               <div class="col-md-6">
@@ -219,7 +294,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- Edit Data Stok Barang -->
 

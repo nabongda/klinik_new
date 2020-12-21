@@ -13,11 +13,11 @@
     if($_SESSION['jenis_u']=="JU-01"){
       $date = date('Y-m-d');
 
-      $qq = mysqli_query($con, "SELECT *FROM beli_k WHERE '$date' <= tgl_tempo AND bukti_bayar=''"); 
+      $qq = mysqli_query($con, "SELECT * FROM beli_k WHERE '$date' <= tgl_tempo AND bukti_bayar=''"); 
 
       $tot = mysqli_num_rows($qq);
 
-      $qp = mysqli_query($con, "SELECT *FROM pengiriman WHERE status='Lapor'");
+      $qp = mysqli_query($con, "SELECT * FROM pengiriman WHERE status='Lapor'");
 
       $cek = mysqli_num_rows($qp);
       $notif = 0;
@@ -55,7 +55,7 @@
 
     <?php } 
     if($_SESSION['jenis_u']=="JU-06"){
-      $qq = mysqli_query($con, "SELECT *FROM pengiriman WHERE cabang='$id_kk' AND keterangan='Sedang Proses Pengiriman'"); 
+      $qq = mysqli_query($con, "SELECT * FROM pengiriman WHERE cabang='$id_kk' AND keterangan='Sedang Proses Pengiriman'"); 
       $tot = mysqli_num_rows($qq);
     ?>
     <li class="nav-item dropdown" id="checkout" style="display: none">

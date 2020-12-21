@@ -41,16 +41,32 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>No Faktur</th>
-                <th>Tanggal Pembelian</th>
-                <th>Id Suplier</th>
-                <th>Total</th>
-                <th>Jenis Pembayaran</th>
+                <th>No Pengiriman</th>
+                <th>Tanggal Pengiriman</th>
                 <th>Keterangan</th>
                 <th class="nosort">Aksi</th>
               </tr>
             </thead>
             <tbody>
+            <?php
+                $tampil     = mysqli_query($con, "SELECT * FROM kirim_stok");
+                $no = 1;
+                while($data = mysqli_fetch_array($tampil)){
+              ?>
+              <tr>
+                <td><?php echo $no++?></td>
+                <td><?php echo $data['no_peng']; ?></td>
+                <td><?php echo $data['tgl_kirim']; ?></td>
+                <td><?php echo $data['ket']?></td>
+                <td>
+                  <a href="#detail" id="custId" data-toggle="modal" data-id="<?php echo $data['id']?>" class="btn-xs btn-success"><i
+                      class="fa fa-eye"> Detail</i></a>
+                  <a href="#editmodal" id="custId" data-toggle="modal" data-id="<?php echo $data['id']?>" class="btn-xs btn-warning"><i
+                      class="fa fa-edit"> Edit</i></a>
+                  <a href="#" no-fak="<?php echo $data['no_fak']?>" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
+                </td>
+              </tr>
+              <?php } ?>
             </tbody>
             <!-- Modals Detail Barang -->
             <div class="modal fade" id="detail" role="dialog">
@@ -262,7 +278,7 @@
                 <div class="form-group col-md-2">
                   <label>Jumlah </label>
                   <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
-                  <small id="jml" style="color: red;"></small>
+                  <small id="jml" class="collapse" style="color: red;"></small>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Harga </label>
@@ -283,7 +299,7 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <button type="button" class="btn-sm btn-danger" id="reset" onclick="this.form.reset();">Reset Form</button>
+                  <button type="button" class="btn-sm btn-danger" id="reset_form" onclick="this.form.reset();">Reset Form</button>
                   <button type="submit" class="btn-sm btn-success">Tambah</button>
                 </div>
               </div>
@@ -365,62 +381,29 @@
             </table>
           </div>
 
-          <form class="form-horizontal"  method="POST" action="modul/pembelian_t/input_transaksi.php">
-            <!-- <?php
-              $selectidmax  = mysqli_query($con, "SELECT max(no_fak) as nofak From beli");
-              $hsilidmax    = mysqli_fetch_array($selectidmax);
-              $idmax        = $hsilidmax['nofak'];
-              $nourut       = (int) substr($idmax, 3);
-              $nourut++;
-              $kode         = "FAK-".sprintf("%05s", $nourut);
-            ?> -->
+          <form class="form-horizontal"  method="POST" action="modul/pengiriman_stok/input_pengiriman.php">
             <div class="card-body">
               <div class="form-group row">
                 <div class="col-sm-2">
-                  <label for="inputNoFaktur">No Pengiriman </label>
+                  <label>No Pengiriman </label>
                 </div>
                 <div class="col-sm-4">
                   <input type="text" class="form-control" name="no_peng" required>
+                  <input type="hidden" name="id_ju" value="<?php echo $_SESSION['jenis_u']; ?>">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-2">
-                  <label for="inputTglBeli">Tanggal Pengiriman </label>
+                  <label>Tanggal Pengiriman </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="date" class="form-control" name="tgl_beli" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
+                  <input type="date" class="form-control" name="tgl_pengiriman" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
                         data-inputmask-inputformat="mm/dd/yyyy" data-mask required>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-2">
-                  <label for="inputSuplier">Suplier </label>
-                </div>
-                <div class="col-sm-4">
-                  <select class="form-control select2" name="id_sup" name="id_sup" style="width: 100%;" required>
-                    <option value="">--- Pilih Suplier ---</option>
-                      <?php $query = mysqli_query($con, "SELECT *FROM suplier");
-                        while ($cb = mysqli_fetch_array($query)) { ?>
-                          <option value="<?php echo $cb['id_sup']; ?>"><?php echo $cb['nama_sup']; ?></option>
-                      <?php  } ?> 
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-2">
-                  <label for="inputJenisByr">Jenis Pembayaran </label>
-                </div>
-                <div class="col-sm-4">
-                  <select class="form-control select2" name="pembayaran" style="width: 100%;" required>
-                    <option value="">--Pilih Salah Satu--</option>
-                    <option value="tunai">Tunai</option>
-                    <option value="transfer">Transfer</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-2">
-                  <label for="inputNoFaktur">Keterangan </label>
+                  <label>Keterangan </label>
                 </div>
                 <div class="col-sm-4">
                   <textarea class="form-control" name="ket" rows="3" required></textarea>
@@ -453,6 +436,7 @@ $(document).ready(function(){
   // Tambah Input Barang Tunai
   $('#form_t').on('submit', function (e) {
     e.preventDefault();
+    $('#jml').collapse('hide');
     $.ajax({
       type: 'post',
       url: 'modul/pengiriman_stok/input_data.php',
@@ -461,10 +445,14 @@ $(document).ready(function(){
         var oTable = $('#barang11').dataTable();
         oTable.fnDraw(false);
         $('#form_t').trigger("reset");
-        // $('#jml').html("");
         total();
       }
     });
+  });
+
+  // Reset Form
+  $('body').on('click','#reset_form', function () {
+    $('#jml').collapse('hide');
   });
 
   // auto complete
@@ -487,6 +475,7 @@ $(document).ready(function(){
       // Set selection
       $('#kd_brg').val(ui.item.kd_produk);
       $('#nama_barang').val(ui.item.label);
+      $('#jml').collapse('show');
       $('#jml').html("Jumlah Stok di Gudang: <b>"+ui.item.jml+"</b>");
       $('#id_satuan').val(ui.item.id_satuan);
       $('#id_kategori').val(ui.item.id_kategori);
