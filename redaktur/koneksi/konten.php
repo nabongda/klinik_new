@@ -1217,6 +1217,12 @@ elseif ($module=='trf_out'){
 
 	}
 
+	else if ($module=='pelayanan_obat'){
+
+		include "modul/pelayanan_obat/pelayanan_obat.php";
+	
+		}
+
 	// Apabila modul tidak ditemukan
 
 	else {
