@@ -362,7 +362,7 @@ $(document).ready(function(){
     e.preventDefault();
     $.ajax({
       type: 'post',
-      url: 'modul/penjualan_obat/input_data.php',
+      url: 'modul/pelayanan_obat/input_data.php',
       data: $('#form_t').serialize(),
       success: function (data) {
         var oTable = $('#barang11').dataTable();
@@ -409,7 +409,7 @@ $(document).ready(function(){
     "bServerSide": true,
     "responsive": true,
     "autoWidth": false,
-    "sAjaxSource": "modul/pembelian_t/data_barang.php",
+    "sAjaxSource": "modul/pelayanan_obat/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
       null,

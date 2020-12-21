@@ -232,12 +232,12 @@
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-2">
-                  <label>Nama Barang </label>
-                  <input type="text" class="form-control" name="nama_brg" id="nama_barang" placeholder="Nama Barang" required>
+                  <label>Nama Obat </label>
+                  <input type="text" class="form-control" name="nama_brg" id="nama_barang" placeholder="Nama Obat" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Kode Barang </label>
-                  <input type="text" class="form-control" name="kd_brg" id="kd_brg" placeholder="Kode Barang" required>
+                  <input type="text" class="form-control" name="kd_brg" id="kd_brg" placeholder="Kode Obat" required>
                 </div>
                 <div class="col-md-2">
                   <label>Satuan</label>
@@ -529,12 +529,6 @@ $(document).ready(function(){
     var kode_b = $(this).closest('tr').find('td').html();
     $("#kd_brg").val(kode_b);
   });
-
-  // Reset Form
-  // $('body').on('click','#reset', function () {
-  //   $('#form_t').trigger("reset");
-  //   $('#jml').html("");
-  // });
 
   // Reset table input barang
   $("#reset_brg").click(function(){
