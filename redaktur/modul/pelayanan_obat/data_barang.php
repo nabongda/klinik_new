@@ -6,13 +6,13 @@
 	// ID Klinik
 	$id_kk = $_SESSION['klinik'];
 	//data kolom yang akan di tampilkan
-	$aColumns = array('id_t', 'kd_brg','nama_brg', 'jumlah', 'hrg', 'diskon', 'tgl_produksi', 'tgl_expired', 'sub_tot'); //Perlu DIubah
+	$aColumns = array('id_beli_obat', 'kd_brg','nama_brg', 'jumlah', 'hrg', 'diskon', 'tgl_produksi', 'tgl_expired', 'sub_tot'); //Perlu DIubah
 	
 	//primary key
-	$sIndexColumn = "id_t"; //Perlu DIubah
+	$sIndexColumn = "id_beli_obat"; //Perlu DIubah
 	
 	//nama table database
-	$sTable = "pembelian_t";
+	$sTable = "beli_obat";
 
 	$sJoin = "";
 	

@@ -9,9 +9,9 @@
 	$act	= $_GET['act'];
 	// Hapus Produk pusat
 	if ($act == 'hapus'){
-		$id		= $_GET['no_fak'];
+		$id		= $_GET['no_tran'];
 		
-		$sql = mysqli_query($con, "SELECT * FROM history_beli_t Where no_fak='$id'");
+		$sql = mysqli_query($con, "SELECT * FROM history_beli_t Where no_tran='$id'");
 		while ($result = mysqli_fetch_array($sql)) {
 			$sql2 = mysqli_query($con, "SELECT * FROM produk_pusat where kode_barang='$result[kd_brg]'");
 			$ambil = mysqli_fetch_array($sql2);
@@ -24,8 +24,8 @@
 				mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlahsql' where kode_barang='$result[kd_brg]'");
 			}
 
-			mysqli_query($con, "Delete From beli Where no_fak='$id'");
-			mysqli_query($con, "Delete From history_beli_t Where no_fak='$id'");
+			mysqli_query($con, "Delete From pelayanan_obat Where no_tran='$id'");
+			mysqli_query($con, "Delete From history_beli_obat Where no_tran='$id'");
 			catat($con, $_SESSION['namauser'], 'Hapus Data Produk'.' ('.$id.')');
 		}
 		
@@ -46,19 +46,16 @@
 		//$id_sup			= $_POST['id_sup'];
 		$diskon_harga   = $hrg_tot*($diskon/100);
 		$sub_tot		= $hrg_tot-$diskon_harga;
-		//$no_fak			= $_POST['no_fak'];
+		$no_tran			= $_POST['no_tran'];
+		$nama_pembeli	= $nama_pembeli['nama_pembeli'];
 		$tgl_beli		= $_POST['tgl_beli'];
-		//$suplier		= $_POST['suplier'];
-		//$total			= $_POST['total'];
-		$pembayaran		= $_POST['pembayaran'];
-		$ket			= $_POST['ket'];
 
-		$jumlahkan 		= "SELECT SUM(sub_tot) AS total FROM pembelian_t";
-		mysqli_query($con, "INSERT INTO pembelian_t(kd_brg,nama_brg,satuan_t,kategori_t,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli')");
+		$jumlahkan 		= "SELECT SUM(sub_tot) AS total FROM beli_obat";
+		mysqli_query($con, "INSERT INTO beli_obat(kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli')");
 		
 
 	}
 	
-	header('location:../../media.php?module=pembelian_t');
+	header('location:../../media.php?module=pelayanan_obat');
 	exit();
 ?>
