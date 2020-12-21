@@ -55,7 +55,7 @@
             <?php
               $tampil = mysqli_query($con, "Select * From Pelayanan_obat");
               $no = 1;
-              while($data = mysqli_fecth_array($tampil)){
+              while($data = mysqli_fetch_array($tampil)){
               ?>
               <tr>
                 <td><?php echo $no++?></td>
@@ -145,7 +145,7 @@
               <div class="form-row">
                 <div class="form-group col-md-2">
                   <label>Nama Obat </label>
-                  <input type="text" class="form-control" name="nama_brg" id="nama_brg" placeholder="Nama Obat" required>
+                  <input type="text" class="form-control" name="nama_brg" id="nama_barang" placeholder="Nama Obat" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Kode Obat </label>
@@ -362,7 +362,7 @@ $(document).ready(function(){
     e.preventDefault();
     $.ajax({
       type: 'post',
-      url: 'modul/penjualan_obat/input_data.php',
+      url: 'modul/pelayanan_obat/input_data.php',
       data: $('#form_t').serialize(),
       success: function (data) {
         var oTable = $('#barang11').dataTable();
@@ -378,7 +378,7 @@ $(document).ready(function(){
     source: function( request, response ) {
       // Fetch data
       $.ajax({
-      url: "modul/pembelian_t/cari.php",
+      url: "modul/pelayanan_obat/cari.php",
       type: 'post',
       dataType: "json",
       data: {
@@ -409,7 +409,7 @@ $(document).ready(function(){
     "bServerSide": true,
     "responsive": true,
     "autoWidth": false,
-    "sAjaxSource": "modul/pembelian_t/data_barang.php",
+    "sAjaxSource": "modul/pelayanan_obat/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
       null,

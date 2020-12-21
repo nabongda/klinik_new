@@ -1219,9 +1219,9 @@ elseif ($module=='trf_out'){
 
 	else if ($module=='pelayanan_obat'){
 
-		include "modul/pelayanan_obat/pelayanan_obat.php";
-	
-		}
+	include "modul/pelayanan_obat/pelayanan_obat.php";
+
+	}
 
 	else if ($module=='pengiriman_stok'){
 
