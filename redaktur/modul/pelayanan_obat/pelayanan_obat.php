@@ -45,10 +45,7 @@
                 <th>No</th>
                 <th>No Transaksi</th>
                 <th>Nama Pembali</th>
-                <th>Nama Obat</th>
                 <th>Tanggal Pembelian</th>
-                <th>Qty</th>
-                <th>Harga</th>
                 <th class="nosort">Aksi</th>
               </tr>
             </thead>
@@ -62,11 +59,11 @@
                 <td><?php echo $no++?></td>
                 <td><?php echo $data['no_tran']; ?></td>
                 <td><?php echo $data['nama_pembeli']; ?></td>
-                <td><?php echo $data['nama_obat'] ?></td>
                 <td><?php echo $data['tgl_pembelian'] ?></td>
-                <td><?php echo $data['harga'] ?></td>
                 <td>
-                  <a href="#cetak" id=" " data-toggle="modal" data-id="" class="btn-xs btn-success"><i
+                <a href="#cetak" id=" " data-toggle="modal" data-id="" class="btn-xs btn-success"><i
+                      class="fa fa-eye"> Detail </i></a>
+                  <a href="#cetak" id=" " data-toggle="modal" data-id="" class="btn-xs btn-warnng"><i
                       class="fa fa-print"> Cetak </i></a>
                   <a href="#" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
                 </td>
@@ -244,7 +241,7 @@
               <tr>
                 <th colspan="9" style="text-align: right;" id="total">Total: 
                   <?php
-                    $jumlahkan = "SELECT SUM(sub_tot) AS total FROM pelayanan_obat"; //perintah untuk menjumlahkan
+                    $jumlahkan = "SELECT SUM(sub_tot) AS total FROM beli_obat"; //perintah untuk menjumlahkan
                     $total =@mysqli_query($con, $jumlahkan) or die (mysqli_error($con));//melakukan query dengan varibel $jumlahkan
                     $t = mysqli_fetch_array($total); //menyimpan hasil query ke variabel $t
                     ?><b><?php echo rupiah($t["total"]); ?></b>
@@ -296,7 +293,7 @@
             </table>
           </div>
 
-          <form class="form-horizontal"  method="POST" action="modul/pelayanan_obat/aksi_pelayana_obat.php">
+          <form class="form-horizontal"  method="POST" action="modul/pelayanan_obat/input_transaksi.php">
             <!-- <?php
               $selectidmax  = mysqli_query($con, "SELECT max(no_tran) as notran From beli_obat");
               $hsilidmax    = mysqli_fetch_array($selectidmax);
@@ -328,7 +325,7 @@
                   <label for="inputTglBeli">Tanggal Pembelian </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="date" class="form-control" name="tgl_beli" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
+                  <input type="date" class="form-control" name="tgl_pembelian" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
                         data-inputmask-inputformat="mm/dd/yyyy" data-mask>
                 </div>
               </div>
@@ -452,7 +449,7 @@ $(document).ready(function(){
   // Hapus Barang
   $('body').on('click', '#hapus_brg', function (event) {
     event.preventDefault();
-    var id_t = $(this).data("id");
+    var id_beli_obat = $(this).data("id");
     var token = $("meta[name='csrf-token']").attr("content");
     Swal.fire({
       title: 'Delete',
@@ -467,10 +464,10 @@ $(document).ready(function(){
         console.log(result);
         if (result.value) {
           $.ajax({
-            url: "modul/pembelian_t/hapus_brg.php",
+            url: "modul/pelayanan_obat/hapus_brg.php",
             type: "POST",
             data: {
-              "id_t": id_t,
+              "id_beli_obat": id_beli_obat,
               "_token": token,
             },
             success: function (response) {
@@ -498,7 +495,7 @@ $(document).ready(function(){
   // function total
   function total(){
     $.ajax({
-      url : "modul/pembelian_t/total.php",
+      url : "modul/pelayanan_obat/total.php",
       success: function(data){
         var obj = JSON.parse(data);
         var t = "Total: "+obj.rupiah;

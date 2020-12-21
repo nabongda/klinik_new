@@ -33,9 +33,9 @@ $kd_brg 		= $_POST['kd_brg'];
 			echo "satuan";
 			exit();
 		} */
-		$jumlahkan 		= "SELECT SUM(sub_tot) AS total FROM pembelian_t";
+		$jumlahkan 		= "SELECT SUM(sub_tot) AS total FROM beli_obat";
 
-		$q = mysqli_query($con, "SELECT * FROM pembelian_t");
+		$q = mysqli_query($con, "SELECT * FROM beli_obat");
 		$k = mysqli_num_rows($q);
 
 		if ($k >0) {
@@ -49,13 +49,13 @@ $kd_brg 		= $_POST['kd_brg'];
 			}
 			if ($jum>0) {
 				$jumlah = $cek['jumlah']+$jumlah;
-				mysqli_query($con, "UPDATE pembelian_t SET jumlah='$jumlah' where nama_brg='$nama_brg'");
+				mysqli_query($con, "UPDATE beli_obat SET jumlah='$jumlah' where nama_brg='$nama_brg'");
 			}else{
-				mysqli_query($con, "INSERT INTO pembelian_t(kd_brg,nama_brg,satuan_t,kategori_t,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
+				mysqli_query($con, "INSERT INTO beli_obat(kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
 			}
 		
 		}else{
-			mysqli_query($con, "INSERT INTO pembelian_t(kd_brg,nama_brg,satuan_t,kategori_t,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
+			mysqli_query($con, "INSERT INTO beli_obat(kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
 		}
 		
 		
