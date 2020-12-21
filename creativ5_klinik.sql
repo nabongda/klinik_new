@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2020 at 02:43 PM
+-- Generation Time: Dec 21, 2020 at 11:10 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -186,6 +186,30 @@ CREATE TABLE `beli_k` (
 INSERT INTO `beli_k` (`no_fak`, `tgl_beli`, `total`, `id`, `id_sup`, `tgl_tempo`, `bukti_bayar`) VALUES
 ('03122020', '2020-12-03', 250000, 4, '1', '2021-01-03', 'IMG_20191031_110653_892.jpg'),
 ('10122020', '2020-12-10', 1225000, 5, '1', '2021-01-10', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `beli_obat`
+--
+
+CREATE TABLE `beli_obat` (
+  `id_beli_obat` int(11) NOT NULL,
+  `kd_brg` varchar(25) NOT NULL,
+  `nama_brg` varchar(25) NOT NULL,
+  `satuan_o` int(11) NOT NULL,
+  `kategori_o` int(11) NOT NULL,
+  `hrg` varchar(50) NOT NULL,
+  `hrg_jual` int(11) NOT NULL,
+  `batas_cabang` int(11) NOT NULL,
+  `batas_minim` int(11) NOT NULL,
+  `jumlah` varchar(50) NOT NULL,
+  `diskon` varchar(50) NOT NULL,
+  `sub_tot` varchar(50) NOT NULL,
+  `tgl_beli` date NOT NULL,
+  `tgl_produksi` date NOT NULL,
+  `tgl_expired` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -561,6 +585,31 @@ INSERT INTO `history_beli_k` (`id`, `no_fak`, `tgl_beli`, `kd_brg`, `nama_brg`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `history_beli_obat`
+--
+
+CREATE TABLE `history_beli_obat` (
+  `id` int(11) NOT NULL,
+  `no_tran` varchar(50) NOT NULL,
+  `tgl_beli` date NOT NULL,
+  `kd_brg` varchar(50) NOT NULL,
+  `nama_brg` varchar(50) NOT NULL,
+  `satuan` varchar(50) NOT NULL,
+  `kategori` varchar(50) NOT NULL,
+  `hrg` varchar(50) NOT NULL,
+  `hrg_jual` int(11) NOT NULL,
+  `batas_cabang` int(11) NOT NULL,
+  `batas_minim` int(11) NOT NULL,
+  `jumlah` varchar(50) NOT NULL,
+  `diskon` varchar(50) NOT NULL,
+  `sub_tot` varchar(50) NOT NULL,
+  `tgl_produksi` date NOT NULL,
+  `tgl_expired` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `history_beli_t`
 --
 
@@ -762,6 +811,37 @@ INSERT INTO `history_kasir` (`id`, `no_faktur`, `id_pasien`, `id_dr`, `id_kasir`
 (175, '202006250928465', 'S.M.S.5', 9, NULL, '2020-06-25', 0, 'VIT C ( KALENG )', '766785', '', '577', 1, 0, '577', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
 (176, '202005051206323', 'S.M.S.6', 9, NULL, '2020-05-15', 0, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '8085', 1, 0, '8085', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
 (177, '202012101341559', 'S.M.S.2', 0, NULL, '2020-12-10', 1, 'GEQUIN', '010494', '25000', '', 1, 0, '0', 1, 'Produk', 'Belum Lunas', 'sakittt', 'Apotek', 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history_kirim_stok`
+--
+
+CREATE TABLE `history_kirim_stok` (
+  `id` int(11) NOT NULL,
+  `no_peng` varchar(50) NOT NULL,
+  `tgl_kirim` date NOT NULL,
+  `kd_brg` varchar(50) NOT NULL,
+  `nama_brg` varchar(50) NOT NULL,
+  `satuan` varchar(50) NOT NULL,
+  `kategori` varchar(50) NOT NULL,
+  `hrg` varchar(50) NOT NULL,
+  `hrg_jual` int(11) NOT NULL,
+  `batas_cabang` int(11) NOT NULL,
+  `batas_minim` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `tgl_produksi` date DEFAULT NULL,
+  `tgl_expired` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `history_kirim_stok`
+--
+
+INSERT INTO `history_kirim_stok` (`id`, `no_peng`, `tgl_kirim`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_produksi`, `tgl_expired`) VALUES
+(1, '21122020', '2020-12-21', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 20, '2020-11-02', '2022-11-02'),
+(2, '21122020', '2020-12-21', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, 50, '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
 
@@ -1096,6 +1176,27 @@ INSERT INTO `kehadiran_dr` (`id_keh`, `id_dr`, `id_kk`, `tanggal`, `jam`) VALUES
 (56, 11, 0, '2020-12-07', '21:07:59'),
 (57, 11, 0, '2020-12-08', '12:21:06'),
 (58, 11, 0, '2020-12-10', '19:17:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kirim_stok`
+--
+
+CREATE TABLE `kirim_stok` (
+  `id` int(11) NOT NULL,
+  `no_peng` varchar(15) NOT NULL,
+  `id_ju` varchar(5) NOT NULL,
+  `tgl_kirim` date NOT NULL,
+  `ket` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kirim_stok`
+--
+
+INSERT INTO `kirim_stok` (`id`, `no_peng`, `id_ju`, `tgl_kirim`, `ket`) VALUES
+(1, '21122020', 'JU-01', '2020-12-21', 'Kirim produk');
 
 -- --------------------------------------------------------
 
@@ -2378,7 +2479,13 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1242, 'admin', 'Gagal Login', '2020-12-17 08:05:05'),
 (1243, 'admin', 'Berhasil Login dengan IP ::1', '2020-12-17 08:05:13'),
 (1244, 'admin', 'Berhasil Login dengan IP ::1', '2020-12-17 09:04:04'),
-(1245, 'admin', 'Berhasil Login dengan IP ::1', '2020-12-17 10:32:44');
+(1245, 'admin', 'Berhasil Login dengan IP ::1', '2020-12-17 10:32:44'),
+(1246, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-21 05:26:49'),
+(1247, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-21 05:37:28'),
+(1248, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-21 05:42:02'),
+(1249, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-21 05:55:20'),
+(1250, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-21 06:02:31'),
+(1251, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-21 10:07:20');
 
 -- --------------------------------------------------------
 
@@ -2775,12 +2882,19 @@ INSERT INTO `pekerjaan` (`id_pekerjaan`, `pekerjaan`) VALUES
 
 CREATE TABLE `pelayanan_obat` (
   `id_pelayanan_obat` int(11) NOT NULL,
+  `no_tran` varchar(50) NOT NULL,
   `nama_pembeli` varchar(255) NOT NULL,
-  `nama_obat` varchar(255) NOT NULL,
   `tgl_pembelian` date NOT NULL,
-  `qty` int(11) NOT NULL,
-  `harga` int(11) NOT NULL
+  `total` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pelayanan_obat`
+--
+
+INSERT INTO `pelayanan_obat` (`id_pelayanan_obat`, `no_tran`, `nama_pembeli`, `tgl_pembelian`, `total`) VALUES
+(1, '123', '2020-12-21', '0000-00-00', '240000'),
+(2, '124', 'Nada', '2020-12-21', '200000');
 
 -- --------------------------------------------------------
 
@@ -3052,13 +3166,6 @@ CREATE TABLE `pengiriman_stok` (
   `tgl_produksi` date DEFAULT NULL,
   `tgl_expired` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `pengiriman_stok`
---
-
-INSERT INTO `pengiriman_stok` (`id_ps`, `kd_brg`, `nama_brg`, `satuan_ps`, `kategori_ps`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_kirim`, `tgl_produksi`, `tgl_expired`) VALUES
-(2, '010494', 'GEQUIN', 3, 9, '25000', 30000, 100, 10, '50', '2020-12-17', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
 
@@ -4536,6 +4643,12 @@ ALTER TABLE `history_kasir`
   ADD KEY `id_pasien` (`id_pasien`,`no_urut`,`nama`,`kode`,`jenis`);
 
 --
+-- Indexes for table `history_kirim_stok`
+--
+ALTER TABLE `history_kirim_stok`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `identitas`
 --
 ALTER TABLE `identitas`
@@ -4585,6 +4698,12 @@ ALTER TABLE `kategori_pelanggan`
 --
 ALTER TABLE `kehadiran_dr`
   ADD PRIMARY KEY (`id_keh`);
+
+--
+-- Indexes for table `kirim_stok`
+--
+ALTER TABLE `kirim_stok`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `krisar`
@@ -4933,6 +5052,12 @@ ALTER TABLE `history_kasir`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
+-- AUTO_INCREMENT for table `history_kirim_stok`
+--
+ALTER TABLE `history_kirim_stok`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
@@ -4969,6 +5094,12 @@ ALTER TABLE `kehadiran_dr`
   MODIFY `id_keh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
+-- AUTO_INCREMENT for table `kirim_stok`
+--
+ALTER TABLE `kirim_stok`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `krisar`
 --
 ALTER TABLE `krisar`
@@ -4978,7 +5109,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1246;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1252;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5038,7 +5169,7 @@ ALTER TABLE `pembayaran_lab`
 -- AUTO_INCREMENT for table `pembelian_k`
 --
 ALTER TABLE `pembelian_k`
-  MODIFY `id_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pembelian_t`
@@ -5056,7 +5187,7 @@ ALTER TABLE `pengeluaran`
 -- AUTO_INCREMENT for table `pengiriman_stok`
 --
 ALTER TABLE `pengiriman_stok`
-  MODIFY `id_ps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_ps` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `perawatan_pasien`
