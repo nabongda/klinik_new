@@ -1,10 +1,11 @@
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <?php
   switch($_GET['act']){
   default:
 ?>
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <section class="content-header">
   <div class="container-fluid">
@@ -53,9 +54,9 @@
             </thead>
             <tbody>
             <?php
-              $tampil = mysqli_query($con, "Select * From Pelayanan_obat");
+              $tampil = mysqli_query($con, "Select * From pelayanan_obat");
               $no = 1;
-              while($data = mysqli_fecth_array($tampil)){
+              while($data = mysqli_fetch_array($tampil)){
               ?>
               <tr>
                 <td><?php echo $no++?></td>
@@ -145,7 +146,7 @@
               <div class="form-row">
                 <div class="form-group col-md-2">
                   <label>Nama Obat </label>
-                  <input type="text" class="form-control" name="nama_brg" id="nama_brg" placeholder="Nama Obat" required>
+                  <input type="text" class="form-control" name="nama_brg" id="nama_barang" placeholder="Nama Obat" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Kode Obat </label>
@@ -348,7 +349,6 @@
   }
 ?>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
   $.ajaxSetup({
@@ -378,7 +378,7 @@ $(document).ready(function(){
     source: function( request, response ) {
       // Fetch data
       $.ajax({
-      url: "modul/pembelian_t/cari.php",
+      url: "modul/pelayanan_obat/cari.php",
       type: 'post',
       dataType: "json",
       data: {
