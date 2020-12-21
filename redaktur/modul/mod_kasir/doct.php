@@ -42,8 +42,8 @@ if($kd > 0){
 
 		?> 
 		
-		<select class="form-control" name="dokter" style="width: 93%;">
-											<option value="belum">Silahkan pilih dokter ..</option>
+		<select class="form-control" name="dokter">
+			<option value="belum">Silahkan pilih dokter ..</option>
 		
 		<?php
 
@@ -71,7 +71,7 @@ if($kd > 0){
 
 		?> 
 		
-		<select class="form-control" name="dokter" style="width: 93%;" >
+		<select class="form-control" name="dokter">
 											<option value="belum">Silahkan pilih dokter ..</option>
 		
 		<?php
@@ -94,7 +94,7 @@ if($kd > 0){
 
 	?> 
 		
-		<select class="form-control" name="dokter" style="width: 93%;">
+		<select class="form-control" name="dokter">
 											<option value="belum">Silahkan pilih dokter ..</option>
 		
 		<?php
@@ -114,7 +114,7 @@ if($kd > 0){
 } else {
 ?> 
 
-<select class="form-control" name="dokter" style="width: 93%;" disabled>
+<select class="form-control" name="dokter" disabled>
 											<option value="belum">Silahkan pilih dokter ..</option>
 </select>
 

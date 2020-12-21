@@ -1,10 +1,11 @@
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <?php
   switch($_GET['act']){
   default:
 ?>
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <section class="content-header">
   <div class="container-fluid">
@@ -381,7 +382,7 @@
                   <label for="inputNoFaktur">No Faktur </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="no_fak" value="<?php echo $kode; ?>" autocomplete="off">
+                  <input type="text" class="form-control" name="no_fak" value="<?php echo $kode; ?>" autocomplete="off" required>
                   <input type="hidden" name="total" id="tot">
                 </div>
               </div>
@@ -391,7 +392,7 @@
                 </div>
                 <div class="col-sm-4">
                   <input type="date" class="form-control" name="tgl_beli" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
-                        data-inputmask-inputformat="mm/dd/yyyy" data-mask>
+                        data-inputmask-inputformat="mm/dd/yyyy" data-mask required>
                 </div>
               </div>
               <div class="form-group row">
@@ -399,7 +400,7 @@
                   <label for="inputSuplier">Suplier </label>
                 </div>
                 <div class="col-sm-4">
-                  <select class="form-control select2" name="id_sup" name="id_sup" style="width: 100%;">
+                  <select class="form-control select2" name="id_sup" name="id_sup" style="width: 100%;" required>
                     <option value="">--- Pilih Suplier ---</option>
                       <?php $query = mysqli_query($con, "SELECT *FROM suplier");
                         while ($cb = mysqli_fetch_array($query)) { ?>
@@ -414,7 +415,7 @@
                 </div>
                 <div class="col-sm-4">
                   <input type="date" class="form-control" name="tgl_tempo" data-inputmask-alias="datetime"
-                        data-inputmask-inputformat="mm/dd/yyyy" data-mask>
+                        data-inputmask-inputformat="mm/dd/yyyy" data-mask required>
                 </div>
               </div>
               <div class="form-group col-md-2">
@@ -480,7 +481,6 @@
   }
 ?>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
   $.ajaxSetup({

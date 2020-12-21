@@ -1223,6 +1223,12 @@ elseif ($module=='trf_out'){
 	
 		}
 
+	else if ($module=='pengiriman_stok'){
+
+	include "modul/pengiriman_stok/pengiriman_stok.php";
+	
+	}
+
 	// Apabila modul tidak ditemukan
 
 	else {

@@ -11,19 +11,18 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Data Pembelian Tunai</h1>
+        <h1>Data Pengiriman Stok</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?module=home">Beranda</a></li>
-          <li class="breadcrumb-item active">Data Pembelian Tunai</li>
+          <li class="breadcrumb-item active">Data Pengiriman Stok</li>
         </ol>
       </div>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
 </section>
 
-<!-- Main content -->
 <section class="content">
   <div class="row">
     <div class="col-12">
@@ -31,13 +30,12 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-12">
-              <div class="col-md-12"><a href="?module=pembelian_t&act=tambah_produk" class="btn btn-primary">Tambah Data
-                  Pembelian</a>
+              <div class="col-md-12"><a href="?module=pengiriman_stok&act=tambah_produk" class="btn btn-primary">Tambah Data
+                  Pengiriman</a>
               </div>
             </div>
           </div>
         </div>
-        <!-- /.card-header -->
         <div class="card-body">
           <table id="example1" class="table table-bordered table-striped">
             <thead>
@@ -53,30 +51,6 @@
               </tr>
             </thead>
             <tbody>
-              <?php
-                $tampil     = mysqli_query($con, "Select * From beli");
-                $no = 1;
-                while($data = mysqli_fetch_array($tampil)){
-              ?>
-              <tr>
-                <td><?php echo $no++?></td>
-                <td><?php echo $data['no_fak']; ?></td>
-                <td><?php echo $data['tgl_beli']; ?></td>
-                <?php $q1 = mysqli_query($con, "SELECT *FROM suplier WHERE id_sup='$data[id_sup]'"); 
-                    $k = mysqli_fetch_array($q1); ?>
-                <td><?php echo $k['nama_sup']; ?></td>
-                <td><?php echo rupiah($data['total']); ?></td>
-                <td><?php echo $data['pembayaran']; ?></td>
-                <td><?php echo $data['ket']?></td>
-                <td>
-                  <a href="#detail" id="custId" data-toggle="modal" data-id="<?php echo $data['id']?>" class="btn-xs btn-success"><i
-                      class="fa fa-eye"> Detail</i></a>
-                  <a href="#editmodal" id="custId" data-toggle="modal" data-id="<?php echo $data['id']?>" class="btn-xs btn-warning"><i
-                      class="fa fa-edit"> Edit</i></a>
-                  <a href="#" no-fak="<?php echo $data['no_fak']?>" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
-                </td>
-              </tr>
-              <?php } ?>
             </tbody>
             <!-- Modals Detail Barang -->
             <div class="modal fade" id="detail" role="dialog">
@@ -216,56 +190,45 @@
 
           </table>
         </div>
-        <!-- /.card-body -->
       </div>
-      <!-- /.card -->
     </div>
-    <!-- /.col -->
   </div>
-  <!-- /.row -->
 </section>
-<!-- /.content -->
 
 <?php
   break;
   case "tambah_produk":
 ?>
 
-<!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Data Pembelian Tunai</h1>
+        <h1>Data Pengiriman Stok</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?module=home">Beranda</a></li>
-          <li class="breadcrumb-item active">Tambah Pembelian Tunai</li>
+          <li class="breadcrumb-item active">Tambah Pengiriman Stok</li>
         </ol>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Main content -->
 <section class="content">
   <div class="container-fluid">
     <div class="row">
-      <!-- left column -->
       <div class="col-md-12">
-        <!-- general form elements -->
         <div class="card card-primary">
           <div class="card-header">
-              <h3 class="card-title">Silahkan pilih produk yang akan dibeli</h3>
+              <h3 class="card-title">Silahkan pilih produk yang akan dikirim</h3>
           </div>
-          <!-- /.card-header -->
-          <!-- form start -->
           <form role="form" id="form_t">
             <?php 
-            $tgl_beli = date('Y-m-d');
+            $tgl_kirim = date('Y-m-d');
             ?>
-            <input class="form-control" type="hidden" name="id_t" value="<?php echo $id_t ?>">
+            <input class="form-control" type="hidden" name="id_ps" value="<?php echo $id_ps ?>">
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-2">
@@ -280,7 +243,7 @@
                   <label>Satuan</label>
                   <select class="form-control select2" name="id_satuan" id="id_satuan" style="width: 100%;" readonly>
                     <option value="">Satuan</option>
-                    <?php $query = mysqli_query($con, "SELECT *FROM data_satuan");
+                    <?php $query = mysqli_query($con, "SELECT * FROM data_satuan");
                       while ($cb = mysqli_fetch_array($query)) { ?>
                       <option value="<?php echo $cb['id_s']; ?>"><?php echo $cb['satuan']; ?></option>
                     <?php  } ?> 
@@ -299,16 +262,13 @@
                 <div class="form-group col-md-2">
                   <label>Jumlah </label>
                   <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
+                  <small id="jml" style="color: red;"></small>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Harga </label>
                   <input type="text" class="form-control" name="hrg" id="hrg" placeholder="Harga" required>
                   <input class="form-control" type="hidden" name="harga_jual" id="harga_jual" required>
-                  <input class="form-control" type="hidden" name="tgl_beli" value="<?php echo $tgl_beli?>">
-                </div>
-                <div class="form-group col-md-2">
-                  <label>Diskon </label>
-                  <input type="number" class="form-control" name="diskon" id="diskon" placeholder="misal: 1-100">
+                  <input class="form-control" type="hidden" name="tgl_kirim" value="<?php echo $tgl_kirim?>">
                   <input class="form-control" type="hidden" name="batas_cabang" id="batas_cabang" value="100" required>
                   <input class="form-control" type="hidden" name="batas_minim" id="batas_minim" value="10" required>
                 </div>
@@ -323,7 +283,7 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <button type="button" class="btn-sm btn-danger" onclick="this.form.reset();">Reset Form</button>
+                  <button type="button" class="btn-sm btn-danger" id="reset" onclick="this.form.reset();">Reset Form</button>
                   <button type="submit" class="btn-sm btn-success">Tambah</button>
                 </div>
               </div>
@@ -339,41 +299,13 @@
                   <th>Nama Barang</th>
                   <th>Jumlah</th>
                   <th>Harga</th>
-                  <th>Diskon</th>
                   <th>Tanggal Produksi</th>
                   <th>Tanggal Expired</th>
-                  <th>Sub Total</th>
                   <th class="nosort">Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                <?php
-                  $tampil     = mysqli_query($con, "Select * From pembelian_t");
-                  $no = 1;
-                  while($data = mysqli_fetch_array($tampil)){
-                ?>
-                <tr>
-                  <td><?php echo $no++?></td>
-                  <td><?php echo $data['kd_brg']; ?></td>
-                  <td><?php echo $data['nama_brg']; ?></td>
-                  <td><?php echo $data['jumlah']; ?></td>
-                  <td><?php echo rupiah($data['hrg']); ?></td>
-                  <td><?php echo $data['diskon']; ?></td>
-                  <td><?php echo $data['tgl_produksi']; ?></td>
-                  <td><?php echo $data['tgl_expired']; ?></td>
-                  <td><?php echo rupiah($data['sub_tot']); ?></td>
-                </tr>
-                <?php } ?>
               </tbody>
-              <tr>
-                <th colspan="9" style="text-align: right;" id="total">Total: 
-                  <?php
-                    $jumlahkan = "SELECT SUM(sub_tot) AS total FROM pembelian_t"; //perintah untuk menjumlahkan
-                    $total =@mysqli_query($con, $jumlahkan) or die (mysqli_error($con));//melakukan query dengan varibel $jumlahkan
-                    $t = mysqli_fetch_array($total); //menyimpan hasil query ke variabel $t
-                    ?><b><?php echo rupiah($t["total"]); ?></b>
-                </th>
-              </tr>
               <div class="modal fade modalEditBarang" tabindex="-1" role="dialog"
                   aria-hidden="true">
                 <div class="modal-dialog modal-xs" role="document">
@@ -445,16 +377,15 @@
             <div class="card-body">
               <div class="form-group row">
                 <div class="col-sm-2">
-                  <label for="inputNoFaktur">No Faktur </label>
+                  <label for="inputNoFaktur">No Pengiriman </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="no_fak">
-                  <input type="hidden" name="total" id="tot" value="<?php echo $t['total']; ?>">
+                  <input type="text" class="form-control" name="no_peng" required>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-2">
-                  <label for="inputTglBeli">Tanggal Pembelian </label>
+                  <label for="inputTglBeli">Tanggal Pengiriman </label>
                 </div>
                 <div class="col-sm-4">
                   <input type="date" class="form-control" name="tgl_beli" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
@@ -496,7 +427,7 @@
                 </div>
               </div>
               <div class="form-group col-md-2">
-                <button type="submit" class="btn btn-success">Simpan Transaksi</button>
+                <button type="submit" class="btn btn-success">Simpan</button>
               </div>
             </div>
           </form>
@@ -505,7 +436,6 @@
     </div>
   </div>
 </section>
-<!-- /.content -->
 
 <?php
   break;
@@ -525,12 +455,13 @@ $(document).ready(function(){
     e.preventDefault();
     $.ajax({
       type: 'post',
-      url: 'modul/pembelian_t/input_data.php',
+      url: 'modul/pengiriman_stok/input_data.php',
       data: $('#form_t').serialize(),
       success: function (data) {
         var oTable = $('#barang11').dataTable();
         oTable.fnDraw(false);
         $('#form_t').trigger("reset");
+        // $('#jml').html("");
         total();
       }
     });
@@ -541,7 +472,7 @@ $(document).ready(function(){
     source: function( request, response ) {
       // Fetch data
       $.ajax({
-      url: "modul/pembelian_t/cari.php",
+      url: "modul/pengiriman_stok/cari.php",
       type: 'post',
       dataType: "json",
       data: {
@@ -556,6 +487,7 @@ $(document).ready(function(){
       // Set selection
       $('#kd_brg').val(ui.item.kd_produk);
       $('#nama_barang').val(ui.item.label);
+      $('#jml').html("Jumlah Stok di Gudang: <b>"+ui.item.jml+"</b>");
       $('#id_satuan').val(ui.item.id_satuan);
       $('#id_kategori').val(ui.item.id_kategori);
       $('#hrg').val(ui.item.harga_beli);
@@ -572,11 +504,9 @@ $(document).ready(function(){
     "bServerSide": true,
     "responsive": true,
     "autoWidth": false,
-    "sAjaxSource": "modul/pembelian_t/data_barang.php",
+    "sAjaxSource": "modul/pengiriman_stok/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
-      null,
-      null,
       null,
       null,
       null,
@@ -600,10 +530,16 @@ $(document).ready(function(){
     $("#kd_brg").val(kode_b);
   });
 
+  // Reset Form
+  // $('body').on('click','#reset', function () {
+  //   $('#form_t').trigger("reset");
+  //   $('#jml').html("");
+  // });
+
   // Reset table input barang
   $("#reset_brg").click(function(){
     $.ajax({
-      url: 'modul/pembelian_t/reset_brg.php',
+      url: 'modul/pengiriman_stok/reset_brg.php',
       success:function(){
         alert("Tabel Berhasil Direset");
         var oTable = $('#barang11').dataTable(); 
@@ -615,7 +551,7 @@ $(document).ready(function(){
   // Hapus Barang
   $('body').on('click', '#hapus_brg', function (event) {
     event.preventDefault();
-    var id_t = $(this).data("id");
+    var id_ps = $(this).data("id");
     var token = $("meta[name='csrf-token']").attr("content");
     Swal.fire({
       title: 'Delete',
@@ -630,10 +566,10 @@ $(document).ready(function(){
         console.log(result);
         if (result.value) {
           $.ajax({
-            url: "modul/pembelian_t/hapus_brg.php",
+            url: "modul/pengiriman_stok/hapus_brg.php",
             type: "POST",
             data: {
-              "id_t": id_t,
+              "id_ps": id_ps,
               "_token": token,
             },
             success: function (response) {
@@ -661,7 +597,7 @@ $(document).ready(function(){
   // function total
   function total(){
     $.ajax({
-      url : "modul/pembelian_t/total.php",
+      url : "modul/pengiriman_stok/total.php",
       success: function(data){
         var obj = JSON.parse(data);
         var t = "Total: "+obj.rupiah;
