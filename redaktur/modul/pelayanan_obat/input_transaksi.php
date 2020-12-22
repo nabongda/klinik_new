@@ -8,7 +8,7 @@ include "../../../config/koneksi.php";
 
 		mysqli_query($con, "INSERT INTO pelayanan_obat (no_tran, nama_pembeli, tgl_pembelian,total) VALUES('$no_tran', '$nama_pembeli', '$tgl', '$total')");
 		
-		mysqli_query($con, "INSERT INTO history_beli_obat (no_tran, tgl_beli, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot, tgl_produksi, tgl_expired) SELECT '$no_tran','$tgl',kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_produksi,tgl_expired FROM pelayanan_obat ");
+		mysqli_query($con, "INSERT INTO history_beli_obat (no_tran, tgl_beli, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot, tgl_produksi, tgl_expired) SELECT '$no_tran','$tgl',kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_produksi,tgl_expired FROM beli_obat ");
 
 		$q = mysqli_query($con, "SELECT * FROM history_beli_obat Where no_tran='$no_tran'");
 

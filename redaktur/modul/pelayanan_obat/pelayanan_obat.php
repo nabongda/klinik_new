@@ -61,21 +61,49 @@
                 <td><?php echo $data['nama_pembeli']; ?></td>
                 <td><?php echo $data['tgl_pembelian'] ?></td>
                 <td>
-                <a href="#cetak" id=" " data-toggle="modal" data-id="" class="btn-xs btn-success"><i
+                <a href="#detail" id="custId" data-toggle="modal" data-id="<?php echo $data['id_pelayanan_obat']?>" class="btn-xs btn-success"><i
                       class="fa fa-eye"> Detail </i></a>
-                  <a href="#cetak" id=" " data-toggle="modal" data-id="" class="btn-xs btn-warnng"><i
-                      class="fa fa-print"> Cetak </i></a>
-                  <a href="#" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
+                  <!-- <a href="#cetak" id=" " data-toggle="modal" data-id="" class="btn-xs btn-warnng"><i
+                      class="fa fa-print"> Cetak </i></a> -->
+                  <a href="#" no-tran="<?php echo $data['no_tran']?>" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
                 </td>
               </tr>
               <?php } ?>
             </tbody>
+
+            <!-- Modals Detail Barang -->
+           <div class="modal fade" id="detail" role="dialog">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="fetched-data"></div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+              $(document).ready(function () {
+                $('#detail').on('show.bs.modal', function (e) {
+                  var id = $(e.relatedTarget).data('id');
+                  //menggunakan fungsi ajax untuk pengambilan data
+                  $.ajax({
+                    type: 'post',
+                    url: 'modul/pelayanan_obat/detail.php',
+                    data: 'id=' + id,
+                    success: function (data) {
+                      $('.fetched-data').html(data);//menampilkan data ke dalam modal
+                    }
+                  });
+                });
+              });
+            </script>
             
             <!-- SweetAlert Hapus -->
             <script>
               $('body').on('click','.hapus',function (event) {
                 event.preventDefault();
-                  var no_fak = $(this).attr('no-fak');
+                  var no_tran = $(this).attr('no-tran');
                   Swal.fire({
                     title: 'Yakin Ingin Menghapus Data?',
                     icon: 'warning',
@@ -87,7 +115,7 @@
                   .then((result) => {
                     console.log(result);
                   if (result.value) {
-                    window.location = "";
+                    window.location = "modul/pelayanan_obat/aksi_pelayanan_obat.php?module=pelayanan_obat&act=hapus&no_tran="+no_tran;
                   }
                   })
                 });

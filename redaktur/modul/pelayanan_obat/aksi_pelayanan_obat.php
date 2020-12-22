@@ -11,18 +11,18 @@
 	if ($act == 'hapus'){
 		$id		= $_GET['no_tran'];
 		
-		$sql = mysqli_query($con, "SELECT * FROM history_beli_t Where no_tran='$id'");
+		$sql = mysqli_query($con, "SELECT * FROM history_beli_obat Where no_tran='$id'");
 		while ($result = mysqli_fetch_array($sql)) {
 			$sql2 = mysqli_query($con, "SELECT * FROM produk_pusat where kode_barang='$result[kd_brg]'");
 			$ambil = mysqli_fetch_array($sql2);
 			$jumlahsql = $ambil['jumlah']-$result['jumlah'];
 
-			if ($jumlahsql<=0) {
-				mysqli_query($con, "UPDATE produk_pusat SET jumlah='0' where kode_barang='$result[kd_brg]'");
-			}
-			else {
-				mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlahsql' where kode_barang='$result[kd_brg]'");
-			}
+			// if ($jumlahsql<=0) {
+			// 	mysqli_query($con, "UPDATE produk_pusat SET jumlah='0' where kode_barang='$result[kd_brg]'");
+			// }
+			// else {
+			// 	mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlahsql' where kode_barang='$result[kd_brg]'");
+			// }
 
 			mysqli_query($con, "Delete From pelayanan_obat Where no_tran='$id'");
 			mysqli_query($con, "Delete From history_beli_obat Where no_tran='$id'");
