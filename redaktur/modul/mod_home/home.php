@@ -30,7 +30,7 @@ if($_SESSION['jenis_u']!="JU-01"){ ?>
           <div class="card-header callout callout-success">
             <?php $k =  mysqli_query($con, "SELECT *FROM daftar_klinik WHERE id_kk='$id_kk'");
             $kk =  mysqli_fetch_array($k); ?>
-            <h4 style="text-transform: uppercase;">SELAMAT DATANG DI KLINIK <?php echo $kk['nama_klinik']; ?></h4>
+            <h4 style="text-transform: uppercase;">SELAMAT DATANG DI <?php echo $kk['nama_klinik']; ?></h4>
           </div>
         </div>
       </div>
