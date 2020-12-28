@@ -13,13 +13,13 @@ include "../../../config/koneksi.php";
 		$q = mysqli_query($con, "SELECT * FROM history_beli_obat Where no_tran='$no_tran'");
 
 		while ($cek = mysqli_fetch_array($q)) {
-			$q2 = mysqli_query($con, "SELECT * FROM produk_pusat where kode_barang='$cek[kd_brg]'");
+			$q2 = mysqli_query($con, "SELECT * FROM produk where kode_barang='$cek[kd_brg]'");
 			$jum = mysqli_num_rows($q2);
 
 			if ($jum>0) {
 				$p = mysqli_fetch_array($q2);
-				$jumlah = $p['jumlah']+$cek['jumlah'];
-				mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlah' where kode_barang='$cek[kd_brg]'");
+				$jumlah = $p['jumlah']-$cek['jumlah'];
+				mysqli_query($con, "UPDATE produk SET jumlah='$jumlah' where kode_barang='$cek[kd_brg]'");
 			}else{
 				$nama_brg		= $cek['nama_brg'];
 				$hrg_beli		= $cek['hrg'];
@@ -32,7 +32,7 @@ include "../../../config/koneksi.php";
 				$tgl_expired	= $cek['tgl_expired'];
 				$batas_cabang	= 100;
 				$batas_minim	= 10;
-				mysqli_query($con, "INSERT INTO produk_pusat (
+				mysqli_query($con, "INSERT INTO produk (
 					kode_barang,nama_p,jumlah,hrg,hrg_jual,satuan,kategori,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$jumlah','$hrg_beli','$hrg_jual','$id_sat','$kategori','$tgl_produksi','$tgl_expired')
 					");
 			}
