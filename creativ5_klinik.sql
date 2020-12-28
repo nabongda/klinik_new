@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2020 at 10:50 AM
+-- Generation Time: Dec 28, 2020 at 04:38 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -833,7 +833,7 @@ CREATE TABLE `history_kirim_stok` (
   `jumlah` int(11) NOT NULL,
   `tgl_produksi` date DEFAULT NULL,
   `tgl_expired` date DEFAULT NULL,
-  `status` enum('belum','sudah') NOT NULL
+  `status` enum('kirim','terima','tolak') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -841,7 +841,7 @@ CREATE TABLE `history_kirim_stok` (
 --
 
 INSERT INTO `history_kirim_stok` (`id`, `no_peng`, `tgl_kirim`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_produksi`, `tgl_expired`, `status`) VALUES
-(4, '22122020', '2020-12-22', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 20, '2020-11-02', '2022-11-02', 'belum');
+(4, '22122020', '2020-12-22', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 20, '2020-11-02', '2022-11-02', 'terima');
 
 -- --------------------------------------------------------
 
@@ -2487,7 +2487,9 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1250, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-21 06:02:31'),
 (1251, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-21 10:07:20'),
 (1252, 'admin', 'Berhasil Login dengan IP ::1', '2020-12-22 06:35:52'),
-(1253, 'admin', 'Hapus Data Produk (22122020)', '2020-12-22 07:35:33');
+(1253, 'admin', 'Hapus Data Produk (22122020)', '2020-12-22 07:35:33'),
+(1254, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-22 14:29:22'),
+(1255, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 02:48:42');
 
 -- --------------------------------------------------------
 
@@ -3271,24 +3273,30 @@ CREATE TABLE `produk` (
   `id_p` int(11) NOT NULL,
   `kode_barang` varchar(50) NOT NULL,
   `nama_p` varchar(50) NOT NULL,
-  `jumlah` int(11) NOT NULL
+  `jumlah` int(11) NOT NULL,
+  `hrg` int(11) NOT NULL,
+  `hrg_jual` int(11) NOT NULL,
+  `satuan` varchar(50) NOT NULL,
+  `kategori` varchar(50) NOT NULL,
+  `tgl_produksi` date DEFAULT NULL,
+  `tgl_expired` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`) VALUES
-(1, '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', 51),
-(2, '661713', 'ALKOHOL 70 %', 7),
-(3, '766785', 'VIT C ( KALENG )', 48),
-(4, '581543', 'ALKOHOL KECIL', 4),
-(5, '186097', 'ANTIMO DEWASA', 45),
-(6, '643464', 'ANTANGIN JRG', 29),
-(7, '180024', 'BETADINE 5 LITER', 2),
-(13, '504761', 'HICO - HEPARIN SODIUM', 0),
-(21, '150194', 'Hawedion', 80),
-(20, '010494', 'GEQUIN', 98);
+INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`, `hrg`, `hrg_jual`, `satuan`, `kategori`, `tgl_produksi`, `tgl_expired`) VALUES
+(1, '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', 51, 0, 0, '', '', NULL, NULL),
+(2, '661713', 'ALKOHOL 70 %', 7, 0, 0, '', '', NULL, NULL),
+(3, '766785', 'VIT C ( KALENG )', 48, 0, 0, '', '', NULL, NULL),
+(4, '581543', 'ALKOHOL KECIL', 4, 0, 0, '', '', NULL, NULL),
+(5, '186097', 'ANTIMO DEWASA', 45, 0, 0, '', '', NULL, NULL),
+(6, '643464', 'ANTANGIN JRG', 29, 0, 0, '', '', NULL, NULL),
+(7, '180024', 'BETADINE 5 LITER', 2, 0, 0, '', '', NULL, NULL),
+(13, '504761', 'HICO - HEPARIN SODIUM', 0, 0, 0, '', '', NULL, NULL),
+(21, '150194', 'Hawedion', 100, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(20, '010494', 'GEQUIN', 98, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
 
@@ -4115,7 +4123,9 @@ INSERT INTO `produk_pengiriman` (`id`, `tgl_kirim`, `kode_barang`, `nama_p`, `ju
 (33, '2020-12-01', '150194', 'Hawedion', 60, 0),
 (34, '2020-12-01', '010494', 'GEQUIN', 50, 0),
 (35, '2020-12-01', '150194', 'Hawedion', 80, 0),
-(36, '2020-12-15', '010494', 'GEQUIN', 49, 49);
+(36, '2020-12-15', '010494', 'GEQUIN', 49, 49),
+(37, '2020-12-22', '', '', 0, 0),
+(38, '2020-12-22', '150194', 'Hawedion', 20, 80);
 
 -- --------------------------------------------------------
 
@@ -5118,7 +5128,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1254;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1256;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5214,7 +5224,7 @@ ALTER TABLE `poliklinik`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `produk_pasien`
@@ -5226,7 +5236,7 @@ ALTER TABLE `produk_pasien`
 -- AUTO_INCREMENT for table `produk_pengiriman`
 --
 ALTER TABLE `produk_pengiriman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `produk_ps`

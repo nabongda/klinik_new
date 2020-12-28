@@ -14,15 +14,17 @@
 		
 		$sql = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE no_peng='$id'");
 		while ($result = mysqli_fetch_array($sql)) {
-			$sql2 = mysqli_query($con, "SELECT * FROM produk_pusat WHERE kode_barang='$result[kd_brg]'");
-			$ambil = mysqli_fetch_array($sql2);
-			$jumlahsql = $ambil['jumlah']+$result['jumlah'];
+			if ($result['status']=='kirim') {
+				$sql2 = mysqli_query($con, "SELECT * FROM produk_pusat WHERE kode_barang='$result[kd_brg]'");
+				$ambil = mysqli_fetch_array($sql2);
+				$jumlahsql = $ambil['jumlah']+$result['jumlah'];
 
-			if ($jumlahsql<=0) {
-				mysqli_query($con, "UPDATE produk_pusat SET jumlah='0' WHERE kode_barang='$result[kd_brg]'");
-			}
-			else {
-				mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlahsql' WHERE kode_barang='$result[kd_brg]'");
+				if ($jumlahsql<=0) {
+					mysqli_query($con, "UPDATE produk_pusat SET jumlah='0' WHERE kode_barang='$result[kd_brg]'");
+				}
+				else {
+					mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlahsql' WHERE kode_barang='$result[kd_brg]'");
+				}	
 			}
 
 			mysqli_query($con, "DELETE FROM kirim_stok WHERE no_peng='$id'");
@@ -33,7 +35,10 @@
 	}
 
 	elseif ($act == 'editbrg') {
-		# code...
+		$title = "Update";
+        $text = "Data berhasil diperbarui!";
+        $icon = "success";
+        mysqli_query($con, "UPDATE history_kirim_stok SET jumlah = '$_POST[jumlah]' WHERE id = '$_POST[id]'");
 	}
 	
 	header('location:../../media.php?module=pengiriman_stok');
