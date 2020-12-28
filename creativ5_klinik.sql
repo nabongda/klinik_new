@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2020 at 04:38 AM
+-- Generation Time: Dec 28, 2020 at 09:06 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -833,15 +833,16 @@ CREATE TABLE `history_kirim_stok` (
   `jumlah` int(11) NOT NULL,
   `tgl_produksi` date DEFAULT NULL,
   `tgl_expired` date DEFAULT NULL,
-  `status` enum('kirim','terima','tolak') NOT NULL
+  `status` enum('kirim','terima','tolak') NOT NULL,
+  `pesan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `history_kirim_stok`
 --
 
-INSERT INTO `history_kirim_stok` (`id`, `no_peng`, `tgl_kirim`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_produksi`, `tgl_expired`, `status`) VALUES
-(4, '22122020', '2020-12-22', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 20, '2020-11-02', '2022-11-02', 'terima');
+INSERT INTO `history_kirim_stok` (`id`, `no_peng`, `tgl_kirim`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_produksi`, `tgl_expired`, `status`, `pesan`) VALUES
+(5, '28122020', '2020-12-28', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 5, '2020-11-02', '2022-11-02', 'terima', '');
 
 -- --------------------------------------------------------
 
@@ -1196,7 +1197,7 @@ CREATE TABLE `kirim_stok` (
 --
 
 INSERT INTO `kirim_stok` (`id`, `no_peng`, `id_ju`, `tgl_kirim`, `ket`) VALUES
-(3, '22122020', 'JU-01', '2020-12-22', 'Ice Cream Chillin Chillin');
+(4, '28122020', 'JU-01', '2020-12-28', 'Kirimmm');
 
 -- --------------------------------------------------------
 
@@ -2489,7 +2490,10 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1252, 'admin', 'Berhasil Login dengan IP ::1', '2020-12-22 06:35:52'),
 (1253, 'admin', 'Hapus Data Produk (22122020)', '2020-12-22 07:35:33'),
 (1254, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-22 14:29:22'),
-(1255, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 02:48:42');
+(1255, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 02:48:42'),
+(1256, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 04:55:38'),
+(1257, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 05:11:04'),
+(1258, 'admin', 'Hapus Data Produk (22122020)', '2020-12-28 07:50:29');
 
 -- --------------------------------------------------------
 
@@ -2892,14 +2896,6 @@ CREATE TABLE `pelayanan_obat` (
   `total` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `pelayanan_obat`
---
-
-INSERT INTO `pelayanan_obat` (`id_pelayanan_obat`, `no_tran`, `nama_pembeli`, `tgl_pembelian`, `total`) VALUES
-(1, '123', '2020-12-21', '0000-00-00', '240000'),
-(2, '124', 'Nada', '2020-12-21', '200000');
-
 -- --------------------------------------------------------
 
 --
@@ -3171,13 +3167,6 @@ CREATE TABLE `pengiriman_stok` (
   `tgl_expired` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `pengiriman_stok`
---
-
-INSERT INTO `pengiriman_stok` (`id_ps`, `kd_brg`, `nama_brg`, `satuan_ps`, `kategori_ps`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_kirim`, `tgl_produksi`, `tgl_expired`) VALUES
-(1, '150194', 'Hawedion', 7, 6, '40000', 45000, 100, 10, '10', '2020-12-22', '2020-11-02', '2022-11-02');
-
 -- --------------------------------------------------------
 
 --
@@ -3295,7 +3284,7 @@ INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`, `hrg`, `hrg_jua
 (6, '643464', 'ANTANGIN JRG', 29, 0, 0, '', '', NULL, NULL),
 (7, '180024', 'BETADINE 5 LITER', 2, 0, 0, '', '', NULL, NULL),
 (13, '504761', 'HICO - HEPARIN SODIUM', 0, 0, 0, '', '', NULL, NULL),
-(21, '150194', 'Hawedion', 100, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(21, '150194', 'Hawedion', 105, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
 (20, '010494', 'GEQUIN', 98, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
@@ -4125,7 +4114,8 @@ INSERT INTO `produk_pengiriman` (`id`, `tgl_kirim`, `kode_barang`, `nama_p`, `ju
 (35, '2020-12-01', '150194', 'Hawedion', 80, 0),
 (36, '2020-12-15', '010494', 'GEQUIN', 49, 49),
 (37, '2020-12-22', '', '', 0, 0),
-(38, '2020-12-22', '150194', 'Hawedion', 20, 80);
+(38, '2020-12-22', '150194', 'Hawedion', 20, 80),
+(39, '2020-12-28', '150194', 'Hawedion', 5, 100);
 
 -- --------------------------------------------------------
 
@@ -4185,7 +4175,7 @@ INSERT INTO `produk_pusat` (`id_p`, `nama_p`, `jumlah`, `kode_barang`, `hrg`, `h
 (13, 'ANTANGIN JRG', 20, '643464', '', 0, '', '0', NULL, NULL),
 (14, 'BETADINE 5 LITER', 3, '180024', '', 0, '', '0', NULL, NULL),
 (24, 'GEQUIN', 100, '010494', '25000', 30000, '3', '9', '2020-11-01', '2022-11-01'),
-(25, 'Hawedion', 100, '150194', '40000', 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(25, 'Hawedion', 95, '150194', '40000', 45000, '7', '6', '2020-11-02', '2022-11-02'),
 (26, 'PANADOL MERAH', 15, '931489', '10000', 0, '', '9', '2020-11-24', '2022-11-24');
 
 -- --------------------------------------------------------
@@ -4570,6 +4560,12 @@ ALTER TABLE `beli_k`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `beli_obat`
+--
+ALTER TABLE `beli_obat`
+  ADD PRIMARY KEY (`id_beli_obat`);
+
+--
 -- Indexes for table `biaya_administrasi`
 --
 ALTER TABLE `biaya_administrasi`
@@ -4645,6 +4641,12 @@ ALTER TABLE `history_ap`
 -- Indexes for table `history_beli_k`
 --
 ALTER TABLE `history_beli_k`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `history_beli_obat`
+--
+ALTER TABLE `history_beli_obat`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -4778,6 +4780,12 @@ ALTER TABLE `pasien`
 --
 ALTER TABLE `pekerjaan`
   ADD PRIMARY KEY (`id_pekerjaan`);
+
+--
+-- Indexes for table `pelayanan_obat`
+--
+ALTER TABLE `pelayanan_obat`
+  ADD PRIMARY KEY (`id_pelayanan_obat`);
 
 --
 -- Indexes for table `pembayaran`
@@ -4981,6 +4989,12 @@ ALTER TABLE `beli_k`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `beli_obat`
+--
+ALTER TABLE `beli_obat`
+  MODIFY `id_beli_obat` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `biaya_administrasi`
 --
 ALTER TABLE `biaya_administrasi`
@@ -5059,6 +5073,12 @@ ALTER TABLE `history_beli_k`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `history_beli_obat`
+--
+ALTER TABLE `history_beli_obat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `history_beli_t`
 --
 ALTER TABLE `history_beli_t`
@@ -5074,7 +5094,7 @@ ALTER TABLE `history_kasir`
 -- AUTO_INCREMENT for table `history_kirim_stok`
 --
 ALTER TABLE `history_kirim_stok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -5116,7 +5136,7 @@ ALTER TABLE `kehadiran_dr`
 -- AUTO_INCREMENT for table `kirim_stok`
 --
 ALTER TABLE `kirim_stok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `krisar`
@@ -5128,7 +5148,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1256;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1259;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5165,6 +5185,12 @@ ALTER TABLE `pasien`
 --
 ALTER TABLE `pekerjaan`
   MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `pelayanan_obat`
+--
+ALTER TABLE `pelayanan_obat`
+  MODIFY `id_pelayanan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
@@ -5206,7 +5232,7 @@ ALTER TABLE `pengeluaran`
 -- AUTO_INCREMENT for table `pengiriman_stok`
 --
 ALTER TABLE `pengiriman_stok`
-  MODIFY `id_ps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ps` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `perawatan_pasien`
@@ -5236,7 +5262,7 @@ ALTER TABLE `produk_pasien`
 -- AUTO_INCREMENT for table `produk_pengiriman`
 --
 ALTER TABLE `produk_pengiriman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `produk_ps`
