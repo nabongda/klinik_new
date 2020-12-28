@@ -51,7 +51,7 @@
             </thead>
             <tbody>
             <?php
-              $tampil = mysqli_query($con, "Select * From pelayanan_obat");
+              $tampil = mysqli_query($con, "SELECT * From pelayanan_obat");
               $no = 1;
               while($data = mysqli_fetch_array($tampil)){
               ?>

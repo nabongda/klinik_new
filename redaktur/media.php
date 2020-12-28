@@ -142,7 +142,7 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="?module=home" class="nav-link active">
+              <a href="?module=home" class="nav-link">
                 <i class="fas fa-home"></i>
                 <p>
                   Beranda
