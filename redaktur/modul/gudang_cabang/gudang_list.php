@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="card-header">
-            <a href="?module=gudang_cabang&act=tambah_stok" class="btn btn-primary">Tambah Stok</a>
+            <a href="?module=gudang_cabang&act=tambah_stok" class="btn btn-primary">Tambah Stok Baru</a>
           </div>
           <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
@@ -185,9 +185,8 @@
                     <td><?php echo $r['tgl_produksi']?></td>
                     <td><?php echo $r['tgl_expired']?></td>
                     <td>
-                      <a href="#editmodal" id="custId" data-toggle="modal" data-id="<?php echo $data['id']?>" class="btn-xs btn-warning"><i
-                      class="fa fa-edit"> Edit</i></a>
-                      <a href="#" no-fak="<?php echo $data['no_fak']?>" class="hapus btn-xs btn-danger"><i class="fa fa-trash"> Hapus</i></a>
+                      <input type="radio" name="status" id=""> Terima <br>
+                      <input type="radio" name="status" id=""> Tolak
                     </td>
                   </tr>
                   <?php } ?>
