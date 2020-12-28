@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2020 at 09:06 AM
+-- Generation Time: Dec 28, 2020 at 09:17 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -2493,7 +2493,8 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1255, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 02:48:42'),
 (1256, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 04:55:38'),
 (1257, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 05:11:04'),
-(1258, 'admin', 'Hapus Data Produk (22122020)', '2020-12-28 07:50:29');
+(1258, 'admin', 'Hapus Data Produk (22122020)', '2020-12-28 07:50:29'),
+(1259, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 08:14:15');
 
 -- --------------------------------------------------------
 
@@ -4433,7 +4434,7 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-01', 'SM-69', 'Grafik', '#', 'Tidak Aktif', 'bar-chart', 5),
 ('JU-06', 'SM-70', 'Setting Printer', 'set_print', 'Tidak Aktif', 'print', 14),
 ('JU-07', 'SM-71', 'Pelayanan Obat', 'pelayanan_obat', 'Aktif', 'cog', 8),
-('JU-07', 'SM-7778', 'Pelayanan Apotek', 'kasir_apotek', 'Aktif', 'copy', 1),
+('JU-07', 'SM-7778', 'Pelayanan Pasien', 'kasir_apotek', 'Aktif', 'copy', 1),
 ('JU-06', 'SM-9889', 'Retur Penjualan', 'retur', 'Tidak Aktif', 'chain-broken', 4),
 ('JU-09', 'SM-99', 'Kritik & Saran', 'kritik_saran', 'Tidak Aktif', 'thumbs-up', 3),
 ('JU-01', 'SM-99000999', 'Data Poliklinik', 'poliklinik', 'Aktif', 'tags', 9),
@@ -5148,7 +5149,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1259;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1260;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
