@@ -113,7 +113,7 @@
 						</div>
 						<div class="form-group col-md-2">
 							<label>Harga</label>
-							<input type="text" class="form-control" name="harga_p" id="harga_p" readonly>
+							<input type="text" class="form-control" name="harga_p" id="harga_p" required>
 						</div>
 						<div class="form-group col-md-2">
 							<label>Keterangan</label>
@@ -127,7 +127,7 @@
 							<label>Jumlah</label>
 							<input type="number" class="form-control" min="1" name="jumlah" id="jumlah_p" value="1" required>
 						</div>
-						<button type="submit" class="btn btn-sm btn-success">Tambah</button>
+						<button type="submit" class="btn btn-sm btn-success" style="margin-top: 15px;" >Tambah</button>
 						<button type="button" id="reset_t" data-id="<?php echo $_GET['nofak']; ?>" style="margin-top: 15px;" class="btn btn-sm btn-danger">Reset</button>
 					</div>
 				</form>
