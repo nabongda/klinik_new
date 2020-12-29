@@ -17,7 +17,7 @@
 
       $tot = mysqli_num_rows($qq);
 
-      $qp = mysqli_query($con, "SELECT * FROM pengiriman WHERE status='Lapor'");
+      $qp = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE status='tolak'");
 
       $cek = mysqli_num_rows($qp);
       $notif = 0;

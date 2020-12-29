@@ -5,7 +5,7 @@ $no_peng	= $_POST['no_peng'];
 $id_ju    	= $_POST['id_ju'];
 $tgl		= date("Y-m-d");
 $ket    	= $_POST['ket'];
-$status		= "belum";
+$status		= "kirim";
 
 mysqli_query($con, "INSERT INTO kirim_stok (no_peng, id_ju, tgl_kirim, ket) VALUES('$no_peng', '$id_ju', '$tgl', '$ket')");
 
