@@ -59,7 +59,7 @@
             </div>
           </div>
           <div class="card-header">
-            <a href="?module=gudang_cabang&act=tambah_stok" class="btn btn-primary">Tambah Stok Baru</a>
+            <a href="?module=gudang_cabang&act=tambah_stok" class="btn btn-primary">Stock pengiriman Gudang</a>
           </div>
           <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
