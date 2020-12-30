@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2020 at 09:17 AM
+-- Generation Time: Dec 30, 2020 at 10:17 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -834,15 +834,17 @@ CREATE TABLE `history_kirim_stok` (
   `tgl_produksi` date DEFAULT NULL,
   `tgl_expired` date DEFAULT NULL,
   `status` enum('kirim','terima','tolak') NOT NULL,
-  `pesan` text NOT NULL
+  `pesan` text NOT NULL,
+  `tgl_terima` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `history_kirim_stok`
 --
 
-INSERT INTO `history_kirim_stok` (`id`, `no_peng`, `tgl_kirim`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_produksi`, `tgl_expired`, `status`, `pesan`) VALUES
-(5, '28122020', '2020-12-28', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 5, '2020-11-02', '2022-11-02', 'terima', '');
+INSERT INTO `history_kirim_stok` (`id`, `no_peng`, `tgl_kirim`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_produksi`, `tgl_expired`, `status`, `pesan`, `tgl_terima`) VALUES
+(5, '28122020', '2020-12-28', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 5, '2020-11-02', '2022-11-02', 'terima', '', '2020-12-29'),
+(6, '20122020', '2020-12-30', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, 10, '2020-11-01', '2022-11-01', 'terima', '', '2020-12-30');
 
 -- --------------------------------------------------------
 
@@ -1197,7 +1199,8 @@ CREATE TABLE `kirim_stok` (
 --
 
 INSERT INTO `kirim_stok` (`id`, `no_peng`, `id_ju`, `tgl_kirim`, `ket`) VALUES
-(4, '28122020', 'JU-01', '2020-12-28', 'Kirimmm');
+(4, '28122020', 'JU-01', '2020-12-28', 'Kirimmm'),
+(5, '20122020', 'JU-01', '2020-12-30', 'Test...');
 
 -- --------------------------------------------------------
 
@@ -2494,7 +2497,8 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1256, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 04:55:38'),
 (1257, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 05:11:04'),
 (1258, 'admin', 'Hapus Data Produk (22122020)', '2020-12-28 07:50:29'),
-(1259, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 08:14:15');
+(1259, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 08:14:15'),
+(1260, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-30 07:33:06');
 
 -- --------------------------------------------------------
 
@@ -2584,6 +2588,7 @@ INSERT INTO `menu` (`id_sm`, `id_menu`, `nama_menu`, `page_menu`, `sts_menu`) VA
 ('SM-13', 'MN-25', 'Laba Rugi', 'keuangan', 'Tidak Aktif'),
 ('SM-103', 'MN-301', 'Stok Pusat', 'gudang', 'Aktif'),
 ('SM-103', 'MN-302', 'Stok Penjualan', 'gudang_cabang', 'Aktif'),
+('SM-422', 'MN-305', 'Laporan Penerimaan', 'lap_penerimaan_pro', 'Aktif'),
 ('SM-15', 'MN-32', 'Pasien Baru', 'pendaftarbaru', 'Tidak Aktif'),
 ('SM-15', 'MN-33', 'Antrian Baru', 'data_antrian', 'Tidak Aktif'),
 ('SM-15', 'MN-34', 'Checkout', 'checkout', 'Tidak Aktif'),
@@ -2611,13 +2616,13 @@ INSERT INTO `menu` (`id_sm`, `id_menu`, `nama_menu`, `page_menu`, `sts_menu`) VA
 ('SM-36', 'MN-76', 'Data Supplier', 'suplier', 'Tidak Aktif'),
 ('SM-36', 'MN-77', 'Kategori Produk Apotik', 'kategori', 'Tidak Aktif'),
 ('SM-36', 'MN-78', 'Data Satuan', 'data_satuan', 'Tidak Aktif'),
-('SM-42', 'MN-79', 'Laporan Pengiriman Produk', 'lap_pengiriman_pro', 'Non Aktif'),
+('SM-42', 'MN-79', 'Laporan Pengiriman', 'lap_pengiriman_pro', 'Aktif'),
 ('SM-42', 'MN-80', 'Kas', 'lap_kas', 'Non Aktif'),
 ('SM-42', 'MN-81', 'Laporan Perpasien', 'lap_pel', 'Tidak Aktif'),
 ('SM-42', 'MN-82', 'Laporan Tutup Toko', 'lap_tuto', 'Non Aktif'),
 ('SM-42', 'MN-83', 'Laporan Kehadiran Dokter', 'lap_kedo', 'Tidak Aktif'),
-('SM-42', 'MN-84', 'Laporan Pembelian Produk', 'lap_pempro', 'Aktif'),
-('SM-422', 'MN-844', 'Laporan Pembelian Produk', 'lap_pempro', 'Aktif'),
+('SM-42', 'MN-84', 'Laporan Pembelian', 'lap_pempro', 'Aktif'),
+('SM-422', 'MN-844', 'Laporan Pembelian', 'lap_pempro', 'Aktif'),
 ('SM-42', 'MN-85', 'Laporan Stock Produk', 'lap_stock', 'Tidak Aktif'),
 ('SM-43', 'MN-86', 'Stok Pusat', 'gudang', 'Aktif'),
 ('SM-43', 'MN-87', 'Stok Penjualan', 'gudang_cabang', 'Aktif'),
@@ -3286,7 +3291,7 @@ INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`, `hrg`, `hrg_jua
 (7, '180024', 'BETADINE 5 LITER', 2, 0, 0, '', '', NULL, NULL),
 (13, '504761', 'HICO - HEPARIN SODIUM', 0, 0, 0, '', '', NULL, NULL),
 (21, '150194', 'Hawedion', 105, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
-(20, '010494', 'GEQUIN', 98, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
+(20, '010494', 'GEQUIN', 108, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
 
@@ -4116,7 +4121,8 @@ INSERT INTO `produk_pengiriman` (`id`, `tgl_kirim`, `kode_barang`, `nama_p`, `ju
 (36, '2020-12-15', '010494', 'GEQUIN', 49, 49),
 (37, '2020-12-22', '', '', 0, 0),
 (38, '2020-12-22', '150194', 'Hawedion', 20, 80),
-(39, '2020-12-28', '150194', 'Hawedion', 5, 100);
+(39, '2020-12-28', '150194', 'Hawedion', 5, 100),
+(40, '2020-12-30', '010494', 'GEQUIN', 10, 98);
 
 -- --------------------------------------------------------
 
@@ -4175,7 +4181,7 @@ INSERT INTO `produk_pusat` (`id_p`, `nama_p`, `jumlah`, `kode_barang`, `hrg`, `h
 (12, 'ANTIMO DEWASA', 50, '186097', '', 0, '', '0', NULL, NULL),
 (13, 'ANTANGIN JRG', 20, '643464', '', 0, '', '0', NULL, NULL),
 (14, 'BETADINE 5 LITER', 3, '180024', '', 0, '', '0', NULL, NULL),
-(24, 'GEQUIN', 100, '010494', '25000', 30000, '3', '9', '2020-11-01', '2022-11-01'),
+(24, 'GEQUIN', 90, '010494', '25000', 30000, '3', '9', '2020-11-01', '2022-11-01'),
 (25, 'Hawedion', 95, '150194', '40000', 45000, '7', '6', '2020-11-02', '2022-11-02'),
 (26, 'PANADOL MERAH', 15, '931489', '10000', 0, '', '9', '2020-11-24', '2022-11-24');
 
@@ -4364,7 +4370,7 @@ CREATE TABLE `sub_menu` (
   `nama_sm` varchar(50) NOT NULL,
   `page_sm` varchar(50) DEFAULT NULL,
   `sts_sm` varchar(15) NOT NULL,
-  `icon_fa` varchar(50) NOT NULL DEFAULT 'gear',
+  `icon_fa` varchar(50) NOT NULL DEFAULT 'cog',
   `urutan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -4409,8 +4415,8 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-01', 'SM-398', 'Data Bonus', 'data_bonus', 'Non Aktif', 'cog', 2),
 ('JU-01', 'SM-40', 'Data Karyawan', 'karyawan', 'Aktif', 'users', 10),
 ('JU-01', 'SM-41', 'Data Dokter', 'dokter', 'Aktif', 'user-md', 11),
-('JU-01', 'SM-42', 'Laporan', '#', 'Aktif', 'book', 12),
-('JU-07', 'SM-422', 'Laporan', '#', 'Aktif', 'book', 11),
+('JU-01', 'SM-42', 'Laporan Produk', '#', 'Aktif', 'book', 12),
+('JU-07', 'SM-422', 'Laporan Produk', '#', 'Aktif', 'book', 11),
 ('JU-01', 'SM-43', 'Stok Apotek', '#', 'Aktif', 'building', 2),
 ('JU-01', 'SM-443', 'Pengiriman Stok', 'pengiriman_stok', 'Aktif', 'people-carry', 3),
 ('JU-06', 'SM-46', 'Pelayanan', 'kasir', 'Aktif', 'laptop', 1),
@@ -4434,7 +4440,7 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-01', 'SM-69', 'Grafik', '#', 'Tidak Aktif', 'bar-chart', 5),
 ('JU-06', 'SM-70', 'Setting Printer', 'set_print', 'Tidak Aktif', 'print', 14),
 ('JU-07', 'SM-71', 'Pelayanan Obat', 'pelayanan_obat', 'Aktif', 'cog', 8),
-('JU-07', 'SM-7778', 'Pelayanan Pasien', 'kasir_apotek', 'Aktif', 'copy', 1),
+('JU-07', 'SM-7778', 'Pelayanan Apotek', 'kasir_apotek', 'Aktif', 'copy', 1),
 ('JU-06', 'SM-9889', 'Retur Penjualan', 'retur', 'Tidak Aktif', 'chain-broken', 4),
 ('JU-09', 'SM-99', 'Kritik & Saran', 'kritik_saran', 'Tidak Aktif', 'thumbs-up', 3),
 ('JU-01', 'SM-99000999', 'Data Poliklinik', 'poliklinik', 'Aktif', 'tags', 9),
@@ -5095,7 +5101,7 @@ ALTER TABLE `history_kasir`
 -- AUTO_INCREMENT for table `history_kirim_stok`
 --
 ALTER TABLE `history_kirim_stok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -5137,7 +5143,7 @@ ALTER TABLE `kehadiran_dr`
 -- AUTO_INCREMENT for table `kirim_stok`
 --
 ALTER TABLE `kirim_stok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `krisar`
@@ -5149,7 +5155,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1260;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1261;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5263,7 +5269,7 @@ ALTER TABLE `produk_pasien`
 -- AUTO_INCREMENT for table `produk_pengiriman`
 --
 ALTER TABLE `produk_pengiriman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `produk_ps`

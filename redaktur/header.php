@@ -14,18 +14,22 @@
       $date = date('Y-m-d');
 
       $qq = mysqli_query($con, "SELECT * FROM beli_k WHERE '$date' <= tgl_tempo AND bukti_bayar=''"); 
-
       $tot = mysqli_num_rows($qq);
 
       $qp = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE status='tolak'");
-
       $cek = mysqli_num_rows($qp);
+
+      $sql = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE status='kirim'");
+      $peng = mysqli_num_rows($sql);
+
       $notif = 0;
       if ($tot>0) {
         $notif++;
       }
-
       if ($cek>0) {
+        $notif++;
+      }
+      if ($peng>0) {
         $notif++;
       }
     ?>
@@ -46,6 +50,11 @@
         <div class="dropdown-divider"></div>
         <a href="media.php?module=pengiriman&act=lapor" class="dropdown-item">
           <i class="fas fa-envelope mr-2"></i><?php echo $cek; ?> Pengiriman Tidak Sesuai
+        </a>
+        <?php } if ($peng>0) { ?>
+        <div class="dropdown-divider"></div>
+        <a href="media.php?module=gudang_cabang&act=tambah_stok" class="dropdown-item">
+          <i class="fas fa-envelope mr-2"></i><?php echo $peng; ?> Pengiriman Produk
         </a>
         <?php } } else { ?>
         <span class="dropdown-item dropdown-header">Anda Tidak Memiliki Notifikasi</span>

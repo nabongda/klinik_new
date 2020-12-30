@@ -9,7 +9,7 @@ $status		= "kirim";
 
 mysqli_query($con, "INSERT INTO kirim_stok (no_peng, id_ju, tgl_kirim, ket) VALUES('$no_peng', '$id_ju', '$tgl', '$ket')");
 
-mysqli_query($con, "INSERT INTO history_kirim_stok (no_peng, tgl_kirim, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, tgl_produksi, tgl_expired, status) SELECT '$no_peng','$tgl',kd_brg,nama_brg,satuan_ps,kategori_ps,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,tgl_produksi,tgl_expired,'$status' FROM pengiriman_stok");
+mysqli_query($con, "INSERT INTO history_kirim_stok (no_peng, tgl_kirim, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, tgl_produksi, tgl_expired, status, tgl_terima) SELECT '$no_peng','$tgl',kd_brg,nama_brg,satuan_ps,kategori_ps,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,tgl_produksi,tgl_expired,'$status','' FROM pengiriman_stok");
 
 $q = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE no_peng='$no_peng'");
 
