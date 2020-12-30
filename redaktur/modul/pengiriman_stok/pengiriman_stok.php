@@ -262,8 +262,7 @@
               </thead>
               <tbody>
               </tbody>
-
-              <div class="modal fade" role="dialog" id="editbrg">
+              <div class="modal fade" role="dialog" id="modal-default">
                 <div class="modal-dialog modal-xs" role="document">
                   <div class="modal-content">
                     <form class="form-horizontal" role="form" method="POST" id="frm">
@@ -289,21 +288,6 @@
                   </div>
                 </div>
               </div>
-
-              <script>
-                function setdata(id){
-                  $("#frm")[0].reset();
-                  $("#frm").attr("action","modul/pengiriman_stok/aksi_pengiriman_stok.php?act=editbrg");
-                  $("#dataid").val(id);
-                  $.ajax({
-                    url: "modul/pengiriman_stok/data_brg.php?id=" + id,
-                    dataType: "JSON",
-                    success: function(data){
-                        $("#jumlah").val(data.jumlah);
-                    }
-                  });
-                }
-              </script>
             </table>
           </div>
 
@@ -432,7 +416,7 @@ $(document).ready(function(){
       {
       "mData": "0",
       "mRender": function ( data, type, full ) {
-        return '<button id="hapus_brg" data-id="'+data+'" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Remove</button>&nbsp;<button id="edit_brg" data-id="'+data+'" onclick="setdata(this.data-id)" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editbrg"><i class="fa fa-edit"></i> Edit</button>';
+        return '<button id="hapus_brg" data-id="'+data+'" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Remove</button>';
         }
       }
     ]

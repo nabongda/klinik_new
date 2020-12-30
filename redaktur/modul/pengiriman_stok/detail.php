@@ -54,6 +54,7 @@ if($_POST['id']) {
               <th>Tanggal Kirim</th>
               <th>Tanggal Produksi</th>
               <th>Tanggal Expired</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -78,6 +79,7 @@ if($_POST['id']) {
               <td><?php echo $data['tgl_kirim']?></td>
               <td><?php echo $data['tgl_produksi']?></td>
               <td><?php echo $data['tgl_expired']?></td>
+              <td><?php echo $data['status']?></td>
             </tr>
             <?php } ?>
           </tbody> 

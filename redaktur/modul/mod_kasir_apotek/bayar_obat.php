@@ -93,7 +93,7 @@
 <td><span id="sisa"></span></td>
 </tr>
 <tr>
-<td colspan=2><button class="btn btn-info" id="selesai" disabled onclick="simpan()">Selesai</button></td>
+<td colspan=2><button class="btn btn-info" id="selesai" type= onclick="simpan()">Selesai</button></td>
 </tr>
       </div>
     </div>

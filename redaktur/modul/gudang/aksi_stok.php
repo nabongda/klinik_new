@@ -25,7 +25,7 @@
 		$suplier	    	= $_POST['suplier'];
 		$batas_cabang		= $_POST['batas_cabang'];
 		$batas_minim		= $_POST['batas_minim'];
-		$simpan		= mysqli_query($con, "Insert Into produk_pusat(nama_produk,harga_beli,harga_jual,jumlah,id_sat,id_supp,kode_produk,id_kategori,batas_cabang,batas_minim) Values('$nama_produk','$harga_beli','$harga_jual','$stok_produk','$satuan','$suplier','$kd_produk','$kategori_produk','$batas_cabang','$batas_minim')") or die(mysqli_error($con));
+		$simpan		= mysqli_query($con, "INSERT INTO produk_pusat(nama_produk,harga_beli,harga_jual,jumlah,id_sat,id_supp,kode_produk,id_kategori,batas_cabang,batas_minim) VALUES('$nama_produk','$harga_beli','$harga_jual','$stok_produk','$satuan','$suplier','$kd_produk','$kategori_produk','$batas_cabang','$batas_minim')") or die(mysqli_error($con));
 	 	catat($con, $_SESSION['namauser'], 'Data Stok Barang'.' ('.$nm.')');
 		if($simpan){
 			header('location:../../media.php?module=gudang');

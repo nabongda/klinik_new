@@ -1,3 +1,7 @@
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <?php
 	switch($_GET['act']){
 	default:
@@ -92,24 +96,21 @@
                   </td>
                   <td><?php echo $r["kode_barang"]; ?></td>
                   <td><?php echo $r["nama_p"]; ?></td>
-                  <?php 
-                  $ps = mysqli_query($con, "SELECT * FROM produk_pusat WHERE kode_barang='$r[kode_barang]'");
-                  $p = mysqli_fetch_array($ps);
+                  <?php
                   $qk = mysqli_query($con, "SELECT * FROM kategori WHERE id_kategori='$p[kategori]'"); 
                   $kt = mysqli_fetch_array($qk); ?>
                   <td><?php echo $kt['kategori']; ?></td>
                   <td><?php echo $r["jumlah"]; ?></td>
-                  <td><?php echo rupiah($p["hrg"]); ?></td>
-                  <td><?php echo rupiah($p["hrg_jual"]); ?></td>
-                  <td><?php echo $p['tgl_produksi']?></td>
-                  <td><?php echo $p['tgl_expired']?></td>
+                  <td><?php echo rupiah($r["hrg"]); ?></td>
+                  <td><?php echo rupiah($r["hrg_jual"]); ?></td>
+                  <td><?php echo $r['tgl_produksi']?></td>
+                  <td><?php echo $r['tgl_expired']?></td>
                   <td>
                     <?php
                       if ($r["jumlah"] <= 3) {
-                      echo '
-                      <a href="media.php?module=gudang" class="btn-sm btn-danger">Tambah Stok</a>&nbsp;';
+                      echo '<a href="#" class="btn btn-sm btn-danger">Stok Kurang</a>&nbsp;';
                       }else{
-                      echo '<a href="#" class="btn-sm btn-success"> Stok Tersedia</a>';
+                      echo '<a href="#" class="btn btn-sm btn-success">Stok Tersedia</a>';
                       }
                     ?>
                   </td>
@@ -140,29 +141,23 @@
             <h3 class="card-title">Tambah Data Stok Barang</h3>
           </div>
           <div class="card-body">
-            <form role="form" method="POST" enctype="multipart/form-data" action="modul/gudang/aksi_stok.php?act=input">
+            <form role="form" method="POST" enctype="multipart/form-data" action="modul/gudang/kirim.php">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>Gambar</th>
-                    <th>Kode Produk</th>
-                    <th>Nama Produk</th>
-                    <th>Kategori Produk</th>
-                    <th>Stok Produk</th>
-                    <th>Harga Beli</th>
-                    <th>Harga Jual</th>
-                    <th>Tanggal Produksi</th>
-                    <th>Tanggal Expired</th>
+                    <th>Nama Obat</th>
+                    <th>Jumlah</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                    $tampil   = mysqli_query($con, "SELECT * FROM history_kirim_stok");
+                    $tampil   = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE status='kirim'");
                     while($r  = mysqli_fetch_array($tampil)){
                   ?>
                   <tr>
-                    <?php $q1 = mysqli_query($con, "SELECT * FROM produk_master WHERE kd_produk='$r[kode_barang]'"); 
+                    <?php $q1 = mysqli_query($con, "SELECT * FROM produk_master WHERE kd_produk='$r[kd_brg]'"); 
                     $k = mysqli_fetch_array($q1); ?>
                     <td>
                       <?php
@@ -173,30 +168,56 @@
                         }
                       ?>
                     </td>
-                    <td><?php echo $r["kd_brg"]; ?></td>
                     <td><?php echo $r["nama_brg"]; ?></td>
-                    <?php
-                    $qk = mysqli_query($con, "SELECT * FROM kategori WHERE id_kategori='$r[kategori]'"); 
-                    $kt = mysqli_fetch_array($qk); ?>
-                    <td><?php echo $kt['kategori']; ?></td>
                     <td><?php echo $r["jumlah"]; ?></td>
-                    <td><?php echo rupiah($r["hrg"]); ?></td>
-                    <td><?php echo rupiah($r["hrg_jual"]); ?></td>
-                    <td><?php echo $r['tgl_produksi']?></td>
-                    <td><?php echo $r['tgl_expired']?></td>
                     <td>
-                      <input type="radio" name="status" id=""> Terima <br>
-                      <input type="radio" name="status" id=""> Tolak
+                      <input id="terima" type="radio" name="status" value="terima" required> Terima <br>
+                      <input id="tolak" type="radio" name="status" value="tolak" required> Tolak <br>
+                      <input type="hidden" name="id" value="<?php echo $r["id"]; ?>">
+                      <input type="hidden" name="produk" value="<?php echo $r["kd_brg"]; ?>">
+                      <input type="hidden" name="jml" value="<?php echo $r["jumlah"]; ?>">
+                    </td>
+                  </tr>
+                  <tr id="fpesan" style="display:none;">
+                    <td colspan="4">
+                      <textarea name="pesan" id="pesan" class="form-control" placeholder="Alasan tolak obat..."></textarea>
                     </td>
                   </tr>
                   <?php } ?>
                 </tbody>
+                <?php 
+                $t = mysqli_query($con, "SELECT nama_brg FROM history_kirim_stok WHERE status='kirim'");
+                $row = mysqli_fetch_row($t);
+                if ($row > 0) { ?>
                 <tfoot>
                   <tr>
-                    <td colspan="10" class="text-right"><button type="submit" class="btn btn-primary">Simpan</button></td>
+                    <td colspan="4" class="text-right"><button type="submit" class="btn btn-primary">Simpan</button></td>
                   </tr>
                 </tfoot>
+                <?php } ?>
               </table>
+              <script>
+                $(document).ready(function(){
+                  $.ajaxSetup({
+                    headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                  });
+
+                  $("#tolak").click(function() {
+                    $("#fpesan:hidden").show('slow');
+                  });
+                  $("#tolak").click(function() {
+                    if($('fpesan').prop('checked')===false) {
+                      $('#fpesan').hide();
+                    }
+                  });
+
+                  $("#terima").click(function() {
+                    $("#fpesan").hide();
+                  });                 
+                });
+              </script>
             </form>
           </div>
         </div>
