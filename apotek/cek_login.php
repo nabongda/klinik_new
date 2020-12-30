@@ -53,9 +53,9 @@
 		header('location:../redaktur/media.php?module=home');
 	} else {
 		catat($con, $username, "Gagal Login");
-		echo "<script>
-alert('Username atau Password !!'); location.href = '".$url."apotek/index.php';
-</script>";		
+		echo "<script> 
+			alert('Username atau Password !!'); location.href = '".$url."apotek/index.php';
+			</script>";		
 		}
 	}
 ?>
