@@ -1229,6 +1229,12 @@ elseif ($module=='trf_out'){
 	
 	}
 
+	else if ($module=='lap_penerimaan_pro'){
+
+		include "modul/lap_penerimaan_pro/lap_penerimaan.php";
+		
+		}
+
 	// Apabila modul tidak ditemukan
 
 	else {
