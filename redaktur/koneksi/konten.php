@@ -494,7 +494,7 @@ elseif ($module=='trf_out'){
 
 	elseif ($module=='lap_pengiriman_pro'){
 
-	include "modul/lap_pengiriman/lap_pengiriman.php";
+	include "modul/lap_pengiriman_pro/laporan_pengiriman.php";
 
 	}
 

@@ -75,7 +75,7 @@
 			<?php 
 			} 
 			else{ ?>
-			<a href="modul/lap_pembelian/cetak_pembelian.php?tgl1=<?php echo $tgl1; ?>&tgl2=<?php echo $tgl2; ?>&act=cetakpkb" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-print"></i> Cetak Data Pembelian Kredit</a><hr>
+			<a href="modul/lap_penerimaan_pro/cetak_penerimaan.php?tgl1=<?php echo $tgl1; ?>&tgl2=<?php echo $tgl2; ?>&act=cetakpen" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-print"></i> Cetak Data Penerimaan Produk</a><hr>
 			<table id="example1" class="table table-bordered table-striped">
 			  <thead>
 				<tr>
@@ -88,17 +88,15 @@
 			  </thead>
 			  <tbody>
 				<?php
-				  $tampil     = mysqli_query($con, "SELECT * FROM beli_k WHERE bukti_bayar='' AND tgl_beli BETWEEN '$_POST[tgl1]' AND '$_POST[tgl2]'");
+				  $tampil     = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE status='terima' AND tgl_terima BETWEEN '$_POST[tgl1]' AND '$_POST[tgl2]'");
 				  $no = 1;
 				  while($data = mysqli_fetch_array($tampil)){ ?>
 				<tr>
 				  <td><?php echo $no++?></td>
 				  <td><?php echo $data['no_peng']; ?></td>
-				  <td><?php echo $data['tgl_pen']; ?></td>
-					<?php $q1 = mysqli_query($con, "SELECT * FROM suplier WHERE id_sup='$data[id_sup]'"); 
-					  $k = mysqli_fetch_array($q1); ?>
-				  <td><?php echo $k['nama_produk']; ?></td>
-				  <td><?php echo rupiah($data['jumlah_produk']); ?></td>
+				  <td><?php echo $data['tgl_terima']; ?></td>
+				  <td><?php echo $data['nama_brg']; ?></td>
+				  <td><?php echo rupiah($data['jumlah']); ?></td>
 				</tr>
 				<?php } ?>
 			  </tbody>

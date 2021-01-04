@@ -54,32 +54,32 @@ window.print();
 <?php
 
 switch($_GET['act']){
-	case "cetakpen":
+	case "cetakpeng":
 ?>
 <div align="center">
-	<h4>Penerimaan Produk Pada Tanggal : <?php echo $_GET['tgl1']; ?> Sampai Tanggal : <?php echo $_GET['tgl2']; ?></h4>
+	<h4>Pengiriman Produk Pada Tanggal : <?php echo $_GET['tgl1']; ?> Sampai Tanggal : <?php echo $_GET['tgl2']; ?></h4>
 </div>
 <div align="center">
-	<div align="left"><h4>Data Penerimaan Produk</h4></div>    
+	<div align="left"><h4>Data Pengiriman Produk</h4></div>    
 	<table width="100%" class="table1">
 		<thead>
 	    	<tr>
 				<th>No</th>
 				<th>No Pengiriman</th>
-				<th>Tanggal Penerimaan</th>
+				<th>Tanggal Pengiriman</th>
 				<th>Nama Produk</th>
 				<th>Jumlah Produk</th>
 	        </tr>
 	    </thead>
 	    <tbody>
-		<?php $q1 = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE status='terima' AND tgl_terima BETWEEN '$_GET[tgl1]' AND '$_GET[tgl2]'"); 
+		<?php $q1 = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE tgl_kirim BETWEEN '$_GET[tgl1]' AND '$_GET[tgl2]'"); 
               $no =1;
               while ($br = mysqli_fetch_array($q1)) {
                 ?>
             <tr>
 				<td><?php echo $no++?></td>
 				<td><?php echo $br['no_peng']; ?></td>
-				<td><?php echo $br['tgl_terima']; ?></td>
+				<td><?php echo $br['tgl_kirim']; ?></td>
 				<td><?php echo $br['nama_brg']; ?></td>
 				<td><?php echo $br['jumlah']; ?></td>
             </tr>
