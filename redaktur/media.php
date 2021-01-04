@@ -95,6 +95,37 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
   <link rel="stylesheet" href="<?php echo $url2; ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo $url2; ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo $url2; ?>plugins/sweetalert2/sweetalert2.min.css">
+  <style>
+    blink {
+      -webkit-animation: 2s linear infinite condemned_blink_effect; /* for Safari 4.0 - 8.0 */
+      animation: 2s linear infinite condemned_blink_effect;
+    }
+
+    /* for Safari 4.0 - 8.0 */
+    @-webkit-keyframes condemned_blink_effect {
+      0% {
+        visibility: hidden;
+      }
+      50% {
+        visibility: hidden;
+      }
+      100% {
+        visibility: visible;
+      }
+    }
+
+    @keyframes condemned_blink_effect {
+      0% {
+        visibility: hidden;
+      }
+      50% {
+        visibility: hidden;
+      }
+      100% {
+        visibility: visible;
+      }
+    }
+  </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

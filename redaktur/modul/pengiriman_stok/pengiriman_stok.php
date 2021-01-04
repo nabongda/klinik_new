@@ -154,6 +154,17 @@
 <?php
   break;
   case "tambah_produk":
+
+    $query = mysqli_query($con, "SELECT max(no_peng) as kodemax FROM kirim_stok");
+    $data = mysqli_fetch_array($query);
+    $no_peng = $data['kodemax'];
+
+    $urutan = (int) substr($no_peng, 5, 5);
+  
+    $urutan++;
+
+    $huruf = "PS-";
+    $no_peng = $huruf . sprintf("%05s", $urutan);
 ?>
 
 <section class="content-header">
@@ -298,7 +309,7 @@
                   <label>No Pengiriman </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="no_peng" required>
+                  <input type="text" class="form-control" name="no_peng" value="<?php echo $no_peng; ?>" readonly>
                   <input type="hidden" name="id_ju" value="<?php echo $_SESSION['jenis_u']; ?>">
                 </div>
               </div>
