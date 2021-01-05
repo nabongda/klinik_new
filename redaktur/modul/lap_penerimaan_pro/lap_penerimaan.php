@@ -96,7 +96,7 @@
 				  <td><?php echo $data['no_peng']; ?></td>
 				  <td><?php echo $data['tgl_terima']; ?></td>
 				  <td><?php echo $data['nama_brg']; ?></td>
-				  <td><?php echo rupiah($data['jumlah']); ?></td>
+				  <td><?php echo $data['jumlah']; ?></td>
 				</tr>
 				<?php } ?>
 			  </tbody>
