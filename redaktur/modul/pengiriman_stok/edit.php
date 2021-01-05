@@ -18,7 +18,7 @@ $id = $_POST['id'];
     </div>
     <div class="form-group">
       <label>Tanggal Pengiriman</label>
-      <input class="form-control"  type="date" name="tgl_kirim" value="<?php echo $data['tgl_kirim'];?>">
+      <input class="form-control" type="datetime-local" name="tgl_kirim" value="<?php echo $data['tgl_kirim'];?>">
     </div>
     <div class="form-group">
       <label>Keterangan</label>

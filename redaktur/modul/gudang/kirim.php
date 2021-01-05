@@ -47,7 +47,7 @@ if ($_POST['status']=='terima') {
     $rekam = "INSERT INTO produk_pengiriman VALUES (NULL,NOW(),'$_POST[produk]','$nama[prod]','$_POST[jml]','$jml[sblm]')";
 
     //update status
-    $tgl_terima	= date("Y-m-d");
+    $tgl_terima	= date("Y-m-d H:i:s");
     $status     = mysqli_query($con, "UPDATE history_kirim_stok SET status='terima', tgl_terima='$tgl_terima' WHERE id='$_POST[id]'");
 
     mysqli_query($con, $kiriman);

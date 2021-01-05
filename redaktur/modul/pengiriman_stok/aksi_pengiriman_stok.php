@@ -24,7 +24,7 @@
 				}
 				else {
 					mysqli_query($con, "UPDATE produk_pusat SET jumlah='$jumlahsql' WHERE kode_barang='$result[kd_brg]'");
-				}	
+				}
 			}
 
 			mysqli_query($con, "DELETE FROM kirim_stok WHERE no_peng='$id'");

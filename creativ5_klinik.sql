@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2020 at 10:17 AM
+-- Generation Time: Jan 05, 2021 at 05:34 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -185,7 +185,7 @@ CREATE TABLE `beli_k` (
 
 INSERT INTO `beli_k` (`no_fak`, `tgl_beli`, `total`, `id`, `id_sup`, `tgl_tempo`, `bukti_bayar`) VALUES
 ('03122020', '2020-12-03', 250000, 4, '1', '2021-01-03', 'IMG_20191031_110653_892.jpg'),
-('10122020', '2020-12-10', 1225000, 5, '1', '2021-01-10', '');
+('10122020', '2020-12-10', 1225000, 5, '1', '2021-01-10', 'Screenshot_2021-01-02 Denisya Shop.png');
 
 -- --------------------------------------------------------
 
@@ -821,7 +821,7 @@ INSERT INTO `history_kasir` (`id`, `no_faktur`, `id_pasien`, `id_dr`, `id_kasir`
 CREATE TABLE `history_kirim_stok` (
   `id` int(11) NOT NULL,
   `no_peng` varchar(50) NOT NULL,
-  `tgl_kirim` date NOT NULL,
+  `tgl_kirim` datetime NOT NULL,
   `kd_brg` varchar(50) NOT NULL,
   `nama_brg` varchar(50) NOT NULL,
   `satuan` varchar(50) NOT NULL,
@@ -835,7 +835,7 @@ CREATE TABLE `history_kirim_stok` (
   `tgl_expired` date DEFAULT NULL,
   `status` enum('kirim','terima','tolak') NOT NULL,
   `pesan` text NOT NULL,
-  `tgl_terima` date DEFAULT NULL
+  `tgl_terima` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -843,8 +843,8 @@ CREATE TABLE `history_kirim_stok` (
 --
 
 INSERT INTO `history_kirim_stok` (`id`, `no_peng`, `tgl_kirim`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_produksi`, `tgl_expired`, `status`, `pesan`, `tgl_terima`) VALUES
-(5, '28122020', '2020-12-28', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 5, '2020-11-02', '2022-11-02', 'terima', '', '2020-12-29'),
-(6, '20122020', '2020-12-30', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, 10, '2020-11-01', '2022-11-01', 'terima', '', '2020-12-30');
+(7, 'PS-00001', '2021-01-04 15:10:05', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 5, '2020-11-02', '2022-11-02', 'terima', '', '2021-01-04 20:03:01'),
+(8, 'PS-00002', '2021-01-05 12:07:29', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, 10, '2020-11-01', '2022-11-01', 'terima', '', '2021-01-05 12:24:24');
 
 -- --------------------------------------------------------
 
@@ -1190,7 +1190,7 @@ CREATE TABLE `kirim_stok` (
   `id` int(11) NOT NULL,
   `no_peng` varchar(15) NOT NULL,
   `id_ju` varchar(5) NOT NULL,
-  `tgl_kirim` date NOT NULL,
+  `tgl_kirim` datetime NOT NULL,
   `ket` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1199,8 +1199,8 @@ CREATE TABLE `kirim_stok` (
 --
 
 INSERT INTO `kirim_stok` (`id`, `no_peng`, `id_ju`, `tgl_kirim`, `ket`) VALUES
-(4, '28122020', 'JU-01', '2020-12-28', 'Kirimmm'),
-(5, '20122020', 'JU-01', '2020-12-30', 'Test...');
+(6, 'PS-00001', 'JU-01', '2021-01-04 15:10:05', 'Kirim'),
+(7, 'PS-00002', 'JU-01', '2021-01-05 12:07:29', 'Bismillah');
 
 -- --------------------------------------------------------
 
@@ -2498,7 +2498,11 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1257, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 05:11:04'),
 (1258, 'admin', 'Hapus Data Produk (22122020)', '2020-12-28 07:50:29'),
 (1259, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-28 08:14:15'),
-(1260, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-30 07:33:06');
+(1260, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2020-12-30 07:33:06'),
+(1261, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-04 04:45:03'),
+(1262, 'admin', 'Hapus Data Produk (20122020)', '2021-01-04 05:42:41'),
+(1263, 'admin', 'Hapus Data Produk (28122020)', '2021-01-04 05:42:45'),
+(1264, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-05 03:42:06');
 
 -- --------------------------------------------------------
 
@@ -3290,8 +3294,8 @@ INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`, `hrg`, `hrg_jua
 (6, '643464', 'ANTANGIN JRG', 29, 0, 0, '', '', NULL, NULL),
 (7, '180024', 'BETADINE 5 LITER', 2, 0, 0, '', '', NULL, NULL),
 (13, '504761', 'HICO - HEPARIN SODIUM', 0, 0, 0, '', '', NULL, NULL),
-(21, '150194', 'Hawedion', 105, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
-(20, '010494', 'GEQUIN', 108, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
+(21, '150194', 'Hawedion', 110, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(20, '010494', 'GEQUIN', 118, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
 
@@ -4122,7 +4126,9 @@ INSERT INTO `produk_pengiriman` (`id`, `tgl_kirim`, `kode_barang`, `nama_p`, `ju
 (37, '2020-12-22', '', '', 0, 0),
 (38, '2020-12-22', '150194', 'Hawedion', 20, 80),
 (39, '2020-12-28', '150194', 'Hawedion', 5, 100),
-(40, '2020-12-30', '010494', 'GEQUIN', 10, 98);
+(40, '2020-12-30', '010494', 'GEQUIN', 10, 98),
+(41, '2021-01-04', '150194', 'Hawedion', 5, 105),
+(42, '2021-01-05', '010494', 'GEQUIN', 10, 108);
 
 -- --------------------------------------------------------
 
@@ -4181,8 +4187,8 @@ INSERT INTO `produk_pusat` (`id_p`, `nama_p`, `jumlah`, `kode_barang`, `hrg`, `h
 (12, 'ANTIMO DEWASA', 50, '186097', '', 0, '', '0', NULL, NULL),
 (13, 'ANTANGIN JRG', 20, '643464', '', 0, '', '0', NULL, NULL),
 (14, 'BETADINE 5 LITER', 3, '180024', '', 0, '', '0', NULL, NULL),
-(24, 'GEQUIN', 90, '010494', '25000', 30000, '3', '9', '2020-11-01', '2022-11-01'),
-(25, 'Hawedion', 95, '150194', '40000', 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(24, 'GEQUIN', 80, '010494', '25000', 30000, '3', '9', '2020-11-01', '2022-11-01'),
+(25, 'Hawedion', 90, '150194', '40000', 45000, '7', '6', '2020-11-02', '2022-11-02'),
 (26, 'PANADOL MERAH', 15, '931489', '10000', 0, '', '9', '2020-11-24', '2022-11-24');
 
 -- --------------------------------------------------------
@@ -5101,7 +5107,7 @@ ALTER TABLE `history_kasir`
 -- AUTO_INCREMENT for table `history_kirim_stok`
 --
 ALTER TABLE `history_kirim_stok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -5143,7 +5149,7 @@ ALTER TABLE `kehadiran_dr`
 -- AUTO_INCREMENT for table `kirim_stok`
 --
 ALTER TABLE `kirim_stok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `krisar`
@@ -5155,7 +5161,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1261;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1265;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5269,7 +5275,7 @@ ALTER TABLE `produk_pasien`
 -- AUTO_INCREMENT for table `produk_pengiriman`
 --
 ALTER TABLE `produk_pengiriman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `produk_ps`

@@ -54,7 +54,7 @@
                 <th>Nama Produk</th>
                 <th>Jumlah</th>
                 <th>Status Gudang Penjualan</th>
-                <th class="nosort">Aksi</th>
+                <!-- <th class="nosort">Aksi</th> -->
               </tr>
             </thead>
             <tbody>
@@ -85,9 +85,9 @@
                     }
                   ?>
                 </td>
-                <td>
+                <!-- <td>
                   <button class="btn-sm btn-primary" data-toggle="modal" data-target="#modal-default" onclick="additem(this.id)" id="<?php echo $rand; ?>" data-item="<?php echo $r["kode_barang"]; ?>">Tambahkan</button>
-                </td>
+                </td> -->
               </tr>
               <?php } ?>
             </tbody>

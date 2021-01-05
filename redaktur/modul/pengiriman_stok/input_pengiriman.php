@@ -3,7 +3,7 @@ include "../../../config/koneksi.php";
 
 $no_peng	= $_POST['no_peng'];
 $id_ju    	= $_POST['id_ju'];
-$tgl		= date("Y-m-d");
+$tgl		= date("Y-m-d H:i:s");
 $ket    	= $_POST['ket'];
 $status		= "kirim";
 
