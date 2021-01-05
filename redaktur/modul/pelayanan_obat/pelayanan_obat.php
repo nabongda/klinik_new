@@ -130,6 +130,16 @@
 <?php
   break;
   case "tambah":
+    $query = mysqli_query($con, "SELECT max(no_tran) as kodemax FROM pelayanan_obat");
+    $data = mysqli_fetch_array($query);
+    $no_tran = $data['kodemax'];
+
+    $urutan = (int) substr($no_tran, 5, 5);
+  
+    $urutan++;
+
+    $huruf = "TRS-";
+    $no_tran = $huruf . sprintf("%05s", $urutan);
 ?>
 
 <!-- Content Header (Page header) -->
@@ -164,7 +174,7 @@
           <!-- form start -->
           <form role="form" id="form_t">
             <?php 
-            $tgl_beli = date('Y-m-d');
+            $tgl_beli = date('Y-m-d H:i:s');
             ?>
             <input class="form-control" type="hidden" name="id_beli_obat" value="<?php echo $id_beli_obat ?>">
             <div class="card-body">
@@ -209,7 +219,7 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label>Diskon </label>
-                  <input type="number" class="form-control" name="diskon" id="diskon" placeholder="misal: 1-100">
+                  <input type="number" class="form-control" name="diskon" id="diskon" placeholder="misal: 0-100" value="0">
                   <input class="form-control" type="hidden" name="batas_cabang" id="batas_cabang" value="100" required>
                   <input class="form-control" type="hidden" name="batas_minim" id="batas_minim" value="10" required>
                 </div>
@@ -336,7 +346,7 @@
                   <label for="inputNoTransaksi">No Transaksi</label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="no_tran">
+                  <input type="text" class="form-control" name="no_tran" value="<?php echo $no_tran; ?>" readonly>
                   <input type="hidden" name="total" id="tot" value="<?php echo $t['total']; ?>">
                 </div>
               </div>
@@ -345,7 +355,7 @@
                   <label for="inputNamaPembeli">Nama Pembeli </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="nama_pembeli">
+                  <input type="text" class="form-control" name="nama_pembeli" required>
                 </div>
               </div>
               <div class="form-group row">
@@ -354,7 +364,7 @@
                 </div>
                 <div class="col-sm-4">
                   <input type="date" class="form-control" name="tgl_pembelian" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
-                        data-inputmask-inputformat="mm/dd/yyyy" data-mask>
+                        data-inputmask-inputformat="mm/dd/yyyy" data-mask required>
                 </div>
               </div>
               <div class="form-group col-md-2">
