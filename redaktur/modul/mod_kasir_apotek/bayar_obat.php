@@ -39,7 +39,7 @@
         </div>
         <div class="card-body">
           <form id="form_k">
-            <?php 
+    <?php 
               $nofak = date("Y-m-d H:i:s"); 
               $ran = rand(1,9);
               $nofak .= $ran;
@@ -79,23 +79,78 @@
             </div>
           </form>
         </div>
-		
-		<div >Tagihan
-		<td>Rp <?php echo number_format($byr['jml'],0,",","."); ?></td>
+        <?php 
+
+if($_GET['layan'] == "jalan"){
+
+$rz = json_decode($_GET['data'],true);
+
+//id yg dibeli penuh
+
+$byrp = mysqli_fetch_assoc(mysqli_query($con,"SELECT SUM(sub_total) jml FROM kasir_sementara WHERE no_faktur = '$_GET[faktur]' AND id IN ($rz[full])"));
+
+//id yg dibeli setengah
+
+$byrs = mysqli_fetch_assoc(mysqli_query($con,"SELECT SUM(0.5 * sub_total) jml FROM kasir_sementara WHERE no_faktur = '$_GET[faktur]' AND id IN ($rz[half])"));
+
+$byr = array("jml" => ($byrp['jml'] + $byrs['jml']));
+
+
+} else {
+$byr = mysqli_fetch_assoc(mysqli_query($con,"SELECT SUM(sub_total) jml FROM history_kasir WHERE no_faktur = '$_GET[faktur]'"));
+}
+
+
+?>
+       
+<table class="table">
 <tr>
-<div>Pembayaran
-<br/><small>Tekan tombol TAB di keyboard untuk melanjutkan</small>
-<td><input type="text" style="width: 25%" class="form-control" name="bayar" onblur="hitung()" id="bayar" data-bayar="<?php echo $byr['jml']; ?>"/></td>
-</div>
+<td>Tagihan</td>
+<td>Rp <?php echo number_format($byr['jml'],0,",","."); ?></td>
 </tr>
 <tr>
-<div>Kembalian</div>
+<td>Pembayaran
+<br/><small>Tekan tombol TAB di keyboard untuk melanjutkan</small>
+</td>
+<td><input type="text" style="width: 25%" class="form-control" name="bayar" onblur="hitung()" id="bayar" data-bayar="<?php echo $byr['jml']; ?>"/></td>
+</tr>
+<tr>
+<td>Kembalian</td>
 <td><span id="sisa"></span></td>
 </tr>
 <tr>
-<td colspan=2><button class="btn btn-info" id="selesai" type= onclick="simpan()">Selesai</button></td>
+<td colspan=2><button class="btn btn-info" id="selesai" disabled onclick="simpan()">Selesai</button></td>
 </tr>
-      </div>
+</table>
+<script>
+$(document).ready(function(){
+  document.getElementById("bayar").focus();
+});
+
+function simpan(){
+	window.open("modul/mod_kasir_apotek/bayar.php?faktur=<?php echo $_GET['faktur']; ?>&uang=" + $("#bayar").val() + "&data=<?php echo urlencode($_GET['data']); ?>&layan=<?php echo $_GET['layan']; ?>&pasien=<?php echo $id_pasien; ?>","_BLANK");
+}
+
+function hitung(){
+ 
+  var a = parseInt($("#bayar").data("bayar"));
+  var b = parseInt($("#bayar").val());
+
+    var c = b - a;
+    $("#sisa").html(c);
+  
+    if(b >= a){
+     $("#selesai").attr("disabled",false);
+    } else {
+      $("#selesai").attr("disabled",true);
+    }
+
+
+}
+</script>
+
+
+				</div>
+			</div>
     </div>
-  </div>
-</section>
+    </section>

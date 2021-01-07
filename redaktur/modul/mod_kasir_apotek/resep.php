@@ -128,7 +128,9 @@
 							<input type="number" class="form-control" min="1" name="jumlah" id="jumlah_p" value="1" required>
 						</div>
 						<button type="submit" class="btn btn-sm btn-success" style="margin-top: 15px;" >Tambah</button>
+						
 						<button type="button" id="reset_t" data-id="<?php echo $_GET['nofak']; ?>" style="margin-top: 15px;" class="btn btn-sm btn-danger">Reset</button>
+					
 					</div>
 				</form>
 			</div>
