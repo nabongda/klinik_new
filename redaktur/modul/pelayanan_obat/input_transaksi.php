@@ -2,7 +2,7 @@
 include "../../../config/koneksi.php";
 
 		$no_tran = $_POST['no_tran'];
-		$tgl    = date("Y-m-d");
+		$tgl    = date("Y-m-d H:i:s");
 		$nama_pembeli   = $_POST['nama_pembeli'];
 		$total  = $_POST['total'];
 

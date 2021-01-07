@@ -40,7 +40,7 @@
         <div class="card-body">
           <form id="form_k">
             <?php 
-              $nofak = date("YmdHis"); 
+              $nofak = date("Y-m-d H:i:s"); 
               $ran = rand(1,9);
               $nofak .= $ran;
             ?>

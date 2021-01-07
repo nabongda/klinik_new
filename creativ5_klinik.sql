@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2021 at 05:34 AM
+-- Generation Time: Jan 05, 2021 at 07:42 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -206,7 +206,7 @@ CREATE TABLE `beli_obat` (
   `jumlah` varchar(50) NOT NULL,
   `diskon` varchar(50) NOT NULL,
   `sub_tot` varchar(50) NOT NULL,
-  `tgl_beli` date NOT NULL,
+  `tgl_beli` datetime NOT NULL,
   `tgl_produksi` date NOT NULL,
   `tgl_expired` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -591,7 +591,7 @@ INSERT INTO `history_beli_k` (`id`, `no_fak`, `tgl_beli`, `kd_brg`, `nama_brg`, 
 CREATE TABLE `history_beli_obat` (
   `id` int(11) NOT NULL,
   `no_tran` varchar(50) NOT NULL,
-  `tgl_beli` date NOT NULL,
+  `tgl_beli` datetime NOT NULL,
   `kd_brg` varchar(50) NOT NULL,
   `nama_brg` varchar(50) NOT NULL,
   `satuan` varchar(50) NOT NULL,
@@ -606,6 +606,13 @@ CREATE TABLE `history_beli_obat` (
   `tgl_produksi` date NOT NULL,
   `tgl_expired` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `history_beli_obat`
+--
+
+INSERT INTO `history_beli_obat` (`id`, `no_tran`, `tgl_beli`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_produksi`, `tgl_expired`) VALUES
+(1, 'TRS-00001', '2021-01-05 14:41:15', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, '8', '0', '200000', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
 
@@ -2502,7 +2509,10 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1261, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-04 04:45:03'),
 (1262, 'admin', 'Hapus Data Produk (20122020)', '2021-01-04 05:42:41'),
 (1263, 'admin', 'Hapus Data Produk (28122020)', '2021-01-04 05:42:45'),
-(1264, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-05 03:42:06');
+(1264, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-05 03:42:06'),
+(1265, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-05 05:08:29'),
+(1266, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-05 05:09:12'),
+(1267, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-05 06:28:33');
 
 -- --------------------------------------------------------
 
@@ -2902,9 +2912,16 @@ CREATE TABLE `pelayanan_obat` (
   `id_pelayanan_obat` int(11) NOT NULL,
   `no_tran` varchar(50) NOT NULL,
   `nama_pembeli` varchar(255) NOT NULL,
-  `tgl_pembelian` date NOT NULL,
+  `tgl_pembelian` datetime NOT NULL,
   `total` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pelayanan_obat`
+--
+
+INSERT INTO `pelayanan_obat` (`id_pelayanan_obat`, `no_tran`, `nama_pembeli`, `tgl_pembelian`, `total`) VALUES
+(3, 'TRS-00001', 'Nurlaela Khasannah', '2021-01-05 14:41:15', '200000');
 
 -- --------------------------------------------------------
 
@@ -3295,7 +3312,7 @@ INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`, `hrg`, `hrg_jua
 (7, '180024', 'BETADINE 5 LITER', 2, 0, 0, '', '', NULL, NULL),
 (13, '504761', 'HICO - HEPARIN SODIUM', 0, 0, 0, '', '', NULL, NULL),
 (21, '150194', 'Hawedion', 110, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
-(20, '010494', 'GEQUIN', 118, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
+(20, '010494', 'GEQUIN', 110, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
 
@@ -5089,7 +5106,7 @@ ALTER TABLE `history_beli_k`
 -- AUTO_INCREMENT for table `history_beli_obat`
 --
 ALTER TABLE `history_beli_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `history_beli_t`
@@ -5161,7 +5178,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1265;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1268;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5203,7 +5220,7 @@ ALTER TABLE `pekerjaan`
 -- AUTO_INCREMENT for table `pelayanan_obat`
 --
 ALTER TABLE `pelayanan_obat`
-  MODIFY `id_pelayanan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pelayanan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
