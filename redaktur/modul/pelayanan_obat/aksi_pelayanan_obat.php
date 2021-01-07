@@ -29,20 +29,17 @@
 		$hrg 			= $_POST['hrg'];
 		$hrg_tot		= $jumlah*$hrg;
 		$diskon			= $_POST['diskon'];
-		$hrg_jual			= $_POST['harga_jual'];
-		$batas_cabang			= $_POST['batas_cabang'];
-		$batas_minim			= $_POST['batas_minim'];
-		//$id_sup			= $_POST['id_sup'];
+		$hrg_jual		= $_POST['harga_jual'];
+		$batas_cabang	= $_POST['batas_cabang'];
+		$batas_minim	= $_POST['batas_minim'];
 		$diskon_harga   = $hrg_tot*($diskon/100);
 		$sub_tot		= $hrg_tot-$diskon_harga;
-		$no_tran			= $_POST['no_tran'];
+		$no_tran		= $_POST['no_tran'];
 		$nama_pembeli	= $nama_pembeli['nama_pembeli'];
 		$tgl_beli		= $_POST['tgl_beli'];
 
 		$jumlahkan 		= "SELECT SUM(sub_tot) AS total FROM beli_obat";
 		mysqli_query($con, "INSERT INTO beli_obat(kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli')");
-		
-
 	}
 	
 	header('location:../../media.php?module=pelayanan_obat');
