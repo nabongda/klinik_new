@@ -6,11 +6,11 @@ window.print();
 	include("../../config/fungsi_rupiah.php");
 	include("../../config/fungsi_indotgl.php");
 	$id		= $_GET['id'];
-	$resep	= mysql_fetch_array(mysql_query("Select * From pembayaran_resep Where id_pemrsp='$id'"));
+	$resep	= mysqli_fetch_array(mysqli_query($con, "SELECT * From pembayaran_resep Where id_pemrsp='$id'"));
 	$ida	= $resep['id_antrian'];
-	$atr	= mysql_fetch_array(mysql_query("Select * From perawatan_pasien Where id_antrian='$ida'"));
+	$atr	= mysqli_fetch_array(mysqli_query($con, "SELECT * From perawatan_pasien Where id_antrian='$ida'"));
 	$idpas	= $atr['id_pasien'];
-	$pas	= mysql_fetch_array(mysql_query("Select * From pasien Where id_pasien='$idpas'"));
+	$pas	= mysqli_fetch_array(mysqli_query($con, "SELECT * From pasien Where id_pasien='$idpas'"));
 ?>
 <link href="../css/paid.css" rel="stylesheet" type="text/css" />
 <div align="center">

@@ -20,8 +20,8 @@ window.print();
         </thead>
 		<tbody>
 		<?php
-			$data 	= mysql_query("Select * From perawatan_pasien, pasien, jenis_pembayaran, tagihan Where perawatan_pasien.id_antrian=tagihan.id_antrian And perawatan_pasien.id_pasien=pasien.id_pasien And pasien.id_jenispem=jenis_pembayaran.id_jenispem And nama_jenispem='Jamkesmas'");
-			while($hasil = mysql_fetch_array($data)){
+			$data 	= mysqli_query($con, "Select * From perawatan_pasien, pasien, jenis_pembayaran, tagihan Where perawatan_pasien.id_antrian=tagihan.id_antrian And perawatan_pasien.id_pasien=pasien.id_pasien And pasien.id_jenispem=jenis_pembayaran.id_jenispem And nama_jenispem='Jamkesmas'");
+			while($hasil = mysqli_fetch_array($data)){
 		?>
         <tr>
         	<td><?php echo $hasil['nama_pasien']; ?></td>
@@ -31,7 +31,7 @@ window.print();
         </tr>
         <?php
 			}
-			$tot 	= mysql_fetch_array(mysql_query("Select sum(total) as total From perawatan_pasien, pasien, jenis_pembayaran, tagihan Where perawatan_pasien.id_antrian=tagihan.id_antrian And perawatan_pasien.id_pasien=pasien.id_pasien And pasien.id_jenispem=jenis_pembayaran.id_jenispem And nama_jenispem='Jamkesmas'"));
+			$tot 	= mysqli_fetch_array(mysqli_query($con, "SELECT sum(total) as total From perawatan_pasien, pasien, jenis_pembayaran, tagihan Where perawatan_pasien.id_antrian=tagihan.id_antrian And perawatan_pasien.id_pasien=pasien.id_pasien And pasien.id_jenispem=jenis_pembayaran.id_jenispem And nama_jenispem='Jamkesmas'"));
 		?>
         <tr>
         	<td colspan="3"><strong>Total</strong></td>

@@ -30,15 +30,15 @@ window.print();
 		</thead>
         <tbody>
         <?php
-			$tot_pem	= mysql_fetch_array(mysql_query("Select sum(total) total From tagihan, perawatan_pasien Where tagihan.id_antrian=perawatan_pasien.id_antrian And perawatan_pasien.keterangan='Keluar' And tagihan.keterangan='Keluar' And (tgl_tercatat Between '$tgl1' And '$tgl2')"));
-			$sel_pem	= mysql_query("Select tgl_tercatat,
+			$tot_pem	= mysqli_fetch_array(mysqli_query($con, "SELECT sum(total) total From tagihan, perawatan_pasien Where tagihan.id_antrian=perawatan_pasien.id_antrian And perawatan_pasien.keterangan='Keluar' And tagihan.keterangan='Keluar' And (tgl_tercatat Between '$tgl1' And '$tgl2')"));
+			$sel_pem	= mysqli_query($con, "Select tgl_tercatat,
 										sum(biaya_poli) as poli, 
 										sum(biaya_dokter) as medis,
 										sum(biaya_tindakan) as pemeriksaan,
 										sum(biaya_lab) as lab,
 										sum(biaya_rontgen) as rontgen,
 										sum(biaya_kamar) as kamar From tagihan, perawatan_pasien Where tagihan.id_antrian=perawatan_pasien.id_antrian And perawatan_pasien.keterangan='Keluar' And tagihan.keterangan='Keluar' And (tgl_tercatat Between '$tgl1' And '$tgl2') Group by tgl_tercatat");		
-			while($pem	= mysql_fetch_array($sel_pem)){
+			while($pem	= mysqli_fetch_array($sel_pem)){
 		?>
         <tr>
         	<td><?php echo $pem['tgl_tercatat']; ?></td>
@@ -70,9 +70,9 @@ window.print();
     </thead> 
 	<tbody>
     <?php
-		$tot_obt	= mysql_fetch_array(mysql_query("Select sum(total_harga) as total From pembayaran_resep, perawatan_pasien Where pembayaran_resep.id_antrian=perawatan_pasien.id_antrian And perawatan_pasien.keterangan='Keluar' And sts_pem='Lunas' And (tgl_pemrsp Between '$tgl1' And '$tgl2')"));
-   		$obt		= mysql_query("Select tgl_pemrsp, sum(total_harga) as total From pembayaran_resep, perawatan_pasien Where pembayaran_resep.id_antrian=perawatan_pasien.id_antrian And perawatan_pasien.keterangan='Keluar' And sts_pem='Lunas' And (tgl_pemrsp Between '$tgl1' And '$tgl2')");
-		while($do	= mysql_fetch_array($obt)){
+		$tot_obt	= mysqli_fetch_array(mysqli_query($con, "SELECT sum(total_harga) as total From pembayaran_resep, perawatan_pasien Where pembayaran_resep.id_antrian=perawatan_pasien.id_antrian And perawatan_pasien.keterangan='Keluar' And sts_pem='Lunas' And (tgl_pemrsp Between '$tgl1' And '$tgl2')"));
+   		$obt		= mysqli_query($con, "Select tgl_pemrsp, sum(total_harga) as total From pembayaran_resep, perawatan_pasien Where pembayaran_resep.id_antrian=perawatan_pasien.id_antrian And perawatan_pasien.keterangan='Keluar' And sts_pem='Lunas' And (tgl_pemrsp Between '$tgl1' And '$tgl2')");
+		while($do	= mysqli_fetch_array($obt)){
 	?>
     	<tr>
         	<td><?php echo $do['tgl_pemrsp']; ?></td>
@@ -95,8 +95,8 @@ window.print();
     </thead> 
 	<tbody>
     <?php
-   		$pem_obt	= mysql_query("Select tgl_pepo, sum(total_harga) as total From pembayaran_po Where ket_pepo='Lunas' And (tgl_pepo Between '$tgl1' And '$tgl2') Group by tgl_pepo");	
-		while($data	= mysql_fetch_array($pem_obt)){
+   		$pem_obt	= mysqli_query($con, "Select tgl_pepo, sum(total_harga) as total From pembayaran_po Where ket_pepo='Lunas' And (tgl_pepo Between '$tgl1' And '$tgl2') Group by tgl_pepo");	
+		while($data	= mysqli_fetch_array($pem_obt)){
 	?>
     	<tr>
         	<td><?php echo $data['tgl_pepo']; ?></td>

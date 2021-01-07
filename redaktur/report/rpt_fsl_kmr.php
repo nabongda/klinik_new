@@ -49,8 +49,8 @@ window.print();
     </thead>
     <tbody>
 	<?php
-		$obat			= mysql_query("Select * From kamar, detail_kamar Where kamar.id_kamar=detail_kamar.id_kamar");
-		while($hasil	= mysql_fetch_array($obat)){    
+		$obat			= mysqli_query($con, "Select * From kamar, detail_kamar Where kamar.id_kamar=detail_kamar.id_kamar");
+		while($hasil	= mysqli_fetch_array($obat)){    
     ?>
     	<tr>
         	<td><?php echo $hasil['nama_kamar']; ?></td>

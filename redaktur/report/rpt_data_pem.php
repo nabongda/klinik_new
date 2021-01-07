@@ -59,8 +59,8 @@ window.print();
 		</tr>
         </thead>
         <?php
-			$pem	= mysql_query("Select tgl_periksa, count(id_antrian) as jumlah From pemeriksaan_pasien Where tgl_periksa Between '$tgl1' And '$tgl2' Group by tgl_periksa");
-			while($data	= mysql_fetch_array($pem)){
+			$pem	= mysqli_query($con, "SELECT tgl_periksa, count(id_antrian) as jumlah From pemeriksaan_pasien Where tgl_periksa Between '$tgl1' And '$tgl2' Group by tgl_periksa");
+			while($data	= mysqli_fetch_array($pem)){
 		?>
         <tbody>
         <tr>

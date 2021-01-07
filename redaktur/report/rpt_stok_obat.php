@@ -19,8 +19,8 @@ window.print();
     </thead>
     <tbody>
 	<?php
-		$stok	= mysql_query("Select nama_obat, satuan, jumlah From obat, obat_stok Where obat.id_obat=obat_stok.id_obat");
-		while($hasil	= mysql_fetch_array($stok)){    
+		$stok	= mysqli_query($con, "SELECT nama_obat, satuan, jumlah From obat, obat_stok Where obat.id_obat=obat_stok.id_obat");
+		while($hasil	= mysqli_fetch_array($stok)){    
     ?>
     	<tr>
         	<td><?php echo $hasil['nama_obat']; ?></td>

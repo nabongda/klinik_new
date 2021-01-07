@@ -50,8 +50,8 @@ window.print();
     </thead>
     <tbody>
 	<?php
-		$obat			= mysql_query("Select * From treatment");
-		while($hasil	= mysql_fetch_array($obat)){    
+		$obat			= mysqli_query($con, "SELECT * FROM treatment");
+		while($hasil	= mysqli_fetch_array($obat)){    
     ?>
     	<tr>
         	<td><?php echo $hasil['nama_t']; ?></td>

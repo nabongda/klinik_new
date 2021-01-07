@@ -6,13 +6,13 @@ window.print();
 	include("../../config/fungsi_rupiah.php");
 	include("../../config/fungsi_indotgl.php");
 	$id		= $_GET['id'];
-	$plab	= mysql_fetch_array(mysql_query("Select * From pemeriksaan_lab Where id_plab='$id'"));
+	$plab	= mysqli_fetch_array(mysqli_query($con, "SELECT * From pemeriksaan_lab Where id_plab='$id'"));
 	$idl	= $plab['id_ulab'];
-	$ulab	= mysql_fetch_array(mysql_query("Select * From uji_lab Where id_ulab='$idl'"));
+	$ulab	= mysqli_fetch_array(mysqli_query($con, "SELECT * From uji_lab Where id_ulab='$idl'"));
 	$ida	= $plab['id_antrian'];
-	$pas	= mysql_fetch_array(mysql_query("Select * From perawatan_pasien Where id_antrian='$ida'"));
+	$pas	= mysqli_fetch_array(mysqli_query($con, "SELECT * From perawatan_pasien Where id_antrian='$ida'"));
 	$idp	= $pas['id_pasien'];
-	$detp	= mysql_fetch_array(mysql_query("Select * From pasien Where id_pasien='$idp'"));
+	$detp	= mysqli_fetch_array(mysqli_query($con, "SELECT * From pasien Where id_pasien='$idp'"));
 ?>
 <link href="../css/paid.css" rel="stylesheet" type="text/css" />
 <div align="center">

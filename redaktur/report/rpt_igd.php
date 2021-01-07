@@ -61,9 +61,9 @@ window.print();
 		</tr>
         </thead>
         <?php
-			$rj	= mysql_query("Select antrian, tgl_datang, count(id_pasien) as jumlah From perawatan_pasien Where antrian='IGD' And tgl_datang Between '$tgl1' And '$tgl2' Group by antrian, tgl_datang");
+			$rj	= mysqli_query($con, "SELECT antrian, tgl_datang, count(id_pasien) as jumlah From perawatan_pasien Where antrian='IGD' And tgl_datang Between '$tgl1' And '$tgl2' Group by antrian, tgl_datang");
         
-			while($data	= mysql_fetch_array($rj)){
+			while($data	= mysqli_fetch_array($rj)){
 		?>
         <tbody>
         <tr>

@@ -19,8 +19,8 @@ window.print();
     </thead>
     <tbody>
 	<?php
-		$kmr			= mysql_query("Select * From kamar, kamar_jenis Where kamar.id_jenkamar=kamar_jenis.id_jenkamar");
-		while($hasil	= mysql_fetch_array($kmr)){    
+		$kmr			= mysqli_query($con, "Select * From kamar, kamar_jenis Where kamar.id_jenkamar=kamar_jenis.id_jenkamar");
+		while($hasil	= mysqli_fetch_array($kmr)){    
     ?>
     	<tr>
         	<td><?php echo $hasil['kelas']; ?></td>

@@ -27,9 +27,9 @@ window.print();
 		</tr>
         </thead>
         <?php
-			$tot_png	= mysql_fetch_array(mysql_query("Select sum(jumlah_pop) as total From pengeluaran_op Where (tgl_pop Between '$tgl1' And '$tgl2')"));
-			$png		= mysql_query("Select tgl_pop, ket_pop, sum(jumlah_pop) as png From pengeluaran_op Where (tgl_pop Between '$tgl1' And '$tgl2') Group by tgl_pop, ket_pop");
-			while($tot	= mysql_fetch_array($png)){
+			$tot_png	= mysqli_fetch_array(mysqli_query($con, "SELECT sum(jumlah_pop) as total From pengeluaran_op Where (tgl_pop Between '$tgl1' And '$tgl2')"));
+			$png		= mysqli_query($con, "Select tgl_pop, ket_pop, sum(jumlah_pop) as png From pengeluaran_op Where (tgl_pop Between '$tgl1' And '$tgl2') Group by tgl_pop, ket_pop");
+			while($tot	= mysqli_fetch_array($png)){
 		?>
         <tr>
         	<td><center><?php echo $tot['tgl_pop']; ?></center></td>

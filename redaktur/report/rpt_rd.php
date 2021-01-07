@@ -57,8 +57,8 @@ window.print();
 		</thead>
 		<tbody>
 		<?php
-			$om		= mysql_query("Select tgl_rd, count(id_antrian) as total From riwayat_dokter Where no_idk='$id' And tgl_rd Between '$tgl1' And '$tgl2' Group by tgl_rd");
-			while($hasil	= mysql_fetch_array($om)){			
+			$om		= mysqli_query($con, "Select tgl_rd, count(id_antrian) as total From riwayat_dokter Where no_idk='$id' And tgl_rd Between '$tgl1' And '$tgl2' Group by tgl_rd");
+			while($hasil	= mysqli_fetch_array($om)){			
 		?>
             <tr>
                 <td><?php echo $hasil['tgl_rd']; ?></td>

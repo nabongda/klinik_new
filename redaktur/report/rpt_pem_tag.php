@@ -25,8 +25,8 @@ window.print();
         </thead>
         <tbody>
         <?php
-			$pem	= mysql_query("Select tgl_bayar, count(id_pembayaran) as jumlah From pembayaran Where keterangan='Lunas' ANd tgl_bayar Between '$tgl1' And '$tgl2' Group by tgl_bayar");
-			while($data	= mysql_fetch_array($pem)){
+			$pem	= mysqli_query($con, "Select tgl_bayar, count(id_pembayaran) as jumlah From pembayaran Where keterangan='Lunas' ANd tgl_bayar Between '$tgl1' And '$tgl2' Group by tgl_bayar");
+			while($data	= mysqli_fetch_array($pem)){
 		?>
         <tr>
 			<td><?php echo tgl_indo($data['tgl_bayar']); ?></td>

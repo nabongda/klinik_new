@@ -6,7 +6,7 @@ window.print();
 	include("../../config/fungsi_rupiah.php");
 	include("../../config/fungsi_indotgl.php");
 	$id		= $_GET['id'];
-	$po		= mysql_fetch_array(mysql_query("Select * From pembayaran_po Where id_pepo='$id'"));
+	$po		= mysqli_fetch_array(mysqli_query($con, "SELECT * From pembayaran_po Where id_pepo='$id'"));
 ?>
 <link href="../css/paid.css" rel="stylesheet" type="text/css" />
 <div align="center">

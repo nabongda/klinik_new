@@ -6,11 +6,11 @@ window.print();
 	include("../../config/fungsi_rupiah.php");
 	include("../../config/fungsi_indotgl.php");
 	$id		= $_GET['id'];
-	$per	= mysql_fetch_array(mysql_query("Select * From pemeriksaan_pasien Where id_periksa='$id'"));
+	$per	= mysqli_fetch_array(mysqli_query($con, "SELECT * From pemeriksaan_pasien Where id_periksa='$id'"));
 	$ida	= $per['id_antrian'];
-	$pas	= mysql_fetch_array(mysql_query("Select * From perawatan_pasien Where id_antrian='$ida'"));
+	$pas	= mysqli_fetch_array(mysqli_query($con, "SELECT * From perawatan_pasien Where id_antrian='$ida'"));
 	$idp	= $pas['id_pasien'];
-	$detp	= mysql_fetch_array(mysql_query("Select * From pasien Where id_pasien='$idp'"));
+	$detp	= mysqli_fetch_array(mysqli_query($con, "SELECT * From pasien Where id_pasien='$idp'"));
 ?>
 <link href="../css/paid.css" rel="stylesheet" type="text/css" />
 	<div align="center">
@@ -72,10 +72,10 @@ window.print();
         </thead>
 		<tbody>
 		<?php
-			$obt	= mysql_query("Select * From obat_resep Where id_periksa='$id'");
-			while($hasil = mysql_fetch_array($obt)){
+			$obt	= mysqli_query($con, "Select * From obat_resep Where id_periksa='$id'");
+			while($hasil = mysqli_fetch_array($obt)){
 			$ido	= $hasil['id_obat'];
-			$dt_obt	= mysql_fetch_array(mysql_query("Select * From obat Where id_obat='$ido'"));
+			$dt_obt	= mysqli_fetch_array(mysqli_query($con, "SELECT * From obat Where id_obat='$ido'"));
 		?>
         <tr>
        	  <td><?php echo $dt_obt['nama_obat']; ?></td>

@@ -50,8 +50,8 @@ window.print();
     </thead>
     <tbody>
 	<?php
-		$obat			= mysql_query("Select * From produk Where id");
-		while($hasil	= mysql_fetch_array($obat)){    
+		$obat			= mysqli_query($con, "Select * From produk Where id");
+		while($hasil	= mysqli_fetch_array($obat)){    
     ?>
     	<tr>
         	<td><?php echo $hasil['nama_produk']; ?></td>

@@ -209,17 +209,17 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label>Jumlah </label>
-                  <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
+                  <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" onkeypress="return hanyaAngka(event)" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Harga </label>
-                  <input type="text" class="form-control" name="hrg" id="hrg" placeholder="Harga" required>
+                  <input type="text" class="form-control" name="hrg" id="hrg" placeholder="Harga" onkeypress="return hanyaAngka(event)" required>
                   <input class="form-control" type="hidden" name="harga_jual" id="harga_jual" required>
                   <input class="form-control" type="hidden" name="tgl_beli" value="<?php echo $tgl_beli?>">
                 </div>
                 <div class="form-group col-md-2">
                   <label>Diskon </label>
-                  <input type="number" class="form-control" name="diskon" id="diskon" placeholder="misal: 0-100" value="0">
+                  <input type="number" class="form-control" name="diskon" id="diskon" placeholder="misal: 0-100" value="0" onkeypress="return hanyaAngka(event)">
                   <input class="form-control" type="hidden" name="batas_cabang" id="batas_cabang" value="100" required>
                   <input class="form-control" type="hidden" name="batas_minim" id="batas_minim" value="10" required>
                 </div>
@@ -283,6 +283,7 @@
                     $total =@mysqli_query($con, $jumlahkan) or die (mysqli_error($con));//melakukan query dengan varibel $jumlahkan
                     $t = mysqli_fetch_array($total); //menyimpan hasil query ke variabel $t
                     ?><b><?php echo rupiah($t["total"]); ?></b>
+                    <input type="hidden" id="total" name="total" value="<?php echo $t["total"]; ?>">
                 </th>
               </tr>
               <div class="modal fade modalEditBarang" tabindex="-1" role="dialog"
@@ -315,8 +316,6 @@
                           <input class="form-control" type="text" name="total"
                               value="" readonly>
                         </div>
-                        
-                        
                       </form>
                     </div>
                     <div class="modal-footer">
@@ -352,6 +351,15 @@
               </div>
               <div class="form-group row">
                 <div class="col-sm-2">
+                  <label for="inputTglBeli">Tanggal Pembelian </label>
+                </div>
+                <div class="col-sm-4">
+                  <input type="date" class="form-control" name="tgl_pembelian" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
+                        data-inputmask-inputformat="mm/dd/yyyy" data-mask required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">
                   <label for="inputNamaPembeli">Nama Pembeli </label>
                 </div>
                 <div class="col-sm-4">
@@ -360,11 +368,38 @@
               </div>
               <div class="form-group row">
                 <div class="col-sm-2">
-                  <label for="inputTglBeli">Tanggal Pembelian </label>
+                  <label for="inputJenisByr">Jenis Pembayaran </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="date" class="form-control" name="tgl_pembelian" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
-                        data-inputmask-inputformat="mm/dd/yyyy" data-mask required>
+                  <select class="form-control select2" name="jenispem" id="jenispem" style="width: 100%;" required>
+                    <option value="">--Pilih Salah Satu--</option>
+                    <option value="tunai">Tunai</option>
+                    <option value="transfer">Transfer</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row collapse" id="pembayaran">
+                <div class="col-sm-2">
+                  <label for="inputNamaPembeli">Pembayaran </label>
+                </div>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" name="pembayaran" onblur="hitung()" id="bayar" onkeypress="return hanyaAngka(event)" required>
+                </div>
+              </div>
+              <div class="form-group row collapse" id="kembalian">
+                <div class="col-sm-2">
+                  <label for="inputNamaPembeli">Kembalian </label>
+                </div>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="kembalian" name="kembalian" readonly>
+                </div>
+              </div>
+              <div class="form-group row collapse" id="buktitf">
+                <div class="col-sm-2">
+                  <label for="inputNamaPembeli">Bukti Transfer </label>
+                </div>
+                <div class="col-sm-4">
+                  <input type="file" class="form-control" name="bukti_transfer" readonly>
                 </div>
               </div>
               <div class="form-group col-md-2">
@@ -372,6 +407,28 @@
               </div>
             </div>
           </form>
+          <script>
+            function hitung(){
+              var a = parseInt($("#total").val());
+              var b = parseInt($("#bayar").val());
+              var c = b - a;
+              $("#kembalian").value(c);
+            
+              // if(b >= a){
+              //   $("#selesai").attr("disabled",false);
+              // } else {
+              //   $("#selesai").attr("disabled",true);
+              // }
+            }
+
+            function hanyaAngka(evt) {
+              var charCode = (evt.which) ? evt.which : event.keyCode
+              if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+                return false;
+              return true;
+            }
+          </script>
         </div>
       </div>
     </div>
@@ -389,6 +446,26 @@ $(document).ready(function(){
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  $('#jenispem').on('click', function (e) {
+    e.preventDefault();
+    var j = $("#jenispem").val();
+    if (j == "tunai") {
+      $('#pembayaran').collapse('show');
+      $('#kembalian').collapse('show');
+      $('#buktitf').collapse('hide');
+    }
+    else if (j == "transfer") {
+      $('#buktitf').collapse('show');
+      $('#pembayaran').collapse('hide');
+      $('#kembalian').collapse('hide');
+    }
+    else {
+      $('#buktitf').collapse('hide');
+      $('#pembayaran').collapse('hide');
+      $('#kembalian').collapse('hide');
     }
   });
 
