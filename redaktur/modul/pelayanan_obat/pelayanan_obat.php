@@ -44,7 +44,7 @@
               <tr>
                 <th>No</th>
                 <th>No Transaksi</th>
-                <th>Nama Pembali</th>
+                <th>Nama Pembeli</th>
                 <th>Tanggal Pembelian</th>
                 <th class="nosort">Aksi</th>
               </tr>
@@ -130,7 +130,7 @@
 <?php
   break;
   case "tambah":
-    $query = mysqli_query($con, "SELECT max(no_tran) as kodemax FROM pelayanan_obat");
+    $query = mysqli_query($con, "SELECT max(no_tran) as kodemax FROM history_beli_obat");
     $data = mysqli_fetch_array($query);
     $no_tran = $data['kodemax'];
 
@@ -330,7 +330,7 @@
             </table>
           </div>
 
-          <form class="form-horizontal"  method="POST" action="modul/pelayanan_obat/input_transaksi.php">
+          <form class="form-horizontal" method="POST" action="modul/pelayanan_obat/input_transaksi.php" enctype="multipart/form-data">
             <!-- <?php
               $selectidmax  = mysqli_query($con, "SELECT max(no_tran) as notran From beli_obat");
               $hsilidmax    = mysqli_fetch_array($selectidmax);
@@ -371,7 +371,7 @@
                   <label for="inputJenisByr">Jenis Pembayaran </label>
                 </div>
                 <div class="col-sm-4">
-                  <select class="form-control select2" name="jenispem" id="jenispem" style="width: 100%;" required>
+                  <select class="form-control select2" name="jenis_pembayaran" id="jenis_pembayaran" style="width: 100%;" required>
                     <option value="">--Pilih Salah Satu--</option>
                     <option value="tunai">Tunai</option>
                     <option value="transfer">Transfer</option>
@@ -380,10 +380,10 @@
               </div>
               <div class="form-group row collapse" id="pembayaran">
                 <div class="col-sm-2">
-                  <label for="inputNamaPembeli">Pembayaran </label>
+                  <label for="inputNamaPembeli">Cash </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="pembayaran" onblur="hitung()" id="bayar" onkeypress="return hanyaAngka(event)" required>
+                  <input type="text" class="form-control" name="cash" onblur="hitung()" id="cash" onkeypress="return hanyaAngka(event)">
                 </div>
               </div>
               <div class="form-group row collapse" id="kembalian">
@@ -396,10 +396,10 @@
               </div>
               <div class="form-group row collapse" id="buktitf">
                 <div class="col-sm-2">
-                  <label for="inputNamaPembeli">Bukti Transfer </label>
+                  <label for="file">Bukti Transfer </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="file" class="form-control" name="bukti_transfer" readonly>
+                  <input type="file" class="form-control" name="bukti_transfer" id="bukti_transfer">
                 </div>
               </div>
               <div class="form-group col-md-2">
@@ -449,15 +449,20 @@ $(document).ready(function(){
     }
   });
 
-  $('#jenispem').on('click', function (e) {
+  $('#jenis_pembayaran').on('click', function (e) {
     e.preventDefault();
-    var j = $("#jenispem").val();
+    var j = $("#jenis_pembayaran").val();
     if (j == "tunai") {
+      $('#cash').attr('required', true);
+      $('#bukti_transfer').val('');
       $('#pembayaran').collapse('show');
       $('#kembalian').collapse('show');
       $('#buktitf').collapse('hide');
     }
     else if (j == "transfer") {
+      $('#bukti_transfer').attr('required', true);
+      $('#cash').val('');
+      $('#kembalian').val('');
       $('#buktitf').collapse('show');
       $('#pembayaran').collapse('hide');
       $('#kembalian').collapse('hide');
@@ -544,7 +549,7 @@ $(document).ready(function(){
 
   // Edit Barang Tunai
   $('body').on('click','#edit_brg', function () {
-    $("#modal_pembelian_t").modal("show");
+    $("#modal_pelayanan_obat").modal("show");
     var kode_b = $(this).closest('tr').find('td').html();
     $("#kd_brg").val(kode_b);
   });
@@ -552,7 +557,7 @@ $(document).ready(function(){
   // Reset table input barang
   $("#reset_brg").click(function(){
     $.ajax({
-      url: 'modul/pembelian_t/reset_brg.php',
+      url: 'modul/pelayanan_obat/reset_brg.php',
       success:function(){
         alert("Tabel Berhasil Direset");
         var oTable = $('#barang11').dataTable(); 

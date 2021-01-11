@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2021 at 06:43 AM
+-- Generation Time: Jan 08, 2021 at 05:43 PM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -211,13 +211,6 @@ CREATE TABLE `beli_obat` (
   `tgl_produksi` date NOT NULL,
   `tgl_expired` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `beli_obat`
---
-
-INSERT INTO `beli_obat` (`id_beli_obat`, `kd_brg`, `nama_brg`, `satuan_o`, `kategori_o`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_beli`, `tgl_produksi`, `tgl_expired`) VALUES
-(1, '150194', 'Hawedion', 7, 6, '40000', 45000, 100, 10, '10', '1', '396000', '2021-01-07', '2020-11-02', '2022-11-02');
 
 -- --------------------------------------------------------
 
@@ -600,7 +593,7 @@ INSERT INTO `history_beli_k` (`id`, `no_fak`, `tgl_beli`, `kd_brg`, `nama_brg`, 
 CREATE TABLE `history_beli_obat` (
   `id` int(11) NOT NULL,
   `no_tran` varchar(50) NOT NULL,
-  `tgl_beli` date NOT NULL,
+  `tgl_beli` datetime NOT NULL,
   `kd_brg` varchar(50) NOT NULL,
   `nama_brg` varchar(50) NOT NULL,
   `satuan` varchar(50) NOT NULL,
@@ -615,6 +608,14 @@ CREATE TABLE `history_beli_obat` (
   `tgl_produksi` date NOT NULL,
   `tgl_expired` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `history_beli_obat`
+--
+
+INSERT INTO `history_beli_obat` (`id`, `no_tran`, `tgl_beli`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_produksi`, `tgl_expired`) VALUES
+(7, 'TRS-00001', '2021-01-09 00:16:44', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, '5', '0', '200000', '2020-11-02', '2022-11-02'),
+(8, 'TRS-00002', '2021-01-09 00:39:09', '251069', 'DOTRAMOL-PARACETAMOL-TRAM', '0', '0', '13500', 0, 100, 10, '1', '0', '13500', '2020-11-07', '2022-11-07');
 
 -- --------------------------------------------------------
 
@@ -2514,7 +2515,13 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1264, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-05 03:42:06'),
 (1265, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-07 04:06:42'),
 (1266, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-07 04:09:10'),
-(1267, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-07 04:26:30');
+(1267, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-07 04:26:30'),
+(1268, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-07 07:40:17'),
+(1269, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-08 05:24:53'),
+(1270, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-08 11:08:08'),
+(1271, 'ginger', 'Berhasil Login dengan IP ::1', '2021-01-08 14:41:25'),
+(1272, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-08 16:27:42'),
+(1273, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-08 16:34:17');
 
 -- --------------------------------------------------------
 
@@ -2914,13 +2921,21 @@ CREATE TABLE `pelayanan_obat` (
   `id_pelayanan_obat` int(11) NOT NULL,
   `no_tran` varchar(50) NOT NULL,
   `nama_pembeli` varchar(255) NOT NULL,
-  `tgl_pembelian` date NOT NULL,
-  `jenis_pembayaran` varchar(50) DEFAULT NULL,
-  `total` varchar(50) NOT NULL,
-  `cash` varchar(50) DEFAULT NULL,
-  `kembalian` varchar(50) DEFAULT NULL,
+  `tgl_pembelian` datetime NOT NULL,
+  `jenis_pembayaran` enum('tunai','transfer') NOT NULL,
+  `total` int(11) NOT NULL,
+  `cash` int(11) DEFAULT NULL,
+  `kembalian` int(11) DEFAULT NULL,
   `bukti_transfer` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pelayanan_obat`
+--
+
+INSERT INTO `pelayanan_obat` (`id_pelayanan_obat`, `no_tran`, `nama_pembeli`, `tgl_pembelian`, `jenis_pembayaran`, `total`, `cash`, `kembalian`, `bukti_transfer`) VALUES
+(4, 'TRS-00001', 'Nurlaela Khasannah', '2021-01-09 00:16:44', 'tunai', 200000, 200000, 0, NULL),
+(5, 'TRS-00002', 'Nurlaela Khasannah', '2021-01-09 00:39:09', 'transfer', 13500, 0, 0, 'Screenshot_2021-01-02 Denisya Shop.png');
 
 -- --------------------------------------------------------
 
@@ -3302,7 +3317,7 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`, `hrg`, `hrg_jual`, `satuan`, `kategori`, `tgl_produksi`, `tgl_expired`) VALUES
-(1, '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', 51, 0, 0, '', '', NULL, NULL),
+(1, '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', 50, 0, 0, '', '', NULL, NULL),
 (2, '661713', 'ALKOHOL 70 %', 7, 0, 0, '', '', NULL, NULL),
 (3, '766785', 'VIT C ( KALENG )', 48, 0, 0, '', '', NULL, NULL),
 (4, '581543', 'ALKOHOL KECIL', 4, 0, 0, '', '', NULL, NULL),
@@ -3310,8 +3325,8 @@ INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`, `hrg`, `hrg_jua
 (6, '643464', 'ANTANGIN JRG', 29, 0, 0, '', '', NULL, NULL),
 (7, '180024', 'BETADINE 5 LITER', 2, 0, 0, '', '', NULL, NULL),
 (13, '504761', 'HICO - HEPARIN SODIUM', 0, 0, 0, '', '', NULL, NULL),
-(21, '150194', 'Hawedion', 110, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
-(20, '010494', 'GEQUIN', 118, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
+(21, '150194', 'Hawedion', 90, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(20, '010494', 'GEQUIN', 90, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
 
@@ -4558,7 +4573,8 @@ INSERT INTO `user` (`id_ju`, `id_kk`, `id_user`, `username`, `password`, `nama_l
 ('JU-02', 0, 9, 'drwatson', '0bdd56e52b9f2ba1568f732087ddcad9', 'Watson', '-', '-', '', 'N', '2000-01-01', '-', '-'),
 ('JU-02', 0, 10, 'drstrange', '8b6e10530f75d23c0a0eca4d5671db7d', 'Stephen', '-', '-', '', 'N', '2000-01-01', '-', '-'),
 ('JU-02', 1, 11, 'drsam', 'c4584667951e1479b8dedb9d8105f19b', 'drsam', 'drsam@gmail.com', '088212671299', '', 'N', '2020-04-15', 's3 UGM', 'Jl. jalan'),
-('JU-02', 1, 12, 'drdaniel', '364393b7ac43318a848e94ee90b75835', 'drdaniel', 'daniel@gmail.com', '109923764789', '', 'N', '2020-04-15', 's3 UGM', 'Jl. Sudirman');
+('JU-02', 1, 12, 'drdaniel', '364393b7ac43318a848e94ee90b75835', 'drdaniel', 'daniel@gmail.com', '109923764789', '', 'N', '2020-04-15', 's3 UGM', 'Jl. Sudirman'),
+('JU-02', 1, 15, 'drahn', '20267282f56650a08f044159c860a1d0', 'Dokter Ahn', 'drahn@gmail.com', '089999888787', '84shopping_cart_PNG59.png', 'N', '2021-01-08', '2018', 'Seoul');
 
 --
 -- Indexes for dumped tables
@@ -5021,7 +5037,7 @@ ALTER TABLE `beli_k`
 -- AUTO_INCREMENT for table `beli_obat`
 --
 ALTER TABLE `beli_obat`
-  MODIFY `id_beli_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_beli_obat` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `biaya_administrasi`
@@ -5105,7 +5121,7 @@ ALTER TABLE `history_beli_k`
 -- AUTO_INCREMENT for table `history_beli_obat`
 --
 ALTER TABLE `history_beli_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `history_beli_t`
@@ -5177,7 +5193,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1268;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1274;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5219,7 +5235,7 @@ ALTER TABLE `pekerjaan`
 -- AUTO_INCREMENT for table `pelayanan_obat`
 --
 ALTER TABLE `pelayanan_obat`
-  MODIFY `id_pelayanan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pelayanan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
@@ -5375,7 +5391,7 @@ ALTER TABLE `treatment`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
