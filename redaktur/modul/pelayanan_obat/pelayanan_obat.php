@@ -46,6 +46,7 @@
                 <th>No Transaksi</th>
                 <th>Nama Pembeli</th>
                 <th>Tanggal Pembelian</th>
+                <th>Jenis Pembayaran</th>
                 <th class="nosort">Aksi</th>
               </tr>
             </thead>
@@ -60,6 +61,7 @@
                 <td><?php echo $data['no_tran']; ?></td>
                 <td><?php echo $data['nama_pembeli']; ?></td>
                 <td><?php echo $data['tgl_pembelian'] ?></td>
+                <td><?php echo $data['jenis_pembayaran'] ?></td>
                 <td>
                 <a href="#detail" id="custId" data-toggle="modal" data-id="<?php echo $data['id_pelayanan_obat']?>" class="btn-xs btn-success"><i
                       class="fa fa-eye"> Detail </i></a>
