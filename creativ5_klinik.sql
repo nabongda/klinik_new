@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2021 at 05:43 PM
+-- Generation Time: Jan 11, 2021 at 08:08 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -207,9 +207,10 @@ CREATE TABLE `beli_obat` (
   `jumlah` varchar(50) NOT NULL,
   `diskon` varchar(50) NOT NULL,
   `sub_tot` varchar(50) NOT NULL,
-  `tgl_beli` date NOT NULL,
+  `tgl_beli` datetime NOT NULL,
   `tgl_produksi` date NOT NULL,
-  `tgl_expired` date NOT NULL
+  `tgl_expired` date NOT NULL,
+  `resep` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -606,16 +607,19 @@ CREATE TABLE `history_beli_obat` (
   `diskon` varchar(50) NOT NULL,
   `sub_tot` varchar(50) NOT NULL,
   `tgl_produksi` date NOT NULL,
-  `tgl_expired` date NOT NULL
+  `tgl_expired` date NOT NULL,
+  `resep` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `history_beli_obat`
 --
 
-INSERT INTO `history_beli_obat` (`id`, `no_tran`, `tgl_beli`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_produksi`, `tgl_expired`) VALUES
-(7, 'TRS-00001', '2021-01-09 00:16:44', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, '5', '0', '200000', '2020-11-02', '2022-11-02'),
-(8, 'TRS-00002', '2021-01-09 00:39:09', '251069', 'DOTRAMOL-PARACETAMOL-TRAM', '0', '0', '13500', 0, 100, 10, '1', '0', '13500', '2020-11-07', '2022-11-07');
+INSERT INTO `history_beli_obat` (`id`, `no_tran`, `tgl_beli`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_produksi`, `tgl_expired`, `resep`) VALUES
+(7, 'TRS-00001', '2021-01-09 00:16:44', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, '5', '0', '200000', '2020-11-02', '2022-11-02', ''),
+(8, 'TRS-00002', '2021-01-09 00:39:09', '251069', 'DOTRAMOL-PARACETAMOL-TRAM', '0', '0', '13500', 0, 100, 10, '1', '0', '13500', '2020-11-07', '2022-11-07', ''),
+(9, 'TRS-00003', '2021-01-11 13:59:44', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, '5', '0', '125000', '2020-11-01', '2022-11-01', ''),
+(10, 'TRS-00004', '2021-01-11 15:07:17', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, '5', '0', '200000', '2020-11-02', '2022-11-02', 'kode.jpg');
 
 -- --------------------------------------------------------
 
@@ -2521,7 +2525,10 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1270, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-08 11:08:08'),
 (1271, 'ginger', 'Berhasil Login dengan IP ::1', '2021-01-08 14:41:25'),
 (1272, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-08 16:27:42'),
-(1273, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-08 16:34:17');
+(1273, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-08 16:34:17'),
+(1274, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-11 03:35:20'),
+(1275, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-11 04:24:01'),
+(1276, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-11 06:48:59');
 
 -- --------------------------------------------------------
 
@@ -2935,7 +2942,9 @@ CREATE TABLE `pelayanan_obat` (
 
 INSERT INTO `pelayanan_obat` (`id_pelayanan_obat`, `no_tran`, `nama_pembeli`, `tgl_pembelian`, `jenis_pembayaran`, `total`, `cash`, `kembalian`, `bukti_transfer`) VALUES
 (4, 'TRS-00001', 'Nurlaela Khasannah', '2021-01-09 00:16:44', 'tunai', 200000, 200000, 0, NULL),
-(5, 'TRS-00002', 'Nurlaela Khasannah', '2021-01-09 00:39:09', 'transfer', 13500, 0, 0, 'Screenshot_2021-01-02 Denisya Shop.png');
+(5, 'TRS-00002', 'Nurlaela Khasannah', '2021-01-09 00:39:09', 'transfer', 13500, 0, 0, 'Screenshot_2021-01-02 Denisya Shop.png'),
+(7, 'TRS-00003', 'Nurlaela Khasannah', '2021-01-11 13:59:44', 'tunai', 125000, 150000, 25000, NULL),
+(8, 'TRS-00004', 'Nurlaela Khasannah', '2021-01-11 15:07:17', 'tunai', 200000, 200000, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -3325,8 +3334,8 @@ INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`, `hrg`, `hrg_jua
 (6, '643464', 'ANTANGIN JRG', 29, 0, 0, '', '', NULL, NULL),
 (7, '180024', 'BETADINE 5 LITER', 2, 0, 0, '', '', NULL, NULL),
 (13, '504761', 'HICO - HEPARIN SODIUM', 0, 0, 0, '', '', NULL, NULL),
-(21, '150194', 'Hawedion', 90, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
-(20, '010494', 'GEQUIN', 90, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
+(21, '150194', 'Hawedion', 85, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(20, '010494', 'GEQUIN', 85, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
 
@@ -4477,7 +4486,7 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-01', 'SM-69', 'Grafik', '#', 'Tidak Aktif', 'bar-chart', 5),
 ('JU-06', 'SM-70', 'Setting Printer', 'set_print', 'Tidak Aktif', 'print', 14),
 ('JU-07', 'SM-71', 'Penjualan Obat', 'pelayanan_obat', 'Aktif', 'cog', 8),
-('JU-07', 'SM-7778', 'Pelayanan Apotek', 'kasir_apotek', 'Aktif', 'copy', 1),
+('JU-07', 'SM-7778', 'Pelayanan Pasien', 'kasir_apotek', 'Aktif', 'copy', 1),
 ('JU-06', 'SM-9889', 'Retur Penjualan', 'retur', 'Tidak Aktif', 'chain-broken', 4),
 ('JU-09', 'SM-99', 'Kritik & Saran', 'kritik_saran', 'Tidak Aktif', 'thumbs-up', 3),
 ('JU-01', 'SM-99000999', 'Data Poliklinik', 'poliklinik', 'Aktif', 'tags', 9),
@@ -5121,7 +5130,7 @@ ALTER TABLE `history_beli_k`
 -- AUTO_INCREMENT for table `history_beli_obat`
 --
 ALTER TABLE `history_beli_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `history_beli_t`
@@ -5193,7 +5202,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1274;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1277;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5235,7 +5244,7 @@ ALTER TABLE `pekerjaan`
 -- AUTO_INCREMENT for table `pelayanan_obat`
 --
 ALTER TABLE `pelayanan_obat`
-  MODIFY `id_pelayanan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pelayanan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`

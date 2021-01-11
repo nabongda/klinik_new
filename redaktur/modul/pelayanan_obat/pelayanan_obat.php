@@ -172,7 +172,7 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form role="form" id="form_t">
+          <form role="form" id="form_t" enctype="multipart/form-data">
             <?php 
             $tgl_beli = date('Y-m-d H:i:s');
             ?>
@@ -231,6 +231,10 @@
                   <label>Tanggal Expired </label>
                   <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_expired" id="tgl_expired" required>
                 </div>
+                <div class="form-group col-md-2">
+                  <label>Resep Obat </label>
+                  <input type="file" class="form-control" name="resep" id="resep">
+                </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
@@ -253,6 +257,7 @@
                   <th>Diskon</th>
                   <th>Tanggal Produksi</th>
                   <th>Tanggal Expired</th>
+                  <th>Resep</th>
                   <th>Sub Total</th>
                   <th class="nosort">Aksi</th>
                 </tr>
@@ -272,12 +277,19 @@
                   <td><?php echo $data['diskon']; ?></td>
                   <td><?php echo $data['tgl_produksi']; ?></td>
                   <td><?php echo $data['tgl_expired']; ?></td>
+                  <td>
+                    <?php if ($data['resep']=='') { 
+                      echo '-';
+                     } else {
+                      echo '<center><a href="'.$url.'/resep_obat/'.$data['resep'].'"><img src="'.$url.'/resep_obat/'.$data['resep'].'" width="50px" height="50px"></a></center>';
+                    } ?>
+                  </td>
                   <td><?php echo rupiah($data['sub_tot']); ?></td>
                 </tr>
                 <?php } ?>
               </tbody>
               <tr>
-                <th colspan="9" style="text-align: right;" id="total">Total: 
+                <th colspan="10" style="text-align: right;" id="total">Total: 
                   <?php
                     $jumlahkan = "SELECT SUM(sub_tot) AS total FROM beli_obat"; //perintah untuk menjumlahkan
                     $total =@mysqli_query($con, $jumlahkan) or die (mysqli_error($con));//melakukan query dengan varibel $jumlahkan
@@ -383,14 +395,15 @@
                   <label for="inputNamaPembeli">Cash </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="cash" onblur="hitung()" id="cash" onkeypress="return hanyaAngka(event)">
+                  <input type="text" class="form-control" name="cash" autofocus onkeyup="hitung()" onkeypress="return hanyaAngka(event)" id="cash">
                 </div>
               </div>
-              <div class="form-group row collapse" id="kembalian">
+              <div class="form-group row collapse" id="fkembalian">
                 <div class="col-sm-2">
                   <label for="inputNamaPembeli">Kembalian </label>
                 </div>
                 <div class="col-sm-4">
+                  <!-- <span id="kmbl"></span> -->
                   <input type="text" class="form-control" id="kembalian" name="kembalian" readonly>
                 </div>
               </div>
@@ -409,16 +422,10 @@
           </form>
           <script>
             function hitung(){
-              var a = parseInt($("#total").val());
-              var b = parseInt($("#bayar").val());
+              var a = $("#tot").val();
+              var b = $("#cash").val();
               var c = b - a;
-              $("#kembalian").value(c);
-            
-              // if(b >= a){
-              //   $("#selesai").attr("disabled",false);
-              // } else {
-              //   $("#selesai").attr("disabled",true);
-              // }
+              $("#kembalian").val(c);
             }
 
             function hanyaAngka(evt) {
@@ -456,7 +463,7 @@ $(document).ready(function(){
       $('#cash').attr('required', true);
       $('#bukti_transfer').val('');
       $('#pembayaran').collapse('show');
-      $('#kembalian').collapse('show');
+      $('#fkembalian').collapse('show');
       $('#buktitf').collapse('hide');
     }
     else if (j == "transfer") {
@@ -465,22 +472,28 @@ $(document).ready(function(){
       $('#kembalian').val('');
       $('#buktitf').collapse('show');
       $('#pembayaran').collapse('hide');
-      $('#kembalian').collapse('hide');
+      $('#fkembalian').collapse('hide');
     }
     else {
       $('#buktitf').collapse('hide');
       $('#pembayaran').collapse('hide');
-      $('#kembalian').collapse('hide');
+      $('#fkembalian').collapse('hide');
     }
   });
 
   // Tambah Input Barang Tunai
   $('#form_t').on('submit', function (e) {
     e.preventDefault();
+    var form = $('#form_t')[0];
+    var data = new FormData(form);
     $.ajax({
       type: 'post',
       url: 'modul/pelayanan_obat/input_data.php',
-      data: $('#form_t').serialize(),
+      enctype: 'multipart/form-data',
+      data: data,
+      processData: false,
+      contentType: false,
+      cache: false,
       success: function (data) {
         var oTable = $('#barang11').dataTable();
         oTable.fnDraw(false);
@@ -529,6 +542,7 @@ $(document).ready(function(){
     "sAjaxSource": "modul/pelayanan_obat/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
+      null,
       null,
       null,
       null,

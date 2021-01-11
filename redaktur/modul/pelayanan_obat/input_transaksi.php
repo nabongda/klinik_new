@@ -19,7 +19,7 @@ $path = "../../../bukti_transfer/".$nama_file;
 
 if ($jenis_pembayaran=='tunai') {
 	$query = "INSERT INTO pelayanan_obat(no_tran, nama_pembeli, tgl_pembelian, jenis_pembayaran, total, cash, kembalian, bukti_transfer) VALUES('$no_tran', '$nama_pembeli', '$tgl', '$jenis_pembayaran', '$total', '$cash', '$kembalian', NULL)";
-	mysqli_query($con, "INSERT INTO history_beli_obat (no_tran, tgl_beli, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot, tgl_produksi, tgl_expired) SELECT '$no_tran','$tgl',kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_produksi,tgl_expired FROM beli_obat ");
+	mysqli_query($con, "INSERT INTO history_beli_obat (no_tran, tgl_beli, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot, tgl_produksi, tgl_expired, resep) SELECT '$no_tran','$tgl',kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_produksi,tgl_expired,resep FROM beli_obat ");
 	$sql = mysqli_query($con, $query);
 	$q = mysqli_query($con, "SELECT * FROM history_beli_obat WHERE no_tran='$no_tran'");
 
@@ -68,7 +68,7 @@ else {
 			// Jika gambar berhasil diupload, Lakukan :  
 			// Proses simpan ke Database
 				$query = "INSERT INTO pelayanan_obat(no_tran, nama_pembeli, tgl_pembelian, jenis_pembayaran, total, cash, kembalian, bukti_transfer) VALUES('$no_tran', '$nama_pembeli', '$tgl', '$jenis_pembayaran', '$total', '$cash', '$kembalian', '$nama_file')";
-				mysqli_query($con, "INSERT INTO history_beli_obat (no_tran, tgl_beli, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot, tgl_produksi, tgl_expired) SELECT '$no_tran','$tgl',kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_produksi,tgl_expired FROM beli_obat ");
+				mysqli_query($con, "INSERT INTO history_beli_obat (no_tran, tgl_beli, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot, tgl_produksi, tgl_expired, resep) SELECT '$no_tran','$tgl',kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_produksi,tgl_expired,resep FROM beli_obat ");
 				$sql = mysqli_query($con, $query);
 				$q = mysqli_query($con, "SELECT * FROM history_beli_obat Where no_tran='$no_tran'");
 	
