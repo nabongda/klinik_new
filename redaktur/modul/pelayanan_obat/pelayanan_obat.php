@@ -174,7 +174,7 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form role="form" id="form_t" enctype="multipart/form-data">
+          <form role="form" id="form_t">
             <?php 
             $tgl_beli = date('Y-m-d H:i:s');
             ?>
@@ -210,14 +210,14 @@
                   </select>
                 </div>
                 <div class="form-group col-md-2">
-                  <label>Jumlah </label>
-                  <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" onkeypress="return hanyaAngka(event)" required>
-                </div>
-                <div class="form-group col-md-2">
                   <label>Harga </label>
                   <input type="text" class="form-control" name="hrg" id="hrg" placeholder="Harga" onkeypress="return hanyaAngka(event)" required>
                   <input class="form-control" type="hidden" name="harga_jual" id="harga_jual" required>
                   <input class="form-control" type="hidden" name="tgl_beli" value="<?php echo $tgl_beli?>">
+                </div>
+                <div class="form-group col-md-2">
+                  <label>Jumlah </label>
+                  <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" onkeypress="return hanyaAngka(event)" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Diskon </label>
@@ -227,15 +227,11 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label>Tanggal Produksi </label>
-                  <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_produksi" id="tgl_produksi" required>
+                  <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_produksi" id="tgl_produksi" readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Tanggal Expired </label>
-                  <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_expired" id="tgl_expired" required>
-                </div>
-                <div class="form-group col-md-2">
-                  <label>Resep Obat </label>
-                  <input type="file" class="form-control" name="resep" id="resep">
+                  <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask name="tgl_expired" id="tgl_expired" readonly>
                 </div>
               </div>
               <div class="form-row">
@@ -259,7 +255,6 @@
                   <th>Diskon</th>
                   <th>Tanggal Produksi</th>
                   <th>Tanggal Expired</th>
-                  <th>Resep</th>
                   <th>Sub Total</th>
                   <th class="nosort">Aksi</th>
                 </tr>
@@ -279,13 +274,6 @@
                   <td><?php echo $data['diskon']; ?></td>
                   <td><?php echo $data['tgl_produksi']; ?></td>
                   <td><?php echo $data['tgl_expired']; ?></td>
-                  <td>
-                    <?php if ($data['resep']=='') { 
-                      echo '-';
-                     } else {
-                      echo '<center><a href="'.$url.'/resep_obat/'.$data['resep'].'"><img src="'.$url.'/resep_obat/'.$data['resep'].'" width="50px" height="50px"></a></center>';
-                    } ?>
-                  </td>
                   <td><?php echo rupiah($data['sub_tot']); ?></td>
                 </tr>
                 <?php } ?>
@@ -345,80 +333,104 @@
           </div>
 
           <form class="form-horizontal" method="POST" action="modul/pelayanan_obat/input_transaksi.php" enctype="multipart/form-data">
-            <!-- <?php
-              $selectidmax  = mysqli_query($con, "SELECT max(no_tran) as notran From beli_obat");
-              $hsilidmax    = mysqli_fetch_array($selectidmax);
-              $idmax        = $hsilidmax['nofak'];
-              $nourut       = (int) substr($idmax, 3);
-              $nourut++;
-              $kode         = "FAK-".sprintf("%05s", $nourut);
-            ?> -->
             <div class="card-body">
-              <div class="form-group row">
-                <div class="col-sm-2">
-                  <label for="inputNoTransaksi">No Transaksi</label>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputNoTransaksi">No Transaksi</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="no_tran" value="<?php echo $no_tran; ?>" readonly>
+                      <input type="hidden" name="id_ju" value="<?php echo $_SESSION['jenis_u']; ?>">
+                    </div>
+                  </div>
                 </div>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" name="no_tran" value="<?php echo $no_tran; ?>" readonly>
-                  <input type="hidden" name="total" id="tot" value="<?php echo $t['total']; ?>">
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputTglBeli">Tanggal Pembelian </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="date" class="form-control" name="tgl_pembelian" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
+                            data-inputmask-inputformat="mm/dd/yyyy" data-mask required>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-2">
-                  <label for="inputTglBeli">Tanggal Pembelian </label>
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputNamaPembeli">Nama Pembeli </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="nama_pembeli" required>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-sm-4">
-                  <input type="date" class="form-control" name="tgl_pembelian" value="<?php echo date('Y-m-d') ?>" data-inputmask-alias="datetime"
-                        data-inputmask-inputformat="mm/dd/yyyy" data-mask required>
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputNamaPembeli">Resep Obat </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="file" class="form-control" id="resep" name="resep">
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-2">
-                  <label for="inputNamaPembeli">Nama Pembeli </label>
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputNamaPembeli">Total </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="total" id="tot" value="<?php echo $t['total']; ?>" readonly>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" name="nama_pembeli" required>
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputNamaPembeli">Pembayaran </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="cash" autofocus onkeyup="hitung()" onkeypress="return hanyaAngka(event)" id="cash">
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-2">
-                  <label for="inputJenisByr">Jenis Pembayaran </label>
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputNamaPembeli">Kembalian </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="kembalian" name="kembalian" readonly>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-sm-4">
-                  <select class="form-control select2" name="jenis_pembayaran" id="jenis_pembayaran" style="width: 100%;" required>
-                    <option value="">--Pilih Salah Satu--</option>
-                    <option value="tunai">Tunai</option>
-                    <option value="transfer">Transfer</option>
-                  </select>
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputJenisByr">Jenis Pembayaran </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <select class="form-control select2" name="jenis_pembayaran" id="jenis_pembayaran" style="width: 100%;" required>
+                        <option value="">--Pilih Salah Satu--</option>
+                        <option value="tunai">Tunai</option>
+                        <option value="transfer">Transfer</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row collapse" id="pembayaran">
-                <div class="col-sm-2">
-                  <label for="inputNamaPembeli">Cash </label>
+                <div class="col-12">
+                  <div class="form-group row">
+                    <div class="col-sm-6 text-right">
+                      <button type="submit" class="btn btn-success">Simpan Transaksi</button>
+                    </div>
+                    <div class="col-sm-6">
+                      <button type="submit" class="btn btn-info">Simpan & Cetak Transaksi</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" name="cash" autofocus onkeyup="hitung()" onkeypress="return hanyaAngka(event)" id="cash">
-                </div>
-              </div>
-              <div class="form-group row collapse" id="fkembalian">
-                <div class="col-sm-2">
-                  <label for="inputNamaPembeli">Kembalian </label>
-                </div>
-                <div class="col-sm-4">
-                  <!-- <span id="kmbl"></span> -->
-                  <input type="text" class="form-control" id="kembalian" name="kembalian" readonly>
-                </div>
-              </div>
-              <div class="form-group row collapse" id="buktitf">
-                <div class="col-sm-2">
-                  <label for="file">Bukti Transfer </label>
-                </div>
-                <div class="col-sm-4">
-                  <input type="file" class="form-control" name="bukti_transfer" id="bukti_transfer">
-                </div>
-              </div>
-              <div class="form-group col-md-2">
-                <button type="submit" class="btn btn-success">Simpan Transaksi</button>
               </div>
             </div>
           </form>
@@ -455,31 +467,6 @@ $(document).ready(function(){
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-  $('#jenis_pembayaran').on('click', function (e) {
-    e.preventDefault();
-    var j = $("#jenis_pembayaran").val();
-    if (j == "tunai") {
-      $('#cash').attr('required', true);
-      $('#bukti_transfer').val('');
-      $('#pembayaran').collapse('show');
-      $('#fkembalian').collapse('show');
-      $('#buktitf').collapse('hide');
-    }
-    else if (j == "transfer") {
-      $('#bukti_transfer').attr('required', true);
-      $('#cash').val('');
-      $('#kembalian').val('');
-      $('#buktitf').collapse('show');
-      $('#pembayaran').collapse('hide');
-      $('#fkembalian').collapse('hide');
-    }
-    else {
-      $('#buktitf').collapse('hide');
-      $('#pembayaran').collapse('hide');
-      $('#fkembalian').collapse('hide');
     }
   });
 
@@ -544,7 +531,6 @@ $(document).ready(function(){
     "sAjaxSource": "modul/pelayanan_obat/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
-      null,
       null,
       null,
       null,
