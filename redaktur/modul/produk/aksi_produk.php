@@ -63,7 +63,7 @@
 		       // Proses simpan ke Database
 			 $query = "INSERT Into produk_master(kd_produk,nama_produk,harga_beli,jual_umum,gambar,id_kategori,id_satuan,jual_bpjs,
 			   jual_lain,tgl_produksi,tgl_expired)VALUES('$kode_barang','$nama_p','$harga_beli','$harga_jual','$nama_file',
-			   '$kategori','$satuan','$harga_bpjs','$harga_asuransilainnya','$tgl_produk','$tgl_exp',)";
+			   '$kategori','$satuan','$harga_bpjs','$harga_asuransilainnya','$tgl_produk','$tgl_exp')";
 			   $sql = mysqli_query($con, $query); // Eksekusi/ Jalankan query dari variabel $query
 			   
 			   if($sql){ // Cek jika proses simpan ke database sukses atau tidak
@@ -102,6 +102,8 @@
 		$harga_asuransilainnya		= $_POST['harga_asuransilainnya'];
 		$id_sup		= $_POST['id_sup'];
 		$id_kk			= $_POST['id_kk'];
+		$tgl_produk	= $_POST['tgl_produksi'];
+		$tgl_exp	= $_POST['tgl_expired'];
 
 		//upload
 		$nama_file = $_FILES['file']['name'];
@@ -120,7 +122,7 @@
 		      // Proses simpan ke Database
 		      $query = "Update produk_master Set kd_produk='$kd_produk', nama_produk='$nama_produk',harga_beli='$harga_beli',jual_umum ='$harga_jual',
 			  jual_bpjs='$harga_bpjs',jual_lain='$harga_asuransilainnya',
-			  gambar='$nama_file',id_kategori='$kategori',id_satuan='$satuan' Where kd_produk='$kd_produk'";
+			  gambar='$nama_file',id_kategori='$kategori',id_satuan='$satuan', tgl_produksi='$tgl_produk', tgl_expired='$tgl_exp' Where kd_produk='$kd_produk'";
 			  $sql = mysqli_query($con, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
 			    //update produk dan produk_pusat
@@ -141,7 +143,7 @@
 		    }else{
 		      // Proses simpan ke Database
 		      $query = "Update produk_master Set kd_produk='$kd_produk', nama_produk='$nama_produk',harga_beli='$harga_beli',jual_umum='$harga_jual',
-			  jual_bpjs='$harga_bpjs',jual_lain='$harga_asuransilainnya',id_kategori='$kategori',id_satuan='$satuan' Where kd_produk='$kd_produk'";
+			  jual_bpjs='$harga_bpjs',jual_lain='$harga_asuransilainnya',id_kategori='$kategori',id_satuan='$satuan', tgl_produksi='$tgl_produk', tgl_expired='$tgl_exp' Where kd_produk='$kd_produk'";
 			  $sql = mysqli_query($con, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
 			   //update produk dan produk_pusat
