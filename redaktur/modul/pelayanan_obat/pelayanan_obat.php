@@ -427,7 +427,7 @@
                       <button type="submit" name="submit" value="simpan" class="btn btn-success">Simpan Transaksi</button>
                     </div>
                     <div class="col-sm-6">
-                      <button type="submit" name="submit" value="cetak" class="btn btn-info">Cetak Nota</button>
+                      <button type="submit" name="submit" id="cetaknota" value="cetak" class="btn btn-info">Cetak Nota</button>
                     </div>
                   </div>
                 </div>
@@ -468,6 +468,49 @@ $(document).ready(function(){
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
+  });
+
+  // Cetak Nota
+  $('#cetaknota').on('click', function (event) {
+    event.preventDefault();
+    var token = $("meta[name='csrf-token']").attr("content");
+    Swal.fire({
+      title: 'Delete',
+      text: "Yakin ingin menghapus data?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Hapus'
+    })
+    .then((result) => {
+      console.log(result);
+      if (result.value) {
+        $.ajax({
+          url: "/pemasukan/delete/"+id,
+          type: "DELETE",
+          data: {
+            "id": id,
+            "_token": token,
+          },
+          success: function (response) {
+            table.row( $button.parents('tr') ).remove().draw();
+            Swal.fire({
+              icon: 'success',
+              title: 'Berhasil!',
+              text: 'Data berhasil dihapus!'
+            });
+          },
+          error: function (xhr) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Terjadi kesalahan!'
+            });
+          }
+        });
+      }
+    })
   });
 
   // Tambah Input Barang Tunai
