@@ -5,8 +5,15 @@ require_once("../../dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
-$query_cetak = mysqli_query($con,"SELECT * FROM history_beli_obat WHERE no_tran='$no_tran'");
-$q = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM pelayanan_obat WHERE no_tran='$no_tran'"));
+$no_tran 			= $_POST['no_tran'];
+$tgl				= date("Y-m-d H:i:s");
+$nama_pembeli   	= $_POST['nama_pembeli'];
+$total  			= $_POST['total'];
+$jenis_pembayaran	= $_POST['jenis_pembayaran'];
+$cash				= $_POST['cash'];
+$kembalian			= $_POST['kembalian'];
+
+$query_cetak = mysqli_query($con,"SELECT * FROM beli_obat WHERE no_tran='$no_tran'");
 
 $html .= "<html lang='en'>
 <head>

@@ -332,7 +332,7 @@
             </table>
           </div>
 
-          <form class="form-horizontal" method="POST" action="modul/pelayanan_obat/input_transaksi.php" target="_blank" enctype="multipart/form-data">
+          <form class="form-horizontal" method="POST" action="modul/pelayanan_obat/input_transaksi.php" enctype="multipart/form-data">
             <div class="card-body">
               <div class="row">
                 <div class="col-6">
@@ -427,7 +427,7 @@
                       <button type="submit" name="submit" value="simpan" class="btn btn-success">Simpan Transaksi</button>
                     </div>
                     <div class="col-sm-6">
-                      <button type="submit" name="submit" id="cetaknota" value="cetak" class="btn btn-info">Simpan & Cetak Nota</button>
+                      <button type="submit" name="submit" value="cetak" class="btn btn-info">Cetak Nota</button>
                     </div>
                   </div>
                 </div>
@@ -471,47 +471,37 @@ $(document).ready(function(){
   });
 
   // Cetak Nota
-  $('#cetaknota').on('click', function (event) {
-    event.preventDefault();
-    var token = $("meta[name='csrf-token']").attr("content");
-    Swal.fire({
-      title: 'Delete',
-      text: "Yakin ingin menghapus data?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Hapus'
-    })
-    .then((result) => {
-      console.log(result);
-      if (result.value) {
-        $.ajax({
-          url: "/pemasukan/delete/"+id,
-          type: "DELETE",
-          data: {
-            "id": id,
-            "_token": token,
-          },
-          success: function (response) {
-            table.row( $button.parents('tr') ).remove().draw();
-            Swal.fire({
-              icon: 'success',
-              title: 'Berhasil!',
-              text: 'Data berhasil dihapus!'
-            });
-          },
-          error: function (xhr) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Terjadi kesalahan!'
-            });
-          }
-        });
-      }
-    })
-  });
+  // $('#cetaknota').on('click', function (event) {
+  //   event.preventDefault();
+  //   var form = $('#form_t')[0];
+  //   var data = new FormData(form);
+  //   $.ajax({
+  //     url: "modul/pelayanan_obat/cetak.php",
+  //     type: 'post',
+  //     enctype: 'multipart/form-data',
+  //     data: data,
+  //     processData: false,
+  //     contentType: false,
+  //     cache: false,
+  //     success: function( data ) {
+  //       Swal.fire({
+  //         title: 'Delete',
+  //         text: "Yakin ingin menghapus data?",
+  //         icon: 'warning',
+  //         showCancelButton: true,
+  //         confirmButtonColor: '#3085d6',
+  //         cancelButtonColor: '#d33',
+  //         confirmButtonText: 'Hapus'
+  //       })
+  //       .then((result) => {
+  //         console.log(result);
+  //         if (result.value) {
+  //           window.location = "/klinik_new/redaktur/media.php?module=pelayanan_obat";
+  //         }
+  //       })
+  //     }
+  //   });
+  // });
 
   // Tambah Input Barang Tunai
   $('#form_t').on('submit', function (e) {
