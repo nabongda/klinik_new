@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2021 at 12:24 PM
+-- Generation Time: Jan 13, 2021 at 05:39 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -209,9 +209,15 @@ CREATE TABLE `beli_obat` (
   `sub_tot` varchar(50) NOT NULL,
   `tgl_beli` datetime NOT NULL,
   `tgl_produksi` date NOT NULL,
-  `tgl_expired` date NOT NULL,
-  `resep` varchar(255) DEFAULT NULL
+  `tgl_expired` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `beli_obat`
+--
+
+INSERT INTO `beli_obat` (`id_beli_obat`, `kd_brg`, `nama_brg`, `satuan_o`, `kategori_o`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_beli`, `tgl_produksi`, `tgl_expired`) VALUES
+(1, '150194', 'Hawedion', 7, 6, '40000', 45000, 100, 10, '1', '0', '40000', '2021-01-13 22:20:51', '2020-11-02', '2022-11-02');
 
 -- --------------------------------------------------------
 
@@ -608,8 +614,7 @@ CREATE TABLE `history_beli_obat` (
   `diskon` varchar(50) NOT NULL,
   `sub_tot` varchar(50) NOT NULL,
   `tgl_produksi` date NOT NULL,
-  `tgl_expired` date NOT NULL,
-  `resep` varchar(255) DEFAULT NULL
+  `tgl_expired` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -2530,7 +2535,12 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1282, 'ginger', 'Hapus Data Produk (TRS-00002)', '2021-01-13 06:03:05'),
 (1283, 'ginger', 'Hapus Data Produk (TRS-00001)', '2021-01-13 06:03:09'),
 (1284, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-13 09:18:21'),
-(1285, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-13 11:20:19');
+(1285, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-13 11:20:19'),
+(1286, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-13 12:13:11'),
+(1287, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-13 14:37:51'),
+(1288, 'ginger', 'Hapus Data Produk (TRS-00003)', '2021-01-13 15:12:32'),
+(1289, 'ginger', 'Hapus Data Produk (TRS-00002)', '2021-01-13 15:12:36'),
+(1290, 'ginger', 'Hapus Data Produk (TRS-00001)', '2021-01-13 15:12:53');
 
 -- --------------------------------------------------------
 
@@ -2668,8 +2678,10 @@ INSERT INTO `menu` (`id_sm`, `id_menu`, `nama_menu`, `page_menu`, `sts_menu`) VA
 ('SM-42', 'MN-97', 'Laporan Penjualan Perfaktur', 'laporan_perfaktur', 'Tidak Aktif'),
 ('SM-66', 'MN-98', 'Laporan Penjualan Perfaktur', 'laporan_cabang_perfaktur', 'Tidak Aktif'),
 ('SM-66', 'MN-99', 'Laporan Kritik dan Saran', 'laporan_krisar', 'Tidak Aktif'),
+('SM-288', 'MN-990', 'Pasien Baru', 'pasien_baru', 'Aktif'),
 ('SM-5000', 'MN-9900', 'Buat Kiriman', 'trf_out', 'Tidak Aktif'),
 ('SM-5000', 'MN-9901', 'Terima Kiriman', 'trf_in', 'Tidak Aktif'),
+('SM-288', 'MN-991', 'Data Pasien', 'data_pasien', 'Aktif'),
 ('SM-42', 'MN-9989', 'Lap Penjualan Harian', 'penjualan_ha', 'Tidak Aktif'),
 ('SM-66', 'MN-9999', 'Lap Penjualan Harian', 'penjualan_h', 'Tidak Aktif');
 
@@ -2928,6 +2940,7 @@ INSERT INTO `pekerjaan` (`id_pekerjaan`, `pekerjaan`) VALUES
 
 CREATE TABLE `pelayanan_obat` (
   `id_pelayanan_obat` int(11) NOT NULL,
+  `id_ju` varchar(5) NOT NULL,
   `no_tran` varchar(50) NOT NULL,
   `nama_pembeli` varchar(255) NOT NULL,
   `tgl_pembelian` datetime NOT NULL,
@@ -2935,7 +2948,7 @@ CREATE TABLE `pelayanan_obat` (
   `total` int(11) NOT NULL,
   `cash` int(11) DEFAULT NULL,
   `kembalian` int(11) DEFAULT NULL,
-  `bukti_transfer` varchar(255) DEFAULT NULL
+  `resep` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -3326,7 +3339,7 @@ INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jumlah`, `hrg`, `hrg_jua
 (6, '643464', 'ANTANGIN JRG', 29, 0, 0, '', '', NULL, NULL),
 (7, '180024', 'BETADINE 5 LITER', 2, 0, 0, '', '', NULL, NULL),
 (13, '504761', 'HICO - HEPARIN SODIUM', 0, 0, 0, '', '', NULL, NULL),
-(21, '150194', 'Hawedion', 85, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(21, '150194', 'Hawedion', 82, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
 (20, '010494', 'GEQUIN', 85, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01');
 
 -- --------------------------------------------------------
@@ -4436,6 +4449,7 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-07', 'SM-201', 'Retur Penjualan', 'retur', 'Aktif', 'exchange-alt', 10),
 ('JU-06', 'SM-202', 'Data Dokter', 'dokter', 'Aktif', 'user-md', 9),
 ('JU-06', 'SM-28', 'Pasien', '#', 'Aktif', 'user', 8),
+('JU-07', 'SM-288', 'Pasien', '#', 'Aktif', 'user', 2),
 ('JU-09', 'SM-299', 'Bonus', 'bonus', 'Non Aktif', 'cog', 4),
 ('JU-06', 'SM-300', 'Bonus', 'bonus', 'Tidak Aktif', 'gift', 4),
 ('JU-06', 'SM-3000', 'Produk Pra Rilis', 'prerelease', 'Tidak Aktif', 'heartbeat', 5),
@@ -5019,7 +5033,7 @@ ALTER TABLE `beli_k`
 -- AUTO_INCREMENT for table `beli_obat`
 --
 ALTER TABLE `beli_obat`
-  MODIFY `id_beli_obat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_beli_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `biaya_administrasi`
@@ -5097,7 +5111,7 @@ ALTER TABLE `history_beli_k`
 -- AUTO_INCREMENT for table `history_beli_obat`
 --
 ALTER TABLE `history_beli_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `history_beli_t`
@@ -5163,7 +5177,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1286;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1291;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5205,7 +5219,7 @@ ALTER TABLE `pekerjaan`
 -- AUTO_INCREMENT for table `pelayanan_obat`
 --
 ALTER TABLE `pelayanan_obat`
-  MODIFY `id_pelayanan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_pelayanan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
