@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2021 at 12:17 PM
+-- Generation Time: Jan 13, 2021 at 12:24 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -356,7 +356,8 @@ INSERT INTO `data_satuan` (`id_s`, `satuan`) VALUES
 (4, 'Kaplet'),
 (5, 'Pulvis'),
 (6, 'Larutan'),
-(7, 'Salep');
+(7, 'Salep'),
+(8, 'Lain-lain');
 
 -- --------------------------------------------------------
 
@@ -1055,7 +1056,9 @@ INSERT INTO `kategori` (`id_kategori`, `kategori`) VALUES
 (15, 'Toner'),
 (16, 'Facial wash'),
 (17, 'Body Lotion'),
-(18, 'Bedak');
+(18, 'Bedak'),
+(19, 'P3K'),
+(20, 'Obat Luar');
 
 -- --------------------------------------------------------
 
@@ -2526,7 +2529,8 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1281, 'ginger', 'Hapus Data Produk (TRS-00003)', '2021-01-13 06:03:02'),
 (1282, 'ginger', 'Hapus Data Produk (TRS-00002)', '2021-01-13 06:03:05'),
 (1283, 'ginger', 'Hapus Data Produk (TRS-00001)', '2021-01-13 06:03:09'),
-(1284, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-13 09:18:21');
+(1284, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-13 09:18:21'),
+(1285, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-13 11:20:19');
 
 -- --------------------------------------------------------
 
@@ -4650,12 +4654,6 @@ ALTER TABLE `daftar_klinik`
   ADD PRIMARY KEY (`id_kk`);
 
 --
--- Indexes for table `data_satuan`
---
-ALTER TABLE `data_satuan`
-  ADD PRIMARY KEY (`id_s`);
-
---
 -- Indexes for table `dr_pengganti`
 --
 ALTER TABLE `dr_pengganti`
@@ -4737,12 +4735,6 @@ ALTER TABLE `kasir_sementara`
   ADD PRIMARY KEY (`id`),
   ADD KEY `no_faktur` (`no_faktur`,`id_kk`),
   ADD KEY `id_pasien` (`id_pasien`,`no_urut`,`nama`,`kode`,`jenis`);
-
---
--- Indexes for table `kategori`
---
-ALTER TABLE `kategori`
-  ADD PRIMARY KEY (`id_kategori`);
 
 --
 -- Indexes for table `kategori_biaya`
@@ -5072,12 +5064,6 @@ ALTER TABLE `daftar_klinik`
   MODIFY `id_kk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `data_satuan`
---
-ALTER TABLE `data_satuan`
-  MODIFY `id_s` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
 -- AUTO_INCREMENT for table `dr_pengganti`
 --
 ALTER TABLE `dr_pengganti`
@@ -5144,12 +5130,6 @@ ALTER TABLE `kasir_sementara`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
--- AUTO_INCREMENT for table `kategori`
---
-ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
 -- AUTO_INCREMENT for table `kategori_biaya`
 --
 ALTER TABLE `kategori_biaya`
@@ -5183,7 +5163,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1285;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1286;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
