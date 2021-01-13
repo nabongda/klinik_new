@@ -395,6 +395,7 @@ elseif ($_POST['submit']=="cetak") {
 					// </tr>";
 					// $no++;
 					// }
+					// header('location:../../media.php?module=pelayanan_obat',TRUE,307);
 					// $html .= "</html>";
 					$dompdf->loadHtml($html);
 					// Setting ukuran dan orientasi kertas
@@ -405,7 +406,13 @@ elseif ($_POST['submit']=="cetak") {
 					$dompdf->stream('nota.pdf');
 
 					mysqli_query($con, "TRUNCATE TABLE beli_obat");
-					header('location:../../media.php?module=pelayanan_obat',TRUE,307);
+
+					echo "<script>
+						setTimeout(function(){
+							window.location.href = window.location.origin+'/klinik_new/redaktur/media.php?module=pelayanan_obat';
+						},500);
+						</script>
+					";				
 				}
 				else {
 					echo "<script>alert('Gagal!');";
