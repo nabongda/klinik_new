@@ -332,7 +332,7 @@
             </table>
           </div>
 
-          <form class="form-horizontal" method="POST" action="modul/pelayanan_obat/input_transaksi.php" enctype="multipart/form-data">
+          <form class="form-horizontal" method="POST" action="modul/pelayanan_obat/input_transaksi.php" target="_blank" enctype="multipart/form-data">
             <div class="card-body">
               <div class="row">
                 <div class="col-6">
@@ -343,6 +343,16 @@
                     <div class="col-sm-8">
                       <input type="text" class="form-control" name="no_tran" value="<?php echo $no_tran; ?>" readonly>
                       <input type="hidden" name="id_ju" value="<?php echo $_SESSION['jenis_u']; ?>">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputNamaPembeli">Total </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="total" id="tot" value="<?php echo $t['total']; ?>" readonly>
                     </div>
                   </div>
                 </div>
@@ -360,36 +370,6 @@
                 <div class="col-6">
                   <div class="form-group row">
                     <div class="col-sm-4">
-                      <label for="inputNamaPembeli">Nama Pembeli </label>
-                    </div>
-                    <div class="col-sm-8">
-                      <input type="text" class="form-control" name="nama_pembeli" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group row">
-                    <div class="col-sm-4">
-                      <label for="inputNamaPembeli">Resep Obat </label>
-                    </div>
-                    <div class="col-sm-8">
-                      <input type="file" class="form-control" id="resep" name="resep">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group row">
-                    <div class="col-sm-4">
-                      <label for="inputNamaPembeli">Total </label>
-                    </div>
-                    <div class="col-sm-8">
-                      <input type="text" class="form-control" name="total" id="tot" value="<?php echo $t['total']; ?>" readonly>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group row">
-                    <div class="col-sm-4">
                       <label for="inputNamaPembeli">Pembayaran </label>
                     </div>
                     <div class="col-sm-8">
@@ -400,10 +380,30 @@
                 <div class="col-6">
                   <div class="form-group row">
                     <div class="col-sm-4">
+                      <label for="inputNamaPembeli">Nama Pembeli </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="nama_pembeli" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
                       <label for="inputNamaPembeli">Kembalian </label>
                     </div>
                     <div class="col-sm-8">
                       <input type="text" class="form-control" id="kembalian" name="kembalian" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label for="inputNamaPembeli">Resep Obat </label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="file" class="form-control" id="resep" name="resep">
                     </div>
                   </div>
                 </div>
@@ -424,10 +424,10 @@
                 <div class="col-12">
                   <div class="form-group row">
                     <div class="col-sm-6 text-right">
-                      <button type="submit" class="btn btn-success">Simpan Transaksi</button>
+                      <button type="submit" name="submit" value="simpan" class="btn btn-success">Simpan Transaksi</button>
                     </div>
                     <div class="col-sm-6">
-                      <button type="submit" class="btn btn-info">Simpan & Cetak Transaksi</button>
+                      <button type="submit" name="submit" value="cetak" class="btn btn-info">Cetak Nota</button>
                     </div>
                   </div>
                 </div>

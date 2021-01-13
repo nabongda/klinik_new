@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2021 at 06:06 AM
+-- Generation Time: Jan 13, 2021 at 07:03 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -610,16 +610,6 @@ CREATE TABLE `history_beli_obat` (
   `tgl_expired` date NOT NULL,
   `resep` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `history_beli_obat`
---
-
-INSERT INTO `history_beli_obat` (`id`, `no_tran`, `tgl_beli`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_produksi`, `tgl_expired`, `resep`) VALUES
-(7, 'TRS-00001', '2021-01-09 00:16:44', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, '5', '0', '200000', '2020-11-02', '2022-11-02', ''),
-(8, 'TRS-00002', '2021-01-09 00:39:09', '251069', 'DOTRAMOL-PARACETAMOL-TRAM', '0', '0', '13500', 0, 100, 10, '1', '0', '13500', '2020-11-07', '2022-11-07', ''),
-(9, 'TRS-00003', '2021-01-11 13:59:44', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, '5', '0', '125000', '2020-11-01', '2022-11-01', ''),
-(10, 'TRS-00004', '2021-01-11 15:07:17', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, '5', '0', '200000', '2020-11-02', '2022-11-02', 'kode.jpg');
 
 -- --------------------------------------------------------
 
@@ -2528,7 +2518,14 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1273, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-08 16:34:17'),
 (1274, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-11 03:35:20'),
 (1275, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-11 04:24:01'),
-(1276, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-11 06:48:59');
+(1276, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-11 06:48:59'),
+(1277, 'ginger', 'Berhasil Login dengan IP ::1', '2021-01-13 05:14:12'),
+(1278, 'admin', 'Berhasil Login dengan IP ::1', '2021-01-13 05:19:21'),
+(1279, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-13 06:02:49'),
+(1280, 'ginger', 'Hapus Data Produk (TRS-00004)', '2021-01-13 06:02:58'),
+(1281, 'ginger', 'Hapus Data Produk (TRS-00003)', '2021-01-13 06:03:02'),
+(1282, 'ginger', 'Hapus Data Produk (TRS-00002)', '2021-01-13 06:03:05'),
+(1283, 'ginger', 'Hapus Data Produk (TRS-00001)', '2021-01-13 06:03:09');
 
 -- --------------------------------------------------------
 
@@ -2935,16 +2932,6 @@ CREATE TABLE `pelayanan_obat` (
   `kembalian` int(11) DEFAULT NULL,
   `bukti_transfer` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `pelayanan_obat`
---
-
-INSERT INTO `pelayanan_obat` (`id_pelayanan_obat`, `no_tran`, `nama_pembeli`, `tgl_pembelian`, `jenis_pembayaran`, `total`, `cash`, `kembalian`, `bukti_transfer`) VALUES
-(4, 'TRS-00001', 'Nurlaela Khasannah', '2021-01-09 00:16:44', 'tunai', 200000, 200000, 0, NULL),
-(5, 'TRS-00002', 'Nurlaela Khasannah', '2021-01-09 00:39:09', 'transfer', 13500, 0, 0, 'Screenshot_2021-01-02 Denisya Shop.png'),
-(7, 'TRS-00003', 'Nurlaela Khasannah', '2021-01-11 13:59:44', 'tunai', 125000, 150000, 25000, NULL),
-(8, 'TRS-00004', 'Nurlaela Khasannah', '2021-01-11 15:07:17', 'tunai', 200000, 200000, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -3362,37 +3349,37 @@ CREATE TABLE `produk_master` (
 --
 
 INSERT INTO `produk_master` (`kd_produk`, `nama_produk`, `harga_beli`, `jual_umum`, `gambar`, `id_kategori`, `id_satuan`, `jual_bpjs`, `jual_lain`, `tgl_produksi`, `tgl_expired`) VALUES
-('636628', 'AB VASK  10 MG', '', '14700', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('940980', 'ABIXIM / SIMFIX CAPSUL (CEFIXIME 100MG)', '', '21000', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('412201', 'ACARBOSA', '', '2310', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('134766', 'ACITRAL', '', '47775', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('066193', 'ACLAM 500 MG ( AMOX + AS CLAV)', '', '16000', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('326111', 'ACTALIPID TAB 20 MG / FASTOR 20', '', '15750', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('704072', 'ACTOS 30 (PIOGLITAZONE)', '8000', '15750', NULL, 0, 0, 10000, 16000, NULL, NULL),
-('011109', 'ACYCLOVIR 400MG TAB', '', '577', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('400055', 'ACYCLOVIR ZALF ( ACIFAR ZALF )', '', '9975', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', '', '36750', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('947114', 'ALBOTHYL ( POLICRESULEN) 5 ML', '', '34650', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('565186', 'ALCO DROP ( PSEUDOEPHEDRIN HCL )', '', '75000', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('606965', 'ALERFED SYRUP / LAPIFED SYR', '', '34650', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('395203', 'ALERFED TAB / LAPIFED TABLET', '', '3150', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('860077', 'ALGANAX-0.5', '', '4879.35', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('140748', 'ALGANAX-1', '', '5000', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('155671', 'ALINAMIN F INJ / FURAMIN INJ', '', '47250', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('766663', 'ALINAMIN F TAB', '', '2310', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('661713', 'ALKOHOL 70 %', '', '46200', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('581543', 'ALKOHOL KECIL', '5555', '7875', NULL, 0, 0, 0, 0, NULL, NULL),
-('014924', 'ALLETROL', '', '17325', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('987732', 'ALOFAR ( ALLOPURINOL ) 100 MG', '0', '600', NULL, 0, 0, 400, 900, NULL, NULL),
-('070771', 'ALOFAR ( ALLOPURINOL ) 300 MG', '', '800', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('231324', 'ALPARA', '', '1155', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('653473', 'AMINOPHILIN GENERIK TAB', '', '577', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('152161', 'AMINOPHYLLINE INJ G', '', '8085', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('306000', 'AMOXAN 100MG DROP (AMOCIXILLIN)', '', '34650', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('933838', 'AMVAR', '', '9555', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('040070', 'ANDALAN 1 MG / 3 BULAN INJEKSI', '', '17325', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('853699', 'ANDALAN 3 MG / 3 BULAN INJEKSI', '', '17325', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('086152', 'ANFLAT TAB', '', '1050', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('636628', 'AB VASK  10 MG', '88800', '168000', 'obat ab vask.jpg', 9, 1, 16000, 16000, '2021-01-12', '2023-01-12'),
+('940980', 'ABIXIM / SIMFIX CAPSUL (CEFIXIME 100MG)', '145500', '100000', 'abixim.png', 9, 3, 50000, 50000, '2021-01-13', '2023-01-13'),
+('412201', 'ACARBOSA', '8250', '7661', 'acarbose.jpg', 9, 1, 7000, 7000, '2021-01-14', '2023-01-14'),
+('134766', 'ACITRAL', '4700', '14000', 'acitral.jpeg', 9, 1, 4000, 4000, '2021-01-15', '2023-01-15'),
+('066193', 'ACLAM 500 MG ( AMOX + AS CLAV)', '522100', '188000', 'aclam.jpg', 9, 6, 50000, 5000, '2021-01-16', '2023-01-16'),
+('326111', 'ACTALIPID TAB 20 MG / FASTOR 20', '261400', '144400', 'fastor.jpg', 9, 1, 50000, 50000, '2021-01-17', '2023-01-17'),
+('704072', 'ACTOS 30 (PIOGLITAZONE)', '150000', '140000', 'actos.jpg', 6, 1, 10000, 16000, '2021-01-18', '2023-01-18'),
+('011109', 'ACYCLOVIR 400MG TAB', '43000', '40000', 'acyclovir.jpeg', 9, 1, 20000, 20000, '2021-01-19', '2023-01-19'),
+('400055', 'ACYCLOVIR ZALF ( ACIFAR ZALF ) 5 GM', '23000', '9975', 'acifar-cr-5g-1.jpg', 4, 7, 5000, 5000, '2021-01-20', '2023-01-20'),
+('279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', '53000', '36750', 'abotil.jpg', 15, 6, 20000, 20000, '2021-01-01', '2023-01-01'),
+('947114', 'ALBOTHYL ( POLICRESULEN) 5 ML', '50000', '34650', 'abotil.jpg', 14, 6, 20000, 20000, '2021-01-21', '2023-01-21'),
+('565186', 'ALCO DROP ( PSEUDOEPHEDRIN HCL )', '133000', '78000', 'alco.jpg', 9, 6, 50000, 5000, '2021-01-21', '2021-01-21'),
+('606965', 'ALERFED SYRUP / LAPIFED SYR', '62000', '34650', 'lapifed.jpg', 9, 6, 20000, 20000, '2021-01-21', '2023-01-21'),
+('395203', 'ALERFED TAB / LAPIFED TABLET', '55000', '31500', 'lapifedd.jpg', 9, 1, 5000, 5000, '2021-01-22', '2023-01-22'),
+('860077', 'ALGANAX-0.5', '340000', '300.35', 'alganax.jpg', 9, 1, 100000, 100000, '2021-01-21', '2023-01-21'),
+('140748', 'ALGANAX-1', '300000', '100000', 'alganax.jpg', 9, 1, 50000, 50000, '2021-01-21', '2023-01-21'),
+('155671', 'ALINAMIN F INJ / FURAMIN INJ', '70000', '47250', 'furamin.jpg', 15, 6, 50000, 50000, '2021-01-21', '2023-01-21'),
+('766663', 'ALINAMIN F TAB', '16000', '2310', 'alinamin-f.jpg', 9, 1, 10000, 10000, '2021-01-21', '2021-01-21'),
+('661713', 'ALKOHOL 70 %', '26000', '46200', 'alqohol.jpg', 16, 6, 20000, 20000, '2021-01-21', '2023-01-21'),
+('581543', 'ALKOHOL KECIL', '5555', '7875', 'alqohol.jpg', 15, 6, 0, 0, '2021-01-21', '2023-01-21'),
+('014924', 'ALLETROL', '33000', '15000', 'alle.jpg', 15, 6, 0, 0, '2021-01-21', '2023-01-21'),
+('987732', 'ALOFAR ( ALLOPURINOL ) 100 MG', '13000', '2000', 'alfor.jpg', 6, 4, 400, 900, '2021-01-21', '2023-01-21'),
+('070771', 'ALOFAR ( ALLOPURINOL ) 300 MG', '22000', '2000', 'alforr.jpg', 9, 4, 0, 0, '2021-01-21', '2023-02-21'),
+('231324', 'ALPARA', '19500', '1155', 'alpara.jpg', 9, 4, 0, 0, '2021-01-21', '2023-01-21'),
+('653473', 'AMINOPHILIN GENERIK TAB', '28000', '20000', 'AMINOPHILIN GENERIK TAB.jpg', 9, 4, 0, 0, '2021-01-21', '2023-01-21'),
+('152161', 'AMINOPHYLLINE INJ G', '20000', '22500', '1843e02a-99de-46c9-bbd5-79166505d7b2.jpg', 9, 1, 21000, 21000, '2020-11-24', '2021-05-01'),
+('306000', 'AMOXAN 100MG DROP (AMOCIXILLIN)', '24200', '34650', '6959.jpg', 9, 6, 26000, 26000, '2021-01-04', '2021-03-26'),
+('933838', 'AMVAR', '39000', '42000', '8674.jpg', 9, 4, 40000, 40000, '2020-11-10', '2021-06-04'),
+('040070', 'ANDALAN 1 MG / 3 BULAN INJEKSI', '100000', '130000', 'c99ced44-c59b-4444-ab3b-66f625837a8d.jpg', 12, 6, 115000, 115000, '2020-12-29', '2021-08-31'),
+('853699', 'ANDALAN 3 MG / 3 BULAN INJEKSI', '115000', '130000', 'andalan 3 mg.jpg', 12, 6, 120000, 120000, '2020-12-27', '2021-04-30'),
+('086152', 'ANFLAT TAB', '55000', '62000', 'anflat.jpg', 9, 1, 59000, 59000, '2020-11-30', '2021-12-02'),
 ('032837', 'ANOXI TAB SPESIALIS', '', '4200', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('643464', 'ANTANGIN JRG', '', '2500', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('186097', 'ANTIMO DEWASA', '', '4620', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3913,7 +3900,8 @@ INSERT INTO `produk_master` (`kd_produk`, `nama_produk`, `harga_beli`, `jual_umu
 ('414979', 'PRIMAQUINE GENERIK 15 MG', '', '577', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('890595', 'PROCETAM 3 G - PIRACETAM INJEKSI', '', '69300', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('842164', 'PROCUR PLUS KAPSUL', '', '11550', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('485016', 'PRODEXON ( DEXAMETHASON 0.5 MG )', '', '600', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('485016', 'PRODEXON ( DEXAMETHASON 0.5 MG )', '', '600', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `produk_master` (`kd_produk`, `nama_produk`, `harga_beli`, `jual_umum`, `gambar`, `id_kategori`, `id_satuan`, `jual_bpjs`, `jual_lain`, `tgl_produksi`, `tgl_expired`) VALUES
 ('040345', 'PROFAT SIRUP (SPESIALIS)', '', '88588.5', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('368012', 'PROFEN - IBUPROFEN SYRUP', '', '26500', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('943116', 'PROFIM ( CEFIXIME ) SYRUP', '', '3150', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3923,8 +3911,7 @@ INSERT INTO `produk_master` (`kd_produk`, `nama_produk`, `harga_beli`, `jual_umu
 ('815552', 'PROIMUN SYRUP', '', '57750', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('209382', 'PROMAMA ', '', '11413.5', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('121155', 'PROMAVIT', '', '5040', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('801362', 'PROMEDEX TABLET', '', '1900', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `produk_master` (`kd_produk`, `nama_produk`, `harga_beli`, `jual_umum`, `gambar`, `id_kategori`, `id_satuan`, `jual_bpjs`, `jual_lain`, `tgl_produksi`, `tgl_expired`) VALUES
+('801362', 'PROMEDEX TABLET', '', '1900', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('303223', 'PROMIN TAB', '', '9240', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('178010', 'PRONIS ( PEMANIS PUYER )', '', '20475', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('264100', 'PROPRANOLOL 10 MG TABLET', '', '525', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -4089,8 +4076,8 @@ INSERT INTO `produk_master` (`kd_produk`, `nama_produk`, `harga_beli`, `jual_umu
 ('821564', 'ZINE 10 MG (SPESIALIS)', '', '6006', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('911561', 'ZORALIN ( KETOCONAZOLE  ) ZALF', '', '28875', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('768036', 'ZORALIN TABLET ( KETOCONAZOLE )', '', '3150', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('010494', 'GEQUIN', '25000', '30000', '1.png', 9, 3, 27000, 27000, '2020-11-01', '2022-11-01'),
-('150194', 'Hawedion', '40000', '45000', 'betyouwanna.jpg', 6, 7, 37000, 46000, '2020-11-02', '2022-11-02');
+('010494', 'TEQUINOL', '240000', '119100', 'tequin.jpg', 9, 4, 27000, 27000, '2021-11-01', '2023-11-01'),
+('150194', 'Haemocaine', '40000', '45000', 'Haemocainee.jpg', 6, 7, 37000, 46000, '2020-11-02', '2022-11-02');
 
 -- --------------------------------------------------------
 
@@ -4904,13 +4891,6 @@ ALTER TABLE `produk`
   ADD KEY `kode_barang_2` (`kode_barang`,`nama_p`);
 
 --
--- Indexes for table `produk_master`
---
-ALTER TABLE `produk_master`
-  ADD PRIMARY KEY (`kd_produk`),
-  ADD KEY `nama_produk` (`nama_produk`);
-
---
 -- Indexes for table `produk_pasien`
 --
 ALTER TABLE `produk_pasien`
@@ -5202,7 +5182,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1277;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1284;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
