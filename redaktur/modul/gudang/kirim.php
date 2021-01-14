@@ -12,6 +12,8 @@ if ($_POST['status']=='terima') {
     //cek jml produk di gudang pusat (yg diisi saat pembelian)
     $jml_di = mysqli_fetch_assoc(mysqli_query($con, "SELECT jumlah AS gudang FROM produk_pusat WHERE kode_barang = '$_POST[produk]'"));
 
+    $produk = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM produk_pusat WHERE kode_barang = '$_POST[produk]'"));
+
     //STOP kl $jml_di[gudang] < $_POST[jml]
 
     if( $jml_di['gudang'] < $_POST['jml'] ){
@@ -36,7 +38,7 @@ if ($_POST['status']=='terima') {
     //cek kl $jml[sblm] tdk null maka update, $jml[sblm] disimpan
 
     if(!$jml){
-        $kiriman = "INSERT INTO produk VALUES (NULL,'$_POST[produk]','$nama[prod]','$_POST[jml]')";
+        $kiriman = "INSERT INTO produk VALUES (NULL,'$_POST[produk]','$nama[prod]','$_POST[jml]', '$_POST[hrg]', '$_POST[hrg_jual]', '$_POST[satuan]', '$_POST[kategori]', '$_POST[tgl_produksi]', '$_POST[tgl_expired]')";
     } else {
         //totalkan $jml[sblm] + $_POST[jml]
         $jmln = $jml['sblm'] + $_POST['jml'];
