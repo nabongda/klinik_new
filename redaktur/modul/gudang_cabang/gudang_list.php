@@ -79,7 +79,7 @@
               </thead>
               <tbody>
                 <?php
-                  $tampil   = mysqli_query($con, "Select * From produk");
+                  $tampil   = mysqli_query($con, "SELECT * FROM produk");
                   while($r  = mysqli_fetch_array($tampil)){
                 ?>
                 <tr>
@@ -192,6 +192,12 @@
                       <input type="hidden" name="id" value="<?php echo $r["id"]; ?>">
                       <input type="hidden" name="produk" value="<?php echo $r["kd_brg"]; ?>">
                       <input type="hidden" name="jml" value="<?php echo $r["jumlah"]; ?>">
+                      <input type="hidden" name="hrg" value="<?php echo $r["hrg"]; ?>">
+                      <input type="hidden" name="hrg_jual" value="<?php echo $r["hrg_jual"]; ?>">
+                      <input type="hidden" name="satuan" value="<?php echo $r["satuan"]; ?>">
+                      <input type="hidden" name="kategori" value="<?php echo $r["kategori"]; ?>">
+                      <input type="hidden" name="tgl_produksi" value="<?php echo $r["tgl_produksi"]; ?>">
+                      <input type="hidden" name="tgl_expired" value="<?php echo $r["tgl_expired"]; ?>">
                     </td>
                   </tr>
                   <tr id="fpesan" style="display:none;">
