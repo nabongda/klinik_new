@@ -223,6 +223,16 @@
 <?php
   break;
   case "tambah_produk":
+    $query = mysqli_query($con, "SELECT max(no_fak) as kodemax FROM history_beli_k");
+    $data = mysqli_fetch_array($query);
+    $no_fak = $data['kodemax'];
+
+    $urutan = (int) substr($no_fak, 5, 5);
+  
+    $urutan++;
+
+    $huruf = "FAK-";
+    $no_fak = $huruf . sprintf("%0s", $urutan);
 ?>
 
 <!-- Content Header (Page header) -->
@@ -382,7 +392,7 @@
                   <label for="inputNoFaktur">No Faktur </label>
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="no_fak" value="<?php echo $kode; ?>" autocomplete="off" required>
+                  <input type="text" class="form-control" name="no_fak" value="<?php echo $no_fak; ?>" readonly>
                   <input type="hidden" name="total" id="tot">
                 </div>
               </div>
