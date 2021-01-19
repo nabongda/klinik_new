@@ -6,7 +6,7 @@
   }
   session_destroy();
   
-  if($admin=="YES"){
+  if($_SESSION['jenis_u']=='JU-01'){
     echo "<script>
     setTimeout(function() {
         swal({
