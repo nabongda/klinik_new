@@ -414,7 +414,7 @@
                     </div>
                     <div class="col-sm-8">
                       <select class="form-control select2" name="jenis_pembayaran" id="jenis_pembayaran" style="width: 100%;" required>
-                        <option value="">--Pilih Salah Satu--</option>
+                        <option value="" selected="selected" disabled="disabled">--Pilih Salah Satu--</option>
                         <option value="tunai">Tunai</option>
                         <option value="transfer">Transfer</option>
                       </select>

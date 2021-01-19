@@ -287,27 +287,22 @@ elseif ($_POST['submit']=="cetak") {
 								<tr>
 									<td colspan='2'></td>
 									<td colspan='2' style='text-align: right;'>SUBTOTAL:</td>
-									<td>Rp".$q['total']."</td>
-								</tr>
-								<tr>
-									<td colspan='2'></td>
-									<td colspan='2' style='text-align: right;'>DISKON:</td>
-									<td>Rp".$q['diskon']."</td>
+									<td>Rp ".$q['total']."</td>
 								</tr>
 								<tr>
 									<td colspan='2'></td>
 									<td colspan='2' style='text-align: right;'>TOTAL:</td>
-									<td>Rp".$total."</td>
+									<td>Rp ".$total."</td>
 								</tr>
 								<tr>
 									<td colspan='2'></td>
 									<td colspan='2' style='text-align: right;'>BAYAR:</td>
-									<td>Rp".$cash."</td>
+									<td>Rp ".$cash."</td>
 								</tr>
 								<tr>
 									<td colspan='2'></td>
 									<td colspan='2' style='text-align: right;'>KEMBALI:</td>
-									<td>Rp".$kembalian."</td>
+									<td>Rp ".$kembalian."</td>
 								</tr>
 							</tbody>
 						</table>";
