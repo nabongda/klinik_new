@@ -45,6 +45,7 @@
 				  <div class="col-md-12">
                     <label for="inputTgl2">Jenis Pembelian </label>
                     <select name="jenis" id="jenis" class="form-control">
+						<option value="" selected="selected" disabled="disabled">--Pilih Jenis Pembelian--</option>
 						<option value="tunai">Pembelian Tunai</option>
 						<option value="kredit">Pembelian Kredit</option>
 					</select>
@@ -54,6 +55,7 @@
 				  <div class="col-md-12">
                     <label for="inputTgl2">Status Pembelian Kredit</label>
                     <select name="status" class="form-control">
+						<option value="" selected="selected" disabled="disabled">--Pilih Status--</option>
 						<option value="sudah">Sudah Lunas</option>
 						<option value="">Belum Lunas</option>
 					</select>

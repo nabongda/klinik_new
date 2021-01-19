@@ -90,7 +90,8 @@
 				<?php
 				  $tampil     = mysqli_query($con, "SELECT * FROM history_kirim_stok WHERE status='terima' AND tgl_terima BETWEEN '$_POST[tgl1]' AND '$_POST[tgl2]'");
 				  $no = 1;
-				  while($data = mysqli_fetch_array($tampil)){ ?>
+				  while($data = mysqli_fetch_array($tampil)){ 
+				?>
 				<tr>
 				  <td><?php echo $no++?></td>
 				  <td><?php echo $data['no_peng']; ?></td>
