@@ -237,7 +237,7 @@
   
     $urutan++;
 
-    $huruf = "FAK-T";
+    $huruf = "PT-";
     $no_fak = $huruf . sprintf("%05s", $urutan);
 ?>
 
@@ -318,7 +318,7 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label>Diskon </label>
-                  <input type="number" class="form-control" name="diskon" id="diskon" placeholder="misal: 1-100">
+                  <input type="number" class="form-control" name="diskon" id="diskon" placeholder="misal: 1-100" value="0">
                   <input class="form-control" type="hidden" name="batas_cabang" id="batas_cabang" value="100" required>
                   <input class="form-control" type="hidden" name="batas_minim" id="batas_minim" value="10" required>
                 </div>
@@ -477,7 +477,7 @@
                 </div>
                 <div class="col-sm-4">
                   <select class="form-control select2" name="id_sup" name="id_sup" style="width: 100%;" required>
-                    <option value="">--- Pilih Suplier ---</option>
+                    <option value="" selected="selected" disabled="disabled">--- Pilih Suplier ---</option>
                       <?php $query = mysqli_query($con, "SELECT *FROM suplier");
                         while ($cb = mysqli_fetch_array($query)) { ?>
                           <option value="<?php echo $cb['id_sup']; ?>"><?php echo $cb['nama_sup']; ?></option>
@@ -491,7 +491,7 @@
                 </div>
                 <div class="col-sm-4">
                   <select class="form-control select2" name="pembayaran" style="width: 100%;" required>
-                    <option value="">--Pilih Salah Satu--</option>
+                    <option value="" selected="selected" disabled="disabled">--Pilih Salah Satu--</option>
                     <option value="tunai">Tunai</option>
                     <option value="transfer">Transfer</option>
                   </select>

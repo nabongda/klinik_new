@@ -231,8 +231,8 @@
   
     $urutan++;
 
-    $huruf = "FAK-";
-    $no_fak = $huruf . sprintf("%0s", $urutan);
+    $huruf = "PK-";
+    $no_fak = $huruf . sprintf("%05s", $urutan);
 ?>
 
 <!-- Content Header (Page header) -->
@@ -411,7 +411,7 @@
                 </div>
                 <div class="col-sm-4">
                   <select class="form-control select2" name="id_sup" name="id_sup" style="width: 100%;" required>
-                    <option value="">--- Pilih Suplier ---</option>
+                    <option value="" selected="selected" disabled="disabled">--- Pilih Suplier ---</option>
                       <?php $query = mysqli_query($con, "SELECT *FROM suplier");
                         while ($cb = mysqli_fetch_array($query)) { ?>
                         <option value="<?php echo $cb['id_sup']; ?>"><?php echo $cb['nama_sup']; ?></option>
