@@ -44,7 +44,7 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
 <?php
   } else {
     
-    $iden = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM identitas"));
+    $iden = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM identitas WHERE id=2"));
 	if (($_SESSION['jenis_u']=='JU-01') OR ($_SESSION['jenis_u']=='JU-02')){ 
     $user = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM user WHERE id_user ='".$_SESSION["id_user"]."'"));
 	

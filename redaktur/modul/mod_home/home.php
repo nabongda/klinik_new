@@ -28,15 +28,82 @@ if($_SESSION['jenis_u']!="JU-01"){ ?>
       <div class="col-12">
         <div class="card">
           <div class="card-header callout callout-success">
-            <?php $k =  mysqli_query($con, "SELECT *FROM daftar_klinik WHERE id_kk='$id_kk'");
+            <?php $k =  mysqli_query($con, "SELECT * FROM identitas WHERE id=2");
             $kk =  mysqli_fetch_array($k); ?>
-            <h4 style="text-transform: uppercase;">SELAMAT DATANG DI <?php echo $kk['nama_klinik']; ?></h4>
+            <h4 style="text-transform: uppercase;">SELAMAT DATANG DI <?php echo $kk['nama_organisasi']; ?></h4>
           </div>
         </div>
       </div>
     </div>
 
-  <?php 
+    <?php if ($_SESSION['jenis_u']=="JU-07") { ?>
+    <div class="row">
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3><i class="fas fa-plus-circle"></i></h3>
+              <p>Tambah Penjualan</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-android-archive"></i>
+            </div>
+            <a href="media.php?module=pelayanan_obat&act=tambah" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3>
+                <?php 
+                  $stok = mysqli_fetch_array(mysqli_query($con, "SELECT COUNT(id_p) as jml FROM produk"));
+                  echo $stok['jml'];
+                ?>
+              </h3>
+              <p>Stok Obat</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-medkit"></i>
+            </div>
+            <a href="media.php?module=gudang_cabang" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>
+              <?php 
+                  $po = mysqli_fetch_array(mysqli_query($con, "SELECT COUNT(id_pelayanan_obat) as jml FROM pelayanan_obat"));
+                  echo $po['jml'];
+                ?>
+              </h3>
+              <p>Data Penjualan</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="media.php?module=pelayanan_obat" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3>
+              <?php 
+                  $antri = mysqli_fetch_array(mysqli_query($con, "SELECT COUNT(id) as jml FROM antrian_pasien"));
+                  echo $antri['jml'];
+                ?>
+              </h3>
+              <p>Antrian Dokter</p>
+            </div>
+            <div class="icon">
+            <i class="ion ion-clipboard"></i>
+            </div>
+            <a href="media.php?module=apotek_antrian" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div> 
+
+  <?php } 
     $date_now = date("Y-m-d");
     $q1  = mysqli_query($con, "SELECT * FROM antrian_pasien WHERE tanggal_pendaftaran='$date_now' AND jenis_layanan IN ('igd','poliklinik') AND rujuk_inap IS NULL");
     $mp  = mysqli_num_rows($q1);
