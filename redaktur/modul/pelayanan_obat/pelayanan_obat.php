@@ -404,18 +404,19 @@
                     </div>
                   </div>
                 </div>
-                
-                <div class="col-6">
+                <?php 
+                $bo = mysqli_fetch_array(mysqli_query($con, "SELECT jenis_obat FROM beli_obat WHERE jenis_obat='keras' LIMIT 1")); ?>
+                <input type="hidden" name="jkeras" id="jkeras" value="<?php echo $bo['jenis_obat']; ?>">
+                <div class="col-6 collapse" id="resep_obat">
                   <div class="form-group row">
                     <div class="col-sm-4">
-                      <label for="inputNamaPembeli">Resep Obat </label>
+                      <label>Resep Obat </label>
                     </div>
                     <div class="col-sm-8">
                       <input type="file" class="form-control" id="resep" name="resep">
                     </div>
                   </div>
                 </div>
-                
                 <div class="col-6">
                   <div class="form-group row">
                     <div class="col-sm-4">
@@ -479,6 +480,11 @@ $(document).ready(function(){
     }
   });
 
+  var jo = $('#jkeras').val();
+  if(jo=='keras'){
+    $('#resep_obat').collapse('show');
+  }
+
   // Cetak Nota
   // $('#cetaknota').on('click', function (event) {
   //   event.preventDefault();
@@ -526,12 +532,14 @@ $(document).ready(function(){
       processData: false,
       contentType: false,
       cache: false,
-      success: function (data) {        
+      success: function (data) {
         alert(data);
+        var jo = $('#jkeras').val();
         var oTable = $('#barang11').dataTable();
         oTable.fnDraw(false);
         $('#form_t').trigger("reset");
         total();
+        location.reload();
       }
     });
   });
