@@ -6,7 +6,7 @@
 	// ID Klinik
 	$id_kk = $_SESSION['klinik'];
 	//data kolom yang akan di tampilkan
-	$aColumns = array('id_ps', 'kd_brg','nama_brg', 'jumlah', 'hrg', 'tgl_produksi', 'tgl_expired'); //Perlu DIubah
+	$aColumns = array('id_ps', 'kd_brg','nama_brg','jenis_obat', 'jumlah', 'hrg', 'tgl_produksi', 'tgl_expired'); //Perlu DIubah
 	
 	//primary key
 	$sIndexColumn = "id_ps"; //Perlu DIubah

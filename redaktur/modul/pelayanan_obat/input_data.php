@@ -32,7 +32,7 @@ $k = mysqli_num_rows($q);
 //cek jml produk sblm pengiriman
 $stok = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM produk WHERE kode_barang='$kd_brg'"));
 if ($stok['jumlah'] < $jumlah) {
-	echo "Stok tidak boleh lebih dari ".$stok['jumlah'];
+	echo "Produk tidak boleh lebih dari ".$stok['jumlah'];
 }else{
 	if ($k >0) {
 		$cek = mysqli_fetch_array($q);
@@ -40,16 +40,24 @@ if ($stok['jumlah'] < $jumlah) {
 			$jum=1;
 		}
 		if ($jum>0) {
-			$jumlah = $cek['jumlah']+$jumlah;
-			mysqli_query($con, "UPDATE beli_obat SET jumlah='$jumlah' where nama_brg='$nama_brg'");
+			$bo = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM beli_obat WHERE kd_brg='$kd_brg'"));
+			$jbo = $bo['jumlah']+$_POST['jumlah'];
+			if ($stok['jumlah'] < $jbo) {
+				echo "Produk tidak boleh lebih dari ".$stok['jumlah'];
+			}else{
+				$jumlah = $cek['jumlah']+$jumlah;
+				mysqli_query($con, "UPDATE beli_obat SET jumlah='$jumlah' where nama_brg='$nama_brg'");
+				echo "Produk Berhasil Di Tambahkan!";
+			}
 		}else{				
-				mysqli_query($con, "INSERT INTO beli_obat(kd_brg,nama_brg,jenis_obat,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$jenis_obat','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");		
+				mysqli_query($con, "INSERT INTO beli_obat(kd_brg,nama_brg,jenis_obat,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$jenis_obat','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
+				echo "Produk Berhasil Di Tambahkan!";		
 		}
 	
 	}else{
 		mysqli_query($con, "INSERT INTO beli_obat(kd_brg,nama_brg,jenis_obat,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$jenis_obat','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
+		echo "Produk Berhasil Di Tambahkan!";
 	}
-	echo "Produk Berhasil Di Tambahkan!";
 }	
 	
 exit();

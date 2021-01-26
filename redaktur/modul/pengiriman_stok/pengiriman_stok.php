@@ -206,6 +206,10 @@
                   <label>Kode Barang </label>
                   <input type="text" class="form-control" name="kd_brg" id="kd_brg" placeholder="Kode Obat" required>
                 </div>
+                <div class="form-group col-md-2">
+                  <label>Jenis Obat</label>
+                  <input type="text" class="form-control" name="jenis_obat" id="jenis_obat" placeholder="Jenis Obat" required>
+                </div>
                 <div class="col-md-2">
                   <label>Satuan</label>
                   <select class="form-control select2" name="id_satuan" id="id_satuan" style="width: 100%;" readonly>
@@ -264,6 +268,7 @@
                   <th>No</th>
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
+                  <th>Jenis Obat</th>
                   <th>Jumlah</th>
                   <th>Harga</th>
                   <th>Tanggal Produksi</th>
@@ -363,6 +368,7 @@ $(document).ready(function(){
       url: 'modul/pengiriman_stok/input_data.php',
       data: $('#form_t').serialize(),
       success: function (data) {
+        alert(data);
         var oTable = $('#barang11').dataTable();
         oTable.fnDraw(false);
         $('#form_t').trigger("reset");
@@ -396,6 +402,7 @@ $(document).ready(function(){
       // Set selection
       $('#kd_brg').val(ui.item.kd_produk);
       $('#nama_barang').val(ui.item.label);
+      $('#jenis_obat').val(ui.item.jenis_obat);
       $('#jml').collapse('show');
       $('#jml').html("Jumlah Stok di Gudang: <b>"+ui.item.jml+"</b>");
       $('#id_satuan').val(ui.item.id_satuan);
@@ -417,6 +424,7 @@ $(document).ready(function(){
     "sAjaxSource": "modul/pengiriman_stok/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
+      null,
       null,
       null,
       null,

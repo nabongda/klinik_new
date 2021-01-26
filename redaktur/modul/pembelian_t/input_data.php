@@ -5,6 +5,7 @@ include "../../../config/koneksi.php";
 
 $kd_brg 		= $_POST['kd_brg'];
 		$nama_brg 		= $_POST['nama_brg'];
+		$jenis_obat		= $_POST['jenis_obat'];
 		$satuan		    = $_POST['id_satuan'];
 		$kategori		= $_POST['id_kategori'];
 		$jumlah			= $_POST['jumlah'];
@@ -51,11 +52,11 @@ $kd_brg 		= $_POST['kd_brg'];
 				$jumlah = $cek['jumlah']+$jumlah;
 				mysqli_query($con, "UPDATE pembelian_t SET jumlah='$jumlah' where nama_brg='$nama_brg'");
 			}else{
-				mysqli_query($con, "INSERT INTO pembelian_t(kd_brg,nama_brg,satuan_t,kategori_t,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
+				mysqli_query($con, "INSERT INTO pembelian_t(kd_brg,nama_brg,jenis_obat,satuan_t,kategori_t,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$jenis_obat','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
 			}
 		
 		}else{
-			mysqli_query($con, "INSERT INTO pembelian_t(kd_brg,nama_brg,satuan_t,kategori_t,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
+			mysqli_query($con, "INSERT INTO pembelian_t(kd_brg,nama_brg,jenis_obat,satuan_t,kategori_t,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_beli,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$jenis_obat','$satuan','$kategori', '$hrg','$hrg_jual','$batas_cabang','$batas_minim','$jumlah', '$diskon', '$sub_tot', '$tgl_beli', '$tgl_produksi', '$tgl_expired')");
 		}
 		
 		

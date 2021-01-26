@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2021 at 05:09 AM
+-- Generation Time: Jan 26, 2021 at 06:26 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -165,7 +165,8 @@ INSERT INTO `beli` (`no_fak`, `tgl_beli`, `total`, `id`, `id_sup`, `pembayaran`,
 ('01122020', '2020-12-01', 7300000, 29, '1', 'tunai', 'Fix 01 Desember 2020', ''),
 ('32141', '2021-01-14', 14330000, 30, '1', 'tunai', 'Lunas', ''),
 ('PT-01108', '2021-01-19', 5455000, 31, '1', 'tunai', 'Lunas', ''),
-('PT-00109', '2021-01-19', 45000000, 33, '1', 'tunai', 'Beli', '');
+('PT-00109', '2021-01-19', 45000000, 33, '1', 'tunai', 'Beli', ''),
+('PT-00109', '2021-01-26', 1855500, 34, '1', 'tunai', 'acdc', '');
 
 -- --------------------------------------------------------
 
@@ -565,6 +566,7 @@ CREATE TABLE `history_beli_k` (
   `tgl_beli` date NOT NULL,
   `kd_brg` varchar(25) NOT NULL,
   `nama_brg` varchar(50) NOT NULL,
+  `jenis_obat` enum('bebas','keras') DEFAULT NULL,
   `satuan` varchar(50) NOT NULL,
   `kategori` varchar(50) NOT NULL,
   `hrg` varchar(50) NOT NULL,
@@ -582,10 +584,10 @@ CREATE TABLE `history_beli_k` (
 -- Dumping data for table `history_beli_k`
 --
 
-INSERT INTO `history_beli_k` (`id`, `no_fak`, `tgl_beli`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_produksi`, `tgl_expired`) VALUES
-(8, 'PK-00001', '2021-01-19', '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', '6', '21', '53000', 0, 100, 10, '50', '0', '2650000', '2021-01-01', '2023-01-01'),
-(9, 'PK-00001', '2021-01-19', '947114', 'ALBOTHYL ( POLICRESULEN) 5 ML', '6', '21', '50000', 0, 100, 10, '50', '10', '2250000', '2021-01-21', '2023-01-21'),
-(10, 'PK-00001', '2021-01-19', '661713', 'ALKOHOL 70 %', '6', '16', '26000', 0, 100, 10, '100', '15', '2210000', '2021-01-21', '2023-01-21');
+INSERT INTO `history_beli_k` (`id`, `no_fak`, `tgl_beli`, `kd_brg`, `nama_brg`, `jenis_obat`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_produksi`, `tgl_expired`) VALUES
+(8, 'PK-00001', '2021-01-19', '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', NULL, '6', '21', '53000', 0, 100, 10, '50', '0', '2650000', '2021-01-01', '2023-01-01'),
+(9, 'PK-00001', '2021-01-19', '947114', 'ALBOTHYL ( POLICRESULEN) 5 ML', NULL, '6', '21', '50000', 0, 100, 10, '50', '10', '2250000', '2021-01-21', '2023-01-21'),
+(10, 'PK-00001', '2021-01-19', '661713', 'ALKOHOL 70 %', NULL, '6', '16', '26000', 0, 100, 10, '100', '15', '2210000', '2021-01-21', '2023-01-21');
 
 -- --------------------------------------------------------
 
@@ -642,6 +644,7 @@ CREATE TABLE `history_beli_t` (
   `tgl_beli` date NOT NULL,
   `kd_brg` varchar(50) NOT NULL,
   `nama_brg` varchar(50) NOT NULL,
+  `jenis_obat` enum('bebas','keras') DEFAULT NULL,
   `satuan` varchar(50) NOT NULL,
   `kategori` varchar(50) NOT NULL,
   `hrg` varchar(50) NOT NULL,
@@ -659,34 +662,36 @@ CREATE TABLE `history_beli_t` (
 -- Dumping data for table `history_beli_t`
 --
 
-INSERT INTO `history_beli_t` (`id`, `no_fak`, `tgl_beli`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_produksi`, `tgl_expired`) VALUES
-(19, '2020-17-04', '2020-04-17', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', '', '', '21000', 0, 100, 10, '50', '0', '1050000', NULL, NULL),
-(18, '20200415', '2020-04-15', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', '', '', '21000', 0, 100, 10, '100', '0', '2100000', NULL, NULL),
-(17, '35143', '2020-03-09', '180024', 'BETADINE 5 LITER', '', '', '', 0, 100, 10, '5', '0', '0', NULL, NULL),
-(16, '35143', '2020-03-09', '643464', 'ANTANGIN JRG', '', '', '', 0, 100, 10, '50', '0', '0', NULL, NULL),
-(15, '35143', '2020-03-09', '186097', 'ANTIMO DEWASA', '', '', '', 0, 100, 10, '100', '0', '0', NULL, NULL),
-(14, '35143', '2020-03-09', '581543', 'ALKOHOL KECIL', '', '', '5555', 0, 100, 10, '10', '0', '55550', NULL, NULL),
-(11, '747712', '2020-03-09', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', '', '', '10000', 0, 100, 10, '2', '0', '20000', NULL, NULL),
-(10, '4311432', '2020-03-09', '497345', 'CASETAMOL SYR (PARASETAMOL)', '', '', '11.000', 0, 100, 10, '1', '0', '11', NULL, NULL),
-(9, '1987657', '2020-03-09', '682038', 'NEUROBAT FORTE INJ 3 ML/20', '', '', '20000', 0, 100, 10, '1', '1', '19800', NULL, NULL),
-(7, ' ', '2020-03-09', '504761', 'HICO - HEPARIN SODIUM', '', '', '3000', 0, 100, 10, '3', '0', '9000', NULL, NULL),
-(8, '1', '2020-03-09', '056275', 'IMBOOST F COUGH SPESIALIS', '', '9', '15000', 0, 100, 10, '2', '0', '30000', NULL, NULL),
-(3, '999911107', '2020-03-09', '766785', 'VIT C ( KALENG )', '', '9', '40000', 0, 100, 10, '1', '0', '40000', NULL, NULL),
-(2, '999911107', '2020-03-09', '368012', 'PROFEN - IBUPROFEN SYRUP', '', '9', '15.000', 0, 100, 10, '1', '0', '15', NULL, NULL),
-(1, '999911107', '2020-03-09', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', '', '', '22.000', 0, 100, 10, '2', '0', '44', NULL, NULL),
-(50, 'PT-00109', '2021-01-19', '180024', 'BETADINE 5 LITER', '6', '19', '500000', 866250, 100, 10, '100', '0', '50000000', '2020-08-30', '2021-10-31'),
-(21, '123311', '2020-06-24', '766785', 'VIT C ( KALENG )', '', '9', '21000', 0, 100, 10, '100', '0', '2100000', NULL, NULL),
-(41, '01122020', '2020-12-01', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, '100', '0', '2500000', '2020-11-01', '2022-11-01'),
-(40, '01122020', '2020-12-01', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, '120', '0', '4800000', '2020-11-02', '2022-11-02'),
-(42, '32141', '2021-01-14', '040070', 'ANDALAN 1 MG / 3 BULAN INJEKSI', '6', '12', '100000', 130000, 100, 10, '20', '', '2000000', '2020-12-29', '2021-08-31'),
-(43, '32141', '2021-01-14', '636628', 'AB VASK  10 MG', '1', '9', '88800', 168000, 100, 10, '100', '', '8880000', '2021-01-12', '2023-01-12'),
-(44, '32141', '2021-01-14', '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', '6', '15', '53000', 36750, 100, 10, '50', '', '2650000', '2021-01-01', '2023-01-01'),
-(45, '32141', '2021-01-14', '226227', 'BYE BYE FEVER BAYI', '8', '20', '5000', 8000, 100, 10, '100', '', '500000', '2020-10-04', '2022-01-14'),
-(46, '32141', '2021-01-14', '954468', 'BYE BYE FEVER ANAK', '8', '20', '6000', 10000, 100, 10, '50', '', '300000', '2020-12-06', '2022-05-10'),
-(47, 'PT-01108', '2021-01-19', '954468', 'BYE BYE FEVER ANAK', '8', '20', '6000', 10000, 100, 10, '100', '10', '540000', '2020-12-06', '2022-05-10'),
-(48, 'PT-01108', '2021-01-19', '226227', 'BYE BYE FEVER BAYI', '8', '20', '5000', 8000, 100, 10, '100', '5', '475000', '2020-10-04', '2022-01-14'),
-(49, 'PT-01108', '2021-01-19', '636628', 'AB VASK  10 MG', '1', '9', '88800', 168000, 100, 10, '50', '0', '4440000', '2021-01-12', '2023-01-12'),
-(51, 'PT-00109', '2021-01-19', '180024', 'BETADINE 5 LITER', '6', '19', '500000', 866250, 100, 10, '100', '10', '45000000', '2020-08-30', '2021-10-31');
+INSERT INTO `history_beli_t` (`id`, `no_fak`, `tgl_beli`, `kd_brg`, `nama_brg`, `jenis_obat`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_produksi`, `tgl_expired`) VALUES
+(19, '2020-17-04', '2020-04-17', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', NULL, '', '', '21000', 0, 100, 10, '50', '0', '1050000', NULL, NULL),
+(18, '20200415', '2020-04-15', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', NULL, '', '', '21000', 0, 100, 10, '100', '0', '2100000', NULL, NULL),
+(17, '35143', '2020-03-09', '180024', 'BETADINE 5 LITER', NULL, '', '', '', 0, 100, 10, '5', '0', '0', NULL, NULL),
+(16, '35143', '2020-03-09', '643464', 'ANTANGIN JRG', NULL, '', '', '', 0, 100, 10, '50', '0', '0', NULL, NULL),
+(15, '35143', '2020-03-09', '186097', 'ANTIMO DEWASA', NULL, '', '', '', 0, 100, 10, '100', '0', '0', NULL, NULL),
+(14, '35143', '2020-03-09', '581543', 'ALKOHOL KECIL', NULL, '', '', '5555', 0, 100, 10, '10', '0', '55550', NULL, NULL),
+(11, '747712', '2020-03-09', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', NULL, '', '', '10000', 0, 100, 10, '2', '0', '20000', NULL, NULL),
+(10, '4311432', '2020-03-09', '497345', 'CASETAMOL SYR (PARASETAMOL)', NULL, '', '', '11.000', 0, 100, 10, '1', '0', '11', NULL, NULL),
+(9, '1987657', '2020-03-09', '682038', 'NEUROBAT FORTE INJ 3 ML/20', NULL, '', '', '20000', 0, 100, 10, '1', '1', '19800', NULL, NULL),
+(7, ' ', '2020-03-09', '504761', 'HICO - HEPARIN SODIUM', NULL, '', '', '3000', 0, 100, 10, '3', '0', '9000', NULL, NULL),
+(8, '1', '2020-03-09', '056275', 'IMBOOST F COUGH SPESIALIS', NULL, '', '9', '15000', 0, 100, 10, '2', '0', '30000', NULL, NULL),
+(3, '999911107', '2020-03-09', '766785', 'VIT C ( KALENG )', NULL, '', '9', '40000', 0, 100, 10, '1', '0', '40000', NULL, NULL),
+(2, '999911107', '2020-03-09', '368012', 'PROFEN - IBUPROFEN SYRUP', NULL, '', '9', '15.000', 0, 100, 10, '1', '0', '15', NULL, NULL),
+(1, '999911107', '2020-03-09', '251069', 'DOTRAMOL-PARACETAMOL-TRAMADOL', NULL, '', '', '22.000', 0, 100, 10, '2', '0', '44', NULL, NULL),
+(50, 'PT-00109', '2021-01-19', '180024', 'BETADINE 5 LITER', NULL, '6', '19', '500000', 866250, 100, 10, '100', '0', '50000000', '2020-08-30', '2021-10-31'),
+(21, '123311', '2020-06-24', '766785', 'VIT C ( KALENG )', NULL, '', '9', '21000', 0, 100, 10, '100', '0', '2100000', NULL, NULL),
+(41, '01122020', '2020-12-01', '010494', 'GEQUIN', NULL, '3', '9', '25000', 30000, 100, 10, '100', '0', '2500000', '2020-11-01', '2022-11-01'),
+(40, '01122020', '2020-12-01', '150194', 'Hawedion', NULL, '7', '6', '40000', 45000, 100, 10, '120', '0', '4800000', '2020-11-02', '2022-11-02'),
+(42, '32141', '2021-01-14', '040070', 'ANDALAN 1 MG / 3 BULAN INJEKSI', NULL, '6', '12', '100000', 130000, 100, 10, '20', '', '2000000', '2020-12-29', '2021-08-31'),
+(43, '32141', '2021-01-14', '636628', 'AB VASK  10 MG', NULL, '1', '9', '88800', 168000, 100, 10, '100', '', '8880000', '2021-01-12', '2023-01-12'),
+(44, '32141', '2021-01-14', '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', NULL, '6', '15', '53000', 36750, 100, 10, '50', '', '2650000', '2021-01-01', '2023-01-01'),
+(45, '32141', '2021-01-14', '226227', 'BYE BYE FEVER BAYI', NULL, '8', '20', '5000', 8000, 100, 10, '100', '', '500000', '2020-10-04', '2022-01-14'),
+(46, '32141', '2021-01-14', '954468', 'BYE BYE FEVER ANAK', NULL, '8', '20', '6000', 10000, 100, 10, '50', '', '300000', '2020-12-06', '2022-05-10'),
+(47, 'PT-01108', '2021-01-19', '954468', 'BYE BYE FEVER ANAK', NULL, '8', '20', '6000', 10000, 100, 10, '100', '10', '540000', '2020-12-06', '2022-05-10'),
+(48, 'PT-01108', '2021-01-19', '226227', 'BYE BYE FEVER BAYI', NULL, '8', '20', '5000', 8000, 100, 10, '100', '5', '475000', '2020-10-04', '2022-01-14'),
+(49, 'PT-01108', '2021-01-19', '636628', 'AB VASK  10 MG', NULL, '1', '9', '88800', 168000, 100, 10, '50', '0', '4440000', '2021-01-12', '2023-01-12'),
+(51, 'PT-00109', '2021-01-19', '180024', 'BETADINE 5 LITER', NULL, '6', '19', '500000', 866250, 100, 10, '100', '10', '45000000', '2020-08-30', '2021-10-31'),
+(52, 'PT-00109', '2021-01-26', '581543', 'ALKOHOL KECIL', NULL, '6', '15', '5555', 7875, 100, 10, '100', '0', '555500', '2021-01-21', '2023-01-21'),
+(53, 'PT-00109', '2021-01-26', '661713', 'ALKOHOL 70 %', NULL, '6', '16', '26000', 46200, 100, 10, '50', '0', '1300000', '2021-01-21', '2023-01-21');
 
 -- --------------------------------------------------------
 
@@ -856,6 +861,7 @@ CREATE TABLE `history_kirim_stok` (
   `tgl_kirim` datetime NOT NULL,
   `kd_brg` varchar(50) NOT NULL,
   `nama_brg` varchar(50) NOT NULL,
+  `jenis_obat` enum('bebas','keras') DEFAULT NULL,
   `satuan` varchar(50) NOT NULL,
   `kategori` varchar(50) NOT NULL,
   `hrg` varchar(50) NOT NULL,
@@ -874,21 +880,21 @@ CREATE TABLE `history_kirim_stok` (
 -- Dumping data for table `history_kirim_stok`
 --
 
-INSERT INTO `history_kirim_stok` (`id`, `no_peng`, `tgl_kirim`, `kd_brg`, `nama_brg`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_produksi`, `tgl_expired`, `status`, `pesan`, `tgl_terima`) VALUES
-(7, 'PS-00001', '2021-01-04 15:10:05', '150194', 'Hawedion', '7', '6', '40000', 45000, 100, 10, 5, '2020-11-02', '2022-11-02', 'terima', '', '2021-01-04 20:03:01'),
-(8, 'PS-00002', '2021-01-05 12:07:29', '010494', 'GEQUIN', '3', '9', '25000', 30000, 100, 10, 10, '2020-11-01', '2022-11-01', 'terima', '', '2021-01-05 12:24:24'),
-(9, 'PS-00003', '2021-01-14 12:17:58', '226227', 'BYE BYE FEVER BAYI', '8', '20', '5000', 8000, 100, 10, 100, '2020-10-04', '2022-01-14', 'terima', '', '2021-01-14 12:26:35'),
-(10, 'PS-00003', '2021-01-14 12:17:58', '040070', 'ANDALAN 1 MG / 3 BULAN INJEKSI', '6', '12', '100000', 130000, 100, 10, 20, '2020-12-29', '2021-08-31', 'terima', '', '2021-01-14 12:26:22'),
-(11, 'PS-00003', '2021-01-14 12:17:58', '636628', 'AB VASK  10 MG', '1', '9', '88800', 168000, 100, 10, 100, '2021-01-12', '2023-01-12', 'terima', '', '2021-01-14 12:26:02'),
-(12, 'PS-00003', '2021-01-14 12:17:58', '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', '6', '15', '53000', 36750, 100, 10, 50, '2021-01-01', '2023-01-01', 'terima', '', '2021-01-14 12:25:39'),
-(16, 'PS-00004', '2021-01-14 12:29:32', '226227', 'BYE BYE FEVER BAYI', '8', '20', '5000', 8000, 100, 10, 200, '2020-10-04', '2022-01-14', 'terima', '', '2021-01-14 12:44:06'),
-(17, 'PS-00004', '2021-01-14 12:29:32', '954468', 'BYE BYE FEVER ANAK', '8', '20', '6000', 10000, 100, 10, 100, '2020-12-06', '2022-05-10', 'terima', '', '2021-01-14 12:44:01'),
-(18, 'PS-00004', '2021-01-14 12:29:32', '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', '6', '15', '53000', 36750, 100, 10, 50, '2021-01-01', '2023-01-01', 'terima', '', '2021-01-14 12:43:47'),
-(19, 'PS-00004', '2021-01-14 12:29:32', '636628', 'AB VASK  10 MG', '1', '9', '88800', 168000, 100, 10, 100, '2021-01-12', '2023-01-12', 'terima', '', '2021-01-14 12:43:12'),
-(20, 'PS-00004', '2021-01-14 12:29:32', '040070', 'ANDALAN 1 MG / 3 BULAN INJEKSI', '6', '12', '100000', 130000, 100, 10, 100, '2020-12-29', '2021-08-31', 'terima', '', '2021-01-14 12:29:54'),
-(21, 'PS-00005', '2021-01-19 15:58:39', '954468', 'BYE BYE FEVER ANAK', '8', '20', '6000', 10000, 100, 10, 100, '2020-12-06', '2022-05-10', 'terima', '', '2021-01-19 16:00:07'),
-(22, 'PS-00005', '2021-01-19 15:58:39', '226227', 'BYE BYE FEVER BAYI', '8', '20', '5000', 8000, 100, 10, 150, '2020-10-04', '2022-01-14', 'terima', '', '2021-01-19 15:59:38'),
-(24, 'PS-00006', '2021-01-19 16:08:28', '180024', 'BETADINE 5 LITER', '6', '19', '500000', 866250, 100, 10, 100, '2020-08-30', '2021-10-31', 'terima', '', '2021-01-19 16:08:52');
+INSERT INTO `history_kirim_stok` (`id`, `no_peng`, `tgl_kirim`, `kd_brg`, `nama_brg`, `jenis_obat`, `satuan`, `kategori`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_produksi`, `tgl_expired`, `status`, `pesan`, `tgl_terima`) VALUES
+(7, 'PS-00001', '2021-01-04 15:10:05', '150194', 'Hawedion', 'bebas', '7', '6', '40000', 45000, 100, 10, 5, '2020-11-02', '2022-11-02', 'terima', '', '2021-01-04 20:03:01'),
+(8, 'PS-00002', '2021-01-05 12:07:29', '010494', 'GEQUIN', 'bebas', '3', '9', '25000', 30000, 100, 10, 10, '2020-11-01', '2022-11-01', 'terima', '', '2021-01-05 12:24:24'),
+(9, 'PS-00003', '2021-01-14 12:17:58', '226227', 'BYE BYE FEVER BAYI', 'bebas', '8', '20', '5000', 8000, 100, 10, 100, '2020-10-04', '2022-01-14', 'terima', '', '2021-01-14 12:26:35'),
+(10, 'PS-00003', '2021-01-14 12:17:58', '040070', 'ANDALAN 1 MG / 3 BULAN INJEKSI', 'bebas', '6', '12', '100000', 130000, 100, 10, 20, '2020-12-29', '2021-08-31', 'terima', '', '2021-01-14 12:26:22'),
+(11, 'PS-00003', '2021-01-14 12:17:58', '636628', 'AB VASK  10 MG', 'bebas', '1', '9', '88800', 168000, 100, 10, 100, '2021-01-12', '2023-01-12', 'terima', '', '2021-01-14 12:26:02'),
+(12, 'PS-00003', '2021-01-14 12:17:58', '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', 'bebas', '6', '15', '53000', 36750, 100, 10, 50, '2021-01-01', '2023-01-01', 'terima', '', '2021-01-14 12:25:39'),
+(16, 'PS-00004', '2021-01-14 12:29:32', '226227', 'BYE BYE FEVER BAYI', 'bebas', '8', '20', '5000', 8000, 100, 10, 200, '2020-10-04', '2022-01-14', 'terima', '', '2021-01-14 12:44:06'),
+(17, 'PS-00004', '2021-01-14 12:29:32', '954468', 'BYE BYE FEVER ANAK', 'bebas', '8', '20', '6000', 10000, 100, 10, 100, '2020-12-06', '2022-05-10', 'terima', '', '2021-01-14 12:44:01'),
+(18, 'PS-00004', '2021-01-14 12:29:32', '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', 'bebas', '6', '15', '53000', 36750, 100, 10, 50, '2021-01-01', '2023-01-01', 'terima', '', '2021-01-14 12:43:47'),
+(19, 'PS-00004', '2021-01-14 12:29:32', '636628', 'AB VASK  10 MG', 'bebas', '1', '9', '88800', 168000, 100, 10, 100, '2021-01-12', '2023-01-12', 'terima', '', '2021-01-14 12:43:12'),
+(20, 'PS-00004', '2021-01-14 12:29:32', '040070', 'ANDALAN 1 MG / 3 BULAN INJEKSI', 'bebas', '6', '12', '100000', 130000, 100, 10, 100, '2020-12-29', '2021-08-31', 'terima', '', '2021-01-14 12:29:54'),
+(21, 'PS-00005', '2021-01-19 15:58:39', '954468', 'BYE BYE FEVER ANAK', 'bebas', '8', '20', '6000', 10000, 100, 10, 100, '2020-12-06', '2022-05-10', 'terima', '', '2021-01-19 16:00:07'),
+(22, 'PS-00005', '2021-01-19 15:58:39', '226227', 'BYE BYE FEVER BAYI', 'bebas', '8', '20', '5000', 8000, 100, 10, 150, '2020-10-04', '2022-01-14', 'terima', '', '2021-01-19 15:59:38'),
+(24, 'PS-00006', '2021-01-19 16:08:28', '180024', 'BETADINE 5 LITER', 'bebas', '6', '19', '500000', 866250, 100, 10, 100, '2020-08-30', '2021-10-31', 'terima', '', '2021-01-19 16:08:52');
 
 -- --------------------------------------------------------
 
@@ -2629,7 +2635,10 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1331, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-25 05:43:09'),
 (1332, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-25 06:51:13'),
 (1333, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-25 07:12:07'),
-(1334, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-26 03:57:36');
+(1334, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-26 03:57:36'),
+(1335, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-26 04:54:35'),
+(1336, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-26 04:55:06'),
+(1337, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-01-26 05:17:09');
 
 -- --------------------------------------------------------
 
@@ -3243,6 +3252,7 @@ CREATE TABLE `pembelian_k` (
   `id_k` int(11) NOT NULL,
   `kd_brg` varchar(25) NOT NULL,
   `nama_brg` varchar(50) NOT NULL,
+  `jenis_obat` enum('bebas','keras') DEFAULT NULL,
   `satuan_k` varchar(50) NOT NULL,
   `kategori_k` varchar(50) NOT NULL,
   `hrg` varchar(50) NOT NULL,
@@ -3257,6 +3267,13 @@ CREATE TABLE `pembelian_k` (
   `tgl_expired` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pembelian_k`
+--
+
+INSERT INTO `pembelian_k` (`id_k`, `kd_brg`, `nama_brg`, `jenis_obat`, `satuan_k`, `kategori_k`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_beli`, `tgl_produksi`, `tgl_expired`) VALUES
+(1, '678528', 'BETADIN OBAT KUMUR', 'bebas', '8', '19', '15000', 0, 100, 10, '100', '0', '1500000', '2021-01-26', '2020-10-25', '2021-12-31');
+
 -- --------------------------------------------------------
 
 --
@@ -3267,6 +3284,7 @@ CREATE TABLE `pembelian_t` (
   `id_t` int(11) NOT NULL,
   `kd_brg` varchar(25) NOT NULL,
   `nama_brg` varchar(50) NOT NULL,
+  `jenis_obat` enum('bebas','keras') DEFAULT NULL,
   `satuan_t` int(11) NOT NULL,
   `kategori_t` int(11) NOT NULL,
   `hrg` varchar(50) NOT NULL,
@@ -3280,6 +3298,13 @@ CREATE TABLE `pembelian_t` (
   `tgl_produksi` date DEFAULT NULL,
   `tgl_expired` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembelian_t`
+--
+
+INSERT INTO `pembelian_t` (`id_t`, `kd_brg`, `nama_brg`, `jenis_obat`, `satuan_t`, `kategori_t`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `diskon`, `sub_tot`, `tgl_beli`, `tgl_produksi`, `tgl_expired`) VALUES
+(1, '180024', 'BETADINE 5 LITER', 'bebas', 6, 19, '500000', 866250, 100, 10, '10', '0', '5000000', '2021-01-26', '2020-08-30', '2021-10-31');
 
 -- --------------------------------------------------------
 
@@ -3307,6 +3332,7 @@ CREATE TABLE `pengiriman_stok` (
   `id_ps` int(11) NOT NULL,
   `kd_brg` varchar(25) CHARACTER SET latin1 NOT NULL,
   `nama_brg` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `jenis_obat` enum('bebas','keras') DEFAULT NULL,
   `satuan_ps` int(11) NOT NULL,
   `kategori_ps` int(11) NOT NULL,
   `hrg` varchar(50) CHARACTER SET latin1 NOT NULL,
@@ -3318,6 +3344,13 @@ CREATE TABLE `pengiriman_stok` (
   `tgl_produksi` date DEFAULT NULL,
   `tgl_expired` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pengiriman_stok`
+--
+
+INSERT INTO `pengiriman_stok` (`id_ps`, `kd_brg`, `nama_brg`, `jenis_obat`, `satuan_ps`, `kategori_ps`, `hrg`, `hrg_jual`, `batas_cabang`, `batas_minim`, `jumlah`, `tgl_kirim`, `tgl_produksi`, `tgl_expired`) VALUES
+(6, '581543', 'ALKOHOL KECIL', 'bebas', 6, 15, '5555', 7875, 100, 10, '50', '2021-01-26', '2021-01-21', '2023-01-21');
 
 -- --------------------------------------------------------
 
@@ -4306,6 +4339,7 @@ CREATE TABLE `produk_ps` (
 CREATE TABLE `produk_pusat` (
   `id_p` int(11) NOT NULL,
   `nama_p` varchar(50) NOT NULL,
+  `jenis_obat` enum('bebas','keras') DEFAULT NULL,
   `jumlah` int(11) NOT NULL,
   `kode_barang` varchar(50) NOT NULL,
   `hrg` varchar(50) NOT NULL,
@@ -4320,17 +4354,19 @@ CREATE TABLE `produk_pusat` (
 -- Dumping data for table `produk_pusat`
 --
 
-INSERT INTO `produk_pusat` (`id_p`, `nama_p`, `jumlah`, `kode_barang`, `hrg`, `hrg_jual`, `satuan`, `kategori`, `tgl_produksi`, `tgl_expired`) VALUES
-(33, 'BETADINE 5 LITER', 100, '180024', '500000', 866250, '6', '19', '2020-08-30', '2021-10-31'),
-(24, 'GEQUIN', 31, '010494', '25000', 30000, '3', '9', '2020-11-01', '2022-11-01'),
-(25, 'Hawedion', 90, '150194', '40000', 45000, '7', '6', '2020-11-02', '2022-11-02'),
-(26, 'PANADOL MERAH', 0, '931489', '10000', 0, '', '9', '2020-11-24', '2022-11-24'),
-(27, 'ANDALAN 1 MG / 3 BULAN INJEKSI', 400, '040070', '100000', 130000, '6', '12', '2020-12-29', '2021-08-31'),
-(28, 'AB VASK  10 MG', 550, '636628', '88800', 168000, '1', '9', '2021-01-12', '2023-01-12'),
-(29, 'ALBOTHYL ( POLICRESULEN) 10 ML', 600, '279603', '53000', 36750, '6', '15', '2021-01-01', '2023-01-01'),
-(30, 'BYE BYE FEVER BAYI', 450, '226227', '5000', 8000, '8', '20', '2020-10-04', '2022-01-14'),
-(31, 'BYE BYE FEVER ANAK', 400, '954468', '6000', 10000, '8', '20', '2020-12-06', '2022-05-10'),
-(32, 'ALBOTHYL ( POLICRESULEN) 5 ML', 50, '947114', '50000', 0, '6', '21', '2021-01-21', '2023-01-21');
+INSERT INTO `produk_pusat` (`id_p`, `nama_p`, `jenis_obat`, `jumlah`, `kode_barang`, `hrg`, `hrg_jual`, `satuan`, `kategori`, `tgl_produksi`, `tgl_expired`) VALUES
+(33, 'BETADINE 5 LITER', 'bebas', 300, '180024', '500000', 866250, '6', '19', '2020-08-30', '2021-10-31'),
+(24, 'GEQUIN', 'bebas', 31, '010494', '25000', 30000, '3', '9', '2020-11-01', '2022-11-01'),
+(25, 'Hawedion', 'bebas', 90, '150194', '40000', 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(26, 'PANADOL MERAH', 'bebas', 0, '931489', '10000', 0, '', '9', '2020-11-24', '2022-11-24'),
+(27, 'ANDALAN 1 MG / 3 BULAN INJEKSI', 'bebas', 400, '040070', '100000', 130000, '6', '12', '2020-12-29', '2021-08-31'),
+(28, 'AB VASK  10 MG', 'bebas', 550, '636628', '88800', 168000, '1', '9', '2021-01-12', '2023-01-12'),
+(29, 'ALBOTHYL ( POLICRESULEN) 10 ML', 'bebas', 600, '279603', '53000', 36750, '6', '15', '2021-01-01', '2023-01-01'),
+(30, 'BYE BYE FEVER BAYI', 'bebas', 450, '226227', '5000', 8000, '8', '20', '2020-10-04', '2022-01-14'),
+(31, 'BYE BYE FEVER ANAK', 'bebas', 400, '954468', '6000', 10000, '8', '20', '2020-12-06', '2022-05-10'),
+(32, 'ALBOTHYL ( POLICRESULEN) 5 ML', 'bebas', 50, '947114', '50000', 0, '6', '21', '2021-01-21', '2023-01-21'),
+(34, 'ALKOHOL KECIL', 'bebas', 100, '581543', '5555', 7875, '6', '15', '2021-01-21', '2023-01-21'),
+(35, 'ALKOHOL 70 %', 'bebas', 50, '661713', '26000', 46200, '6', '16', '2021-01-21', '2023-01-21');
 
 -- --------------------------------------------------------
 
@@ -5135,7 +5171,7 @@ ALTER TABLE `asuransi`
 -- AUTO_INCREMENT for table `beli`
 --
 ALTER TABLE `beli`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `beli_k`
@@ -5147,7 +5183,7 @@ ALTER TABLE `beli_k`
 -- AUTO_INCREMENT for table `beli_obat`
 --
 ALTER TABLE `beli_obat`
-  MODIFY `id_beli_obat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_beli_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `biaya_administrasi`
@@ -5237,7 +5273,7 @@ ALTER TABLE `history_beli_obat`
 -- AUTO_INCREMENT for table `history_beli_t`
 --
 ALTER TABLE `history_beli_t`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `history_kasir`
@@ -5303,7 +5339,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1335;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1338;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5369,13 +5405,13 @@ ALTER TABLE `pembayaran_lab`
 -- AUTO_INCREMENT for table `pembelian_k`
 --
 ALTER TABLE `pembelian_k`
-  MODIFY `id_k` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pembelian_t`
 --
 ALTER TABLE `pembelian_t`
-  MODIFY `id_t` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_t` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
@@ -5387,7 +5423,7 @@ ALTER TABLE `pengeluaran`
 -- AUTO_INCREMENT for table `pengiriman_stok`
 --
 ALTER TABLE `pengiriman_stok`
-  MODIFY `id_ps` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `perawatan_pasien`
@@ -5429,7 +5465,7 @@ ALTER TABLE `produk_ps`
 -- AUTO_INCREMENT for table `produk_pusat`
 --
 ALTER TABLE `produk_pusat`
-  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `produk_reture`

@@ -15,6 +15,7 @@ if(isset($_POST['search'])){
       "label"=>$row['nama_p'],
       "jml"=>$row['jumlah'],
       "kd_produk"=>$row['kode_barang'],
+      "jenis_obat"=>$row['jenis_obat'],
       "harga_beli"=>$row['hrg'],
       "harga_jual"=>$row['hrg_jual'],
       "id_satuan"=>$row['satuan'],

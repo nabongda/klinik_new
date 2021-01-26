@@ -286,6 +286,10 @@
                   <label>Kode Barang </label>
                   <input type="text" class="form-control" name="kd_brg" id="kd_brg" placeholder="Kode Barang" required>
                 </div>
+                <div class="form-group col-md-2">
+                  <label>Jenis Obat</label>
+                  <input type="text" class="form-control" name="jenis_obat" id="jenis_obat" placeholder="Jenis Obat" required>
+                </div>
                 <div class="col-md-2">
                   <label>Satuan</label>
                   <select class="form-control select2" name="id_satuan" id="id_satuan" style="width: 100%;" readonly>
@@ -347,6 +351,7 @@
                   <th>No</th>
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
+                  <th>Jenis Obat</th>
                   <th>Jumlah</th>
                   <th>Harga</th>
                   <th>Diskon</th>
@@ -366,6 +371,7 @@
                   <td><?php echo $no++?></td>
                   <td><?php echo $data['kd_brg']; ?></td>
                   <td><?php echo $data['nama_brg']; ?></td>
+                  <td><?php echo $data['jenis_obat']; ?></td>
                   <td><?php echo $data['jumlah']; ?></td>
                   <td><?php echo rupiah($data['hrg']); ?></td>
                   <td><?php echo $data['diskon']; ?></td>
@@ -376,7 +382,7 @@
                 <?php } ?>
               </tbody>
               <tr>
-                <th colspan="9" style="text-align: right;" id="total">Total: 
+                <th colspan="10" style="text-align: right;" id="total">Total: 
                   <?php
                     $jumlahkan = "SELECT SUM(sub_tot) AS total FROM pembelian_t"; //perintah untuk menjumlahkan
                     $total =@mysqli_query($con, $jumlahkan) or die (mysqli_error($con));//melakukan query dengan varibel $jumlahkan
@@ -566,6 +572,7 @@ $(document).ready(function(){
       // Set selection
       $('#kd_brg').val(ui.item.kd_produk);
       $('#nama_barang').val(ui.item.label);
+      $('#jenis_obat').val(ui.item.jenis_obat);
       $('#id_satuan').val(ui.item.id_satuan);
       $('#id_kategori').val(ui.item.id_kategori);
       $('#hrg').val(ui.item.harga_beli);
@@ -585,6 +592,7 @@ $(document).ready(function(){
     "sAjaxSource": "modul/pembelian_t/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
+      null,
       null,
       null,
       null,
