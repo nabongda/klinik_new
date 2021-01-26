@@ -62,18 +62,6 @@ if($_POST['id']) {
               <input class="form-control" value="<?php echo $data['ket']; ?>" readonly>
             </div>
           </div>
-          <div class="form-group row">
-            <div class="col-sm-4">
-              <label>Bukti Bayar</label>
-            </div>
-            <div class="col-sm-8">
-              <?php if ( $data['bukti_bayar'] == '') { ?>
-              <input class="form-control" value="<?php echo "Belum Dibayar"; ?>" readonly>
-              <?php } else { 
-                echo '<a href="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'"><img src="'.$url.'/bukti_bayar/'.$data['bukti_bayar'].'" width="100px" height="100px"></a>';
-              } ?>
-            </div>
-          </div>
         </form>
       </div>
 
