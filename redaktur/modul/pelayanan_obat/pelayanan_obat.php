@@ -189,6 +189,10 @@
                   <label>Kode Obat </label>
                   <input type="text" class="form-control" name="kd_brg" id="kd_brg" placeholder="Kode Obat" required>
                 </div>
+                <div class="form-group col-md-2">
+                  <label>Jenis Obat </label>
+                  <input type="text" class="form-control" name="jenis_obat" id="jenis_obat" placeholder="Jenis Obat" required>
+                </div>
                 <div class="col-md-2">
                   <label>Satuan</label>
                   <select class="form-control select2" name="id_satuan" id="id_satuan" style="width: 100%;" readonly>
@@ -218,6 +222,7 @@
                 <div class="form-group col-md-2">
                   <label>Jumlah </label>
                   <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" onkeypress="return hanyaAngka(event)" required>
+                  <small id="jml" class="collapse" style="color: red;"></small>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Diskon </label>
@@ -236,7 +241,7 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <button type="button" class="btn-sm btn-danger" onclick="this.form.reset();">Reset Form</button>
+                  <button type="button" class="btn-sm btn-danger" id="reset_form" onclick="this.form.reset();">Reset Form</button>
                   <button type="submit" class="btn-sm btn-success">Tambah</button>
                 </div>
               </div>
@@ -250,6 +255,7 @@
                   <th>No</th>
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
+                  <th>Jenis Obat</th>
                   <th>Jumlah</th>
                   <th>Harga</th>
                   <th>Diskon</th>
@@ -269,6 +275,7 @@
                   <td><?php echo $no++?></td>
                   <td><?php echo $data['kd_brg']; ?></td>
                   <td><?php echo $data['nama_brg']; ?></td>
+                  <td><?php echo $data['jenis_obat']; ?></td>
                   <td><?php echo $data['jumlah']; ?></td>
                   <td><?php echo rupiah($data['hrg']); ?></td>
                   <td><?php echo $data['diskon']; ?></td>
@@ -397,6 +404,7 @@
                     </div>
                   </div>
                 </div>
+                
                 <div class="col-6">
                   <div class="form-group row">
                     <div class="col-sm-4">
@@ -407,6 +415,7 @@
                     </div>
                   </div>
                 </div>
+                
                 <div class="col-6">
                   <div class="form-group row">
                     <div class="col-sm-4">
@@ -506,6 +515,7 @@ $(document).ready(function(){
   // Tambah Input Barang Tunai
   $('#form_t').on('submit', function (e) {
     e.preventDefault();
+    $('#jml').collapse('hide');
     var form = $('#form_t')[0];
     var data = new FormData(form);
     $.ajax({
@@ -516,13 +526,19 @@ $(document).ready(function(){
       processData: false,
       contentType: false,
       cache: false,
-      success: function (data) {
+      success: function (data) {        
+        alert(data);
         var oTable = $('#barang11').dataTable();
         oTable.fnDraw(false);
         $('#form_t').trigger("reset");
         total();
       }
     });
+  });
+
+  // Reset Form
+  $('body').on('click','#reset_form', function () {
+    $('#jml').collapse('hide');
   });
 
   // auto complete
@@ -545,12 +561,15 @@ $(document).ready(function(){
       // Set selection
       $('#kd_brg').val(ui.item.kd_produk);
       $('#nama_barang').val(ui.item.label);
+      $('#jml').collapse('show');
+      $('#jml').html("Jumlah Stok di Gudang: <b>"+ui.item.jml+"</b>");
       $('#id_satuan').val(ui.item.id_satuan);
       $('#id_kategori').val(ui.item.id_kategori);
       $('#hrg').val(ui.item.harga_beli);
       $('#harga_jual').val(ui.item.harga_jual);
       $('#tgl_produksi').val(ui.item.tgl_produksi);
       $('#tgl_expired').val(ui.item.tgl_expired);
+      $('#jenis_obat').val(ui.item.jenis_obat);
       return false;
     }
   });
@@ -564,6 +583,7 @@ $(document).ready(function(){
     "sAjaxSource": "modul/pelayanan_obat/data_barang.php",
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }],
     "aoColumns": [
+      null,
       null,
       null,
       null,

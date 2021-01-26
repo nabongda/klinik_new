@@ -26,7 +26,7 @@ if ($_POST['submit']=="simpan") {
 		if($ukuran_file <= 5000000){
 			if(move_uploaded_file($tmp_file, $path)){
 				$query = "INSERT INTO pelayanan_obat(id_ju, no_tran, nama_pembeli, tgl_pembelian, jenis_pembayaran, total, cash, kembalian, resep) VALUES('$id_ju','$no_tran', '$nama_pembeli', '$tgl', '$jenis_pembayaran', '$total', '$cash', '$kembalian', '$nama_file')";
-				mysqli_query($con, "INSERT INTO history_beli_obat (no_tran, tgl_beli, kd_brg, nama_brg, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot, tgl_produksi, tgl_expired) SELECT '$no_tran','$tgl',kd_brg,nama_brg,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_produksi,tgl_expired FROM beli_obat ");
+				mysqli_query($con, "INSERT INTO history_beli_obat (no_tran, tgl_beli, kd_brg, nama_brg, jenis_obat, satuan, kategori, hrg, hrg_jual, batas_cabang, batas_minim, jumlah, diskon, sub_tot, tgl_produksi, tgl_expired) SELECT '$no_tran','$tgl',kd_brg,nama_brg,jenis_obat,satuan_o,kategori_o,hrg,hrg_jual,batas_cabang,batas_minim,jumlah,diskon,sub_tot,tgl_produksi,tgl_expired FROM beli_obat ");
 				$sql = mysqli_query($con, $query);
 				$q = mysqli_query($con, "SELECT * FROM history_beli_obat WHERE no_tran='$no_tran'");
 
@@ -40,6 +40,7 @@ if ($_POST['submit']=="simpan") {
 						mysqli_query($con, "UPDATE produk SET jumlah='$jumlah' where kode_barang='$cek[kd_brg]'");
 					}else{
 						$nama_brg		= $cek['nama_brg'];
+						$jenis_obat		= $cek['jenis_obat'];
 						$hrg_beli		= $cek['hrg'];
 						$hrg_jual		= $cek['hrg_jual'];
 						$jumlah			= $cek['jumlah'];
@@ -51,7 +52,7 @@ if ($_POST['submit']=="simpan") {
 						$batas_cabang	= 100;
 						$batas_minim	= 10;
 						mysqli_query($con, "INSERT INTO produk (
-							kode_barang,nama_p,jumlah,hrg,hrg_jual,satuan,kategori,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$jumlah','$hrg_beli','$hrg_jual','$id_sat','$kategori','$tgl_produksi','$tgl_expired')
+							kode_barang,nama_p,jenis_obat,jumlah,hrg,hrg_jual,satuan,kategori,tgl_produksi,tgl_expired) VALUES('$kd_brg','$nama_brg','$jenis_obat','$jumlah','$hrg_beli','$hrg_jual','$id_sat','$kategori','$tgl_produksi','$tgl_expired')
 							");
 					}
 				}

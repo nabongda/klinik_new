@@ -16,6 +16,7 @@
 	elseif ($module == 'produk' AND $act == 'input') {
 		$kode_barang	= $_POST['kd_produk'];
 		$nama_p 		= $_POST['nama_produk'];
+		$jenis_obat		= $_POST['jenis_obat'];
 		// $id_s			= $_POST['id_s'];
 		// $id_kategori	= $_POST['id_kategori'];
 		// $jumlah			= $_POST['jumlah'];
@@ -46,8 +47,8 @@
 		    if(move_uploaded_file($tmp_file, $path)){ // Cek apakah gambar berhasil diupload atau tidak
 		      // Jika gambar berhasil diupload, Lakukan :  
 		      // Proses simpan ke Database
-		      $query = "INSERT Into produk_master(kd_produk,nama_produk,harga_beli,jual_umum,gambar,id_kategori,id_satuan,jual_bpjs,
-			   jual_lain,tgl_produksi,tgl_expired)VALUES('$kode_barang','$nama_p','$harga_beli','$harga_jual','$nama_file',
+		      $query = "INSERT Into produk_master(kd_produk,nama_produk, jenis_obat,harga_beli,jual_umum,gambar,id_kategori,id_satuan,jual_bpjs,
+			   jual_lain,tgl_produksi,tgl_expired)VALUES('$kode_barang','$nama_p', '$jenis_obat','$harga_beli','$harga_jual','$nama_file',
 			   '$kategori','$satuan','$harga_bpjs','$harga_asuransilainnya','$tgl_produk','$tgl_exp')";
 			  $sql = mysqli_query($con, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
@@ -61,8 +62,8 @@
 		      }
 		    }else{
 		       // Proses simpan ke Database
-			 $query = "INSERT Into produk_master(kd_produk,nama_produk,harga_beli,jual_umum,gambar,id_kategori,id_satuan,jual_bpjs,
-			   jual_lain,tgl_produksi,tgl_expired)VALUES('$kode_barang','$nama_p','$harga_beli','$harga_jual','$nama_file',
+			 $query = "INSERT Into produk_master(kd_produk,nama_produk, jenis_obat,harga_beli,jual_umum,gambar,id_kategori,id_satuan,jual_bpjs,
+			   jual_lain,tgl_produksi,tgl_expired)VALUES('$kode_barang','$nama_p', '$jenis_obat','$harga_beli','$harga_jual','$nama_file',
 			   '$kategori','$satuan','$harga_bpjs','$harga_asuransilainnya','$tgl_produk','$tgl_exp')";
 			   $sql = mysqli_query($con, $query); // Eksekusi/ Jalankan query dari variabel $query
 			   
@@ -89,8 +90,9 @@
 	//Update Produk yang Ada
 	elseif ($module == 'produk' AND $act == 'update') {
 		$id_produk				= $_POST['id_produk'];
-		$kd_produk	= $_POST['kd_produk'];
-		$nama_produk 		= $_POST['nama_produk'];
+		$kd_produk		= $_POST['kd_produk'];
+		$nama_produk 	= $_POST['nama_produk'];
+		$jenis_obat		= $_POST['jenis_obat'];
 		$satuan			= $_POST['satuan'];
 		$kategori		= $_POST['kategori'];
 		$jumlah			= $_POST['jumlah'];
@@ -120,7 +122,7 @@
 		    if(move_uploaded_file($tmp_file, $path)){ // Cek apakah gambar berhasil diupload atau tidak
 		      // Jika gambar berhasil diupload, Lakukan :  
 		      // Proses simpan ke Database
-		      $query = "Update produk_master Set kd_produk='$kd_produk', nama_produk='$nama_produk',harga_beli='$harga_beli',jual_umum ='$harga_jual',
+		      $query = "Update produk_master Set kd_produk='$kd_produk', nama_produk='$nama_produk', jenis_obat='$jenis_obat', harga_beli='$harga_beli',jual_umum ='$harga_jual',
 			  jual_bpjs='$harga_bpjs',jual_lain='$harga_asuransilainnya',
 			  gambar='$nama_file',id_kategori='$kategori',id_satuan='$satuan', tgl_produksi='$tgl_produk', tgl_expired='$tgl_exp' Where kd_produk='$kd_produk'";
 			  $sql = mysqli_query($con, $query); // Eksekusi/ Jalankan query dari variabel $query
@@ -142,7 +144,7 @@
 		      }
 		    }else{
 		      // Proses simpan ke Database
-		      $query = "Update produk_master Set kd_produk='$kd_produk', nama_produk='$nama_produk',harga_beli='$harga_beli',jual_umum='$harga_jual',
+		      $query = "Update produk_master Set kd_produk='$kd_produk', nama_produk='$nama_produk', jenis_obat='$jenis_obat',harga_beli='$harga_beli',jual_umum='$harga_jual',
 			  jual_bpjs='$harga_bpjs',jual_lain='$harga_asuransilainnya',id_kategori='$kategori',id_satuan='$satuan', tgl_produksi='$tgl_produk', tgl_expired='$tgl_exp' Where kd_produk='$kd_produk'";
 			  $sql = mysqli_query($con, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  

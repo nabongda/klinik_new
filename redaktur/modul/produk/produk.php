@@ -41,6 +41,7 @@
                 <th>Gambar Produk</th>
                 <th>Kode Produk</th>
                 <th>Nama Produk</th>
+                <th>Jenis Obat</th>
                 <th>Tgl Produksi</th>
                 <th>Tgl Expired</th>
                 <th>Harga Beli</th>
@@ -68,6 +69,7 @@
                 </td>
                 <td><?php echo $r["kd_produk"]; ?></td>
                 <td><?php echo $r["nama_produk"]; ?></td>
+                <td><?php echo $r["jenis_obat"]?></td>
                 <td><?php echo $r["tgl_produksi"]; ?></td>
                 <td><?php echo $r["tgl_expired"]; ?></td>
                 <td><?php echo rupiah ($r['harga_beli']);?></td>
@@ -156,9 +158,17 @@
                 <input type="text" class="form-control" name="nama_produk" placeholder="Nama Produk" required>
               </div>
               <div class="form-group">
+                <label>Jenis Obat</label>
+                <select class="form-control select2" name="jenis_obat" style="width: 100%;" required>
+                  <option value="" selected="Selected" disabled="disabled">--Pilih Jenis Obat--</option>
+                  <option value="bebas"> Bebas </option>
+                  <option value="keras"> Keras </option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label>Satuan Produk</label>
                 <select class="form-control select2" name="satuan" id="satuan" style="width: 100%;" required>
-                  <option value="">Pilih Satuan Produk</option>
+                  <option value="" selected="Selected" disabled="disabled">--Pilih Satuan Produk--</option>
                   <?php $query = mysqli_query($con, "SELECT *FROM data_satuan");
                     while ($cb = mysqli_fetch_array($query)) { ?>
                       <option value="<?php echo $cb['id_s']; ?>"><?php echo $cb['satuan']; ?></option>
@@ -168,7 +178,7 @@
               <div class="form-group">
                 <label>Kategori Produk</label>
                 <select class="form-control select2" name="kategori" id="kategori" style="width: 100%;" required>
-                  <option value="">Pilih Kategori</option>
+                  <option value="" selected="Selected" disabled="disabled">--Pilih Kategori--</option>
                   <?php $query = mysqli_query($con, "SELECT *FROM kategori");
                     while ($cb = mysqli_fetch_array($query)) { ?>
                       <option value="<?php echo $cb['id_kategori']; ?>"><?php echo $cb['kategori']; ?></option>
@@ -226,7 +236,7 @@
   break;
   case "edit_produk":
   $id_produk   = $_GET['id_produk'];
-  $edit   = mysqli_fetch_array(mysqli_query($con, "Select * From produk_master Where kd_produk='$id_produk'"));
+  $edit   = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM produk_master WHERE kd_produk='$id_produk'"));
 ?>
 
 <section class="content-header">
@@ -265,9 +275,17 @@
                 <input type="text" class="form-control" name="nama_produk" value="<?php echo $edit['nama_produk']; ?>" required>
               </div>
               <div class="form-group">
+                <label>Jenis Obat</label>
+                <select class="form-control select2" name="jenis_obat" style="width: 100%;" required>
+                  <option value="" selected="Selected" disabled="disabled">--Pilih Jenis Obat--</option>
+                  <option value="bebas"> Bebas </option>
+                  <option value="keras"> Keras </option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label>Satuan Produk</label>
                 <select class="form-control select2" name="satuan" id="satuan" style="width: 100%;" required>
-                  <option value="">Pilih Satuan Produk</option>
+                  <option value="" selected="Selected" disabled="disabled">--Pilih Satuan Produk--</option>
                   <?php $query = mysqli_query($con, "SELECT *FROM data_satuan");
                     while ($cb = mysqli_fetch_array($query)) { ?>
                     <?php $sel = $edit['id_satuan'] == $cb['id_s']? "selected" : ""; ?>
@@ -278,7 +296,7 @@
               <div class="form-group">
                 <label>Kategori Produk</label>
                 <select class="form-control select2" name="kategori" id="kategori" style="width: 100%;" required>
-                  <option value="">Pilih Kategori</option>
+                  <option value="" selected="Selected" disabled="disabled">--Pilih Kategori--</option>
                   <?php $query = mysqli_query($con, "SELECT *FROM kategori");
                     while ($cb = mysqli_fetch_array($query)) { ?>
                     <?php $sel = $edit['id_kategori'] == $cb['id_kategori']? "selected" : ""; ?>

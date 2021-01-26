@@ -31,6 +31,9 @@
     <div class="col-12">
       <form action="" method="post">
         <div class="card">
+        <?php 
+            if ($_SESSION['jenis_u']=="JU-01") { 
+          ?>
           <div class="card-header">
             <div class="form-group row">
               <div class="col-sm-6">
@@ -58,6 +61,7 @@
               </div>
             </div>
           </div>
+          <?php } ?>
           <div class="card-header">
             <a href="?module=gudang_cabang&act=tambah_stok" class="btn btn-primary">Stok Pengiriman Gudang</a>
           </div>
@@ -68,9 +72,14 @@
                   <th>Gambar</th>
                   <th>Kode Produk</th>
                   <th>Nama Produk</th>
+                  <th>Jenis Obat</th>
                   <th>Kategori Produk</th>
                   <th>Stok Produk</th>
+                  <?php 
+                    if ($_SESSION['jenis_u']=="JU-01") { 
+                  ?>
                   <th>Harga Beli</th>
+                  <?php } ?>
                   <th>Harga Jual</th>
                   <th>Tanggal Produksi</th>
                   <th>Tanggal Expired</th>
@@ -99,9 +108,14 @@
                   <?php
                   $qk = mysqli_query($con, "SELECT * FROM kategori WHERE id_kategori='$r[kategori]'"); 
                   $kt = mysqli_fetch_array($qk); ?>
+                  <td><?php echo $k['jenis_obat']; ?></td>
                   <td><?php echo $kt['kategori']; ?></td>
                   <td><?php echo $r["jumlah"]; ?></td>
+                  <?php 
+                    if ($_SESSION['jenis_u']=="JU-01") { 
+                  ?>
                   <td><?php echo rupiah($r["hrg"]); ?></td>
+                  <?php } ?>
                   <td><?php echo rupiah($r["hrg_jual"]); ?></td>
                   <td><?php echo $r['tgl_produksi']?></td>
                   <td><?php echo $r['tgl_expired']?></td>
