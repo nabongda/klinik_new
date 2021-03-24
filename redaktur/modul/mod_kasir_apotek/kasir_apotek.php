@@ -33,8 +33,11 @@ $id_kk = $_SESSION['klinik']; ?>
 					<div class="row">
 						<div class="col-md-12">
 							<ul class="nav nav-tabs">
+								<li class="nav-item" id="bpt">
+									<a class="nav-link " href="#" id="bpt">Rawat Jalan</a>
+								</li>
 								<li class="nav-item" id="pb">
-									<a class="nav-link active" href="#" id="konsultasi">Apotek</a>
+									<a class="nav-link " href="#" id="konsultasi">Apotek</a>
 								</li>
 							</ul>
 							<input type="hidden" id="awal">
@@ -172,13 +175,11 @@ $id_kk = $_SESSION['klinik']; ?>
 						</form>
 
 						<!-- Form Poliklinik -->
-						<div class="collapse" id="pilih_dok">
+						<div class="card-body collapse" id="pilih_dok">
 							<form style="margin-bottom: 20px;" id="form_z">
 								<input class="form-control" type="hidden" name="id_kasir" value="<?php echo $_SESSION['id_user']; ?>">
-											<input class="form-control id_pasien" type="hidden" name="id_pasien" id="id_pasien">
-										
-											<input type="hidden" name="nofak" value="<?php echo $nofak; ?>">
-
+								<input class="form-control id_pasien" type="hidden" name="id_pasien" id="id_pasien">
+								<input type="hidden" name="nofak" value="<?php echo $nofak; ?>">
 								<div class="row">
 									<div class="col-md-6">
 										<label>Jenis Pasien</label>
@@ -192,7 +193,6 @@ $id_kk = $_SESSION['klinik']; ?>
 											<option value="corp1">Perusahaan 1</option>
 											<option value="corp2">Perusahaan 2</option>
 										</select>
-
 									</div>
 									<div class="col-md-6">
 										<label>Asuransi</label>
@@ -207,35 +207,27 @@ $id_kk = $_SESSION['klinik']; ?>
 										</select>
 										<span>(abaikan jika tidak ada)</span>
 									</div>
-
 									<div class="col-md-3">
 										<label>Berat Badan</label>
 										<input type="text" name="bb" class="form-control" />
-
 									</div>
 									<div class="col-md-3">
 										<label>Tinggi Badan</label>
 										<input type="text" name="tb" class="form-control" />
-
 									</div>
-
 									<div class="col-md-3">
 										<label>Suhu Badan</label>
 										<input type="text" name="suhu" class="form-control" />
-
 									</div>
 									<div class="col-md-3">
 										<label>Tekanan Darah</label>
 										<input type="text" name="tensi" class="form-control" />
-
 									</div>
 									<div class="col-md-3">
 										<label>Keluhan</label>
 										<textarea class="form-control" style="height: 150px"
 											name="sakit"></textarea>
-
 									</div>
-
 									<div class="col-md-6"><br>
 										<button style="margin-top: 5px;" type="submit"
 											class="btn btn-sm btn-success">Simpan</button>
@@ -261,6 +253,85 @@ $id_kk = $_SESSION['klinik']; ?>
 							</script>
 						</div>
 
+						<!-- Form Rawat -->
+						<div class="card-body collapse" id="tap">
+							<form id="form_u">
+								<input class="form-control" type="hidden" name="id_kasir" value="<?php echo $_SESSION['id_user']; ?>">
+									<input class="form-control id_pasien" type="hidden" name="id_pasien" id="id_pasien">
+									<input type="hidden" name="nofak" value="<?php echo $nofak; ?>">
+								<div class="row">
+								<div class="col">
+									<label>Jenis Pasien</label>
+									<select name="pas" class="form-control" required>
+									<option value="">--Silakan Pilih--</option>
+									<option value="umum">Umum</option>
+									<option value="bpjs">BPJS</option>
+									<option value="lain">Asuransi Lain</option>
+									<option value="inhealt">Inhealt</option>
+									<option value="jkk">JKK</option>
+									<option value="corp1">Perusahaan 1</option>
+									<option value="corp2">Perusahaan 2</option>
+									</select>
+								</div>
+								<div class="col">
+									<label>Asuransi</label>
+									<select name="ass" class="form-control">
+									<option value="">--Abaikan--</option>
+									<?php 
+									$asur = mysqli_query($con, "SELECT * FROM asuransi");
+									while($asuri = mysqli_fetch_assoc($asur)){
+										echo "<option value='$asuri[id]'>$asuri[nama]</option>";
+									}
+									?>
+									</select>
+									<small>(abaikan jika tidak ada)</small>
+								</div>
+								</div>
+								<div class="row">
+								<div class="col-6">
+									<label>Dokter</label>
+									<select name="dokter" class="form-control">
+									<option value="belum">--Silahkan Pilih--</option>
+									<?php 
+									$q1 = mysqli_query($con, "SELECT *FROM user WHERE id_ju = 'JU-02'");
+									while ($dok = mysqli_fetch_array($q1)) { ?>
+										<option value="<?php echo $dok['id_user']; ?>"><?php echo $dok['nama_lengkap']; ?></option>
+									<?php } ?>
+									</select>
+								</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-3">
+										<label>Berat Badan</label>
+										<input type="text" name="bb" class="form-control">
+									</div>
+									<div class="col-3">
+										<label>Tinggi Badan</label>
+										<input type="text" name="tb" class="form-control">
+									</div>
+									<div class="col-3">
+										<label>Suhu Badan</label>
+										<input type="text" name="suhu" class="form-control">
+									</div>
+									<div class="col-3">
+										<label>Tekanan Darah</label>
+										<input type="text" name="tensi" class="form-control">
+									</div>
+									<div class="col-3">
+										<label>Keluhan</label>
+										<textarea class="form-control" style="height: 150px" name="sakit"></textarea>
+									</div>
+								</div>
+								<div class="row">
+								<div class="col">
+									<button style="margin-top: 20px;" type="submit" class="btn btn-sm btn-success">Simpan</button>
+									<button style="margin-top: 20px;" type="button" class="btn btn-sm btn-danger data_batal">Batal</button>
+								</div>
+								</div>
+							</form>
+							
+        				</div>
 					</div>
 				</div>
 			</div>
@@ -461,6 +532,23 @@ $(document).ready(function(){
           });
      });
    
+// Tambah Rawat Jalan
+$('#form_u').on('submit', function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'post',
+        url: 'modul/mod_kasir_apotek/tambah_u.php',
+        data: $('#form_u').serialize(),
+        success: function (data) {
+          if(data == "error"){} 
+          else {
+            location.href="?module=antrian_pasien";
+          }
+        }
+      });
+    });
+
+
  // Tambah Apotek
  $('#form_z').on('submit', function (e) {
 

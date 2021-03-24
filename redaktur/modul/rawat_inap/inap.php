@@ -86,24 +86,22 @@
         <div class="modal-header">
           <h5 class="modal-title">Pasien Rawat Inap Pulang</h5>
         </div>
-        <form class="form-horizontal" role="form">
-          <div class="modal-body">        
-            <input type="hidden" id="pasien">
-            <input type="hidden" id="faktur">
-            <div class="form-group row">
-              <div class="col-sm-4">
-                <label>Alasan Boleh Pulang</label>
-              </div>
-              <div class="col-sm-8">
-                <textarea class="form-control" id="status"></textarea>
-              </div>
+        <div class="modal-body">
+          <input type="hidden" id="pasien">
+          <input type="hidden" id="faktur">
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <label>Alasan Boleh Pulang</label>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="pulangkan" onclick="pulangkan()">OK</button>
+            <div class="col-sm-8">
+              <textarea class="form-control" id="status"></textarea>
             </div>
           </div>
-        </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="pulangkan" onclick="pulangkan()">OK</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

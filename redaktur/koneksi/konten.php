@@ -26,6 +26,7 @@
 		include "modul/mod_kasir_apotek/resep_jalan.php";
 	
 		}
+	
 
 	elseif ($module=='bayar_lab'){
 
@@ -148,6 +149,12 @@
 	
 		}
 
+		elseif ($module=='kasir_apotek'){
+
+			include "modul/mod_kasir_apotek/tambah_u.php";
+		
+			}
+
 		elseif ($module=='kasir_lab'){
 
 			include "modul/mod_kasir_lab/kasir_lab.php";
@@ -166,11 +173,11 @@
 				
 					}
 
-					elseif ($module=='bayar_obat'){
+					// elseif ($module=='bayar_obat'){
 
-						include "modul/mod_kasir_apotek/bayar_obat.php";
+					// 	include "modul/mod_kasir_apotek/bayar_obat.php";
 					
-						}
+					// 	}
 	
 	
 	elseif ($module=='bonus'){
@@ -876,9 +883,15 @@ elseif ($module=='trf_out'){
 
 	elseif ($module=='kas'){
 
-	include "modul/mod_kas/kas.php";
+	include "modul/mod_kas/data_kas.php";
 
 	}
+
+	elseif ($module=='tambah_kas'){
+
+		include "modul/mod_kas/kas&act=tambah_kas.php";
+	
+		}
 
 	/*View Obat Masuk*/
 
@@ -1233,10 +1246,64 @@ elseif ($module=='trf_out'){
 
 		include "modul/lap_penerimaan_pro/lap_penerimaan.php";
 		
-		}
+	}
+
+	else if ($module=='lap_penjualan'){
+
+		include "modul/lap_penjualan/lap_penjualan.php";
+		
+	}
+
+	else if ($module=='antrian_pasien'){
+
+		include "modul/antrian_pasien/antrian_pasien.php";
+		
+	}
+
+	else if ($module=='pemeriksaan'){
+
+		include "modul/pemeriksaan/pemeriksaan.php";
+		
+	}
+
+	else if ($module=='rawat_jalan'){
+
+		include "modul/rawat_jalan/rawat_jalan.php";
+		
+	}
+
+	else if ($module=='histori_rawat_jalan'){
+
+		include "modul/histori_rawat_jalan/histori_rawat_jalan.php";
+		
+	}
+
+	else if ($module=='obat_detail'){
+
+		include "modul/rawat_jalan/obat_detail.php";
+		
+	}
+
+	elseif ($module=='bayar_obat'){
+
+		include "modul/rawat_jalan/bayar_obat.php";
+	
+	}
+
+	elseif ($module=='lap_rugilaba'){
+
+		include "modul/lap_rugilaba/lap_rugilaba.php";
+	
+	}
+
+	elseif ($module=='stok_opname'){
+
+		include "modul/stok_opname/stok_list.php";
+	
+	}
+
 
 	// Apabila modul tidak ditemukan
-
 	else {
 
 ?>

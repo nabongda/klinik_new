@@ -44,7 +44,7 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
 <?php
   } else {
     
-    $iden = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM identitas WHERE id=2"));
+    $iden = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM identitas WHERE id=1"));
 	if (($_SESSION['jenis_u']=='JU-01') OR ($_SESSION['jenis_u']=='JU-02')){ 
     $user = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM user WHERE id_user ='".$_SESSION["id_user"]."'"));
 	
@@ -342,6 +342,10 @@ alert("Anda belum login"); location.href = "<?php echo $url;?>/redaktur/index.ph
         "responsive": true,
       });
       $("#example3").dataTable({
+        "responsive": true,
+        "autoWidth": false,
+      });
+      $("#example4").dataTable({
         "responsive": true,
         "autoWidth": false,
       });

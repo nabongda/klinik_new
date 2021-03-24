@@ -29,6 +29,7 @@
 							$id_pasien = $pem['id_pasien'];
 							$mem = mysqli_fetch_assoc(mysqli_query($con,"SELECT a.* FROM kategori_pelanggan a JOIN pasien b ON a.kategori = b.klaster WHERE b.id_pasien = '$id_pasien'"));
 							?>
+							<input type="hidden" id="nofaktur" value="<?php echo $no_faktur; ?>">
 							<div class="form-group row">
 								<label class="col-sm-3 col-form-label">Nama</label>
 								<div class="col-sm-9" id="data_n">
@@ -129,21 +130,21 @@
 			  </div>
 		  </div>
 		  <div class="card-body">
-			<h5>Resep Obat & Tindakan Dokter (data tersimpan otomatis)</h5><hr>
+		  <h5>Resep Obat & Tindakan Dokter (data tersimpan otomatis)</h5><hr>
 			<div class="col-md-12">
-				<form>
+				<form action="" method="POST">
 					<div class="row">
 						<div class="col">
 							<label>Pilih Resep Obat</label>
 							<select id="tataup" class="form-control">
-								<option value="">--Silakan Pilih--</option>
+								<option value="" selected disabled>--Silakan Pilih--</option>
 								<option value="produk">Resep Obat</option>
 							</select>
 						</div>
 						<div class="col">
 							<label>Pilih Tindakan Dokter</label>
 							<select id="tataup2" class="form-control">
-								<option value="">--Silakan Pilih--</option>
+								<option value="" selected disabled>--Silakan Pilih--</option>
 								<?php
 								$u = mysqli_query($con,"SELECT * FROM kategori_biaya WHERE id = 1");
 								while($ux = mysqli_fetch_assoc($u)){
@@ -154,91 +155,102 @@
 						</div>
 					</div>
 				</form>
-			</div>
-			<div class="col-md-12">
+            </div>
+			<br>
+			<div class="row">
+				<div class="col-md-12">
 				<form id="form_px" class="collapse">
-					<input class="form-control" type="hidden" name="id_kk" value="<?php echo $_SESSION['klinik'] ?>">
-					<input class="form-control" type="hidden" id="nou" name="no_urut" value="<?php echo $pem['no_urut']; ?>">
-					<input class="form-control id_pasien" type="hidden" name="id_pasien" value="<?php echo $pem['id_pasien']; ?>">
-					<input type="hidden" class="form-control" name="id_dr" value="<?php echo $_SESSION['id_dr']; ?>">
-					<input type="hidden" name="modal" id="modal">
-					<input type="hidden" name="nofak" value="<?php echo $pem['no_faktur']; ?>">
-					<div class="form-row">
-						<div class="form-group col-md-2">
-							<label>Nama Tindakan Dokter</label>
-							<input type="text" class="form-control" name="nama_t" id="nama_t" required>
-						</div>
-						<div class="form-group col-md-2">
-							<label>Harga</label>
-							<input type="text" class="form-control" name="harga_t" id="harga" readonly>
-						</div>
-						<div class="form-group col-md-2">
-							<label>Keterangan</label>
-							<input type="text" class="form-control" name="ket" value="-" required>
-						</div>
-						<div class="form-group col-md-2">
-							<label>Diskon (%)</label>
-							<input type="number" class="form-control" name="dis" id="diskon_t" value="0" required>
-						</div>
-						<div class="form-group col-md-2">
-							<label>Tanggal</label>
-							<input type="text" class="form-control datepicker" name="tgl_visit">
-						</div>
-						<div class="form-group col-md-2">
-							<label>Dokter Visit</label>
-							<select class="form-control" name="dr_visit">
-								<option value="">--silakan pilih--</option>
-								<?php $do = mysqli_query($con,"SELECT * FROM user WHERE id_ju = 'JU-02'");
-								while($doc = mysqli_fetch_assoc($do)){
-									echo "<option value='$doc[id_user]'>$doc[nama_lengkap]</option>";
-								}
-								?>
-								<?php
-								while($ko = mysqli_fetch_assoc($c)){
-									$dr = mysqli_fetch_assoc(mysqli_query($con,"SELECT nama_lengkap FROM user WHERE id_user = $ko[id_dr]"));
-									echo "<option value='$ko[id_dr]'>$dr[nama_lengkap]</option>";
-								} ?>
-							</select>
-						</div>
-						<button type="submit" class="btn btn-sm btn-success">Tambah</button>
-						<button type="button" id="reset_t" data-id="<?php echo $_GET['nofak']; ?>" style="margin-top: 20px;" class="btn btn-sm btn-danger">Reset</button>
-					</div>
-				</form>
+                        <input class="form-control" type="hidden" name="id_kk" value="<?php echo $_SESSION['klinik'] ?>">
+                        <input class="form-control" type="hidden" id="nou" name="no_urut" value="<?php echo $pem['no_urut']; ?>">
+                        <input class="form-control id_pasien" type="hidden" name="id_pasien" value="<?php echo $pem['id_pasien']; ?>">
+                        <input type="hidden" class="form-control" name="id_dr" value="<?php echo $_SESSION['id_dr']; ?>">
+                        <input type="hidden" name="modal" id="modal">
+                        <input type="hidden" name="nofak" value="<?php echo $pem['no_faktur']; ?>">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label>Nama Tindakan Dokter</label>
+                                <input type="text" class="form-control" name="nama_t" id="nama_tindakan" required>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Harga</label>
+                                <input type="text" class="form-control" name="harga_t" id="harga_t" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Keterangan</label>
+                                <input type="text" class="form-control" name="ket" value="-" required>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Diskon (%)</label>
+                                <input type="number" class="form-control" name="dis" id="diskon_t" value="0" required>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Tanggal</label>
+                                <input type="text" class="form-control datepicker" name="tgl_visit">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Dokter Visit</label>
+                                <select class="form-control" name="dr_visit">
+                                    <option value="">--silakan pilih--</option>
+                                    <?php $do = mysqli_query($con,"SELECT * FROM user WHERE id_ju = 'JU-02'");
+                                    while($doc = mysqli_fetch_assoc($do)){
+                                        echo "<option value='$doc[id_user]'>$doc[nama_lengkap]</option>";
+                                    }
+                                    ?>
+                                    <?php
+                                    while($ko = mysqli_fetch_assoc($c)){
+                                        $dr = mysqli_fetch_assoc(mysqli_query($con,"SELECT nama_lengkap FROM user WHERE id_user = $ko[id_dr]"));
+                                        echo "<option value='$ko[id_dr]'>$dr[nama_lengkap]</option>";
+                                    } ?>
+                                </select>
+                            </div>
+							<div class="form-group col-md-12">
+								<button type="submit" class="btn btn-sm btn-success">Tambah</button>
+								<button type="button" id="reset_t" data-id="<?php echo $_GET['nofak']; ?>" class="btn btn-sm btn-danger">Reset</button>
+							</div>
+
+                        </div>
+                    </form>
+				</div>
 			</div>
-			<div class="col-md-12">
-				<form id="form_produk" class="collapse">
-					<input class="form-control id_pasien" type="hidden" name="id_pasien" value="<?php echo $pem['id_pasien']; ?>">
-					<input class="form-control" type="hidden" id="nou" name="no_urut" value="<?php echo $pem['no_urut']; ?>">
-					<input type="hidden" name="kode_p" id="kode_p">
-					<input type="hidden" name="harga_b" id="harga_b">
-					<input type="hidden" name="nofak" value="<?php echo $pem['no_faktur']; ?>">
-					<div class="form-row">
-						<div class="form-group col-md-2">
-							<label>Nama Resep Obat</label>
-							<input type="text" class="form-control" name="nama_p" id="nama_p" required>
+			<div class="row">
+				<div class="col-md-12">
+					<form id="form_produk" class="collapse">
+						<input class="form-control id_pasien" type="hidden" name="id_pasien" value="<?php echo $pem['id_pasien']; ?>">
+						<input class="form-control" type="hidden" id="nou" name="no_urut" value="<?php echo $pem['no_urut']; ?>">
+						<input type="hidden" name="kode_p" id="kode_p">
+						<input type="hidden" name="harga_b" id="harga_b">
+						<input type="hidden" name="nofak" value="<?php echo $pem['no_faktur']; ?>">
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label>Nama Resep Obat</label>
+								<input type="text" class="form-control" name="nama_p" id="nama_p" required>
+							</div>
+							<div class="form-group col-md-2">
+								<label>Harga</label>
+								<input type="text" class="form-control" name="harga_p" id="harga_p" readonly>
+							</div>
+							<div class="form-group col-md-2">
+								<label>Keterangan</label>
+								<input type="text" class="form-control" name="ket" value="-">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Diskon (%)</label>
+								<input type="number" class="form-control" name="dis" id="diskon_p" value="0">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Jumlah</label>
+								<input type="number" class="form-control" min="1" name="jumlah" id="jumlah_p" value="1" required>
+							</div>
+							<div class="form-group col-md-2">
+									<button type="submit" class="btn btn-sm btn-success">Tambah</button>
+									<button type="button" id="reset_t" data-id="<?php echo $_GET['nofak']; ?>" class="btn btn-sm btn-danger">Reset</button>
+								</div>
 						</div>
-						<div class="form-group col-md-2">
-							<label>Harga</label>
-							<input type="text" class="form-control" name="harga_p" id="harga_p" readonly>
-						</div>
-						<div class="form-group col-md-2">
-							<label>Keterangan</label>
-							<input type="text" class="form-control" name="ket" value="-">
-						</div>
-						<div class="form-group col-md-2">
-							<label>Diskon (%)</label>
-							<input type="number" class="form-control" name="dis" id="diskon_p" value="0">
-						</div>
-						<div class="form-group col-md-2">
-							<label>Jumlah</label>
-							<input type="number" class="form-control" min="1" name="jumlah" id="jumlah_p" value="1" required>
-						</div>
-						<button type="submit" class="btn btn-sm btn-success">Tambah</button>
-						<button type="button" id="reset_t" data-id="<?php echo $_GET['nofak']; ?>" style="margin-top: 15px;" class="btn btn-sm btn-danger">Reset</button>
-					</div>
-				</form>
+					</form>
+				</div>			
 			</div>
 		  </div>
+
 		  <div class="card-body">
 		  	<div class="col-md-12">
 				<table id="tabel_tp" class="table table-bordered table-striped">
@@ -489,6 +501,70 @@
 				}
 				}
 			]
+		});
+
+		// Auto complete pencarian perawatan
+		$( "#nama_tindakan" ).autocomplete({
+			source: function( request, response ) {
+				// Fetch data
+				var id = $(".id_pasien").val();
+				var kat = $("#tataup2").val();
+				var nofaktur = $("#nofaktur").val();
+				$.ajax({
+					url: "modul/mod_kasir/source.php",
+					type: 'post',
+					dataType: "json",
+					data: {
+					search: request.term,nofak:nofaktur,kategori:kat
+					},
+					success: function( data ) {
+						response( data );
+					}
+				});
+			},
+			select: function (event, ui) {
+				// Set selection
+				$('#nama_tindakan').val(ui.item.label); // display the selected text
+				$('#harga_t').val(ui.item.harga); // save selected id to input
+				if (ui.item.edit=="Yes") {
+					$("#harga_t").attr({
+							"readonly" : false     
+						});
+				}
+				return false;
+			}
+		});
+
+		// Auto Complete pencarian produk
+		$( "#nama_p" ).autocomplete({
+			source: function( request, response ) {
+				var id = $(".id_pasien").val();
+				var jamin = $("#jamin_obat").val();
+				// Fetch data
+				$.ajax({
+					url: "modul/mod_kasir/source_produk.php",
+					type: 'post',
+					dataType: "json",
+					data: {
+					search: request.term,id:id,jamin:jamin,nofak:"<?php echo $_GET[nofak]; ?>"
+					},
+					success: function( data ) {
+					response( data );
+					}
+				});
+			},
+			select: function (event, ui) {
+				// Set selection
+				$('#nama_p').val(ui.item.label); // display the selected text
+				$('#harga_p').val(ui.item.harga); // save selected id to input
+				$('#kode_p').val(ui.item.kode);
+				$('#harga_b').val(ui.item.harga_b);
+				//   $('#diskon_p').val(ui.item.diskon);
+				$("#jumlah_p").attr({
+					"max" : ui.item.limit     
+				});
+				return false;
+			}
 		});
 
   		// Tambah Perawatan

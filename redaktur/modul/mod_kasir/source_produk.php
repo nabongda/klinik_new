@@ -11,13 +11,14 @@ $id = $_POST['id'];
 if(isset($_POST['search'])){
  $search = $_POST['search'];
 
- $query = "SELECT * FROM produk a JOIN produk_master b ON a.kode_barang = b.kd_produk WHERE  a.jumlah>0 AND a.nama_p like'%".$search."%'";
+ $query = "SELECT * FROM produk WHERE jumlah>0 AND nama_p like'%".$search."%'";
  // 7 9 12 13
 
  $result = mysqli_query($con,$query);
 
  $response = array();
  while($row = mysqli_fetch_array($result) ){
+	$pm = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM produk_master WHERE kd_produk='$row[kode_barang]'"));
 
 	$k = mysqli_query($con,"SELECT jenis_pasien FROM antrian_pasien WHERE no_faktur = '$_POST[nofak]'");
 		$kx = mysqli_num_rows($k);
@@ -37,14 +38,20 @@ if(isset($_POST['search'])){
 		}
 
 	switch($tipes['jenis_pasien']){
-		case "umum": $harga = $row['jual_umum']; break;
-		case "bpjs": $harga = $row['jual_bpjs']; break;
-		case "lain": $harga = $row['jual_lain']; break;
+		case "umum": $harga = $pm['jual_umum']; break;
+		case "bpjs": $harga = $pm['jual_bpjs']; break;
+		case "lain": $harga = $pm['jual_lain']; break;
+		case "inhealt": $harga = $pm['jual_lain']; break;
+		case "jkk": $harga = $pm['jual_lain']; break;
+		case "corp1": $harga = $pm['jual_lain']; break;
+		case "corp2": $harga = $pm['jual_lain']; break;
 	}
-   $response[] = array("harga"=>$harga,
+   $response[] = array(
    	"label"=>$row['nama_p'],
    	"kode"=>$row['kode_barang'],
-   	"harga_b"=>$row['harga_beli'],
+	"harga_b"=>$row['hrg'],
+	"harga"=>$harga,
+	// "harga"=>$row['hrg_jual'],
    	"limit"=>$row['jumlah'],
    	"diskon"=>$bd
    );

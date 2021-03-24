@@ -39,9 +39,10 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
+              <h4 class="modal-title">Buat Notice Lab</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Buat Notice Lab</h4>
+                
               </div><form action="modul/mod_home/noticelab.php" method="POST">
               <div class="modal-body">
                 <table class="table">

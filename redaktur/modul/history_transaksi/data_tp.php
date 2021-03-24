@@ -25,7 +25,7 @@
 	$gaSql['link'] =  mysqli_connect( $gaSql['server'], $gaSql['user'], $gaSql['password']  ) or
 		die( 'Could not open connection to server' );
 	
-	mysqli_select_db( $gaSql['db'], $gaSql['link'] ) or 
+	mysqli_select_db( $gaSql['link'], $gaSql['db'] ) or 
 		die( 'Could not select database '. $gaSql['db'] );
 	
 
@@ -55,8 +55,8 @@
 		}
 	}
 	
-	$zWhere = ($_GET['layan'] == "jalan")? "AND jenis != 'Produk' AND kategori != '2'" : "";
-	$sWhere = "WHERE no_faktur = '$nofak' $zWhere";
+	$zWhere = ($_GET['layan'] == "jalan")? " AND kategori != '2'" : "";
+	$sWhere = "WHERE no_faktur = '$nofak'";
 	if ( $_GET['sSearch'] != "" )
 	{
 		$sWhere = "WHERE (";

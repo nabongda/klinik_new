@@ -20,8 +20,8 @@
     date_default_timezone_set("Asia/Manila");
     error_reporting(E_ERROR | E_PARSE);
 
-    // $url = "http://creativegamastudio.com//KELOMPOK_B";
-	// $url2 = "http://creativegamastudio.com//KELOMPOK_B/redaktur/";
+    // $url = "http://creativegamastudio.com/KELOMPOK_B";
+	// $url2 = "http://creativegamastudio.com/KELOMPOK_B/redaktur/";
 
 	$url = "../";
   	$url2 = "";

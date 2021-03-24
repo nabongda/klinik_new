@@ -437,7 +437,7 @@
                       <button type="submit" name="submit" value="simpan" class="btn btn-success">Simpan Transaksi</button>
                     </div>
                     <div class="col-sm-6">
-                      <button type="submit" name="submit" value="cetak" class="btn btn-info">Cetak Nota</button>
+                      <button type="submit" name="submit" value="cetak" formtarget="_blank" class="btn btn-info">Cetak Nota</button>
                     </div>
                   </div>
                 </div>

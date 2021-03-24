@@ -27,11 +27,11 @@
     case 'bayar':
       $tgl = $_GET['tgl'];
       $nu = $_GET['nu'];
-      $p = mysqli_query($con,"SELECT *FROM history_ap JOIN pasien ON history_ap.id_pasien=pasien.id_pasien WHERE no_urut='$nu' AND history_ap.tanggal_pendaftaran='$tgl'");
+      $p = mysqli_query($con,"SELECT * FROM history_ap JOIN pasien ON history_ap.id_pasien=pasien.id_pasien WHERE no_urut='$nu' AND history_ap.tanggal_pendaftaran='$tgl'");
       $pas = mysqli_fetch_array($p);
       // Total
       $query = mysqli_query($con,"SELECT SUM(harga_p) AS jumlah FROM perawatan_pasien WHERE no_urut='$nu' AND tanggal='$tgl'");
-      $query2 = mysqli_query($con,"SELECT *FROM produk_pasien WHERE no_urut='$nu' AND tanggal='$tgl'");
+      $query2 = mysqli_query($con,"SELECT * FROM produk_pasien WHERE no_urut='$nu' AND tanggal='$tgl'");
       while ($tot1 = mysqli_fetch_array($query2)) {
         $totalpr += $tot1['harga_pr']*$tot1['jumlah'];
       }
@@ -53,7 +53,7 @@
             <input type="hidden" name="id_pasien" value="<?php echo $pas['id_pasien']; ?>">
             <div class="col-md-6">
               <div class="form-group">
-                <?php $nofak = date("YmdHis"); ?>
+                <?php $nofak = date("Y-m-d H:i:s"); ?>
                 <label>No. Faktur</label>
                 <input class="form-control" type="number" name="nofak" value="<?php echo $nofak; ?>">
               </div>
@@ -120,7 +120,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php $p = mysqli_query($con,"SELECT *FROM perawatan_pasien WHERE no_urut='$nu' AND tanggal='$tgl' AND id_kk='$id_kk'"); 
+                <?php $p = mysqli_query($con,"SELECT * FROM perawatan_pasien WHERE no_urut='$nu' AND tanggal='$tgl' AND id_kk='$id_kk'"); 
                   while($dat=mysqli_fetch_array($p)){ ?>
                     <tr>
                       <td><?php echo $dat['nama_p']; ?></td>
@@ -186,13 +186,47 @@
         </div>
       </div>
     </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Antrian Pembayaran Layanan Laboratorium/Apotek</h5>
+        </div>
+        <div class="card-body">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Nama Pasien</th>
+                <th>Nomor Antrian</th>
+                <th>Pilihan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $appp1 = mysqli_query($con, "SELECT *FROM history_ap JOIN pasien ON history_ap.id_pasien=pasien.id_pasien WHERE pembayaran='Belum Lunas' AND jenis_layanan IN ('lab','apotek') ORDER BY history_ap.no_urut ASC");
+              while($iii1 = mysqli_fetch_array($appp1)) { ?>
+                <tr>
+                  <td><?php echo $iii1['nama_pasien']; ?></td>
+                  <td><?php echo $iii1['no_urut']; ?></td>
+                  <td>
+                    <a href="media.php?module=history_transaksi&layan=lab&act=bayar&nofak=<?php echo $iii1['no_faktur']; ?>" class="btn btn-xs btn-primary">Bayar</a>
+                  </td>
+			          </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
           <h5>Antrian Pembayaran Pasien Rawat Inap</h5>
         </div>
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example2" class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Nama Pasien</th>
@@ -202,24 +236,49 @@
             </thead>
             <tbody>
               <?php
-              $appp = mysqli_query($con,"SELECT * FROM perawatan_pasien JOIN pasien ON perawatan_pasien.id_pasien=pasien.id_pasien WHERE tgl_out='$daten' ORDER BY perawatan_pasien.id ASC");
-              while($iii = mysqli_fetch_array($appp)){
-                $bang = mysqli_fetch_assoc(mysqli_query($con,"SELECT nama_ruangan AS sal FROM ruangan WHERE id = $iii[id_ruang]"));
-                $check = mysqli_query($con,"SELECT *FROM history_kasir WHERE no_faktur='$iii[no_faktur]' AND status='Belum Lunas'");
-                $total1 =0;
-                while ($ks1=mysqli_fetch_array($check)) {
-                  $total1 += $ks1['sub_total'];
-                }
-								if($total1 != 0){
-                ?>
+              $appp = mysqli_query($con, "SELECT * FROM perawatan_pasien JOIN pasien ON perawatan_pasien.id_pasien=pasien.id_pasien WHERE tgl_out='$daten' ORDER BY perawatan_pasien.id ASC");
+              while($iii = mysqli_fetch_array($appp)) {
+                $bang = mysqli_fetch_assoc(mysqli_query($con, "SELECT nama_ruangan AS sal FROM ruangan WHERE id = $iii[id_ruang]")); ?>
+                
                 <tr>
                   <td><?php echo $iii['nama_pasien']; ?></td>
                   <td><?php echo $bang['sal']; ?></td>
-                  <td><a href="media.php?module=history_transaksi&layan=inap&act=bayar&nofak=<?php echo $iii['no_faktur']; ?>" class="btn btn-xs btn-primary">Bayar</a></td>
-                </tr>
-			          <?php 
-			          }
-			        } ?>
+                  <td>
+                    <a href="media.php?module=history_transaksi&layan=inap&act=bayar&nofak=<?php echo $iii['no_faktur']; ?>" class="btn btn-xs btn-primary">Bayar</a>
+                  </td>
+			          </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Antrian Pembayaran Pasien Rawat Jalan</h5>
+        </div>
+        <div class="card-body">
+          <table id="example3" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Nama Pasien</th>
+                <th>Nomor Faktur</th>
+                <th>Pilihan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php 
+              $date_now = date("Y-m-d");
+              $ap = mysqli_query($con,"SELECT * FROM kasir_sementara JOIN pasien ON kasir_sementara.id_pasien=pasien.id_pasien WHERE status='Belum Lunas' AND jenis IN ('Produk', 'Treatment') GROUP BY kasir_sementara.no_faktur");
+              while($i = mysqli_fetch_array($ap)){ ?>
+              <tr>
+                <td><?php echo $i['nama_pasien']; ?></td>
+                <td><?php echo $i['no_faktur']; ?></td>
+                <td><a href="media.php?module=history_transaksi&layan=jalan&act=bayar&nofak=<?php echo $i['no_faktur']; ?>" class="btn btn-xs btn-primary">Bayar</a></td>
+              </tr>
+              <?php } ?>
             </tbody>
           </table>
         </div>
@@ -232,7 +291,7 @@
           <h5>Antrian Pembayaran Pasien Poliklinik/IGD</h5>
         </div>
         <div class="card-body">
-          <table id="example3" class="table table-bordered table-striped">
+          <table id="example4" class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Nama Pasien</th>
@@ -240,14 +299,15 @@
                 <th>Pilihan</th>
               </tr>
             </thead>
+            
             <tbody>
               <?php 
-              $appp = mysqli_query($con,"SELECT *FROM history_ap JOIN pasien ON history_ap.id_pasien=pasien.id_pasien WHERE pembayaran = 'Belum Lunas' AND jenis_layanan IN ('poliklinik','igd') AND tanggal_pendaftaran='$daten' ORDER BY history_ap.no_urut ASC");
+              $appp = mysqli_query($con,"SELECT * FROM history_ap JOIN pasien ON history_ap.id_pasien=pasien.id_pasien WHERE pembayaran = 'Belum Lunas' AND jenis_layanan IN ('poliklinik','igd') ORDER BY history_ap.no_urut ASC ");
               while($iii = mysqli_fetch_array($appp)){ ?>
               <tr>
                 <td><?php echo $iii['nama_pasien']; ?></td>
                 <td><?php echo $iii['no_urut']; ?></td>
-                <td><a href="media.php?module=history_transaksi&layan=jalan&act=bayar&nofak=<?php echo $iii['no_faktur']; ?>" class="btn btn-xs btn-primary">Bayar</a></td>
+                <td><a href="media.php?module=history_transaksi&layan=poli&act=bayar&nofak=<?php echo $iii['no_faktur']; ?>" class="btn btn-xs btn-primary">Bayar</a></td>
               </tr>
               <?php } ?>
             </tbody>

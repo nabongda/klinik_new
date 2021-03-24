@@ -5,6 +5,7 @@ require_once("../../dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
+$id_ju    			= $_POST['id_ju'];
 $no_tran 			= $_POST['no_tran'];
 $tgl				= date("Y-m-d H:i:s");
 $nama_pembeli   	= $_POST['nama_pembeli'];
@@ -13,299 +14,250 @@ $jenis_pembayaran	= $_POST['jenis_pembayaran'];
 $cash				= $_POST['cash'];
 $kembalian			= $_POST['kembalian'];
 
-$query_cetak = mysqli_query($con,"SELECT * FROM beli_obat WHERE no_tran='$no_tran'");
+$query_cetak = mysqli_query($con,"SELECT * FROM beli_obat");
+$q = mysqli_fetch_array(mysqli_query($con,"SELECT SUM(sub_tot) AS total, SUM(diskon) AS diskon FROM beli_obat"));
 
-$html .= "<html lang='en'>
+$html .= "<!DOCTYPE html>
+<html lang='en'>
 <head>
-    <meta charset='utf-8'>
-    <title>simple invoice receipt email template - Bootdey.com</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href='http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet'>
-    <style type='text/css'>
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-            box-sizing: border-box;
-            font-size: 14px;
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Nota | Klinik CGS</title>
+    <link href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet' id='bootstrap-css'>
+    <script src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <style>
+        #invoice{
+            padding: 30px;
         }
-        img {
-            max-width: 100%;
-        }
-        body {
-            -webkit-font-smoothing: antialiased;
-            -webkit-text-size-adjust: none;
-            width: 100% !important;
-            height: 100%;
-            line-height: 1.6;
-        }
-        table td {
-            vertical-align: top;
-        }
-        body {
-            background-color: #f6f6f6;
-        }
-        .body-wrap {
-            background-color: #f6f6f6;
-            width: 100%;
-        }
-        .container {
-            display: block !important;
-            max-width: 600px !important;
-            margin: 0 auto !important;
-            /* makes it centered */
-            clear: both !important;
-        }
-        .content {
-            max-width: 600px;
-            margin: 0 auto;
-            display: block;
-            padding: 20px;
-        }
-        .main {
-            background: #fff;
-            border: 1px solid #e9e9e9;
-            border-radius: 3px;
-        }
-        .content-wrap {
-            padding: 20px;
-        }
-        .content-block {
-            padding: 0 0 20px;
-        }
-        .header {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        .footer {
-            width: 100%;
-            clear: both;
-            color: #999;
-            padding: 20px;
-        }
-        .footer a {
-            color: #999;
-        }
-        .footer p, .footer a, .footer unsubscribe, .footer td {
-            font-size: 12px;
-        }
-        h1, h2, h3 {
-            font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-            color: #000;
-            margin: 40px 0 0;
-            line-height: 1.2;
-            font-weight: 400;
-        }
-        h1 {
-            font-size: 32px;
-            font-weight: 500;
-        }
-        h2 {
-            font-size: 24px;
-        }
-        h3 {
-            font-size: 18px;
-        }
-        h4 {
-            font-size: 14px;
-            font-weight: 600;
-        }
-        p, ul, ol {
-            margin-bottom: 10px;
-            font-weight: normal;
-        }
-        p li, ul li, ol li {
-            margin-left: 5px;
-            list-style-position: inside;
-        }
-        a {
-            color: #1ab394;
-            text-decoration: underline;
-        }
-        .btn-primary {
-            text-decoration: none;
-            color: #FFF;
-            background-color: #1ab394;
-            border: solid #1ab394;
-            border-width: 5px 10px;
-            line-height: 2;
-            font-weight: bold;
-            text-align: center;
-            cursor: pointer;
-            display: inline-block;
-            border-radius: 5px;
-            text-transform: capitalize;
-        }
-        .last {
-            margin-bottom: 0;
-        }
-        .first {
-            margin-top: 0;
-        }
-        .aligncenter {
-            text-align: center;
-        }
-        .alignright {
-            text-align: right;
-        }
-        .alignleft {
-            text-align: left;
-        }
-        .clear {
-            clear: both;
-        }
-        .alert {
-            font-size: 16px;
-            color: #fff;
-            font-weight: 500;
-            padding: 20px;
-            text-align: center;
-            border-radius: 3px 3px 0 0;
-        }
-        .alert a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-        }
-        .alert.alert-warning {
-            background: #f8ac59;
-        }
-        .alert.alert-bad {
-            background: #ed5565;
-        }
-        .alert.alert-good {
-            background: #1ab394;
-        }
+
         .invoice {
-            margin: 40px auto;
-            text-align: left;
-            width: 80%;
+            position: relative;
+            background-color: #FFF;
+            min-height: 680px;
+            padding: 15px
         }
-        .invoice td {
-            padding: 5px 0;
+
+        .invoice header {
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #3989c6
         }
-        .invoice .invoice-items {
+
+        .invoice .company-details {
+            text-align: right
+        }
+
+        .invoice .company-details .name {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+
+        .invoice .contacts {
+            margin-bottom: 20px
+        }
+
+        .invoice .invoice-to {
+            text-align: left
+        }
+
+        .invoice .invoice-to .to {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+
+        .invoice .invoice-details {
+            text-align: right
+        }
+
+        .invoice .invoice-details .invoice-id {
+            margin-top: 0;
+            color: #3989c6
+        }
+
+        .invoice main {
+            padding-bottom: 50px
+        }
+
+        .invoice main .thanks {
+            margin-top: -100px;
+            font-size: 2em;
+            margin-bottom: 50px
+        }
+
+        .invoice main .notices {
+            padding-left: 6px;
+            border-left: 6px solid #3989c6
+        }
+
+        .invoice main .notices .notice {
+            font-size: 1.2em
+        }
+
+        .invoice table {
             width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px
         }
-        .invoice .invoice-items td {
-            border-top: #eee 1px solid;
+
+        .invoice table td,.invoice table th {
+            padding: 15px;
+            background: #eee;
+            border-bottom: 1px solid #fff
         }
-        .invoice .invoice-items .total td {
-            border-top: 2px solid #333;
-            border-bottom: 2px solid #333;
-            font-weight: 700;
+
+        .invoice table th {
+            white-space: nowrap;
+            font-weight: 400;
+            font-size: 16px
         }
-        @media only screen and (max-width: 640px) {
-            h1, h2, h3, h4 {
-                font-weight: 600 !important;
-                margin: 20px 0 5px !important;
-            }
 
-            h1 {
-                font-size: 22px !important;
-            }
+        .invoice table td h3 {
+            margin: 0;
+            font-weight: 400;
+            color: #3989c6;
+            font-size: 1.2em
+        }
 
-            h2 {
-                font-size: 18px !important;
-            }
+        .invoice table .qty,.invoice table .total,.invoice table .unit {
+            text-align: right;
+            font-size: 1.2em
+        }
 
-            h3 {
-                font-size: 16px !important;
-            }
+        .invoice table .no {
+            color: #fff;
+            font-size: 1.6em;
+            background: #3989c6
+        }
 
-            .container {
-                width: 100% !important;
-            }
+        .invoice table .unit {
+            background: #ddd
+        }
 
-            .content, .content-wrap {
-                padding: 10px !important;
-            }
+        .invoice table .total {
+            background: #3989c6;
+            color: #fff
+        }
 
+        .invoice table tbody tr:last-child td {
+            border: none
+        }
+
+        .invoice table tfoot td {
+            background: 0 0;
+            border-bottom: none;
+            white-space: nowrap;
+            text-align: right;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-top: 1px solid #aaa
+        }
+
+        .invoice table tfoot tr:first-child td {
+            border-top: none
+        }
+
+        .invoice table tfoot tr:last-child td {
+            color: #3989c6;
+            font-size: 1.4em;
+            border-top: 1px solid #3989c6
+        }
+
+        .invoice table tfoot tr td:first-child {
+            border: none
+        }
+
+        .invoice footer {
+            width: 100%;
+            text-align: center;
+            color: #777;
+            border-top: 1px solid #aaa;
+            padding: 8px 0
+        }
+
+        @media print {
             .invoice {
-                width: 100% !important;
+                font-size: 11px!important;
+                overflow: hidden!important
+            }
+
+            .invoice footer {
+                position: absolute;
+                bottom: 10px;
+                page-break-after: always
+            }
+
+            .invoice>div:last-child {
+                page-break-before: always
             }
         }
     </style>
 </head>";
-$html .= "<body>";
-$html .= "<table class='body-wrap'>
-    <tbody><tr>
-        <td></td>
-        <td class='container' width='600'>
-            <div class='content'>
-                <table class='main' width='100%' cellpadding='0' cellspacing='0'>
-                    <tbody><tr>
-                        <td class='content-wrap aligncenter'>
-                            <table width='100%' cellpadding='0' cellspacing='0'>
-                                <tbody>
-                                <tr>
-                                    <td class='content-block'>
-                                        <table class='invoice'>
-                                            <tbody>
-                                            <tr>
-                                                <td>".$nama_pembeli."<br>".$no_tran."<br>".$tgl."</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <table class='invoice-items' cellpadding='0' cellspacing='0'>
-                                                        <tbody>";
-                                                        $no = 1;
-                                                        while($row = mysqli_fetch_array($query_cetak))
-                                                        {
-                                                        $html .= 
-                                                        "<tr>
-                                                            <td>".$row['nama_brg']."</td>
-                                                            <td>".$row['hrg']."</td>
-                                                            <td>".$row['jumlah']."</td>
-                                                            <td class='alignright'>Rp <td>".$row['sub_tot']."</td></td>
-                                                        </tr>";
-                                                        $no++;
-                                                        }
-                                                        $html .=
-                                                        "<tr class='total'>
-                                                            <td class='alignright' width='80%'>Total</td>
-                                                            <td class='alignright'>Rp ".$total."</td>
-                                                        </tr>
-                                                    </tbody></table>
-                                                </td>
-                                            </tr>
-                                        </tbody></table>
-                                    </td>
-                                </tr>
-                            </tbody></table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table></div>
-        </td>
-        <td></td>
-    </tr>
-</tbody></table>";
-$html .= "<script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
-<script src='http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>";
+$html .= "<body>
+    <div id='invoice'>
+        <div class='invoice overflow-auto'>
+            <div style='min-width: 600px'>
+                <main>
+                    <div class='row contacts'>
+                        <div class='col invoice-to'>
+                            <h2 class='to'>".$no_tran."</h2>
+                            <div class='address'>".$tgl."</div>
+                        </div>
+                    </div>";
+        $html .= "<table border='0' cellspacing='0' cellpadding='0'>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class='text-left'>NAMA OBAT</th>
+                                <th class='text-right'>HARGA</th>
+                                <th class='text-right'>JUMLAH</th>
+                                <th class='text-right'>TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>";
+                        $no = 1;
+                        while ($row=mysqli_fetch_array($query_cetak)) {
+                        $html .= "<tr>
+                                <td class='no'>".$no."</td>
+                                <td class='text-left'><h3>".$row['nama_brg']."</h3>
+                                </td>
+                                <td class='unit'>Rp".$row['hrg']."</td>
+                                <td class='qty'>".$row['jumlah']."</td>
+                                <td class='total'>Rp".$row['sub_tot']."</td>
+                                </tr>";
+                        $no++;
+                        }
+                        $html .= "</tbody>
+                        <tbody>
+                            <tr>
+                                <td colspan='2'></td>
+                                <td colspan='2' style='text-align: right;'>SUBTOTAL:</td>
+                                <td>Rp ".$q['total']."</td>
+                            </tr>
+                            <tr>
+                                <td colspan='2'></td>
+                                <td colspan='2' style='text-align: right;'>TOTAL:</td>
+                                <td>Rp ".$total."</td>
+                            </tr>
+                            <tr>
+                                <td colspan='2'></td>
+                                <td colspan='2' style='text-align: right;'>BAYAR:</td>
+                                <td>Rp ".$cash."</td>
+                            </tr>
+                            <tr>
+                                <td colspan='2'></td>
+                                <td colspan='2' style='text-align: right;'>KEMBALI:</td>
+                                <td>Rp ".$kembalian."</td>
+                            </tr>
+                        </tbody>
+                    </table>";
+        $html .= "</main>
+            <div>
+        </div>
+    </div>";
 $html .= "</body>";
 $html .= "</html>";
-// $html = '<center><h3>Daftar Belanja</h3></center><hr/><br/>';
-// $html .= '<table border="1" width="100%">
-// <tr>
-// <th>No</th>
-// <th>Nama</th>
-// <th>Nama Obat</th>
-// <th>Tanggal Beli</th>
-// </tr>';
-// $no = 1;
-// while($row = mysqli_fetch_array($query_cetak))
-// {
-// $html .= "<tr>
-// <td>".$no."</td>
-// <td>".$row['nama_pembeli']."</td>
-// <td>".$row['nama_brg']."</td>
-// <td>".$row['tgl_beli']."</td>
-// </tr>";
-// $no++;
-// }
-// $html .= "</html>";
 $dompdf->loadHtml($html);
 // Setting ukuran dan orientasi kertas
 $dompdf->setPaper('A4', 'potrait');

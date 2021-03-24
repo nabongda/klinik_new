@@ -223,27 +223,27 @@ $( "#nama_p2" ).autocomplete({
 
      });
      // form bayar di history transaksi
-     $('#form_bayar').on('submit', function (e) {
+    //  $('#form_bayar').on('submit', function (e) {
 
-          e.preventDefault();
+    //       e.preventDefault();
 
-          $.ajax({
-            type: 'post',
-            url: 'modul/history_transaksi/bayar.php',
-            data: $('#form_bayar').serialize(),
-            success: function (data) {
-              if (data=="Kurang") {
-                alert("Uang yang dimasukkan kurang");
-              }else{
-                  //alert("Pembayaran Lunas");
-                 window.open("modul/mod_kasir/print_kasir.php?nofak=<?php echo $_GET[nofak]; ?>");
-                 window.location.href = "media.php?module=history_transaksi";
-              }
+    //       $.ajax({
+    //         type: 'post',
+    //         url: 'modul/history_transaksi/bayar.php',
+    //         data: $('#form_bayar').serialize(),
+    //         success: function (data) {
+    //           if (data=="Kurang") {
+    //             alert("Uang yang dimasukkan kurang");
+    //           }else{
+    //               //alert("Pembayaran Lunas");
+    //              window.open("modul/mod_kasir/print_kasir.php?nofak=<?php echo $_GET[nofak]; ?>");
+    //              window.location.href = "media.php?module=history_transaksi";
+    //           }
               
-            }
-          });
+    //         }
+    //       });
 
-        });
+    //     });
 // Datatable
 $(".datatable").dataTable({
   ordering:  false
