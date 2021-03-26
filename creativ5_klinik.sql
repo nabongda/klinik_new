@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2021 at 08:48 AM
+-- Generation Time: Mar 26, 2021 at 04:19 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `creativ5_appapotik`
+-- Database: `creativ5_klinik`
 --
 
 -- --------------------------------------------------------
@@ -146,7 +146,16 @@ INSERT INTO `antrian_pasien` (`id`, `no_urut`, `no_faktur`, `id_pasien`, `tangga
 (165, 2, '202102241124463', 'S.M.S.2', '2021-02-24', NULL, 6, 'rawat jalan', '11', NULL, NULL, 70, 160, 'Pusing Mual Lemes', 'bpjs', 34, 0, NULL, NULL, '39', '90/70', NULL, NULL, NULL),
 (166, 3, '202102241138532', 'S.M.S.5', '2021-02-24', NULL, 8, 'rawat jalan', '11', NULL, NULL, 50, 165, 'Meriang', 'bpjs', 34, 0, NULL, NULL, '38', '110/70', NULL, NULL, NULL),
 (167, 1, '202102260000007', 'S.M.S.2', '2021-02-26', NULL, 0, 'poliklinik', '', NULL, 7, NULL, NULL, NULL, 'umum', NULL, 0, '2021-02-26', 1, NULL, NULL, NULL, NULL, NULL),
-(168, 2, '202102260000005', 'S.M.S.3', '2021-02-26', NULL, 0, 'poliklinik', '11', NULL, 7, NULL, NULL, NULL, 'umum', NULL, 0, '2021-02-26', 1, NULL, NULL, NULL, NULL, NULL);
+(168, 2, '202102260000005', 'S.M.S.3', '2021-02-26', NULL, 0, 'poliklinik', '11', NULL, 7, NULL, NULL, NULL, 'umum', NULL, 0, '2021-02-26', 1, NULL, NULL, NULL, NULL, NULL),
+(169, 1, '202103051104372', 'S.M.S.2', '2021-03-05', NULL, 6, 'poliklinik', '11', NULL, 7, NULL, NULL, '', 'umum', 33, 0, NULL, NULL, 'NULL', 'NULL', NULL, NULL, NULL),
+(170, 1, '202103101118289', 'A999C', '2021-03-10', NULL, 1, 'rawat jalan', '16', NULL, NULL, 55, 160, 'Kejang-kejang', 'bpjs', 34, 0, NULL, NULL, '39', '130/90', NULL, NULL, NULL),
+(171, 1, '202103151120437', 'S.M.S', '2021-03-15', NULL, 6, 'rawat jalan', '16', NULL, NULL, 70, 165, 'Pusing', 'bpjs', 34, 0, NULL, NULL, '35', '90/70', NULL, NULL, NULL),
+(173, 1, '202103161434368', 'S.M.S.3', '2021-03-16', NULL, 15, 'rawat jalan', '16', NULL, NULL, 55, 165, 'Sakit Perut', 'umum', 34, 0, NULL, NULL, '38', '110/90', NULL, NULL, NULL),
+(175, 1, '202103181037394', 'A888C', '2021-03-18', NULL, 1, 'rawat jalan', '16', NULL, NULL, 50, 170, 'Pusing', 'umum', 34, 0, NULL, NULL, '39', '90/70', NULL, NULL, NULL),
+(176, 1, '202103221026384', 'S.M.S.3', '2021-03-22', NULL, 15, 'rawat jalan', '16', NULL, NULL, 50, 165, 'Pusing', 'umum', 34, 0, NULL, NULL, '38', '110/70', NULL, NULL, NULL),
+(177, 1, '202103221046243', 'S.M.S', '2021-03-22', NULL, 6, 'poliklinik', '16', NULL, 7, NULL, NULL, '', 'umum', 33, 0, NULL, NULL, 'NULL', 'NULL', NULL, NULL, NULL),
+(178, 2, '202103221402456', 'S.M.S.5', '2021-03-22', NULL, 8, 'rawat jalan', '11', NULL, NULL, 50, 165, 'Kejang', 'umum', 34, 0, NULL, NULL, '40', '120/70', NULL, NULL, NULL),
+(179, 1, '202103231114106', 'S.M.S.6', '2021-03-23', NULL, 2, 'apotek', NULL, NULL, NULL, 55, 165, 'Mual', 'bpjs', 34, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -510,7 +519,9 @@ INSERT INTO `dr_praktek` (`id_drpraktek`, `id_poli`, `id_dr`, `hari`, `jam`, `ex
 (63, 7, 11, 1, '08:30:00', '2021-02-24'),
 (64, 7, 11, 5, '11:00:00', '2021-03-24'),
 (65, 1, 9, 2, '10:00:00', '2021-03-24'),
-(66, 7, 11, 3, '16:00:00', '2021-03-24');
+(66, 7, 11, 3, '16:00:00', '2021-03-24'),
+(67, 7, 16, 5, '15:00:00', '2021-03-24'),
+(68, 7, 16, 1, '09:00:00', '2021-03-24');
 
 -- --------------------------------------------------------
 
@@ -535,7 +546,8 @@ INSERT INTO `dr_visit` (`id`, `id_pasien`, `no_faktur`, `id_dr`) VALUES
 (3, 'S.M.S.1', '202004301221125', 12),
 (4, 'S.M.S.2', '202005051205062', 11),
 (5, 'S.M.S.3', '202006241028013', 11),
-(6, 'S.M.S.3', '202006241127291', 11);
+(6, 'S.M.S.3', '202006241127291', 11),
+(7, 'S.M.S.6', '202102161055594', 16);
 
 -- --------------------------------------------------------
 
@@ -576,11 +588,8 @@ INSERT INTO `history_ap` (`id`, `id_kk`, `no_urut`, `id_pasien`, `tanggal_pendaf
 (2, 0, 2, 'S.M.S 5', '2020-03-09', 'Selesai', 'Lunas', '202003091330462', 1, 'Yes', 'umum', 'poliklinik', NULL, 1, NULL, NULL, '', 'NULL', 'NULL', NULL, NULL),
 (3, 0, 2, 'S.M.S.2', '2020-03-09', 'Selesai', 'Lunas', '202003091354513', 1, 'Yes', 'corp2', 'poliklinik', NULL, 6, NULL, NULL, '', 'NULL', 'NULL', NULL, NULL),
 (4, 0, 1, 'S.M.S.2', '2020-03-09', 'Selesai', 'Lunas', '202003091354068', 1, 'Yes', 'umum', 'igd', NULL, NULL, NULL, NULL, '', 'NULL', 'NULL', NULL, NULL),
-(5, 0, 1, 'S.M.S.3', '2020-03-09', 'Selesai', 'Belum Lunas', '202003091112221', 1, 'Yes', 'umum', 'poliklinik', NULL, 6, NULL, NULL, '', 'NULL', 'NULL', NULL, NULL),
-(6, 0, 1, 'S.M.S.2', '2020-04-13', 'Selesai', 'Belum Lunas', '202004131420536', 2, 'Yes', 'umum', 'poliklinik', NULL, 2, 58, 165, 'Kepala pusing', '23', '12', NULL, NULL),
 (7, 0, 1, 'S.M.S.2', '2020-04-14', 'Selesai', 'Lunas', '202004140921151', 3, 'Yes', 'umum', 'poliklinik', NULL, 2, 45, 165, 'Kepala terasa pusing', '35', '12', NULL, NULL),
-(8, 0, 1, 'S.M.S.3', '2020-04-14', 'Selesai', 'Belum Lunas', '202004140935337', 2, 'Yes', 'umum', 'poliklinik', NULL, 2, 58, 170, 'Sakit', '35', '23', NULL, NULL),
-(9, 0, 1, 'S.M.S', '2020-04-14', 'Selesai', 'Belum Lunas', '202004141234179', 1, 'Yes', 'umum', 'poliklinik', NULL, 7, 45, 170, 'sada', '23', '12', NULL, NULL),
+(9, 0, 1, 'S.M.S', '2020-04-14', 'Selesai', 'Lunas', '202004141234179', 1, 'Yes', 'umum', 'poliklinik', NULL, 7, 45, 170, 'sada', '23', '12', NULL, NULL),
 (10, 0, 1, 'S.M.S.3', '2020-04-14', 'Selesai', 'Belum Lunas', '202004141344389', 3, 'Yes', 'bpjs', 'poliklinik', NULL, 7, 45, 165, 'wadada', '23', '12', NULL, NULL),
 (11, 0, 1, 'S.M.S.2', '2020-04-14', 'Selesai', 'Belum Lunas', '202004141356563', 4, 'Yes', 'umum', 'poliklinik', NULL, 7, 45, 165, 'adadg', '23', '12', NULL, NULL),
 (12, 0, 3, 'S.M.S.3', '2020-04-15', 'Selesai', 'Lunas', '202004151404049', 4, 'Yes', 'corp1', 'poliklinik', NULL, 5, 45, 165, 'bssb', '23', '12', NULL, NULL),
@@ -605,12 +614,10 @@ INSERT INTO `history_ap` (`id`, `id_kk`, `no_urut`, `id_pasien`, `tanggal_pendaf
 (31, 0, 2, 'S.M.S.6', '2020-06-04', 'Selesai', 'Lunas', '202006040821599', 1, 'Yes', 'lain', 'poliklinik', NULL, 7, NULL, NULL, '', 'NULL', 'NULL', NULL, NULL),
 (32, 0, 1, 'S.M.S.3', '2020-06-09', 'Selesai', 'Lunas', '202006091544577', 11, 'Yes', 'umum', 'lab', 0, 7, 45, 165, 'sdad', '23', '12', NULL, NULL),
 (33, 0, 1, 'S.M.S.3', '2020-06-09', 'Selesai', 'Lunas', '202006091544577', 12, 'Yes', 'umum', 'poliklinik', NULL, 7, 45, 165, 'sdad', '23', '12', NULL, NULL),
-(34, 0, 1, 'S.M.S.3', '2020-06-09', 'Selesai', 'Belum Lunas', '202006091553129', 13, 'Yes', 'umum', 'poliklinik', NULL, 7, 45, 165, 'adad', '44', '12', NULL, NULL),
-(35, 0, 1, 'S.M.S.3', '2020-06-09', 'Selesai', 'Belum Lunas', '202006091553129', 12, 'Yes', 'umum', 'lab', 0, 7, 45, 165, 'adad', '44', '12', NULL, NULL),
+(34, 0, 1, 'S.M.S.3', '2020-06-09', 'Selesai', 'Lunas', '202006091553129', 13, 'Yes', 'umum', 'poliklinik', NULL, 7, 45, 165, 'adad', '44', '12', NULL, NULL),
 (36, 0, 1, 'S.M.S.3', '2020-06-09', 'Selesai', 'Lunas', '202006091601393', 14, 'Yes', 'lain', 'poliklinik', NULL, 7, NULL, NULL, '', 'NULL', 'NULL', NULL, NULL),
 (37, 0, 1, 'S.M.S.5', '2020-06-23', 'Selesai', 'Lunas', '202006231642159', 5, 'Yes', 'lain', 'poliklinik', 1, 7, 45, 165, 'Sakit', '66', '23', NULL, NULL),
 (38, 0, 1, 'S.M.S.5', '2020-06-23', 'Selesai', 'Lunas', '202006231642159', 4, 'Yes', 'lain', 'lab', 1, 7, 45, 165, 'Sakit', '66', '23', NULL, NULL),
-(39, 0, 1, 'S.M.S.5', '2020-06-23', 'Selesai', 'Belum Lunas', '202006231651563', 5, 'Yes', 'lain', 'lab', 0, 7, 0, 0, '', 'NULL', 'NULL', NULL, NULL),
 (40, 0, 1, 'S.M.S.5', '2020-06-23', 'Selesai', 'Belum Lunas', '202006231651563', 6, 'Yes', 'lain', 'poliklinik', NULL, 7, NULL, NULL, '', 'NULL', 'NULL', NULL, NULL),
 (41, 0, 1, 'S.M.S.5', '2020-08-18', 'Selesai', 'Lunas', '202008181431504', 7, 'Yes', 'umum', 'poliklinik', 1, 1, NULL, NULL, '', 'NULL', 'NULL', NULL, NULL);
 
@@ -901,7 +908,7 @@ INSERT INTO `history_kasir` (`id`, `no_faktur`, `id_pasien`, `id_dr`, `id_kasir`
 (146, '202006231642159', '', 0, 33, '2020-06-23', 1, 'Perawatan Luka kena Benda Tajam', NULL, '', '20000', 1, 0, '20000', 1, 'Treatment', 'Lunas', '-', 'Dokter', 2, NULL, NULL),
 (147, '202006231642159', 'S.M.S.5', 9, 33, '2020-06-23', 1, 'Perawatan Luka kena Benda Tajam', NULL, '', '20000', 1, 0, '20000', 0, 'Treatment', 'Lunas', '-', 'Dokter', 1, NULL, NULL),
 (148, '202006231642159', 'S.M.S.5', 9, NULL, '2020-06-23', 1, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '', 1, 0, '0', 0, 'Produk', 'Lunas', '-', 'Dokter', 0, NULL, 'Tidak'),
-(149, '202006231651563', '', 0, NULL, '2020-06-23', 1, 'Pemeriksaan Biasa', NULL, '', '15000', 1, 0, '15000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
+(225, '202103091342414', 'A888C', 11, NULL, '2021-03-09', 0, 'Tes Gula Darah', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-09', NULL),
 (150, '202006231651563', 'S.M.S.5', 9, NULL, '2020-06-23', 1, 'Pemeriksaan Biasa', NULL, '', '15000', 1, 0, '15000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, NULL, NULL),
 (151, '202006241028013', 'S.M.S.3', 0, NULL, '2020-06-24', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
 (152, '202006241028013', 'S.M.S.3', 9, NULL, '2020-06-24', 0, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
@@ -916,7 +923,6 @@ INSERT INTO `history_kasir` (`id`, `no_faktur`, `id_pasien`, `id_dr`, `id_kasir`
 (162, '202005051206143', 'S.M.S.1', 9, 33, '2020-05-14', 0, 'ANTIMO DEWASA', '186097', '', '', 1, 0, '0', 0, 'Produk', 'Lunas', '-', 'Dokter', 0, NULL, NULL),
 (169, '202006251237287', 'S.M.S.2', 9, NULL, '2020-06-25', 0, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
 (164, '202006250928465', 'S.M.S.5', 9, 33, '2020-06-25', 0, 'VIT C ( KALENG )', '766785', '', '577', 1, 0, '577', 0, 'Produk', 'Lunas', '-', 'Dokter', 0, NULL, NULL),
-(165, '202006251055049', 'S.M.S.5', 0, NULL, '2020-06-25', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
 (166, '202006251055049', 'S.M.S.5', 9, NULL, '2020-06-25', 0, 'VIT C ( KALENG )', '766785', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
 (172, '202006251302069', 'S.M.S.5', 0, 33, '2020-06-25', 0, 'Perawatan Luka kena Benda Tajam', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
 (173, '202006251302069', 'S.M.S.5', 9, 33, '2020-06-25', 0, 'VIT C ( KALENG )', '766785', '', '577', 1, 0, '577', 0, 'Produk', 'Lunas', '-', 'Dokter', 0, NULL, NULL),
@@ -964,7 +970,29 @@ INSERT INTO `history_kasir` (`id`, `no_faktur`, `id_pasien`, `id_dr`, `id_kasir`
 (217, '202102241124463', 'S.M.S.2', 11, NULL, '2021-02-24', 2, 'Konsultasi', NULL, '', '17000', 1, 0, '17000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-24', NULL),
 (218, '202102241124463', 'S.M.S.2', 11, NULL, '2021-02-24', 2, 'BYE BYE FEVER ANAK', '954468', '6000', '10000', 10, 0, '100000', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
 (219, '202102241124463', 'S.M.S.2', 11, NULL, '2021-02-24', 2, 'BYE BYE FEVER BAYI', '226227', '5000', '8000', 10, 10, '72000', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(220, '202102241138532', 'S.M.S.5', 11, NULL, '2021-02-24', 3, 'Konsultasi', NULL, '', '17000', 1, 0, '17000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-24', NULL);
+(220, '202102241138532', 'S.M.S.5', 11, NULL, '2021-02-24', 3, 'Konsultasi', NULL, '', '17000', 1, 0, '17000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-24', NULL),
+(221, '202102241138532', 'S.M.S.5', 11, NULL, '2021-02-24', 3, 'ANTIMO DEWASA', '186097', '3750', '4620', 1, 0, '4620', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
+(222, '202102241138532', 'S.M.S.5', 11, NULL, '2021-02-24', 3, 'AB VASK  10 MG', '636628', '88800', '168000', 1, 0, '168000', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
+(223, '202103051104372', 'S.M.S.2', 11, NULL, '2021-03-05', 1, 'Tes Gula Darah', NULL, '', '10000', 1, 0, '10000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-05', NULL),
+(224, '202103051104372', 'S.M.S.2', 11, NULL, '2021-03-05', 1, 'Konsultasi', NULL, '', '20000', 1, 0, '20000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-05', NULL),
+(227, '202103101118289', 'A999C', 16, NULL, '2021-03-10', 0, 'Tes Gula Darah', NULL, '', '8000', 1, 0, '8000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-10', NULL),
+(230, '202103151120437', 'S.M.S', 16, NULL, '2021-03-15', 0, 'Pemeriksaan Biasa', '', NULL, '9000', 1, 0, '9000', 1, 'Treatment', 'Belum Lunas', '-', 'Kasir', 1, '2021-03-15', NULL),
+(231, '202103151120437', '', 16, NULL, '2021-03-15', 0, 'BYE BYE FEVER ANAK', '954468', '6000', '7000', 1, 0, '7000', 1, 'Produk', 'Belum Lunas', '-', 'Kasir', 0, NULL, NULL),
+(232, '202103151120437', 'S.M.S', 16, NULL, '2021-03-15', 0, 'Perawatan Luka kena Benda Tajam', '', NULL, '9000', 1, 0, '9000', 1, 'Treatment', 'Belum Lunas', '-', 'Kasir', 1, '2021-03-15', NULL),
+(233, '202103161434368', 'S.M.S.3', 16, NULL, '2021-03-16', 1, 'Cek Telinga', NULL, '', '79000', 1, 0, '79000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-16', NULL),
+(234, '202103171204338', 'S.M.S.3', 16, NULL, '2021-03-17', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-17', NULL),
+(235, '202006231651563', 'S.M.S.5', 16, NULL, '2021-03-17', 1, 'Tes Golongan Darah', '', NULL, '12000', 1, 0, '12000', 1, 'Treatment', 'Belum Lunas', '-', 'Kasir', 2, '2021-03-17', NULL),
+(236, '202006231651563', '', 16, NULL, '2021-03-17', 0, 'BYE BYE FEVER ANAK', '954468', '6000', '8000', 2, 0, '16000', 1, 'Produk', 'Belum Lunas', '-', 'Kasir', 0, NULL, NULL),
+(238, '202103181037394', 'A888C', 16, NULL, '2021-03-18', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-18', NULL),
+(239, '202103181037394', 'A888C', 16, NULL, '2021-03-18', 1, 'Cek Telinga', NULL, '', '79000', 1, 0, '79000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-18', NULL),
+(240, '202103181037394', '', 16, NULL, '2021-03-18', 0, 'BYE BYE FEVER ANAK', '954468', '6000', '10000', 1, 0, '10000', 1, 'Produk', 'Belum Lunas', '-', 'Kasir', 0, NULL, NULL),
+(241, '202103221026384', 'S.M.S.3', 16, NULL, '2021-03-22', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-22', NULL),
+(242, '202103101118289', 'A999C', 16, 33, '2021-03-22', 0, 'Pemeriksaan Biasa', NULL, '', '9000', 1, 0, '9000', 0, 'Treatment', 'Lunas', '-', 'Dokter', 1, '2021-03-23', NULL),
+(243, '202103221402456', 'S.M.S.5', 11, 33, '2021-03-22', 2, 'Hawedion', '150194', '40000', '45000', 1, 0, '45000', 0, 'Produk', 'Lunas', '-', 'Apotek', 0, NULL, NULL),
+(244, '202103221402456', 'S.M.S.5', 11, 33, '2021-03-22', 2, 'ALBOTHYL ( POLICRESULEN) 10 ML', '279603', '53000', '53000', 1, 0, '53000', 0, 'Produk', 'Lunas', '-', 'Apotek', 0, NULL, NULL),
+(245, '202103221402456', 'S.M.S.5', 11, 33, '2021-03-22', 2, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Lunas', '-', 'Apotek', 1, '2021-03-22', NULL),
+(246, '202103221402456', 'S.M.S.5', 11, 33, '2021-03-22', 2, 'Cek Telinga', NULL, '', '79000', 1, 0, '79000', 0, 'Treatment', 'Lunas', '-', 'Apotek', 1, '2021-03-22', NULL),
+(247, '202103101118289', 'A999C', 16, 33, '2021-03-22', 0, 'BYE BYE FEVER ANAK', '954468', '6000', '7000', 1, 0, '7000', 0, 'Produk', 'Lunas', '-', 'Dokter', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1141,76 +1169,14 @@ CREATE TABLE `kasir_sementara` (
 --
 
 INSERT INTO `kasir_sementara` (`id`, `no_faktur`, `id_pasien`, `id_dr`, `id_kasir`, `tanggal`, `no_urut`, `nama`, `kode`, `harga_beli`, `harga`, `jumlah`, `diskon`, `sub_total`, `id_kk`, `jenis`, `status`, `ket`, `penginput`, `kategori`, `tgl_visit`, `ganti_resep`) VALUES
-(1, '202003091128113', 'S.M.S.3', 0, NULL, '2020-03-09', 1, 'Konsultasi', NULL, '', '20000', 1, 0, '20000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(5, '202003091112221', 'S.M.S.3', 9, NULL, '2020-03-09', 1, 'Tes Golongan Darah', NULL, '', '10000', 1, 0, '10000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(6, '202003091112221', 'S.M.S.3', 0, NULL, '2020-03-09', 1, 'Cek Telinga', NULL, '', '79000', 1, 0, '79000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(13, '', '', 0, NULL, '2020-03-09', 0, 'Tes Goldar', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(12, '202003091422598', 'S.M.S.5', 10, NULL, '2020-03-09', 2, 'Pemeriksaan Biasa', NULL, '', '9000', 1, 2, '8820', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(15, '202004131420536', 'S.M.S.2', 0, NULL, '2020-04-13', 1, 'Tes Gula Darah', NULL, '', '10000', 1, 0, '10000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(16, '202004131420536', 'S.M.S.2', 0, NULL, '2020-04-13', 1, 'Tes Golongan Darah', NULL, '', '10000', 1, 0, '10000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(17, '202004131420536', 'S.M.S.2', 9, NULL, '2020-04-13', 1, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '8085', 1, 0, '8085', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(19, '202004140935337', 'S.M.S.3', 0, NULL, '2020-04-14', 1, 'Tes Golongan Darah', NULL, '', '10000', 1, 0, '10000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(21, '202004141234179', 'S.M.S', 9, NULL, '2020-04-14', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, NULL, NULL),
-(24, '202004141356563', 'S.M.S.2', 9, NULL, '2020-04-14', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, NULL, NULL),
-(23, '202004141344389', 'S.M.S.3', 9, NULL, '2020-04-14', 1, 'Pemeriksaan Biasa', NULL, '', '9000', 1, 0, '9000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, NULL, NULL),
-(221, '202102151136588', 'S.M.S.6', 11, NULL, '2021-02-15', 1, 'Tes Gula Darah', NULL, '', '8000', 1, 0, '8000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-16', NULL),
-(235, '202102241124463', 'S.M.S.2', 11, NULL, '2021-02-24', 2, 'Konsultasi', NULL, '', '17000', 1, 0, '17000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-24', NULL),
-(28, '', '', 0, NULL, '2020-04-15', 0, 'Tes Golongan Darah', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(29, '', '', 0, NULL, '2020-04-15', 0, 'Tes Gula Darah', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(30, '', '', 0, NULL, '2020-04-15', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(31, '', '', 0, NULL, '2020-04-15', 0, 'Tes Gula Darah', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(32, '', '', 0, NULL, '2020-04-15', 0, 'Tes Golongan Darah', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(228, '202102231318249', 'S.M.S.6', 11, NULL, '2021-02-23', 3, 'Cek Telinga', NULL, '', '55000', 1, 0, '55000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-23', NULL),
-(58, '', '', 0, NULL, '2020-05-07', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(57, '', '', 0, NULL, '2020-05-07', 0, 'Perawatan Luka kena Benda Tajam', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(82, '202005131708522', 'S.M.S.3', 0, NULL, '2020-05-16', 1, 'Perawatan Luka kena Benda Tajam', NULL, '', '15000', 1, 0, '15000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(81, '202005131709205', 'S.M.S', 0, NULL, '2020-05-16', 2, 'Pemeriksaan Biasa', NULL, '', '15000', 1, 0, '15000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(54, '', '', 0, NULL, '2020-05-07', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(53, '', '', 0, NULL, '2020-05-06', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(51, '', '', 0, NULL, '2020-05-06', 0, 'Tes Golongan Darah', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(52, '', '', 0, NULL, '2020-05-06', 0, 'Tes Golongan Darah', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(59, '', '', 0, NULL, '2020-05-07', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(165, '202006251055049', 'S.M.S.5', 0, NULL, '2020-06-25', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
-(129, '202005051205062', 'S.M.S.2', 0, NULL, '2020-06-05', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(130, '202005051205062', 'S.M.S.2', 0, NULL, '2020-06-05', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(131, '202006051556273', '', 0, NULL, '2020-06-06', 1, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(114, '202005281631071', 'S.M.S 4', 0, NULL, '2020-05-28', 2, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(128, '202006040821599', 'S.M.S.6', 9, NULL, '2020-06-04', 2, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(127, '202006040754512', 'S.M.S.3', 9, NULL, '2020-06-04', 1, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(112, '202005281629025', 'S.M.S.3', 9, NULL, '2020-05-28', 1, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(110, '202005281439593', 'S.M.S', 9, NULL, '2020-05-28', 1, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(132, '202005051206323', '', 0, NULL, '2020-06-06', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(133, '202006010853075', '', 0, NULL, '2020-06-06', 1, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(134, '202006060621541', '', 0, NULL, '2020-06-06', 2, 'Pemeriksaan Biasa', NULL, '', '9000', 1, 0, '9000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(135, '202006060155159', '', 0, NULL, '2020-06-06', 2, 'wadad', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(139, '202006091553129', '', 0, NULL, '2020-06-09', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(140, '202006091553129', '', 0, NULL, '2020-06-09', 1, 'Perawatan Luka kena Benda Tajam', NULL, '', '15000', 1, 0, '15000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(143, '202006091601393', 'S.M.S.3', 9, NULL, '2020-06-09', 1, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(142, '202006091553129', 'S.M.S.3', 9, NULL, '2020-06-09', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, NULL, NULL),
-(144, '202006191450321', '', 0, NULL, '2020-06-19', 1, 'Pemeriksaan Biasa', NULL, '', '9000', 1, 0, '9000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(148, '202006231651563', '', 0, NULL, '2020-06-23', 1, 'Pemeriksaan Biasa', NULL, '', '15000', 1, 0, '15000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(149, '202006231651563', 'S.M.S.5', 9, NULL, '2020-06-23', 1, 'DOTRAMOL-PARACETAMOL-TRAMADOL', '251069', '', '', 1, 0, '0', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(150, '202006231651563', 'S.M.S.5', 9, NULL, '2020-06-23', 1, 'Pemeriksaan Biasa', NULL, '', '15000', 1, 0, '15000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, NULL, NULL),
-(155, '202006241028013', '', 0, NULL, '2020-06-24', 1, 'Perawatan Luka kena Benda Tajam', NULL, '', '', 1, 0, '0', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(156, '202006241127291', '', 0, NULL, '2020-06-24', 2, 'Perawatan Luka kena Benda Tajam', NULL, '', '15000', 1, 0, '15000', 1, 'Treatment', 'Belum Lunas', '-', 'Dokter', 2, NULL, NULL),
-(153, '202006241028013', 'S.M.S.3', 0, NULL, '2020-06-24', 0, 'Pemeriksaan Biasa', NULL, '', '', 1, 0, '0', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
-(159, '202006241127291', 'S.M.S.3', 0, NULL, '2020-06-24', 0, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '0000-00-00', NULL),
-(186, '202102031124002', 'S.M.S.3', 0, NULL, '2021-02-03', 2, 'Cek Telinga', NULL, '', '79000', 1, 0, '79000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-03', NULL),
-(187, '202102031124002', 'S.M.S.3', 11, NULL, '2021-02-03', 2, 'ALKOHOL KECIL', '581543', '5555', '7875', 1, 0, '7875', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(188, '202102031124002', 'S.M.S.3', 11, NULL, '2021-02-03', 2, 'ALBOTHYL ( POLICRESULEN) 10 ML', '279603', '53000', '36750', 1, 0, '36750', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(196, '202102041052155', 'A888C', 0, NULL, '2021-02-04', 1, 'ANTANGIN JRG', '643464', '2000', '2300', 6, 0, '13800', 1, 'Produk', 'Belum Lunas', 'diminum sebelum tidur', 'Dokter', 0, NULL, NULL),
-(195, '202102041052155', 'A888C', 0, NULL, '2021-02-04', 1, 'AB VASK  10 MG', '636628', '88800', '16000', 1, 0, '16000', 1, 'Produk', 'Belum Lunas', 'diminum 3xsehari', 'Dokter', 0, NULL, NULL),
-(193, '202102041052155', 'A888C', 11, NULL, '2021-02-04', 1, 'Tes Gula Darah', NULL, '', '8000', 1, 0, '8000', 1, 'Treatment', 'Belum Lunas', 'Gula darah tinggi', 'Dokter', 1, '2021-02-04', NULL),
-(199, '202102051048544', 'S.M.S.6', 11, NULL, '2021-02-05', 1, 'Tes Gula Darah', NULL, '', '8000', 1, 0, '8000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-05', NULL),
-(203, '202102051421418', 'S.M.S.2', 11, NULL, '2021-02-05', 3, 'Tes Gula Darah', NULL, '', '10000', 1, 0, '10000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-12', NULL),
-(225, '202102231301153', 'S.M.S.2', 11, NULL, '2021-02-23', 1, 'Tes Golongan Darah', NULL, '', '5000', 1, 0, '5000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-24', NULL),
-(226, '202102231301153', 'S.M.S.2', 11, NULL, '2021-02-23', 1, 'Tes Gula Darah', NULL, '', '8000', 1, 0, '8000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-24', NULL),
-(229, '202102231318249', 'S.M.S.6', 11, NULL, '2021-02-23', 3, 'Perawatan Luka kena Benda Tajam', NULL, '', '9000', 1, 0, '9000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-23', NULL),
-(234, '202102241124463', 'S.M.S.2', 11, NULL, '2021-02-24', 2, 'Tes Gula Darah', NULL, '', '8000', 1, 0, '8000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-24', NULL),
-(232, '202102241035077', 'S.M.S.3', 11, NULL, '2021-02-24', 1, 'Tes Gula Darah', NULL, '', '10000', 1, 0, '10000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-24', NULL),
-(238, '202102241138532', 'S.M.S.5', 11, NULL, '2021-02-24', 3, 'Konsultasi', NULL, '', '17000', 1, 0, '17000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-02-24', NULL),
-(239, '202102241138532', 'S.M.S.5', 11, NULL, '2021-02-24', 3, 'ANTIMO DEWASA', '186097', '3750', '4620', 1, 0, '4620', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
-(240, '202102241138532', 'S.M.S.5', 11, NULL, '2021-02-24', 3, 'AB VASK  10 MG', '636628', '88800', '168000', 1, 0, '168000', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL);
+(272, '202103221026384', 'S.M.S.3', 16, NULL, '2021-03-22', 1, 'AB VASK  10 MG', '636628', '88800', '168000', 1, 0, '168000', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
+(273, '202103221026384', 'S.M.S.3', 16, NULL, '2021-03-22', 1, 'Hawedion', '150194', '40000', '45000', 1, 0, '45000', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
+(274, '202103221026384', 'S.M.S.3', 16, NULL, '2021-03-22', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-22', NULL),
+(276, '202103101118289', 'A999C', 16, NULL, '2021-03-22', 0, 'Pemeriksaan Biasa', NULL, '', '9000', 1, 0, '9000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-23', NULL),
+(268, '202103181037394', 'A888C', 16, NULL, '2021-03-18', 1, 'ANTIMO DEWASA', '186097', '3750', '4620', 1, 0, '4620', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
+(269, '202103181037394', 'A888C', 16, NULL, '2021-03-18', 1, 'ALBOTHYL ( POLICRESULEN) 10 ML', '279603', '53000', '53000', 1, 0, '53000', 0, 'Produk', 'Belum Lunas', '-', 'Dokter', 0, NULL, NULL),
+(270, '202103181037394', 'A888C', 16, NULL, '2021-03-18', 1, 'Pemeriksaan Biasa', NULL, '', '12000', 1, 0, '12000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-18', NULL),
+(271, '202103181037394', 'A888C', 16, NULL, '2021-03-18', 1, 'Cek Telinga', NULL, '', '79000', 1, 0, '79000', 0, 'Treatment', 'Belum Lunas', '-', 'Dokter', 1, '2021-03-18', NULL);
 
 -- --------------------------------------------------------
 
@@ -1272,7 +1238,7 @@ INSERT INTO `kategori_biaya` (`id`, `kategori`) VALUES
 (5, 'Biaya Apoteker'),
 (6, 'Biaya Rawat Inap'),
 (7, 'Biaya Operasi'),
-(10, 'Hahaha'),
+(12, 'Obat'),
 (11, 'Perawatan');
 
 -- --------------------------------------------------------
@@ -1391,7 +1357,19 @@ INSERT INTO `kehadiran_dr` (`id_keh`, `id_dr`, `id_kk`, `tanggal`, `jam`) VALUES
 (70, 11, 0, '2021-02-16', '12:17:49'),
 (71, 11, 0, '2021-02-23', '13:02:03'),
 (72, 11, 0, '2021-02-24', '10:34:40'),
-(73, 11, 0, '2021-02-25', '11:02:34');
+(73, 11, 0, '2021-02-25', '11:02:34'),
+(74, 11, 0, '2021-03-04', '10:35:10'),
+(75, 11, 0, '2021-03-05', '11:13:51'),
+(76, 11, 0, '2021-03-08', '11:43:14'),
+(77, 11, 0, '2021-03-09', '11:13:28'),
+(78, 16, 0, '2021-03-10', '11:05:47'),
+(79, 16, 0, '2021-03-12', '10:29:50'),
+(80, 16, 0, '2021-03-15', '11:08:37'),
+(81, 16, 0, '2021-03-16', '11:00:22'),
+(82, 16, 0, '2021-03-17', '12:05:53'),
+(83, 16, 0, '2021-03-18', '10:38:22'),
+(84, 16, 0, '2021-03-22', '10:28:04'),
+(85, 11, 0, '2021-03-22', '14:03:18');
 
 -- --------------------------------------------------------
 
@@ -3058,7 +3036,119 @@ INSERT INTO `log` (`id`, `username`, `aksi`, `tanggal`) VALUES
 (1596, 'S.M.S.3', 'Hapus Data Produk (PS-00007)', '2021-02-25 06:48:22'),
 (1597, 'S.M.S.3', 'Hapus Data Produk (PS-00007)', '2021-02-25 06:48:22'),
 (1598, 'S.M.S.3', 'Data Treatment Baru ()', '2021-02-25 07:15:08'),
-(1599, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-02-25 07:44:57');
+(1599, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-02-25 07:44:57'),
+(1600, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-03 04:45:26'),
+(1601, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-03 04:56:26'),
+(1602, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-03 05:00:17'),
+(1603, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-03 05:23:23'),
+(1604, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-03 06:04:13'),
+(1605, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-03 06:08:05'),
+(1606, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-03 06:14:37'),
+(1607, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-03 06:24:59'),
+(1608, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-04 03:35:11'),
+(1609, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-05 03:31:19'),
+(1610, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-05 03:44:16'),
+(1611, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-05 04:04:34'),
+(1612, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-05 04:13:14'),
+(1613, 'drsam', 'Gagal Login', '2021-03-05 04:13:44'),
+(1614, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-05 04:13:52'),
+(1615, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-05 04:15:51'),
+(1616, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-05 04:32:25'),
+(1617, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-05 07:51:39'),
+(1618, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-05 07:52:14'),
+(1619, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-08 04:07:00'),
+(1620, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-08 04:43:14'),
+(1621, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-08 04:45:09'),
+(1622, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 03:48:07'),
+(1623, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 04:09:37'),
+(1624, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 04:10:48'),
+(1625, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 04:11:45'),
+(1626, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 04:12:55'),
+(1627, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 04:13:17'),
+(1628, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 04:13:28'),
+(1629, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 04:13:45'),
+(1630, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 06:39:58'),
+(1631, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 06:42:25'),
+(1632, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 06:43:05'),
+(1633, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 06:45:52'),
+(1634, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 06:48:39'),
+(1635, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-09 08:10:03'),
+(1636, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-10 04:04:59'),
+(1637, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-10 04:05:47'),
+(1638, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-10 04:06:51'),
+(1639, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-10 04:19:15'),
+(1640, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-10 06:39:19'),
+(1641, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-10 07:14:53'),
+(1642, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-10 07:46:39'),
+(1643, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-12 03:29:02'),
+(1644, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-12 03:29:50'),
+(1645, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-12 03:31:12'),
+(1646, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-12 03:42:09'),
+(1647, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-12 04:02:42'),
+(1648, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-12 04:11:06'),
+(1649, 'admin', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-12 04:42:23'),
+(1650, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-12 05:53:47'),
+(1651, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-15 03:35:20'),
+(1652, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-15 04:08:37'),
+(1653, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-15 04:20:40'),
+(1654, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-15 04:21:22'),
+(1655, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-15 04:37:42'),
+(1656, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-15 06:04:19'),
+(1657, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-15 07:49:25'),
+(1658, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 03:49:40'),
+(1659, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 03:55:36'),
+(1660, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 03:58:32'),
+(1661, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 04:00:22'),
+(1662, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 06:54:05'),
+(1663, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 07:17:30'),
+(1664, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 07:18:37'),
+(1665, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 07:19:18'),
+(1666, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 07:35:24'),
+(1667, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-16 07:56:51'),
+(1668, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 04:32:34'),
+(1669, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 04:56:46'),
+(1670, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 05:04:30'),
+(1671, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 05:05:53'),
+(1672, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 05:10:24'),
+(1673, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 06:25:35'),
+(1674, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 06:27:19'),
+(1675, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 07:27:27'),
+(1676, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 07:27:42'),
+(1677, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 07:28:32'),
+(1678, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 07:28:54'),
+(1679, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 07:40:43'),
+(1680, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-17 07:44:06'),
+(1681, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-18 03:31:47'),
+(1682, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-18 03:36:02'),
+(1683, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-18 03:37:03'),
+(1684, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-18 03:37:37'),
+(1685, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-18 03:38:22'),
+(1686, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-18 03:40:15'),
+(1687, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-18 03:46:21'),
+(1688, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-19 03:25:13'),
+(1689, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 03:17:10'),
+(1690, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 03:26:21'),
+(1691, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 03:28:04'),
+(1692, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 03:31:46'),
+(1693, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 03:35:15'),
+(1694, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 03:49:22'),
+(1695, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 04:01:20'),
+(1696, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 04:03:24'),
+(1697, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 05:50:43'),
+(1698, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 05:58:01'),
+(1699, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 06:12:10'),
+(1700, 'drarf', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 07:01:32'),
+(1701, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 07:02:41'),
+(1702, 'drsam', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 07:03:18'),
+(1703, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-22 07:04:57'),
+(1704, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-23 03:29:47'),
+(1705, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-23 04:14:06'),
+(1706, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-23 04:14:48'),
+(1707, 'ginger', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-23 06:44:11'),
+(1708, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-23 07:19:45'),
+(1709, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-24 03:27:30'),
+(1710, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-25 03:46:36'),
+(1711, 'hibiscus', 'Berhasil Login dengan IP 127.0.0.1', '2021-03-25 15:34:52');
 
 -- --------------------------------------------------------
 
@@ -3415,7 +3505,19 @@ INSERT INTO `pasca_treatment` (`id_pt`, `id_kk`, `id_dr`, `id_pasien`, `no_faktu
 (84, 0, 11, 'S.M.S.6', '202102231318249', '2021-02-23', 'Perawatan Luka', '5 Jahitan', 'Cepat Sembuh', '', '', '', ''),
 (85, 0, 11, 'S.M.S.3', '202102241035077', '2021-02-24', 'Pemeriksaan Gula Darah', 'Keluhan Pusing', 'Tekanan darah tinggi', '', '', '', ''),
 (86, 0, 11, 'S.M.S.2', '202102241124463', '2021-02-24', 'Pemeriksaan Biasa', 'Konsultasi Tekanan Darah', 'Tensi Darah Rendah', '4spongebob-e1441057213584.jpg', '', '', ''),
-(87, 0, 11, 'S.M.S.5', '202102241138532', '2021-02-24', 'Pemeriksaan Biasa', 'Gejala Kecapean', 'Kurang tidur', '85spongebob-e1441057213584.jpg', '', '', '');
+(87, 0, 11, 'S.M.S.5', '202102241138532', '2021-02-24', 'Pemeriksaan Biasa', 'Gejala Kecapean', 'Kurang tidur', '85spongebob-e1441057213584.jpg', '', '', ''),
+(88, 0, 11, 'S.M.S.2', '202103051104372', '2021-03-05', 'Testing 5 Maret part II', 'Konsultasi Tekanan Darah', 'Pemeriksaan', '', '', '', ''),
+(89, 0, 11, 'A888C', '202103091342414', '2021-03-09', 'Testing 9 Maret', 'Pemeriksaan', 'Perawatan Pasien Inap', '', '', '', ''),
+(90, 0, 16, 'A999C', '202103101118289', '2021-03-10', 'Testing Rawat Jalan', 'Maret 10', 'Dicoba', '', '', '', ''),
+(91, 0, 16, 'S.M.S.1', '202103121029181', '2021-03-12', 'Testing 12 Maret ', 'Testing', 'Klinik', '', '', '', ''),
+(92, 0, 16, 'S.M.S.3', '202103161434368', '2021-03-16', 'Testing 16 Maret', '2021', 'Dicoba', '', '', '', ''),
+(93, 0, 16, 'S.M.S.3', '202103171204338', '2021-03-17', 'Testing 17 Maret', 'Testing', 'Rawat Jalan', '', '', '', ''),
+(94, 0, 16, 'S.M.S.3', '202103171204338', '2021-03-17', 'Testing 17 Maret II', 'Apapun', 'Dicoba', '', '', '', ''),
+(95, 0, 16, 'A888C', '202103181037394', '2021-03-18', 'Testing Rawat Jalan Maret', 'Pemeriksaan Pasien Maret', 'Ditesting', '', '', '', ''),
+(96, 0, 16, 'S.M.S.3', '202103221026384', '2021-03-22', 'Pemeriksaan Pasien', 'Keluhan Pusing dan Pusing', 'Pasien cek tensi darah', '', '', '', ''),
+(97, 0, 16, 'A999C', '202103101118289', '2021-03-22', '-', '-', '-', '', '', '', ''),
+(98, 0, 16, 'S.M.S.3', '202103221026384', '2021-03-22', 'testing', 'mbuh', 'aaa', '', '', '', ''),
+(99, 0, 11, 'S.M.S.5', '202103221402456', '2021-03-22', 'Di Coba', 'Testing ting', 'Pasien', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -3621,7 +3723,11 @@ INSERT INTO `pembayaran` (`id`, `no_faktur`, `id_pasien`, `id_kk`, `status`, `no
 (21, '202006241501536', 'S.M.S.1', 1, 'Lunas', 0, '2020-06-24', '0', '0', '0', '', 'Tunai', 0, NULL, '0', 33),
 (22, '202006100527362', 'S.M.S.2', 1, 'Lunas', 0, '2020-06-10', '0', '0', '0', '', 'Tunai', 0, NULL, '0', 33),
 (23, '202006250928465', 'S.M.S.5', 1, 'Lunas', 0, '2020-06-25', '577', '577', '0', '', 'Tunai', 0, NULL, '0', 33),
-(24, '202006251302069', 'S.M.S.5', 1, NULL, 0, '2020-06-25', '577', '1000', '0', '', 'Tunai', 0, NULL, '423', 33);
+(24, '202006251302069', 'S.M.S.5', 1, NULL, 0, '2020-06-25', '577', '1000', '0', '', 'Tunai', 0, NULL, '423', 33),
+(25, '202103121029181', 'S.M.S.1', 1, 'Lunas', 0, '0000-00-00', '0', '0', '0', '', '', 0, NULL, '0', 2),
+(26, '202103171324277', 'A999C', 1, 'Lunas', 0, '0000-00-00', '0', '0', '0', '', '', 0, NULL, '5000', 33),
+(27, '202103221402456', 'S.M.S.5', 1, 'Lunas', 2, '2021-03-22', '45000', '45000', '0', '', 'Tunai', 0, NULL, '0', 33),
+(28, '202103101118289', 'A999C', 1, 'Lunas', 0, '2021-03-22', '16000', '17000', '0', '', 'Tunai', 0, NULL, '0', 33);
 
 -- --------------------------------------------------------
 
@@ -3919,14 +4025,22 @@ INSERT INTO `perawatan_pasien` (`id`, `id_dr`, `id_kasir`, `no_faktur`, `id_pasi
 (37, '11', 34, '202102091422151', 'S.M.S.6', 1, '2021-02-09', 55, 160, 'Demam', 'umum', 0, NULL, NULL, '39', '130/90', NULL, NULL),
 (38, '11', 34, '202102111049007', 'S.M.S.6', 1, '2021-02-11', 50, 165, 'Pusing Mual', 'umum', 0, NULL, NULL, '38', '120/70', NULL, NULL),
 (39, '11', 34, '202102151136588', 'S.M.S.6', 1, '2021-02-15', 55, 165, 'Pusing', 'bpjs', 0, NULL, NULL, '39', '120/70', NULL, NULL),
-(40, '11', 34, '202102161055594', 'S.M.S.6', 1, '2021-02-16', 50, 170, 'Pusing', 'bpjs', 0, NULL, NULL, '39', '120/70', NULL, NULL),
+(55, '16', 34, '202103161417405', 'A999C', 1, '2021-03-16', 70, 165, 'Pusing', 'umum', 0, 'Sehat', '2021-03-16', '40', '120/70', NULL, NULL),
 (41, '11', 34, '202102231301153', 'S.M.S.2', 1, '2021-02-23', 55, 160, 'Pusing', 'bpjs', 0, NULL, NULL, '39', '120/70', NULL, NULL),
 (42, '11', 34, '202102231317262', 'S.M.S.3', 1, '2021-02-23', 50, 165, 'Meriang', 'umum', 0, NULL, NULL, '39', '120/70', NULL, NULL),
 (43, '11', 34, '202102231318249', 'S.M.S.6', 1, '2021-02-23', 45, 155, 'Kejang', 'bpjs', 0, NULL, NULL, '40', '120/70', NULL, NULL),
 (44, '11', 34, '202102231318568', 'S.M.S.5', 1, '2021-02-23', 50, 165, 'Kepala Pusing dan Perut Kembung', 'umum', 0, NULL, NULL, '35', '90/70', NULL, NULL),
 (45, '11', 34, '202102241035077', 'S.M.S.3', 1, '2021-02-24', 70, 170, 'Pusing ', 'umum', 0, NULL, NULL, '39', '120/70', NULL, NULL),
 (46, '11', 34, '202102241124463', 'S.M.S.2', 1, '2021-02-24', 70, 160, 'Pusing Mual Lemes', 'bpjs', 0, NULL, NULL, '39', '90/70', NULL, NULL),
-(47, '11', 34, '202102241138532', 'S.M.S.5', 1, '2021-02-24', 50, 165, 'Meriang', 'bpjs', 0, NULL, NULL, '38', '110/70', NULL, NULL);
+(47, '11', 34, '202102241138532', 'S.M.S.5', 1, '2021-02-24', 50, 165, 'Meriang', 'bpjs', 0, NULL, NULL, '38', '110/70', NULL, NULL),
+(48, '11', 33, '202103081405485', 'S.M.S', 1, '2021-03-08', NULL, NULL, '', 'umum', 1, NULL, NULL, 'NULL', 'NULL', NULL, NULL),
+(49, '11', 33, '202103091342414', 'A888C', 1, '2021-03-09', NULL, NULL, '', 'bpjs', NULL, NULL, NULL, 'NULL', 'NULL', NULL, NULL),
+(50, '16', 33, '202103101105099', 'A999C', 1, '2021-03-10', NULL, NULL, '', 'bpjs', NULL, 'Sehat sehat', '2021-03-10', 'NULL', 'NULL', NULL, NULL),
+(51, '16', 34, '202103101118289', 'A999C', 1, '2021-03-10', 55, 160, 'Kejang-kejang', 'bpjs', 0, 'Sudah sehat', '2021-03-22', '39', '130/90', NULL, NULL),
+(52, '16', 33, '202103121029181', 'S.M.S.1', 1, '2021-03-12', NULL, NULL, '', 'umum', NULL, 'Sudah sehat', '2021-03-12', 'NULL', 'NULL', NULL, NULL),
+(56, '16', 33, '202103171324277', 'A999C', 1, '2021-03-17', NULL, NULL, '', 'umum', NULL, 'Sudah Sehat', '2021-03-17', 'NULL', 'NULL', NULL, NULL),
+(54, '16', 34, '202103151120437', 'S.M.S', 1, '2021-03-15', 70, 165, 'Pusing', 'bpjs', 0, 'Sudah Sehat', '2021-03-15', '35', '90/70', NULL, NULL),
+(57, '16', 33, '202103221046413', 'S.M.S.1', 1, '2021-03-22', NULL, NULL, '', 'umum', NULL, NULL, NULL, 'NULL', 'NULL', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3979,16 +4093,16 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_p`, `kode_barang`, `nama_p`, `jenis_obat`, `jumlah`, `hrg`, `hrg_jual`, `satuan`, `kategori`, `tgl_produksi`, `tgl_expired`) VALUES
-(5, '186097', 'ANTIMO DEWASA', 'bebas', 3, 3750, 4620, '2', '9', '2020-11-30', '2021-05-29'),
+(5, '186097', 'ANTIMO DEWASA', 'bebas', 2, 3750, 4620, '2', '9', '2020-11-30', '2021-05-29'),
 (4, '581543', 'ALKOHOL KECIL', 'keras', 44, 5555, 7875, '6', '15', '2021-01-21', '2023-01-21'),
 (2, '661713', 'ALKOHOL 70 %', 'bebas', 2, 26000, 46200, '6', '16', '2021-01-21', '2023-01-21'),
 (6, '643464', 'ANTANGIN JRG', 'bebas', 8, 2000, 2500, '6', '9', '2020-12-27', '2021-04-29'),
 (7, '180024', 'BETADINE 5 LITER', 'bebas', 72, 500000, 866500, '6', '19', '2021-01-04', '2021-08-21'),
-(21, '150194', 'Hawedion', 'bebas', 60, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
+(21, '150194', 'Hawedion', 'bebas', 59, 40000, 45000, '7', '6', '2020-11-02', '2022-11-02'),
 (20, '010494', 'GEQUIN', 'bebas', 85, 25000, 30000, '3', '9', '2020-11-01', '2022-11-01'),
-(23, '636628', 'AB VASK  10 MG', 'bebas', 178, 88800, 168000, '1', '9', '2021-01-12', '2023-01-12'),
-(24, '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', 'bebas', 47, 53000, 36750, '6', '15', '2021-01-01', '2023-01-01'),
-(25, '954468', 'BYE BYE FEVER ANAK', 'bebas', 255, 6000, 10000, '8', '20', '2020-12-06', '2022-05-10'),
+(23, '636628', 'AB VASK  10 MG', 'bebas', 177, 88800, 168000, '1', '9', '2021-01-12', '2023-01-12'),
+(24, '279603', 'ALBOTHYL ( POLICRESULEN) 10 ML', 'bebas', 46, 53000, 36750, '6', '15', '2021-01-01', '2023-01-01'),
+(25, '954468', 'BYE BYE FEVER ANAK', 'bebas', 248, 6000, 10000, '8', '20', '2020-12-06', '2022-05-10'),
 (26, '226227', 'BYE BYE FEVER BAYI', 'bebas', 473, 5000, 8000, '8', '20', '2020-10-04', '2022-01-14');
 
 -- --------------------------------------------------------
@@ -5195,10 +5309,10 @@ INSERT INTO `sub_menu` (`id_ju`, `id_sm`, `nama_sm`, `page_sm`, `sts_sm`, `icon_
 ('JU-09', 'SM-99', 'Kritik & Saran', 'kritik_saran', 'Tidak Aktif', 'thumbs-up', 3),
 ('JU-01', 'SM-99000999', 'Data Poliklinik', 'poliklinik', 'Non Aktif', 'tags', 9),
 ('JU-10', 'SM-990911', 'Data Obat Rawat Inap', 'apotek_inap', 'Aktif', 'bed', 4),
-('JU-07', 'SM-990990', 'Data Obat Rawat Inap', 'apotek_inap', 'Non Aktif', 'bed', 4),
+('JU-07', 'SM-990990', 'Data Obat Rawat Inap', 'apotek_inap', 'Aktif', 'bed', 4),
 ('JU-08', 'SM-998767', 'Pelayanan Lab', 'kasir_lab', 'Aktif', 'table', 1),
 ('JU-08', 'SM-998789', 'Data Antrian Lab', 'data_lab', 'Tidak Aktif', 'files-o', 2),
-('JU-02', 'SM-998990', 'Data Rawat Inap', 'rawat_inap', 'Non Aktif', 'cog', 3),
+('JU-02', 'SM-998990', 'Data Rawat Inap', 'rawat_inap', 'Aktif', 'cog', 3),
 ('JU-01', 'SM-9989976', 'Jadwal Perawat', 'jadwal_perawat', 'Aktif', 'wheelchair', 6),
 ('JU-02', 'SM-999', 'Daftar Antrian Pasien', 'antrian_pasien', 'Aktif', 'building', 1),
 ('JU-10', 'SM-99998', 'Data Lab Rawat Inap', 'lab_inap', 'Aktif', 'cog', 4);
@@ -5746,7 +5860,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `antrian_pasien`
 --
 ALTER TABLE `antrian_pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
 
 --
 -- AUTO_INCREMENT for table `asuransi`
@@ -5836,13 +5950,13 @@ ALTER TABLE `dr_pengganti`
 -- AUTO_INCREMENT for table `dr_praktek`
 --
 ALTER TABLE `dr_praktek`
-  MODIFY `id_drpraktek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id_drpraktek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `dr_visit`
 --
 ALTER TABLE `dr_visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `history_ap`
@@ -5872,7 +5986,7 @@ ALTER TABLE `history_beli_t`
 -- AUTO_INCREMENT for table `history_kasir`
 --
 ALTER TABLE `history_kasir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=248;
 
 --
 -- AUTO_INCREMENT for table `history_kirim_stok`
@@ -5890,7 +6004,7 @@ ALTER TABLE `karyawan`
 -- AUTO_INCREMENT for table `kasir_sementara`
 --
 ALTER TABLE `kasir_sementara`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -5902,7 +6016,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `kategori_biaya`
 --
 ALTER TABLE `kategori_biaya`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `kategori_pelanggan`
@@ -5914,7 +6028,7 @@ ALTER TABLE `kategori_pelanggan`
 -- AUTO_INCREMENT for table `kehadiran_dr`
 --
 ALTER TABLE `kehadiran_dr`
-  MODIFY `id_keh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id_keh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `kirim_stok`
@@ -5932,7 +6046,7 @@ ALTER TABLE `krisar`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1600;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1712;
 
 --
 -- AUTO_INCREMENT for table `master_retur_jual`
@@ -5956,7 +6070,7 @@ ALTER TABLE `nurse`
 -- AUTO_INCREMENT for table `pasca_treatment`
 --
 ALTER TABLE `pasca_treatment`
-  MODIFY `id_pt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id_pt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `pasien`
@@ -5986,7 +6100,7 @@ ALTER TABLE `pemasukan`
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_apotek`
@@ -6028,7 +6142,7 @@ ALTER TABLE `pengiriman_stok`
 -- AUTO_INCREMENT for table `perawatan_pasien`
 --
 ALTER TABLE `perawatan_pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `poliklinik`

@@ -9,22 +9,18 @@ $id    = $_POST['id'];
 
 $filt = ($_POST['layan'] == "jalan")? "AND jenis != 'Produk' AND kategori != '2'" : "";
 
-$q1 = mysqli_query($con, "SELECT * FROM history_kasir WHERE no_faktur='$nofak' AND status='Belum Lunas' AND id IN ('$id')");
-$q2 = mysqli_query($con, "SELECT * FROM history_kasir WHERE no_faktur='$nofak' AND status='Belum Lunas'");
+$q1 = mysqli_query($con, "SELECT * FROM history_kasir WHERE no_faktur='$nofak' AND status='Belum Lunas' AND id IN ($id)");
+$q2 = mysqli_fetch_array(mysqli_query($con, "SELECT SUM(sub_total) AS sub_total FROM history_kasir WHERE no_faktur='$nofak' AND status='Belum Lunas'"));
 
-$total =0;
+$total = 0;
 while ($ks=mysqli_fetch_array($q1)) {
 	$total += $ks['sub_total'];
 }
 
-$total2 =0;
-while ($r=mysqli_fetch_array($q2)) {
-	$total2 += $r['sub_total'];
-}
 $ongkir = $_POST['ongkir'];
 // $out1	= $total;
 $total += $ongkir;
-$out1	= $total2;
+$out1	= $q2['sub_total'];
 
 $tot = array(
 

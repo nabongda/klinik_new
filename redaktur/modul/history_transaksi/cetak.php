@@ -3,15 +3,19 @@
 include "../../../config/koneksi.php";
 
 $c = mysqli_query($con,"SELECT * FROM antrian_pasien a JOIN pasien b ON a.id_pasien = b.id_pasien WHERE a.no_faktur = '$_GET[faktur]'");
-$d = mysqli_query($con,"SELECT * FROM history_ap a JOIN pasien b ON a.id_pasien = b.id_pasien WHERE a.no_faktur = '$_GET[faktur]'");
+// $d = mysqli_query($con,"SELECT * FROM history_ap a JOIN pasien b ON a.id_pasien = b.id_pasien WHERE a.no_faktur = '$_GET[faktur]'");
+$d = mysqli_query($con,"SELECT * FROM history_kasir a JOIN pasien b ON a.id_pasien = b.id_pasien WHERE a.no_faktur = '$_GET[faktur]' AND a.status='Lunas'");
 $e = mysqli_query($con,"SELECT * FROM perawatan_pasien a JOIN pasien b ON a.id_pasien = b.id_pasien WHERE a.no_faktur = '$_GET[faktur]'");
 
 if(mysqli_num_rows($c) > 0){
     $dt = mysqli_fetch_assoc($c);
+    $tanggal_pendaftaran = $dt['tanggal_pendaftaran'];
 } else if(mysqli_num_rows($d) > 0){
     $dt = mysqli_fetch_assoc($d);
+    $tanggal_pendaftaran = $dt['tanggal'];
 } else {
     $dt = mysqli_fetch_assoc($e);
+    $tanggal_pendaftaran = $dt['tanggal_pendaftaran'];
 }
 
 
@@ -45,7 +49,7 @@ table td {padding: 1%}
             </td>
             <td>
                 <label>Tgl Registrasi :</label>
-                <?php echo $dt['tanggal_pendaftaran']; ?>
+                <?php echo $tanggal_pendaftaran; ?>
             </td>
         </tr>
         <tr>
@@ -114,7 +118,8 @@ table td {padding: 1%}
         // }
 
         // echo "<tr><td colspan=4>TOTAL</td><td>".number_format($tot,0,",",".")."</td></tr>";
-        $a = mysqli_query($con, "SELECT * FROM kasir_sementara WHERE no_faktur = '$_GET[faktur]' AND id IN ($_GET[data]) ORDER BY kategori DESC");
+        // $a = mysqli_query($con, "SELECT * FROM kasir_sementara WHERE no_faktur = '$_GET[faktur]' AND id IN ($_GET[data]) ORDER BY kategori DESC");
+        $a = mysqli_query($con, "SELECT * FROM history_kasir WHERE no_faktur = '$_GET[faktur]' AND status='Lunas' ORDER BY kategori DESC");
         $kat = "";
         $tot = 0;
         
@@ -125,8 +130,8 @@ table td {padding: 1%}
                 $sisa = $pro['jumlah'] - $ab['jumlah'];
                 mysqli_query($con, "UPDATE produk SET jumlah = '$sisa' WHERE id_p = '$pro[id_p]'");
                 $status = "OBAT SUDAH DIAMBIL";
-                mysqli_query($con, "INSERT INTO history_kasir (no_faktur,id_pasien,id_dr,id_kasir,tanggal,no_urut,nama,kode,harga_beli,harga,jumlah,diskon,sub_total,id_kk,jenis,status,ket,penginput,kategori,tgl_visit) SELECT no_faktur,id_pasien,id_dr,id_kasir,tanggal,no_urut,nama,kode,harga_beli,harga,jumlah,diskon,sub_total,id_kk,jenis,status,ket,penginput,kategori,tgl_visit FROM kasir_sementara WHERE id = '$ab[id]'");
-                mysqli_query($con, "DELETE FROM kasir_sementara WHERE id='$ab[id]'");
+                // mysqli_query($con, "INSERT INTO history_kasir (no_faktur,id_pasien,id_dr,id_kasir,tanggal,no_urut,nama,kode,harga_beli,harga,jumlah,diskon,sub_total,id_kk,jenis,status,ket,penginput,kategori,tgl_visit) SELECT no_faktur,id_pasien,id_dr,id_kasir,tanggal,no_urut,nama,kode,harga_beli,harga,jumlah,diskon,sub_total,id_kk,jenis,status,ket,penginput,kategori,tgl_visit FROM kasir_sementara WHERE id = '$ab[id]'");
+                // mysqli_query($con, "DELETE FROM kasir_sementara WHERE id='$ab[id]'");
             } else {
                 $status = "STOK OBAT TIDAK TERSEDIA";
             }
@@ -152,6 +157,10 @@ table td {padding: 1%}
         }
 
         ?>
+        <tr>
+            <td colspan="4" align="right">Total</td>
+            <td><?php echo $tot; ?></td>
+        </tr>
         </table>
 <script>
 window.print();

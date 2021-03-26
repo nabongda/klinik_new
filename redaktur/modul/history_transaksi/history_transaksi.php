@@ -261,9 +261,8 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Total Yang Harus Di Bayar</label>
               <div class="col-sm-8 text-right">
-                <input class="form-control" type="text" name="total" id="total_t" value="" readonly>
-                <input type="hidden" id="list_id">
-                <input type="hidden" id="testing">
+                <input class="form-control" type="text" name="total" id="total_t" readonly>
+                <input type="hidden" name="list_id" id="list_id">
               </div>
             </div>
             <div class="form-group row">
@@ -288,17 +287,17 @@
             <div class="form-group row">
               <div class="col-sm-12">
                 <a href="#" onclick="window.history.back()" class="btn btn-primary btn-sm">Kembali</a>
-								<button id="btn_bayar" type="submit" class="btn btn-success btn-sm collapse">Bayar</button>
+								<button type="submit" class="btn btn-success btn-sm btn_bayar collapse">Bayar</button>
               </div>
             </div>
-          </form>
+          <!-- </form> -->
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <form>
+          <!-- <form> -->
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Tanggal Perawatan</label>
               <div class="col-sm-8 text-right">
@@ -542,13 +541,15 @@
       <div class="card">
         <div class="card-header">
           <div class="col-md-6">
+            <form method="POST" action="">
             <div class="form-group">
               <label>Tanggal</label>
-              <input type="date" id="tanggal_h" class="form-control" value="<?php echo $date; ?>" autocomplete="off" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask>
+              <input type="date" id="tanggal_h" name="tanggal_h" class="form-control" value="<?php echo $date; ?>" autocomplete="off" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask>
             </div>
             <div class="form-group">
               <button id="cari_h" class="btn btn-sm btn-info">Cari</button>
             </div>
+            </form>
           </div>
         </div>
         <div class="card-body">
@@ -563,8 +564,16 @@
               </tr>
             </thead>
             <tbody>
-              <?php 
-              $kuery =  mysqli_query($con, "SELECT *FROM history_ap JOIN pasien ON history_ap.id_pasien=pasien.id_pasien WHERE history_ap.tanggal_pendaftaran='$date'");
+              <?php
+              $tanggal_h = $_POST['tanggal_h']; 
+              // $kuery =  mysqli_query($con, "SELECT * FROM history_ap JOIN pasien ON history_ap.id_pasien=pasien.id_pasien WHERE history_ap.tanggal_pendaftaran='$date'");
+              if ($tanggal_h==NULL) {
+                $kuery =  mysqli_query($con, "SELECT * FROM history_kasir JOIN pasien ON history_kasir.id_pasien=pasien.id_pasien GROUP BY history_kasir.no_faktur");
+              }
+              else {
+                $kuery =  mysqli_query($con, "SELECT * FROM history_kasir JOIN pasien ON history_kasir.id_pasien=pasien.id_pasien WHERE history_kasir.tanggal='$tanggal_h' GROUP BY history_kasir.no_faktur");
+              }
+              
               while($data=mysqli_fetch_array($kuery)){ ?>
                 <tr>
                   <td><?php echo $data['nama_pasien']; ?></td>
@@ -626,7 +635,8 @@
     var layan = "<?php echo $_GET['layan']; ?>";
     var list_id;
 
-    $('body').on('click','#frm_byr', function () {
+    $('body').on('click','#frm_byr', function (e) {
+      e.preventDefault();
       var u = "";
       $(".chk").each(function(a,b){
         if($(this).is(":checked")){
@@ -634,33 +644,34 @@
         }
       });
       var k = u.substring(0,u.length - 1);
+      list_id = k;
+      total();
       if(k == ""){
         alert("tidak ada data yang dipilih");
       } else {
-        window.list_id = k;
         $('#list_id').val(k);
-        $('#btn_bayar').collapse('show');
-        $('#form_bayar').on('submit', function (e) {
-          e.preventDefault();
-          $.ajax({
-            type: 'post',
-            url: 'modul/history_transaksi/bayar.php&data=' + k + '&faktur=<?php echo $_GET['faktur']; ?>',
-            data: $('#form_bayar').serialize(),
-            success: function (data) {
-              if (data=="Kurang") {
-                alert("Uang yang dimasukkan kurang");
-              }else{
-                  //alert("Pembayaran Lunas");
-                window.open("modul/mod_kasir/print_kasir.php?nofak=<?php echo $_GET[nofak]; ?>");
-                window.location.href = "media.php?module=history_transaksi";
-              }
-              
-            }
-          });
-        });
-        
+        $('.btn_bayar').collapse('show');
       }
     });
+
+    $('#form_bayar').on('submit', function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'post',
+        url: 'modul/history_transaksi/bayar.php',
+        data: $('#form_bayar').serialize(),
+        success: function (data) {
+          if (data=="Kurang") {
+            alert("Uang yang dimasukkan kurang");
+          }else{
+              // alert("Pembayaran Lunas");
+              // window.open("modul/mod_kasir/print_kasir.php?nofak=<?php echo $_GET[nofak]; ?>");
+              window.location.href = "media.php?module=history_transaksi";
+          }
+        }
+      });
+    });
+    
     // datatable
     $('#tabel_tp').dataTable( {
       "bPaginate": false,
@@ -672,7 +683,7 @@
         {
         "mData": "0",
         "mRender": function ( data, type, full ) {
-          return '<input type="checkbox" class="chk" data-id="'+data+'"/>';
+          return '<input type="checkbox" class="chk" data-id="'+data+'" checked/>';
           }
         },
         null,
@@ -809,8 +820,7 @@
       var nofak 	 = $("#id_nofak").val();
       var ongkir 	 = $("#ongkir").val();
       var layan 	 = "<?php echo $_GET['layan']; ?>";
-      var id       = window.list_id;
-      $("#testing").val(id);
+      var id       = list_id;
       
       $.ajax({
         type: "POST",

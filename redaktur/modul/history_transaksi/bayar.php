@@ -3,6 +3,7 @@
 include "../../../config/koneksi.php";
 
 session_start();
+$list_id   = $_POST['list_id'];
 $id_kk	   = $_SESSION['klinik'];
 $tgl       = $_POST['tgl'];
 $id        = $_POST['id_pasien'];
@@ -22,11 +23,17 @@ if ($uang+$uang_tr<$total+$ongkir) {
 	exit();
 }
 
-$pem     = mysqli_fetch_array(mysqli_query($con, "SELECT *FROM pembayaran WHERE no_faktur='$nofak'"));
+$ht = mysqli_query($con, "SELECT * FROM history_kasir WHERE no_faktur='$nofak' AND status='Belum Lunas' AND id IN ($list_id)");
+$nama_ht = "0";
+while ($rht = mysqli_fetch_array($ht)) {
+	$nama_ht = ",".$rht['nama'];
+}
+
+$pem     = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM pembayaran WHERE no_faktur='$nofak'"));
 $total   = $total   + $pem['total'];
 $uang    = $uang    + $pem['uang'];
 $uang_tr = $uang_tr + $pem['uang_transfer'];
-mysqli_query($con, "UPDATE history_kasir SET status='Lunas',id_kasir='$id_kasir' WHERE no_faktur='$nofak' AND status='Belum Lunas'");
+mysqli_query($con, "UPDATE history_kasir SET status='Lunas',id_kasir='$id_kasir' WHERE no_faktur='$nofak' AND status='Belum Lunas' AND id IN ($list_id)");
 
 if(is_null($pem['total'])){
 if($uang == $total){
@@ -41,8 +48,8 @@ mysqli_query($con, "UPDATE pembayaran SET status = 'Lunas', total='$total',uang=
 
 }
 
-mysqli_query($con, "UPDATE history_ap SET pembayaran='Lunas' WHERE no_faktur='$nofak'");
-mysqli_query($con, "DELETE FROM kasir_sementara WHERE no_faktur='$nofak' AND jenis = 'Treatment'");
+mysqli_query($con, "UPDATE history_ap SET pembayaran='Lunas' WHERE no_faktur='$nofak' AND id IN ($list_id)");
+mysqli_query($con, "DELETE FROM kasir_sementara WHERE no_faktur='$nofak' AND nama IN ('$nama_ht')");
 
 exit();
 
